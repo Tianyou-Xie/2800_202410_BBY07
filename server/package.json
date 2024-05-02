@@ -1,0 +1,20 @@
+{
+	"name": "skynet-server",
+	"description": "Skynet - the interplanetary town square that maintains connections between cultures and ideologies of colonies across the galaxy.",
+	"private": true,
+	"scripts": {
+		"start": "esno index.ts",
+		"dev": "esno watch index.ts"
+	},
+	"dependencies": {
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"express-file-routing": "^3.0.3"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.21",
+		"@types/node": "^20.12.8",
+		"esno": "^4.7.0",
+		"typescript": "^5.4.5"
+	}
+}

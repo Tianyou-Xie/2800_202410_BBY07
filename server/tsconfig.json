@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"lib": ["esnext"],
+		"module": "nodenext",
+		"target": "esnext",
+		"skipLibCheck": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"experimentalDecorators": true,
+		"isolatedModules": true
+	}
+}
