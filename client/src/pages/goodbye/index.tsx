@@ -1,7 +1,7 @@
 import Para from '../../components/para/Para';
 
-const UsersPage = () => {
+const GoodbyePage = () => {
 	return <Para text='Goodbye World!' />;
 };
 
-export default UsersPage;
+export default GoodbyePage;
