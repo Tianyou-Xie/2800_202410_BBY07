@@ -3,8 +3,6 @@
     <h1>Skynet by BBY07</h1>
 </div>
 
-<hr />
-
 ## Introduction
 
 An interplanetary town square that maintains connections between cultures and ideologies of colonies across the galaxy.
