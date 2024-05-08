@@ -37,7 +37,7 @@ The project is built using Typescript, and split into two modules, the client an
 
 -   [Prettier](https://prettier.io/) for consistent code formatting, see `.prettierrc`.
 
-## Enviornment Variables
+## Environment Variables
 
 Both the server and client utilize a `.env` file.
 
