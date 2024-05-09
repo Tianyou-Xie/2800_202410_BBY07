@@ -17,7 +17,7 @@ const schema = new Schema<IUser>({
 	password: { type: 'string', required: true },
 	userName: { type: 'string', required: true },
 	bio: { type: 'string' },
-	locationId: { type: 'ObjectId', ref: 'PlanetLocation' },
+	locationId: { type: 'ObjectId', ref: 'Location', required: true },
 	birthDate: { type: 'date' },
 	avatarUrl: { type: 'string' },
 	followerCount: { type: 'number', required: true, default: 0 },
