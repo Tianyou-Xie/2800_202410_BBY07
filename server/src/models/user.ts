@@ -5,7 +5,7 @@ interface IUser {
 	password: string;
 	userName: string;
 	bio?: string;
-	location: Types.ObjectId;
+	locationId: Types.ObjectId;
 	birthDate?: Date;
 	avatarUrl?: string;
 	followerCount: number;
@@ -17,7 +17,7 @@ const schema = new Schema<IUser>({
 	password: { type: 'string', required: true },
 	userName: { type: 'string', required: true },
 	bio: { type: 'string' },
-	location: { type: 'ObjectId', ref: 'PlanetLocation' },
+	locationId: { type: 'ObjectId', ref: 'PlanetLocation' },
 	birthDate: { type: 'date' },
 	avatarUrl: { type: 'string' },
 	followerCount: { type: 'number', required: true, default: 0 },
