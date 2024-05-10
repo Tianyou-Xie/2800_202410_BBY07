@@ -1,6 +1,7 @@
 import { model, Schema, Types } from 'mongoose';
 
 interface IPost {
+	authorId: Types.ObjectId;
 	content: string;
 	likeCount: number;
 	commentCount: number;
@@ -15,6 +16,7 @@ interface IPost {
 
 const schema = new Schema<IPost>(
 	{
+		authorId: { type: 'ObjectID', ref: 'User', required: true },
 		content: { type: 'string', required: true },
 		likeCount: { type: 'number', required: true, default: 0 },
 		commentCount: { type: 'number', required: true, default: 0 },
@@ -26,7 +28,7 @@ const schema = new Schema<IPost>(
 			type: [
 				{
 					mediaType: { type: 'string', required: true },
-					mediaUrl: { type: 'string', required: 'true' },
+					mediaUrl: { type: 'string', required: true },
 				},
 			],
 		},
