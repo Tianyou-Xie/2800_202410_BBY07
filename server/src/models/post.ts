@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 
 interface IPost {
 	content: string;
@@ -6,6 +6,7 @@ interface IPost {
 	commentCount: number;
 	repostCount: number;
 	createdAt: Date;
+	locationId: Types.ObjectId;
 	media: Array<{
 		mediaType: string;
 		mediaUrl: string;
@@ -18,6 +19,7 @@ const schema = new Schema<IPost>(
 		likeCount: { type: 'number', required: true, default: 0 },
 		commentCount: { type: 'number', required: true, default: 0 },
 		repostCount: { type: 'number', required: true, default: 0 },
+		locationId: { type: 'ObjectID', ref: 'Location', required: true },
 		media: {
 			required: true,
 			default: [],
