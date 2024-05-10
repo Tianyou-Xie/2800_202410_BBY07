@@ -10,6 +10,7 @@ interface IUser {
 	avatarUrl?: string;
 	followerCount: number;
 	followingCount: number;
+	admin: boolean;
 	createdAt: Date;
 }
 
@@ -24,6 +25,7 @@ const schema = new Schema<IUser>(
 		avatarUrl: { type: 'string' },
 		followerCount: { type: 'number', required: true, default: 0 },
 		followingCount: { type: 'number', required: true, default: 0 },
+		admin: { type: 'boolean', required: true, default: false },
 	},
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
