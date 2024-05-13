@@ -7,14 +7,19 @@
 		"dev": "esno watch index.ts"
 	},
 	"dependencies": {
+		"bcrypt": "^5.1.1",
+		"connect-mongo": "^5.1.0",
 		"dotenv": "^16.4.5",
 		"express": "^4.19.2",
 		"express-file-routing": "^3.0.3",
+		"express-session": "^1.18.0",
 		"joi": "^17.13.1",
 		"mongoose": "^8.3.3"
 	},
 	"devDependencies": {
+		"@types/bcrypt": "^5.0.2",
 		"@types/express": "^4.17.21",
+		"@types/express-session": "^1.18.0",
 		"@types/node": "^20.12.8",
 		"esno": "^4.7.0",
 		"typescript": "^5.4.5"
