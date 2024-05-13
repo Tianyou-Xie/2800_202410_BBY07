@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-interface IPlanet {
+export interface IPlanet {
 	name: string;
 }
 
