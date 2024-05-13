@@ -70,4 +70,5 @@ export const post: Handler = async (req, res) => {
 
 	await user.save();
 	req.session.user = { email: user.email, name: user.userName };
+	res.status(201).json({ message: 'User and session created, signup successful.' });
 };
