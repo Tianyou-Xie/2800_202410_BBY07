@@ -1,17 +1,13 @@
-import { model, Schema, Types } from 'mongoose';
+import { Schema, Types } from 'mongoose';
 
-interface ILocation {
+export interface ILocation {
 	planetId: Types.ObjectId;
-	name: string;
 	latitude: number;
 	longitude: number;
 }
 
-const schema = new Schema<ILocation>({
-	planetId: { type: 'ObjectID', ref: 'Planet', required: true },
-	name: { type: 'string', required: true },
+export const LocationSchema = new Schema<ILocation>({
+	planetId: { type: 'ObjectId', ref: 'Planet', required: true },
 	latitude: { type: 'number', required: true },
 	longitude: { type: 'number', required: true },
 });
-
-export const LocationModel = model('Location', schema);

@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose';
 
-interface ILikeInteraction {
+export interface ILikeInteraction {
 	postId: Types.ObjectId;
 	userId: Types.ObjectId;
 }

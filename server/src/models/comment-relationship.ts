@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose';
 
-interface ICommentRelationship {
+export interface ICommentRelationship {
 	parentPost: Types.ObjectId;
 	childPost: Types.ObjectId;
 }

@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose';
 
-interface IFollowRelationship {
+export interface IFollowRelationship {
 	initiateUserId: Types.ObjectId;
 	targetUserId: Types.ObjectId;
 }
