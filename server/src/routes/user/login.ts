@@ -3,15 +3,22 @@ import { Handler } from 'express';
 import { UserModel } from '../../models/user';
 import { compareToHashed } from '../../utils/bcrypt';
 
-interface Body {
+interface PostBody {
 	email: string;
 	password: string;
 }
 
 export const post: Handler = async (req, res) => {
-	const bodySchema = Joi.object<Body>({
-		email: Joi.string().trim().email().required(),
-		password: Joi.string().trim().required(),
+	const bodySchema = Joi.object<PostBody>({
+		email: Joi.string().trim().email().required().messages({
+			'string.base': 'The given email must be a string.',
+			'string.email': 'The given email is invalid.',
+			'any.required': 'Email is required.',
+		}),
+		password: Joi.string().trim().required().messages({
+			'string.base': 'The given password must be a string.',
+			'any.required': 'Password is required.',
+		}),
 	});
 
 	const bodyValidationResult = bodySchema.validate(req.body);
