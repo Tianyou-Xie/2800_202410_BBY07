@@ -15,7 +15,7 @@ interface Body {
 }
 
 export const post: Handler = async (req, res) => {
-	const schema = Joi.object<Body>({
+	const bodySchema = Joi.object<Body>({
 		email: Joi.string().trim().email().required(),
 		userName: Joi.string().trim().required(),
 		password: Joi.string().required(),
@@ -26,10 +26,10 @@ export const post: Handler = async (req, res) => {
 		}),
 	});
 
-	const initialValidationResult = schema.validate(req.body);
-	if (initialValidationResult.error) return res.status(400).json({ error: initialValidationResult.error.message });
+	const bodyValidationResult = bodySchema.validate(req.body);
+	if (bodyValidationResult.error) return res.status(400).json({ error: bodyValidationResult.error.message });
 
-	const { value: body } = initialValidationResult;
+	const { value: body } = bodyValidationResult;
 
 	const existingEmail = await UserModel.findOne({ email: body.email });
 	if (existingEmail) return res.status(422).json({ error: 'Email is already registered.' });
