@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose';
 
-interface IRepostRelationship {
+export interface IRepostRelationship {
 	targetPost: Types.ObjectId;
 	repostPost: Types.ObjectId;
 }

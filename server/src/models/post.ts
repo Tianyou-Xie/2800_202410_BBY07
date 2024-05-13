@@ -1,13 +1,14 @@
 import { model, Schema, Types } from 'mongoose';
+import { ILocation, LocationSchema } from './location';
 
-interface IPost {
+export interface IPost {
 	authorId: Types.ObjectId;
 	content: string;
 	likeCount: number;
 	commentCount: number;
 	repostCount: number;
 	createdAt: Date;
-	locationId: Types.ObjectId;
+	location: ILocation;
 	media: Array<{
 		mediaType: string;
 		mediaUrl: string;
@@ -21,7 +22,7 @@ const schema = new Schema<IPost>(
 		likeCount: { type: 'number', required: true, default: 0 },
 		commentCount: { type: 'number', required: true, default: 0 },
 		repostCount: { type: 'number', required: true, default: 0 },
-		locationId: { type: 'ObjectID', ref: 'Location', required: true },
+		location: { type: LocationSchema, required: true },
 		media: {
 			required: true,
 			default: [],
