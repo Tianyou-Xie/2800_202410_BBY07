@@ -1,5 +1,6 @@
 import { model, Schema, Types } from 'mongoose';
 import { ILocation, LocationSchema } from './location';
+import { IMedia, MediaSchema } from './media';
 
 export interface IPost {
 	authorId: Types.ObjectId;
@@ -9,10 +10,7 @@ export interface IPost {
 	repostCount: number;
 	createdAt: Date;
 	location: ILocation;
-	media: Array<{
-		mediaType: string;
-		mediaUrl: string;
-	}>;
+	media: Array<IMedia>;
 }
 
 const schema = new Schema<IPost>(
@@ -26,12 +24,7 @@ const schema = new Schema<IPost>(
 		media: {
 			required: true,
 			default: [],
-			type: [
-				{
-					mediaType: { type: 'string', required: true },
-					mediaUrl: { type: 'string', required: true },
-				},
-			],
+			type: [MediaSchema],
 		},
 	},
 	{ timestamps: { createdAt: true, updatedAt: false } },
