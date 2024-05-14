@@ -55,8 +55,6 @@ Both the server and client utilize a `.env` file.
 
 **Server Variables:**
 
-MongoDB variables coming soon (TODO)
-
 | Key                   | Usage                                             |
 | --------------------- | ------------------------------------------------- |
 | PORT                  | Port used for the express server                  |
