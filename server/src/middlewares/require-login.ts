@@ -6,5 +6,5 @@ import { NextFunction, Request, Response } from 'express';
 export function requireLogin(req: Request, res: Response, next: NextFunction) {
 	if (req.session.user) {
 		next();
-	} else res.status(401).send({ error: 'Authentication is required' });
+	} else res.status(401).json({ error: 'Authentication is required' });
 }

@@ -33,5 +33,5 @@ export const post: Handler = async (req, res) => {
 	if (!passwordsMatch) return res.status(401).json({ error: 'Password is incorrect.' });
 
 	req.session.user = { email: existingUser.email, name: existingUser.userName };
-	res.status(201).send({ message: 'Session created, login successful.' });
+	res.status(201).json({ message: 'Session created, login successful.' });
 };
