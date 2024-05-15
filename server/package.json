@@ -15,14 +15,17 @@
 		"express-session": "^1.18.0",
 		"http-status-codes": "^2.3.0",
 		"joi": "^17.13.1",
-		"mongoose": "^8.3.3"
+		"mongoose": "^8.3.3",
+		"picocolors": "^1.0.1"
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.2",
 		"@types/express": "^4.17.21",
 		"@types/express-session": "^1.18.0",
+		"@types/morgan": "^1.9.9",
 		"@types/node": "^20.12.8",
 		"esno": "^4.7.0",
+		"morgan": "^1.10.0",
 		"typescript": "^5.4.5"
 	}
 }
