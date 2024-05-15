@@ -179,7 +179,7 @@ export class Resolver {
 	 * all other methods automatically send the response.
 	 */
 	public send() {
-		if (this.res.writableEnded) this.res.status(this.body.statusCode).json(this.body);
+		if (this.res.writable) this.res.status(this.body.statusCode).json(this.body);
 	}
 
 	/**
