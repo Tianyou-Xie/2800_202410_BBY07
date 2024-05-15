@@ -1,3 +1,9 @@
+:root {
+    --signup-background: #f8f4e5;
+    --signup-input-focus: #ebe2c2;
+    --signup-button-active: #ebe2c2;
+}
+
 *,
 *::before,
 *::after {
@@ -11,16 +17,21 @@ body {
 }
 
 @font-face {
+    font-family: Fjalla One;
+    src: url(./assets/fonts/FjallaOne-Regular.ttf);
+}
+
+@font-face {
     font-family: TTOctosquares;
-    src: url(../../assets/fonts/TT-Octosquares-Trial-Regular.ttf);
+    src: url(./assets/fonts/TT-Octosquares-Trial-Regular.ttf);
 }
 
 @font-face {
     font-family: Bitsumishi;
-    src: url(../../assets/fonts/BITSUMIS.TTF);
+    src: url(./assets/fonts/BITSUMIS.TTF);
 }
 
 @font-face {
     font-family: BabaPro;
-    src: url(../../assets/fonts/BabaPro-Bold.ttf);
+    src: url(./assets/fonts/BabaPro-Bold.ttf);
   }
