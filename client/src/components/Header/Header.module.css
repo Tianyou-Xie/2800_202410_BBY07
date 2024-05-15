@@ -1,0 +1,9 @@
+.return-icon {
+    font-size: 2em;
+}
+
+.page-name {
+    font-size: 2em;
+    display: flex;
+    justify-content: end;
+}
