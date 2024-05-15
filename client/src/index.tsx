@@ -8,6 +8,7 @@ import IndexPage from './pages';
 import GoodbyePage from './pages/goodbye';
 import About from './pages/about';
 import Signup from './pages/signup';
+import Hotbar from './components/Hotbar/Hotbar';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
@@ -22,5 +23,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 			<Route path='/signup' component={Signup} />
 			<Route>404 Not Found</Route>
 		</Switch>
+		<Hotbar />
 	</React.StrictMode>,
 );

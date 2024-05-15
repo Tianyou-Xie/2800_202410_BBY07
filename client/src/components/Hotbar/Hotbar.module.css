@@ -1,0 +1,90 @@
+.nav-container {
+    position: fixed;
+    bottom: 0%;
+    left: 0%;
+    width: 100vw;
+    margin-bottom: 100px;
+}
+
+.nav {
+    position: relative;
+    width: 100vw;
+}
+
+.circle {
+    position: absolute;
+    border: none;
+    background-color: chartreuse;
+    padding: 60px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.circle-right {
+    right: 0%;
+    transform: translate(50%, 10%);
+}
+
+.circle-left {
+    left: 0%;
+    transform: translate(-50%, 10%);
+}
+
+.bar {
+    border: none;
+    position: absolute;
+    background-color: chartreuse;
+    padding: 60px;
+    width: 100vw;
+    top: 50px;
+}
+
+.nav-icon {
+    position: absolute;
+    z-index: 2;
+    font-size: 2em;
+}
+
+.icon-right {
+    right: 0%;
+}
+
+.icon-left {
+    left: 0%;
+}
+
+.menu-container-menu {
+    position: absolute;
+    background-color: grey;
+    z-index: 5;
+    padding: 10px;
+    border-radius: 50%;
+    right: 50%;
+    transform: translate(50%);
+}
+
+.menu-container-close {
+    position: absolute;
+    background-color: grey;
+    z-index: 4;
+    padding: 10px;
+    border-radius: 50%;
+    right: 50%;
+    transform: translate(50%);
+}
+
+.menu-backdrop {
+    position: absolute;
+    background-color: white;
+    z-index: 3;
+    width: 95px;
+    border-radius: 50%;
+    padding: 45px;
+    right: 50%;
+    transform: translate(50%);
+}
+
+.menu-icon, .close-icon {
+    font-size: 4em;
+}
+

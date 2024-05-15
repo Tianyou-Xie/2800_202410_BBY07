@@ -1,0 +1,35 @@
+#menu-icon.non-active {
+    animation: fade-out 300ms forwards;
+}
+
+#close-icon.active {
+    animation: fade-in 300ms forwards;
+}
+
+#close-icon.non-active {
+    animation: fade-out 300ms forwards;
+}
+
+#menu-icon.active {
+    animation: fade-in 300ms forwards;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
