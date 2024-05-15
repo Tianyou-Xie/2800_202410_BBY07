@@ -5,3 +5,18 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+
+@font-face {
+    font-family: TTOctosquares;
+    src: url(../../assets/fonts/TT-Octosquares-Trial-Regular.ttf);
+}
+
+@font-face {
+    font-family: Bitsumishi;
+    src: url(../../assets/fonts/BITSUMIS.TTF);
+}
+
+@font-face {
+    font-family: BabaPro;
+    src: url(../../assets/fonts/BabaPro-Bold.ttf);
+  }
