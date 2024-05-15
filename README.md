@@ -55,11 +55,13 @@ Both the server and client utilize a `.env` file.
 
 **Server Variables:**
 
-MongoDB variables coming soon (TODO)
-
-| Key  | Usage                            |
-| ---- | -------------------------------- |
-| PORT | Port used for the express server |
+| Key                   | Usage                                             |
+| --------------------- | ------------------------------------------------- |
+| PORT                  | Port used for the express server                  |
+| MONGO_URL             | The MongoDB connection string                     |
+| SESSION_TTL           | The session expiry time, in milliseconds          |
+| SESSION_COOKIE_SECRET | The secret phrase used to sign the session cookie |
+| SESSION_DATA_SECRET   | The secret phrased used to encrypt session data   |
 
 ## Running Locally & Deployment
 
