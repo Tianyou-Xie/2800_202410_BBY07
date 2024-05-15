@@ -18,6 +18,6 @@ export function setSession(req: Request, user: HydratedDocument<IUser>) {
  * @param req the request to check
  * @param user the user to check the session against
  */
-export function isCurrentSession(req: Request, user: HydratedDocument<IUser>) {
+export function isSessionOf(req: Request, user: HydratedDocument<IUser>) {
 	return req.session.user && req.session.user.id === user._id.toString();
 }
