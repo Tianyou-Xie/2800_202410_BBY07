@@ -1,9 +1,16 @@
-.return-icon {
-    font-size: 2em;
+.header-container {
+    background-color: #242C38;
 }
 
-.page-name {
-    font-size: 2em;
+.return-icon {
+    font-size: 30pt;
+    color: #2196F3;
+}
+
+.page-title {
+    font-size: 3em;
+    font-family: Bitsumishi;
     display: flex;
     justify-content: end;
+    color: #2196F3 !important;
 }

@@ -32,6 +32,7 @@ const Hotbar = () => {
 			<div className={styles.navContainer}>
 				<div className={styles.nav}>
 					<div>
+						{/* <p className={`${styles.menuLabel}`}>menu - menu - menu</p> */}
 						<div className={`${styles.menuContainer}`}>
 							<label htmlFor='label'>
 								<IoMenuSharp id='menu-icon' className={`${styles.menuIcon} active`} />
@@ -66,8 +67,6 @@ const Hotbar = () => {
 								</a>
 							</li>
 						</ul>
-						
-						
 					</div>
 
 					<div className={styles.menuBackdrop}></div>

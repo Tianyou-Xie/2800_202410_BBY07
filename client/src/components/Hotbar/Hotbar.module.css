@@ -5,7 +5,9 @@
 
 .nav-container li a {
     margin-right: 80px;
-    padding: 7px;
+    margin-top: -14px;
+    min-width: 80px;
+    padding: 1px;
     text-decoration: none;
     text-align: center;
     flex-basis: 100%;
@@ -18,7 +20,7 @@
     bottom: 0%;
     left: 0%;
     width: 100vw;
-    margin-bottom: 90px;
+    margin-bottom: 105px;
 }
 
 .nav {
@@ -83,10 +85,11 @@
     position: absolute;
     background-color: white;
     z-index: 3;
-    width: 95px;
+    width: 110px;
     border-radius: 50%;
-    padding: 45px;
+    padding: 50px;
     right: 50%;
+    top: 0px;
     transform: translate(50%);
 }
 
@@ -98,7 +101,7 @@
     position: absolute;
     right: 50%;
     top: 0%;
-    width: 134px;
+    width: 140px;
     transform: translateX(-50%);
 }
 
@@ -169,4 +172,10 @@
 
 .nav-container input:checked ~ .back-drop-div {
     opacity: 1;
+}
+
+.menu-label {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
 }

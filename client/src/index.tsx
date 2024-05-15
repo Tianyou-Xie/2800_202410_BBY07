@@ -15,7 +15,7 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<Switch>
-			<Route path='/' component={Signup} />
+			<Route path='/' component={IndexPage} />
 			<Route path='/goodbye' component={GoodbyePage} />
 			<Route path='/about' component={About} />
 			<Route path='/signup' component={Signup} />
