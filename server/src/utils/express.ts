@@ -52,14 +52,25 @@ class Resolver {
 	public constructor(private readonly res: Response) {}
 
 	/**
-	 * Indicates that the request went okay.
+	 * Indicates that the request went okay, and provided a value.
 	 *
 	 * @see {@link StatusCodes.OK}
-	 * @param value the optional value to send along with the response
+	 * @param value the value to send along with the response
 	 * @param message the optional message to send along with the response
 	 */
-	public ok(value?: unknown, message?: string) {
+	public okWith(value: unknown, message?: string) {
 		this.body = Resolver.responseOf(StatusCodes.OK, message, value);
+		this.send();
+	}
+
+	/**
+	 * Indicates that the request went okay, but no value is provided.
+	 *
+	 * @see {@link StatusCodes.OK}
+	 * @param message the optional message to send along with the response
+	 */
+	public ok(message?: string) {
+		this.body = Resolver.responseOf(StatusCodes.OK, message);
 		this.send();
 	}
 
@@ -132,6 +143,17 @@ class Resolver {
 	 */
 	public notFound(message?: string) {
 		this.body = Resolver.responseOf(StatusCodes.NOT_FOUND, message);
+		this.send();
+	}
+
+	/**
+	 * Indicates that there was a conflict with the current state of the resource.
+	 *
+	 * @see {@link StatusCodes.CONFLICT}
+	 * @param message the  message specifying details about the conflict origins
+	 */
+	public conflict(message: string) {
+		this.body = Resolver.responseOf(StatusCodes.CONFLICT, message);
 		this.send();
 	}
 
