@@ -8,11 +8,12 @@ import About from './pages/about';
 import Header from './components/Header/Header';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<Header />
+		<Header pageName='SamplePage' />
 		<Switch>
 			<Route path='/' component={IndexPage} />
 			<Route path='/goodbye' component={GoodbyePage} />
