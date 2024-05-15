@@ -1,3 +1,7 @@
+#menu-icon {
+    position: absolute;
+}
+
 #menu-icon.non-active {
     animation: fade-out 300ms forwards;
 }

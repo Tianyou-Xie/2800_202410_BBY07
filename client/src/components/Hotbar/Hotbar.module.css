@@ -53,17 +53,7 @@
     left: 0%;
 }
 
-.menu-container-menu {
-    position: absolute;
-    background-color: grey;
-    z-index: 5;
-    padding: 10px;
-    border-radius: 50%;
-    right: 50%;
-    transform: translate(50%);
-}
-
-.menu-container-close {
+.menu-container {
     position: absolute;
     background-color: grey;
     z-index: 4;
