@@ -2,6 +2,7 @@ import { Handler } from 'express';
 import { PlanetModel } from '../../models/planet';
 import { escapeRegex } from '../../utils/regex';
 import mongoose from 'mongoose';
+import { Resolve } from '../../utils/express';
 
 export const get: Handler = async (req, res) => {
 	const nameOrId = req.params.nameOrId;
@@ -14,6 +15,6 @@ export const get: Handler = async (req, res) => {
 			name: new RegExp(`^${escapeRegex(nameOrId)}$`, 'i'),
 		});
 
-	if (planet) res.json(planet);
-	else res.status(404).json({ error: 'No planet by that name or ID was found.' });
+	if (planet) Resolve(res).okWith(planet);
+	else Resolve(res).notFound('No planet by that name or ID was found.');
 };

@@ -3,6 +3,7 @@ import { Handler } from 'express';
 import { UserModel } from '../../models/user';
 import { compareToHashed } from '../../utils/bcrypt';
 import { setSession } from '../../utils/session';
+import { assertRequestBody, Resolve } from '../../utils/express';
 
 interface PostBody {
 	email: string;
@@ -10,29 +11,23 @@ interface PostBody {
 }
 
 export const post: Handler = async (req, res) => {
-	const bodySchema = Joi.object<PostBody>({
-		email: Joi.string().trim().email().required().messages({
-			'string.base': 'The given email must be a string.',
-			'string.email': 'The given email is invalid.',
-			'any.required': 'Email is required.',
+	const body = assertRequestBody(
+		req,
+		res,
+		Joi.object<PostBody>({
+			email: Joi.string().trim().email().required(),
+			password: Joi.string().trim().required(),
 		}),
-		password: Joi.string().trim().required().messages({
-			'string.base': 'The given password must be a string.',
-			'any.required': 'Password is required.',
-		}),
-	});
+	);
 
-	const bodyValidationResult = bodySchema.validate(req.body);
-	if (bodyValidationResult.error) return res.status(400).json({ error: bodyValidationResult.error.message });
-
-	const { value: body } = bodyValidationResult;
+	if (!body) return;
 
 	const existingUser = await UserModel.findOne({ email: body.email });
-	if (!existingUser) return res.status(404).json({ error: 'No user with that email exists.' });
+	if (!existingUser) return Resolve(res).notFound('No user with that email exists.');
 
 	const passwordsMatch = await compareToHashed(body.password, existingUser.password);
-	if (!passwordsMatch) return res.status(401).json({ error: 'Password is incorrect.' });
+	if (!passwordsMatch) return Resolve(res).unauthorized('Password is incorrect.');
 
 	setSession(req, existingUser);
-	res.status(201).json({ message: 'Session created, login successful.' });
+	Resolve(res).created('Session created, login successful.');
 };
