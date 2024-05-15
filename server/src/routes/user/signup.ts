@@ -6,16 +6,14 @@ import { createHash } from '../../utils/bcrypt';
 import { PlanetModel } from '../../models/planet';
 import { setSession } from '../../utils/session';
 import { assertRequestBody, Resolve } from '../../utils/express';
+import { ILocation, RawLocationSchema } from '../../models/location';
+import { RawDocument } from '../../@types/model';
 
 interface PostBody {
 	email: string;
 	userName: string;
 	password: string;
-	location: {
-		planetId: string;
-		latitude: number;
-		longitude: number;
-	};
+	location: RawDocument<ILocation>;
 }
 
 export const post: Handler = async (req, res) => {
@@ -26,11 +24,7 @@ export const post: Handler = async (req, res) => {
 			email: Joi.string().trim().email().required(),
 			userName: Joi.string().trim().required(),
 			password: Joi.string().required(),
-			location: Joi.object({
-				planetId: Joi.string().trim().required(),
-				latitude: Joi.number().min(-90).max(90).required(),
-				longitude: Joi.number().min(-180).max(180).required(),
-			}).required(),
+			location: RawLocationSchema,
 		}),
 	);
 
