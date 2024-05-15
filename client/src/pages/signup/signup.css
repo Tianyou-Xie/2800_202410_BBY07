@@ -1,0 +1,77 @@
+.signup-container {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .signup-form {
+    background: var(--signup-background);
+    padding: 48px 81px;
+    border: 2px solid black;
+    box-shadow: 4px 5px 0px #000;
+  }
+
+  .signup-upperdiv {
+    background: var(--signup-background);
+    padding: 4px 0px;
+    border: 2px solid black;
+    box-shadow: 4px 3px 0px #000;
+  }
+
+  .signup-bottomdiv {
+    background: var(--signup-background);
+    padding: 4px 0px;
+    border: 2px solid black;
+    box-shadow: 4px 4px 0px #000;
+  }
+
+  input, button, select {
+    font-size: 14pt;
+    font-family: "BabaPro";
+    background: var(--signup-background);
+    border: 2px solid black;
+    outline: none;
+    padding-left: 5px;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    line-height: 28pt;
+    margin-bottom: 20pt;
+    box-shadow: 4px 5px;
+  }
+
+  button {
+    padding: 2px;
+    width: 50%;
+    box-shadow: 4px 5px;
+  }
+
+  button:active {
+    box-shadow: 4px 4px var(--signup-button-active)5;
+    transform: translateY(5px);
+  }
+
+  select {
+    width: 100%;
+    margin-bottom: 20pt;
+    box-shadow: 4px 5px;
+    padding: 6px;
+  }
+
+  img { 
+    max-width: 250px !important;
+  }
+
+  input:focus {
+    background: var(--signup-input-focus);
+  }
+
+  h1 {
+    font-family: Bitsumishi;
+  }
+
+  h5 {
+    font-family: BabaPro;
+  }
