@@ -38,10 +38,13 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [Express Sessions](https://github.com/expressjs/session)
 -   [connect-mongo](https://www.npmjs.com/package/connect-mongo)
 -   [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+-   [http-status-codes](https://www.npmjs.com/package/http-status-codes)
 
-**Repository Management:**
+**Development Utilities:**
 
 -   [Prettier](https://prettier.io/) for consistent code formatting, see `.prettierrc`.
+-   [morgan](https://expressjs.com/en/resources/middleware/morgan.html) for request logging
+-   [picocolors](https://www.npmjs.com/package/picocolors) for adding colour to request logging
 
 ## Code Attributions
 
@@ -61,9 +64,9 @@ Both the server and client utilize a `.env` file.
 ```
 
 **Client Variables:**
-| Key                   | Usage                                             |
-| --------------------- | ------------------------------------------------- |
-| PORT                  | Port used for the frontend app                  |                 
+| Key                   | Usage                                            |
+| --------------------- | ------------------------------------------------ |
+| PORT                  | Port used for the frontend app                   |                 
 
 **Server Variables:**
 
