@@ -2,6 +2,7 @@ import Joi from 'joi';
 import { Handler } from 'express';
 import { UserModel } from '../../models/user';
 import { compareToHashed } from '../../utils/bcrypt';
+import { setSession } from '../../utils/session';
 
 interface PostBody {
 	email: string;
@@ -32,6 +33,6 @@ export const post: Handler = async (req, res) => {
 	const passwordsMatch = await compareToHashed(body.password, existingUser.password);
 	if (!passwordsMatch) return res.status(401).json({ error: 'Password is incorrect.' });
 
-	req.session.user = { email: existingUser.email, name: existingUser.userName };
+	setSession(req, existingUser);
 	res.status(201).json({ message: 'Session created, login successful.' });
 };
