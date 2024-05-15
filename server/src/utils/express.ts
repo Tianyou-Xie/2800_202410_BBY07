@@ -38,7 +38,11 @@ interface FailureResponseBody extends BaseResponseBody {
  */
 type ResponseBody = SuccessResponseBody | FailureResponseBody;
 
-class Resolver {
+/**
+ * Utility class to resolve Express responses with a reponse body
+ * template.
+ */
+export class Resolver {
 	/**
 	 * Represents the current body of this response resolver.
 	 * This will be used when sending the request.
