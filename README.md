@@ -38,6 +38,7 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [Express Sessions](https://github.com/expressjs/session)
 -   [connect-mongo](https://www.npmjs.com/package/connect-mongo)
 -   [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+-   [http-status-codes](https://www.npmjs.com/package/http-status-codes)
 
 **Repository Management:**
 
