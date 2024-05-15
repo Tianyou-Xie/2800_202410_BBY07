@@ -6,6 +6,10 @@
 	box-sizing: border-box;
 }
 
+body {
+    height: 100vh;
+}
+
 @font-face {
     font-family: TTOctosquares;
     src: url(../../assets/fonts/TT-Octosquares-Trial-Regular.ttf);

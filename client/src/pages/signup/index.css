@@ -4,8 +4,7 @@
     src: url(../../assets/fonts/BabaPro-Bold.ttf);
   }
 
-body {
-    height: 100vh;
+  .signup-display {
     display: grid;
     align-items: center;
     justify-items: center;

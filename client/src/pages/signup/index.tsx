@@ -3,13 +3,13 @@ import './index.css';
 const Signup = () => {
 	return (
 		<>
-			<div className='px-4 pb-2 text-center'>
+			<div className='px-4 pb-2 text-center signup-display'>
 				<img className='thumbnail img-fluid' src='./src/assets/images/SkynetLogo.png' alt='' />
 				<h1>SKY.NET</h1>
 				<h5>STAY CONNECTED ACROSS THE GALAXY</h5>
 			</div>
-			<div className='signup-upperdiv mb-1'></div>
-			<div className='signup-form'>
+			<div className='signup-upperdiv mb-1 w-50'></div>
+			<div className='signup-form w-50'>
 				<form>
 					<input name='username' placeholder='USERNAME' type='email' />
 					<input name='email' placeholder='EMAIL' type='email' />
@@ -26,7 +26,7 @@ const Signup = () => {
 					</div>
 				</form>
 			</div>
-			<div className='signup-bottomdiv mt-2'></div>
+			<div className='signup-bottomdiv mt-2 w-50'></div>
 		</>
 	);
 };
