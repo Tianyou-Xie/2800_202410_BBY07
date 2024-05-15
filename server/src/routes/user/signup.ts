@@ -4,6 +4,7 @@ import { Handler } from 'express';
 import { UserModel } from '../../models/user';
 import { createHash } from '../../utils/bcrypt';
 import { PlanetModel } from '../../models/planet';
+import { setSession } from '../../utils/session';
 
 interface PostBody {
 	email: string;
@@ -75,6 +76,6 @@ export const post: Handler = async (req, res) => {
 	});
 
 	await user.save();
-	req.session.user = { email: user.email, name: user.userName };
+	setSession(req, user);
 	res.status(201).json({ message: 'User and session created, signup successful.' });
 };
