@@ -6,6 +6,7 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import path from 'path';
 import mongoose from 'mongoose';
+import { requestLogger } from './src/middlewares/log.js';
 
 const PROJECT_ROOT = path.join(__dirname, 'src');
 const PORT = process.env.PORT;
@@ -15,6 +16,7 @@ const PORT = process.env.PORT;
 
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());
+	app.use(requestLogger);
 
 	const mongoUrl = process.env.MONGO_URL!;
 	await mongoose.connect(mongoUrl);
