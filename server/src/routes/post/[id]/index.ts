@@ -1,8 +1,8 @@
 import { Handler } from 'express';
 import mongoose from 'mongoose';
-import { Resolve } from '../../utils/express';
-import { PostModel } from '../../models/post';
-import { requireLogin } from '../../middlewares/require-login';
+import { requireLogin } from '../../../middlewares/require-login';
+import { PostModel } from '../../../models/post';
+import { Resolve } from '../../../utils/express';
 
 export const get: Handler = async (req, res) => {
 	const id = req.params.id;
