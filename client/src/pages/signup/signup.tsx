@@ -1,10 +1,11 @@
 import './signup.css';
+import logoUrl from '../../assets/images/SkynetLogo.png';
 
 const Signup = () => {
 	return (
 		<div className='signup-container'>
 			<div className='px-4 pb-2 text-center'>
-				<img className='img-fluid' src='./src/assets/images/SkynetLogo.png' alt='Skynet Logo' />
+				<img className='img-fluid' src={logoUrl} alt='Skynet Logo' />
 				<h1>SKY.NET</h1>
 				<h5>STAY CONNECTED ACROSS THE GALAXY</h5>
 				<div className='signup-upperdiv mb-1'></div>
