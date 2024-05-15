@@ -12,8 +12,9 @@ export const get: Handler[] = [
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
 
 		const currentUserId = req.session.user!.id;
-		const existingInteraction = await LikeInteraction.exists({ postId: id, userId: currentUserId });
-		Resolve(res).okWith(existingInteraction);
+		const existingInteraction = await LikeInteraction.findOne({ postId: id, userId: currentUserId });
+		if (existingInteraction) Resolve(res).okWith(existingInteraction);
+		else Resolve(res).notFound('Post is not liked.');
 	},
 ];
 
@@ -27,7 +28,7 @@ export const post: Handler[] = [
 		if (!post) return Resolve(res).notFound('Invalid post ID provided.');
 
 		const currentUserId = req.session.user!.id;
-		const existingInteraction = await LikeInteraction.exists({});
+		const existingInteraction = await LikeInteraction.exists({ postId: id, userId: currentUserId }).lean();
 		if (existingInteraction) return Resolve(res).badRequest('Post is already liked.');
 
 		const session = await mongoose.startSession();
@@ -66,7 +67,7 @@ export const del: Handler[] = [
 		if (!post) return Resolve(res).notFound('Invalid post ID provided.');
 
 		const currentUserId = req.session.user!.id;
-		const interaction = await LikeInteraction.findOne({ postId: post._id, userId: currentUserId });
+		const interaction = await LikeInteraction.findOne({ postId: id, userId: currentUserId });
 		if (!interaction) return Resolve(res).badRequest('Post is not liked.');
 
 		const session = await mongoose.startSession();
