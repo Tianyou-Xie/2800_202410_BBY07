@@ -22,8 +22,11 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 **Client (built with [Vite](https://vitejs.dev/)):**
 
 -   [React](https://react.dev/)
+-   [React Bootstrap](https://react-bootstrap.netlify.app/)
+-   [React Icons](https://react-icons.github.io/react-icons/)
 -   [Wouter](https://www.npmjs.com/package/wouter)
 -   [CSS Modules](https://github.com/css-modules/css-modules) (implemented by Vite)
+-   [Bootstrap](https://getbootstrap.com/)
 
 **Server (built with [esno](https://www.npmjs.com/package/esno)):**
 
@@ -58,8 +61,9 @@ Both the server and client utilize a `.env` file.
 ```
 
 **Client Variables:**
-
-(TODO)
+| Key                   | Usage                                             |
+| --------------------- | ------------------------------------------------- |
+| PORT                  | Port used for the frontend app                  |                 
 
 **Server Variables:**
 
