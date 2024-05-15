@@ -15,9 +15,9 @@ An interplanetary town square that maintains connections between cultures and id
 -   Samarjit Bhogal ([@SamarjitBhogal](https://github.com/SamarjitBhogal))
 -   Marcus Lages ([@MarcusLages](https://github.com/MarcusLages))
 
-## Core Technologies
+## Technologies
 
-The project is built using Typescript, and split into two modules, the client and server.
+The project is built using [Typescript](https://www.typescriptlang.org/), and split into two modules, the client and server.
 
 **Client (built with [Vite](https://vitejs.dev/)):**
 
@@ -32,10 +32,18 @@ The project is built using Typescript, and split into two modules, the client an
 -   [Express](https://expressjs.com/)
 -   [Express File Routing](https://www.npmjs.com/package/express-file-routing)
 -   [Joi](https://joi.dev/)
+-   [Express Sessions](https://github.com/expressjs/session)
+-   [connect-mongo](https://www.npmjs.com/package/connect-mongo)
+-   [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 
 **Repository Management:**
 
 -   [Prettier](https://prettier.io/) for consistent code formatting, see `.prettierrc`.
+
+## Code Attributions
+
+-   Regex escape utility: [(`./server/utils/regex.ts:10`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/server/src/utils/regex.ts#L10)
+    > https://github.com/component/escape-regexp/blob/master/index.js
 
 ## Environment Variables
 
@@ -55,11 +63,13 @@ Both the server and client utilize a `.env` file.
 
 **Server Variables:**
 
-MongoDB variables coming soon (TODO)
-
-| Key  | Usage                            |
-| ---- | -------------------------------- |
-| PORT | Port used for the express server |
+| Key                   | Usage                                             |
+| --------------------- | ------------------------------------------------- |
+| PORT                  | Port used for the express server                  |
+| MONGO_URL             | The MongoDB connection string                     |
+| SESSION_TTL           | The session expiry time, in milliseconds          |
+| SESSION_COOKIE_SECRET | The secret phrase used to sign the session cookie |
+| SESSION_DATA_SECRET   | The secret phrased used to encrypt session data   |
 
 ## Running Locally & Deployment
 
