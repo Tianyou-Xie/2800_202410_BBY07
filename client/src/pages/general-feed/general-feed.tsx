@@ -15,7 +15,7 @@ const GeneralFeed = () => {
 	return (
 		<html>
 			<body>
-				<Page content={displayedPosts} noHeader={true}/>
+				<Page content={displayedPosts}/>
 			</body>
 		</html>
 	);
