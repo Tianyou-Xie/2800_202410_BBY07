@@ -2,6 +2,7 @@ import './forgetpassword.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import React, {useState} from 'react';
 import axios from 'axios';
+import { api } from '../../lib/axios';
 
 const Forgetpassword = () => {
 	const [email, setEmail] = useState('');
@@ -10,7 +11,7 @@ const Forgetpassword = () => {
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		try {
-			const response = await axios.post('/user/forgetpassword', { email });
+			const response = await api.post('/user/forgetpassword', { email });
 			setMessage(response.data.message);
 		} catch (error: any) {
 			setMessage(error.response.data.message);
