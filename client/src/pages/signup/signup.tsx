@@ -66,7 +66,7 @@ const Signup = () => {
 
 	return (
 		<div className={styles.signupContainer}>
-			<div className='px-4 pb-2 text-center'>
+			<div className='px-4 text-center'>
 				<img className='img-fluid' src={logoUrl} alt='Skynet Logo' />
 				<h1>SKY.NET</h1>
 				<h5>STAY CONNECTED ACROSS THE GALAXY</h5>
@@ -114,7 +114,7 @@ const Signup = () => {
 						</div>
 					</form>
 					<div className=''>
-						<p>ALREADY A USER. LOGIN BELOW</p>
+						<span>Already a User. Login Below</span>
 						<button className={styles.signupButtonLogin}>LOG IN</button>
 					</div>
 				</div>

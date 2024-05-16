@@ -85,6 +85,10 @@ h1 {
 	font-family: Bitsumishi;
 }
 
-h5, p {
+h5 {
 	font-family: BabaPro;
+}
+
+span {
+    font-family: TTOctosquares;
 }
