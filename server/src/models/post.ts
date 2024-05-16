@@ -15,7 +15,7 @@ export interface IPost {
 
 const schema = new Schema<IPost>(
 	{
-		authorId: { type: 'ObjectID', ref: 'User', required: true },
+		authorId: { type: 'ObjectID', ref: 'User', required: true, index: true },
 		content: { type: 'string', required: true },
 		likeCount: { type: 'number', required: true, default: 0 },
 		commentCount: { type: 'number', required: true, default: 0 },

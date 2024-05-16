@@ -7,8 +7,8 @@ export interface ILikeInteraction {
 
 const schema = new Schema<ILikeInteraction>(
 	{
-		postId: { type: 'ObjectID', ref: 'Post', required: true },
-		userId: { type: 'ObjectID', ref: 'User', required: true },
+		postId: { type: 'ObjectID', ref: 'Post', required: true, index: true },
+		userId: { type: 'ObjectID', ref: 'User', required: true, index: true },
 	},
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );

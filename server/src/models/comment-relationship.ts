@@ -7,7 +7,7 @@ export interface ICommentRelationship {
 
 const schema = new Schema<ICommentRelationship>(
 	{
-		parentPost: { type: 'ObjectID', ref: 'Post', required: true },
+		parentPost: { type: 'ObjectID', ref: 'Post', required: true, index: true },
 		childPost: { type: 'ObjectID', ref: 'Post', required: true },
 	},
 	{ timestamps: { createdAt: true, updatedAt: false } },
