@@ -8,13 +8,18 @@ const Signup = () => {
 		name: string;
 	}
 	const [planets, setPlanets] = useState<Array<Planet>>([]);
+	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [location, setLocation] = useState('');
+
 	useEffect(() => {
 		const fetchPlanets = async () => {
-			const apiUrl = 'http://localhost:3000/planet';
+			const apiUrl = import.meta.env.VITE_DEV + '/planet';
+			console.log(apiUrl);
 			try {
 				const res = await fetch(apiUrl);
 				const data = await res.json();
-				console.log(data.value);
 				setPlanets(data.value);
 			} catch (error) {
 				console.log(error);
@@ -24,6 +29,41 @@ const Signup = () => {
 		fetchPlanets();
 	}, []);
 
+	const submitForm = async (e: any) => {
+		e.preventDefault();
+
+		const newUser = {
+			email: email,
+			userName: username,
+			password: password,
+			location: {
+				latitude: '49.285061',
+				longitude: '-122.794594',
+				planetId: '664399a3036de6e77d00332f',
+			},
+		};
+
+		console.log(newUser);
+
+		const apiUrl = import.meta.env.VITE_DEV + '/user/signup';
+		try {
+			const res = await fetch(apiUrl, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(newUser),
+			});
+			const data = await res.json();
+			alert('new user created');
+		} catch (error) {
+			alert('Error: check console');
+			console.log(error);
+		}
+
+		// addJobSubmit(newJob);
+		// toast.success('Job added successfully');
+		// return navigate('/jobs');
+	};
+
 	return (
 		<div className={styles.signupContainer}>
 			<div className='px-4 pb-2 text-center'>
@@ -32,11 +72,33 @@ const Signup = () => {
 				<h5>STAY CONNECTED ACROSS THE GALAXY</h5>
 				<div className={`${styles.signupUpperdiv} mb-1`}></div>
 				<div className={styles.signupForm}>
-					<form>
-						<input name='username' placeholder='USERNAME' type='email' />
-						<input name='email' placeholder='EMAIL' type='email' />
-						<input name='password' placeholder='********' type='password' />
-						<select name='planets' id='planets'>
+					<form onSubmit={submitForm}>
+						<input
+							name='username'
+							placeholder='USERNAME'
+							type='text'
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+						<input
+							name='email'
+							placeholder='EMAIL'
+							type='email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+						<input
+							name='password'
+							placeholder='********'
+							type='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<select
+							name='planets'
+							id='planets'
+							value={location}
+							onChange={(e) => setLocation(e.target.value)}>
 							<option value='select'>Select Location</option>
 							{planets.map((planet, index) => {
 								return (
@@ -47,10 +109,13 @@ const Signup = () => {
 							})}
 							{/* <option value='xenos-prime'>Xenos Prime</option> */}
 						</select>
+						<div className='mb-3'>
+							<button>SIGN UP</button>
+						</div>
 					</form>
-					<div className='text-center'>
-						<button>LOG IN</button>
-						<button>SIGN UP</button>
+					<div className=''>
+						<p>ALREADY A USER. LOGIN BELOW</p>
+						<button className={styles.signupButtonLogin}>LOG IN</button>
 					</div>
 				</div>
 				<div className={`${styles.signupBottomdiv} mt-2`}></div>
