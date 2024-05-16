@@ -11,6 +11,7 @@ export interface IUser {
 	avatarUrl?: string;
 	followerCount: number;
 	followingCount: number;
+	postCount: number;
 	admin: boolean;
 	savedPosts: Array<Types.ObjectId>;
 	createdAt: Date;
@@ -27,6 +28,7 @@ const schema = new Schema<IUser>(
 		avatarUrl: { type: 'string' },
 		followerCount: { type: 'number', required: true, default: 0 },
 		followingCount: { type: 'number', required: true, default: 0 },
+		postCount: { type: 'number', required: true, default: 0 },
 		savedPosts: { type: ['ObjectId'], required: true, default: [] },
 		admin: { type: 'boolean', required: true, default: false },
 	},

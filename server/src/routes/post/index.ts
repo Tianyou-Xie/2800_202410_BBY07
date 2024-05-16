@@ -7,6 +7,7 @@ import { ILocation, RawLocationSchema } from '../../models/location';
 import { RawDocument } from '../../@types/model';
 import { PostModel } from '../../models/post';
 import { UserModel } from '../../models/user';
+import mongoose from 'mongoose';
 
 interface PostBody {
 	content: string;
@@ -34,14 +35,24 @@ export const post: Handler[] = [
 		const currentUser = await UserModel.findById(authorId);
 		if (!currentUser) return Resolve(res).unauthorized('You are not authorized to post.');
 
-		const post = new PostModel({
-			authorId,
-			content: body.content,
-			media: body.media,
-			location: body.location ?? currentUser.location,
-		});
+		const session = await mongoose.startSession();
+		try {
+			const post = new PostModel({
+				authorId,
+				content: body.content,
+				media: body.media,
+				location: body.location ?? currentUser.location,
+			});
 
-		await post.save();
-		Resolve(res).created(post, 'Post created successfully.');
+			currentUser.postCount++;
+			await currentUser.save({ session });
+
+			await post.save({ session });
+			Resolve(res).created(post, 'Post created successfully.');
+		} catch {
+			Resolve(res).error('Error occured while trying to create this post.');
+		} finally {
+			await session.endSession();
+		}
 	},
 ];
