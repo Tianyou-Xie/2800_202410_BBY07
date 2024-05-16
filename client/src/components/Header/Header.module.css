@@ -3,7 +3,15 @@
 }
 
 .page-name {
+    font-family: Bitsumishi;
     font-size: 2em;
     display: flex;
     justify-content: end;
+}
+
+.navbar {
+    background-color: white;
+    min-width: 100vw;
+    border-bottom: 5px solid var(--soft-shadow);
+    padding-bottom: 0px;
 }

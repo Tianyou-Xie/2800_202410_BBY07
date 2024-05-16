@@ -6,7 +6,7 @@ interface Props {
 
 const Hotbar = (props: Props) => {
 	return (
-		<></>
+		<div></div>
 	);
 };
 

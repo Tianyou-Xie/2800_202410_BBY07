@@ -10,7 +10,8 @@ interface Props {
 
 const Header = (props: Props) => {
 	return (
-		<Navbar expand='lg' className='bg-body-tertiary'>
+		// <Navbar expand='lg' className='bg-body-tertiary'>
+		<Navbar expand='lg' className={styles.navbar}>
 			<Container>
 				<Navbar.Text onClick={handlePageReturn}><IoArrowBackCircleOutline className={styles.returnIcon} /></Navbar.Text>
                 <Navbar.Text className={styles.pageName}>{props.pageName}</Navbar.Text>			

@@ -1,5 +1,6 @@
 .post-container {
     font-family: TTOctosquares;
+    padding-bottom: 5px;
 }
 
 .user-container {
@@ -22,8 +23,8 @@
     border-radius: 10px;
     margin: 2px 0px;
     width: auto;
-    border: 2px solid black;
-    box-shadow: 4px 5px 0px #000;
+    border: 2px solid var(--soft-shadow);
+    box-shadow: 4px 5px 0px var(--soft-shadow);
     text-align: left;
     font-size: 0.8em;
 
