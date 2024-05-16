@@ -5,6 +5,6 @@ export default defineConfig({
 	plugins: [react()],
 	css: { modules: { localsConvention: 'camelCaseOnly' } },
     server: {
-        port: 8000
+        port: 3000
     }
 });
