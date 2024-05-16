@@ -5,7 +5,6 @@ import { TokenModel } from '../../models/token';
 import { Resolve } from '../../utils/express';
 import crypto from 'crypto';
 import {sendEmail} from '../../utils/email';
-import { send } from 'process';
 
 interface PostBody {
 	email: string;
@@ -52,7 +51,7 @@ export const post: Handler = async (req, res) => {
 			subject: 'Password Reset Request',
 			text: message
 		});
-		return res.status(200).json({ message: 'Password reset link has been sent to your email.' });
+		Resolve(res).created(post, 'Password rest link has been sent your email.');
 	} catch (error) {
 		token.deleteOne();
 		console.log(error);

@@ -8,6 +8,7 @@ import { compareToHashed } from '../../utils/bcrypt';
 interface PostBody {
 	password: string;
     newpassword: string;
+	confirmpassword: string;
 }
 
 export const patch: Handler [] = [
@@ -23,6 +24,11 @@ export const patch: Handler [] = [
 			newpassword: Joi.string().trim().required().messages({
 				'string.base': 'The given password must be a string.',
 				'any.required': 'New password is required.',
+			}),
+			confirmpassword: Joi.string().trim().required().valid(Joi.ref('newpassword')).messages({
+				'string.base': 'The given password must be a string.',
+				'any.required': 'Confirm password is required.',
+				'any.only': 'New passwords do not match.',
 			}),
 		});
 
