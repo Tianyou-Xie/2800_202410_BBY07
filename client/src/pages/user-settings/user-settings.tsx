@@ -7,9 +7,11 @@ import Nav from 'react-bootstrap/Nav';
 import Header from '../../components/Header/Header';
 import ModalConfirmation from '../../components/ModalConfirmation/ModalConfirmation';
 import Hotbar from '../../components/Hotbar/Hotbar';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 
 const UserSettings = () => {
-	const initialBody = (bodyDesc: string) => {
+	const initBody = (bodyDesc: string) => {
 		return (
 			<>
 				<p>
@@ -26,19 +28,26 @@ const UserSettings = () => {
 	const [showNameBody, setShowName] = useState(false);
 	const [showDeleteBod, setShowDelete] = useState(false);
 
-	const [modalPasswordBody, setPasswordBody] = useState(initialBody('change your password'));
-	const [modalEmailBody, setEmailBody] = useState(initialBody('change your email'));
-	const [modalNameBody, setNameBody] = useState(initialBody('change your name'));
-	const [modalDeleteBody, setDeleteBody] = useState(initialBody('delete your account'));
+	const [modalPasswordBody, setPasswordBody] = useState(initBody('change your password'));
+	const [modalEmailBody, setEmailBody] = useState(initBody('change your email'));
+	const [modalNameBody, setNameBody] = useState(initBody('change your name'));
+	const [modalDeleteBody, setDeleteBody] = useState(initBody('delete your account'));
 
 	const handlePasswordChange = () => setPasswordBody(changePasswordForm());
-	//const handleEmailChange = () => setEmailBody();
 
 	function changePasswordForm(): JSX.Element {
 		return (
-			<>
-				<p>this is me</p>
-			</>
+			<form>
+				<FloatingLabel controlId='currentPassword' label='Current Password' className='mb-3'>
+					<Form.Control type='password' placeholder='Current Password' />
+				</FloatingLabel>
+				<FloatingLabel controlId='newPassword' label='New Password'>
+					<Form.Control type='password' placeholder='New Password' />
+				</FloatingLabel>
+				<FloatingLabel controlId='confirmPassword' label='Confirm Password'>
+					<Form.Control type='password' placeholder='Confirm Password' />
+				</FloatingLabel>
+			</form>
 		);
 	}
 
@@ -91,7 +100,7 @@ const UserSettings = () => {
 						<ListGroup.Item className={`ms-5`}>
 							<Nav.Link href='/#link'>Change Profile Name</Nav.Link>
 						</ListGroup.Item>
-						<ListGroup.Item className={`ms-5`} onClick={() => setShowPass(true)}>
+						<ListGroup.Item className={`${styles.clickable} ms-5`} onClick={() => setShowPass(true)}>
 							Change Password
 						</ListGroup.Item>
 						<ListGroup.Item className={`ms-5`}>
@@ -108,8 +117,11 @@ const UserSettings = () => {
 			<ModalConfirmation
 				title='Change Password'
 				body={modalPasswordBody}
-				show={showPassBody}
-				onHide={() => setShowPass(false)}
+				show={true}
+				onHide={() => {
+					setShowPass(false);
+					setPasswordBody(initBody('change your password'));
+				}}
 				onContinue={handlePasswordChange}
 			/>
 		</>
