@@ -14,7 +14,7 @@ const Test = () => {
 				<Container className={styles.pageContainer}>
 					<Header pageName='General feed'/>
 					<Post username='@MarcusTheDumbs' text='Testing' postURL='./about'/>
-                    <Hotbar pageName='General feed'/>
+                    <Hotbar />
 				</Container>
 			</body>
 		</html>
