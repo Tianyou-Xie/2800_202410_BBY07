@@ -7,8 +7,8 @@ export interface IFollowRelationship {
 
 const schema = new Schema<IFollowRelationship>(
 	{
-		initiateUserId: { type: 'ObjectID', ref: 'User', required: true },
-		targetUserId: { type: 'ObjectID', ref: 'User', required: true },
+		initiateUserId: { type: 'ObjectID', ref: 'User', required: true, index: true },
+		targetUserId: { type: 'ObjectID', ref: 'User', required: true, index: true },
 	},
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
