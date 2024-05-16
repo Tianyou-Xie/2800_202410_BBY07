@@ -8,7 +8,7 @@ export interface IRepostRelationship {
 const schema = new Schema<IRepostRelationship>(
 	{
 		targetPost: { type: 'ObjectID', ref: 'Post', required: true },
-		repostPost: { type: 'ObjectID', ref: 'Post', required: true },
+		repostPost: { type: 'ObjectID', ref: 'Post', required: true, index: true },
 	},
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );

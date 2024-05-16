@@ -1,4 +1,181 @@
-div {
-    height: 64px;
-    background-color: var(--signup-background);
+.nav-container p {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-container li a {
+    margin-right: 80px;
+    margin-top: -14px;
+    min-width: 80px;
+    padding: 1px;
+    text-decoration: none;
+    text-align: center;
+    flex-basis: 100%;
+    color: #2196F3;
+    font-family: TTOctosquares;
+}
+
+.nav-container {
+    position: fixed;
+    bottom: 0%;
+    left: 0%;
+    width: 100vw;
+    margin-bottom: 105px;
+}
+
+.nav {
+    position: relative;
+    width: 100vw;
+}
+
+.circle {
+    position: absolute;
+    border: none;
+    background-color: #242C38;
+    padding: 60px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.circle-right {
+    right: 0%;
+    transform: translate(50%, 10%);
+}
+
+.circle-left {
+    left: 0%;
+    transform: translate(-50%, 10%);
+}
+
+.bar {
+    border: none;
+    position: absolute;
+    background-color: #242C38;
+    padding: 60px;
+    width: 100vw;
+    top: 50px;
+}
+
+.nav-icon {
+    position: absolute;
+    z-index: 2;
+    font-size: 2em;
+    color: #2196F3;
+}
+
+.icon-right {
+    right: 0%;
+}
+
+.icon-left {
+    left: 0%;
+}
+
+.menu-container {
+    position: absolute;
+    background-color: #2196F3;
+    z-index: 5;
+    padding: 10px;
+    border-radius: 50%;
+    right: 50%;
+    transform: translate(50%);
+}
+
+.menu-backdrop {
+    position: absolute;
+    background-color: white;
+    z-index: 3;
+    width: 110px;
+    border-radius: 50%;
+    padding: 50px;
+    right: 50%;
+    top: 0px;
+    transform: translate(50%);
+}
+
+.menu-icon, .close-icon, .menu-sub-icons {
+    font-size: 4em;
+}
+
+.nav-container ul.submenu {
+    position: absolute;
+    right: 50%;
+    top: 0%;
+    width: 140px;
+    transform: translateX(-50%);
+}
+
+.nav-container input:checked ~ ul.submenu > li {
+    transform: rotate(calc((180deg / 5) * var(--item))) translateX(0px);
+    opacity: 1;
+}
+
+.nav-container ul.submenu > li {
+    --item: 1;
+    position: absolute;
+    opacity: 0;
+    transform: rotate(calc((180deg / 5) * var(--item))) translateX(120px);
+    transform-origin: right center;
+    display: flex;
+    align-self: center;
+    transition: transform .7s, opacity .2s;
+}
+
+.nav-container ul.submenu li:nth-child(1) {
+    --item: 1;
+}
+
+.nav-container ul.submenu li:nth-child(2) {
+    --item: 2;
+}
+
+.nav-container ul.submenu li:nth-child(3) {
+    --item: 3;
+}
+
+.nav-container ul.submenu li:nth-child(4) {
+    --item: 4;
+}
+
+.nav-container ul.submenu li:nth-child(1) a {
+    transform: rotate(-36deg);
+}
+
+.nav-container ul.submenu li:nth-child(2) a {
+    transform: rotate(-72deg);
+}
+
+.nav-container ul.submenu li:nth-child(3) a {
+    transform: rotate(-108deg);
+}
+
+.nav-container ul.submenu li:nth-child(4) a {
+    transform: rotate(-144deg);
+}
+
+.back-drop-div {
+    background-color: rgba(255, 255, 255, 0.4);
+    position: absolute;
+    right: 20%;
+    bottom: 0%;
+    width: 400px;
+    height: 250px;
+    border-radius: 50% 50% 0 0;
+    transform: translateY(50%);
+    backdrop-filter: blur(1px);
+    border: none;
+    box-shadow: 0px 0px 40px 40px rgba(255, 255, 255, 0.4);
+
+    opacity: 0;
+    transition: transform .7s, opacity .7s;
+}
+
+.nav-container input:checked ~ .back-drop-div {
+    opacity: 1;
+}
+
+.menu-label {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
 }

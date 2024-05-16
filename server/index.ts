@@ -6,6 +6,7 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import path from 'path';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import { requestLogger } from './src/middlewares/log.js';
 
 const PROJECT_ROOT = path.join(__dirname, 'src');
@@ -14,6 +15,7 @@ const PORT = process.env.PORT;
 (async () => {
 	const app = express();
 
+    app.use(cors());
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());
 	app.use(requestLogger);

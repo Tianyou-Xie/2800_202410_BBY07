@@ -5,17 +5,15 @@
 
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 84px 1fr 64px;
+    grid-template-rows: 84px 1fr;
     grid-template-areas:
         "header"
-        "content"
-        "hotbar";
+        "content";
 }
 
 .noHeader {
     grid-template-areas: 
-        "content"
-        "hotbar";
+        "content";
 }
 
 .header{
@@ -29,8 +27,4 @@
     margin: 0px 0px;
     overflow-y: scroll;
     grid-area: content;
-}
-
-.hotbar{
-    grid-area: hotbar;
 }

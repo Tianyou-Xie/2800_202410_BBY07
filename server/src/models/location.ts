@@ -8,7 +8,7 @@ export interface ILocation {
 }
 
 export const LocationSchema = new Schema<ILocation>({
-	planetId: { type: 'ObjectId', ref: 'Planet', required: true },
+	planetId: { type: 'ObjectId', ref: 'Planet', required: true, index: true },
 	latitude: { type: 'number', required: true },
 	longitude: { type: 'number', required: true },
 });

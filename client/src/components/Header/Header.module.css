@@ -1,17 +1,17 @@
-.return-icon {
-    font-size: 2em;
+.header-container {
+    background-color: #242C38;
+    padding-bottom: 0px;
 }
 
-.page-name {
+.return-icon {
+    font-size: 30pt;
+    color: #2196F3;
+}
+
+.page-title {
+    font-size: 2.5em;
     font-family: Bitsumishi;
-    font-size: 2em;
     display: flex;
     justify-content: end;
-}
-
-.navbar {
-    background-color: white;
-    min-width: 100vw;
-    border-bottom: 5px solid var(--soft-shadow);
-    padding-bottom: 0px;
+    color: #2196F3 !important;
 }

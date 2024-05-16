@@ -1,31 +1,51 @@
-import './signup.css';
+import { useState, useEffect } from 'react';
+import styles from './signup.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 
 const Signup = () => {
+	interface Planet {
+		_id: string;
+		name: string;
+	}
+	const [planets, setPlanets] = useState<Array<Planet>>([]);
+	useEffect(() => {
+		const fetchPlanets = async () => {
+			const apiUrl = 'http://localhost:3000/planet';
+			try {
+				const res = await fetch(apiUrl);
+				const data = await res.json();
+				console.log(data.value);
+				setPlanets(data.value);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchPlanets();
+	}, []);
+
 	return (
-		<div className='signup-container'>
+		<div className={styles.signupContainer}>
 			<div className='px-4 pb-2 text-center'>
 				<img className='img-fluid' src={logoUrl} alt='Skynet Logo' />
 				<h1>SKY.NET</h1>
 				<h5>STAY CONNECTED ACROSS THE GALAXY</h5>
-				<div className='signup-upperdiv mb-1'></div>
-				<div className='signup-form'>
+				<div className={`${styles.signupUpperdiv} mb-1`}></div>
+				<div className={styles.signupForm}>
 					<form>
 						<input name='username' placeholder='USERNAME' type='email' />
 						<input name='email' placeholder='EMAIL' type='email' />
 						<input name='password' placeholder='********' type='password' />
 						<select name='planets' id='planets'>
 							<option value='select'>Select Location</option>
-							<option value='mercury'>Mercury</option>
-							<option value='venus'>Venus</option>
-							<option value='earth'>Earth</option>
-							<option value='mars'>Mars</option>
-							<option value='jupiter'>Jupiter</option>
-							<option value='saturn'>Saturn</option>
-							<option value='uranus'>Uranus</option>
-							<option value='neptune'>Neptune</option>
-							<option value='moon'>Moon</option>
-							<option value='xenos-prime'>Xenos Prime</option>
+							{planets.map((planet, index) => {
+								return (
+									<option key={index} value={planet.name}>
+										{planet.name}
+									</option>
+								);
+							})}
+							{/* <option value='xenos-prime'>Xenos Prime</option> */}
 						</select>
 					</form>
 					<div className='text-center'>
@@ -33,7 +53,7 @@ const Signup = () => {
 						<button>SIGN UP</button>
 					</div>
 				</div>
-				<div className='signup-bottomdiv mt-2'></div>
+				<div className={`${styles.signupBottomdiv} mt-2`}></div>
 			</div>
 		</div>
 	);

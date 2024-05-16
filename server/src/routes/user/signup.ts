@@ -16,6 +16,8 @@ interface PostBody {
 	location: RawDocument<ILocation>;
 }
 
+const inflightEmails = new Set<string>();
+
 export const post: Handler = async (req, res) => {
 	const body = assertRequestBody(
 		req,
@@ -30,23 +32,31 @@ export const post: Handler = async (req, res) => {
 
 	if (!body) return;
 
-	const existingEmail = await UserModel.findOne({ email: body.email }).lean().exec();
-	if (existingEmail) return Resolve(res).conflict('Email is already registered.');
+	if (inflightEmails.has(body.email)) return Resolve(res).conflict('Email is currently registering.');
+	inflightEmails.add(body.email);
 
-	const isPlanetId = mongoose.isValidObjectId(body.location.planetId);
-	if (!isPlanetId) return Resolve(res).badRequest('The given planet ID is invalid.');
+	try {
+		const existingEmail = await UserModel.findOne({ email: body.email }).lean().exec();
+		if (existingEmail) return Resolve(res).conflict('Email is already registered.');
 
-	const planet = await PlanetModel.findById(body.location.planetId).lean().exec();
-	if (!planet) return Resolve(res).badRequest('The given location does not exist.');
+		const isPlanetId = mongoose.isValidObjectId(body.location.planetId);
+		if (!isPlanetId) return Resolve(res).badRequest('The given planet ID is invalid.');
 
-	const user = new UserModel({
-		email: body.email,
-		userName: body.userName,
-		password: await createHash(body.password),
-		location: body.location,
-	});
+		const planet = await PlanetModel.findById(body.location.planetId).lean().exec();
+		if (!planet) return Resolve(res).badRequest('The given location does not exist.');
 
-	await user.save();
-	setSession(req, user);
-	Resolve(res).created(undefined, 'User and session created, signup successful.');
+		const user = new UserModel({
+			email: body.email,
+			userName: body.userName,
+			password: await createHash(body.password),
+			location: body.location,
+		});
+
+		await user.save();
+
+		setSession(req, user);
+		Resolve(res).created(undefined, 'User and session created, signup successful.');
+	} finally {
+		inflightEmails.delete(body.email);
+	}
 };

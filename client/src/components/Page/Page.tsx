@@ -33,9 +33,7 @@ const Page = (props: PageProp) => {
 						</div>
 					)}
 					<Container className={styles.content}>{props.content}</Container>
-					<div className={styles.hotbar}>
-						<Hotbar pageName='General feed' />
-					</div>
+					<div><Hotbar /></div>
 				</Container>
 			</body>
 		</html>
