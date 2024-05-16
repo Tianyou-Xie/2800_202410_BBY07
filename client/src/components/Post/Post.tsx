@@ -13,14 +13,6 @@ import { FaRegBookmark } from "react-icons/fa"; //<FaRegBookmark />	//Empty book
 import { FaBookmark } from 'react-icons/fa'; //<FaBookmark />	//Filled bookmark
 import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
 
-/**
- * Post component representing the thumbnail post of an user.
- * 
- * @param username - Username of the author of the post
- * @param text - Text of the post
- * @param postURL - URL of the complete version of the post with comments and more information
- * @param createdAt - (optional) Date in which the post was created
- */
 interface PostProp {
 	username: string;
 	text: string;
@@ -28,17 +20,17 @@ interface PostProp {
 	createdAt?: Date;
 }
 
-/**
- * Component representing the user part of the post (image and username).
- * 
- * @param username - Username of the author of the post (got from the Post's props)
- * @param imageURL - (TODO) Will represent the user's profile pictures as an URL or image file.
- */
 interface UserProp {
 	username: string;
 	imageURL? : string;
 }
 
+/**
+ * Component representing the user part of the post (image and username).
+ * 
+ * @param props.username - Username of the author of the post (got from the Post's props)
+ * @param props.imageURL - (TODO) Will represent the user's profile pictures as an URL or image file.
+ */
 const User = (props: UserProp): JSX.Element => {
 	return (
 		<>
@@ -47,6 +39,14 @@ const User = (props: UserProp): JSX.Element => {
 	);
 };
 
+/**
+ * Post component representing the thumbnail post of an user.
+ * 
+ * @param props.username string - Username of the author of the post
+ * @param props.text string - Text of the post
+ * @param props.postURL string - URL of the complete version of the post with comments and more information
+ * @param props.createdAt Date - (optional) Date in which the post was created
+ */
 const Post = (props: PostProp): JSX.Element => {
 	const [bookmarked, setBookmarked] = useState(false);
 	const [liked, setLiked] = useState(false);

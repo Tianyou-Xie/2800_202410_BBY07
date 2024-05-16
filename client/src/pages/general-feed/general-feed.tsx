@@ -1,8 +1,7 @@
 import styles from './general-feed.module.css';
 import Container from 'react-bootstrap/Container';
 
-import Header from '../../components/Header/Header';
-import Hotbar from '../../components/Hotbar/Hotbar';
+import Page from '../../components/Page/Page';
 import Post from '../../components/Post/Post';
 
 const GeneralFeed = () => {
@@ -16,15 +15,7 @@ const GeneralFeed = () => {
 	return (
 		<html>
 			<body>
-				<Container className={styles.pageContainer}>
-					<div className={styles.header}>
-						<Header pageName='General feed'/>
-					</div>
-					<Container className={styles.posts}>{displayedPosts}</Container>
-                    <div className={styles.hotbar}>
-						<Hotbar pageName='General feed'/>
-					</div>
-				</Container>
+				<Page content={displayedPosts} noHeader={true}/>
 			</body>
 		</html>
 	);
