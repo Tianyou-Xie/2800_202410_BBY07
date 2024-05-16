@@ -10,6 +10,7 @@ import About from './pages/about/about';
 import Signup from './pages/signup/signup';
 import Hotbar from './components/Hotbar/Hotbar';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
+import Changepassword from './pages/changepassword/changepassword';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	// <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 		<Route path='/about' component={About} />
 		<Route path='/signup' component={Signup} />
 		<Route path='/forgetpassword' component={Forgetpassword} />
+		<Route path='/changepassword' component={Changepassword} />
 		<Route>404 Not Found</Route>
 	</Switch>,
 	// <Hotbar />

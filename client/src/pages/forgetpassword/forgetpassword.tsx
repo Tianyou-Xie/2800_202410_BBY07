@@ -1,7 +1,6 @@
 import './forgetpassword.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import React, {useState} from 'react';
-import axios from 'axios';
 import { api } from '../../lib/axios';
 
 const Forgetpassword = () => {
@@ -42,6 +41,7 @@ const Forgetpassword = () => {
 					</form>
 				</div>
 				<div className='forgetpassword-bottomdiv mt-2'></div>
+				<br />
 				<div className='message'>{message}</div>
 			</div>
 		</div>

@@ -25,7 +25,7 @@ export const post: Handler = async (req, res) => {
     const { value: body } = bodyValidationResult;
 
 	const existingUser = await UserModel.findOne({ email: body.email });
-	if (!existingUser) return res.status(404).json({ error: 'No user with that email exists.' });
+	if (!existingUser) return Resolve(res).created(post, 'Sorry, no user with that email exists.');
 
 	const resetToken = crypto.randomBytes(32).toString('hex');
 	const passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
