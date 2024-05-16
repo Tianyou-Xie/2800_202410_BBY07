@@ -32,3 +32,34 @@
 .post-text {
     margin: 4px 0px;
 }
+
+.post-date {
+    font-size: 0.6em;
+    color: var(--soft-shadow);
+}
+
+.icons-container {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 61% 13% 13% 13%;
+    grid-template-areas: "shr book cmt like";
+}
+
+.share{
+    grid-area: shr;
+}
+
+.book{
+    grid-area: book;
+    text-align: center;
+}
+
+.comment{
+    grid-area: cmt;
+    text-align: center;
+}
+
+.like{
+    grid-area: like;
+    text-align: center;
+}
