@@ -36,18 +36,23 @@ export const post: Handler[] = [
 		if (!currentUser) return Resolve(res).unauthorized('You are not authorized to post.');
 
 		const session = await mongoose.startSession();
+
 		try {
-			const post = new PostModel({
-				authorId,
-				content: body.content,
-				media: body.media,
-				location: body.location ?? currentUser.location,
+			const post = await session.withTransaction(async () => {
+				const post = new PostModel({
+					authorId,
+					content: body.content,
+					media: body.media,
+					location: body.location ?? currentUser.location,
+				});
+
+				currentUser.postCount++;
+				await currentUser.save({ session });
+
+				await post.save({ session });
+				return post;
 			});
 
-			currentUser.postCount++;
-			await currentUser.save({ session });
-
-			await post.save({ session });
 			Resolve(res).created(post, 'Post created successfully.');
 		} catch {
 			Resolve(res).error('Error occured while trying to create this post.');
