@@ -1,77 +1,94 @@
 .signup-container {
-    display: grid;
-    align-items: center;
-    justify-items: center;
-  }
+	display: grid;
+	align-items: center;
+	justify-items: center;
+}
 
-  .signup-form {
-    background: var(--signup-background);
-    padding: 48px 59px;
-    border: 2px solid black;
-    box-shadow: 4px 5px 0px #000;
-  }
+.signup-form {
+	background: var(--signup-background);
+	padding: 29px 59px;
+	border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
 
-  .signup-upperdiv {
-    background: var(--signup-background);
-    padding: 4px 0px;
-    border: 2px solid black;
-    box-shadow: 4px 3px 0px #000;
-  }
+.signup-upperdiv {
+	background: var(--signup-background);
+	padding: 4px 0px;
+	border: 2px solid black;
+	box-shadow: 4px 3px 0px #000;
+}
 
-  .signup-bottomdiv {
-    background: var(--signup-background);
-    padding: 4px 0px;
-    border: 2px solid black;
-    box-shadow: 4px 4px 0px #000;
-  }
+.signup-bottomdiv {
+	background: var(--signup-background);
+	padding: 4px 0px;
+	border: 2px solid black;
+	box-shadow: 4px 4px 0px #000;
+}
 
-  input, button, select {
-    font-size: 14pt;
-    font-family: "BabaPro";
-    background: var(--signup-background);
-    border: 2px solid black;
-    outline: none;
-    padding-left: 5px;
-  }
+.signup-button-login {
+	box-shadow: 4px 5px gray !important;
+	background: black !important;
+	color: white !important;
+}
 
-  input {
-    display: block;
-    width: 100%;
-    line-height: 28pt;
-    margin-bottom: 20pt;
-    box-shadow: 4px 5px;
-  }
+.signup-button-login:active {
+    box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+	transform: translateY(5px) !important;
+}
 
-  button {
-    padding: 2px;
-    width: 50%;
-    box-shadow: 4px 5px;
-  }
+input,
+button,
+select {
+	font-size: 14pt;
+	font-family: 'BabaPro';
+	background: var(--signup-background);
+	border: 2px solid black;
+	outline: none;
+	padding-left: 5px;
+}
 
-  button:active {
-    box-shadow: 4px 4px var(--signup-button-active)5;
-    transform: translateY(5px);
-  }
+input {
+	display: block;
+	width: 100%;
+	line-height: 28pt;
+	margin-bottom: 20pt;
+	box-shadow: 4px 5px;
+}
 
-  select {
-    width: 100%;
-    margin-bottom: 20pt;
-    box-shadow: 4px 5px;
-    padding: 6px;
-  }
+button {
+	padding: 2px;
+	width: 50%;
+	box-shadow: 4px 5px;
+}
 
-  img { 
-    max-width: 250px !important;
-  }
+button:active {
+	box-shadow: 4px 4px var(--signup-button-active) 5;
+	transform: translateY(5px);
+}
 
-  input:focus {
-    background: var(--signup-input-focus);
-  }
+select {
+	width: 100%;
+	margin-bottom: 20pt;
+	box-shadow: 4px 5px;
+	padding: 6px;
+}
 
-  h1 {
-    font-family: Bitsumishi;
-  }
+img {
+	max-width: 250px !important;
+}
 
-  h5 {
-    font-family: BabaPro;
-  }
+input:focus {
+	background: var(--signup-input-focus);
+}
+
+h1 {
+	font-family: Bitsumishi;
+}
+
+h5 {
+	font-family: BabaPro;
+}
+
+span {
+    font-family: TTOctosquares;
+}
