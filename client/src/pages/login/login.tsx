@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './login.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
+import { api } from '../../lib/axios';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -16,14 +17,14 @@ const Login = () => {
 
 		console.log(newUser);
 
-		const apiUrl = import.meta.env.VITE_DEV + '/user/login';
+		const apiUrl = '/user/login';
 		try {
-			const res = await fetch(apiUrl, {
+			const res = await api.post(apiUrl, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(newUser),
 			});
-			const data = await res.json();
+			const data = await res.data;
 			alert('logged in successfully');
 		} catch (error) {
 			alert('Error: check console');
