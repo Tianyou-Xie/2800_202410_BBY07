@@ -69,9 +69,9 @@ const Signup = () => {
 	return (
 		<div className={styles.signupContainer}>
 			<div className='px-4 text-center'>
-				<img className='img-fluid' src={logoUrl} alt='Skynet Logo' />
-				<h1>SKY.NET</h1>
-				<h5>STAY CONNECTED ACROSS THE GALAXY</h5>
+				<img className={`${styles.img} img-fluid`} src={logoUrl} alt='Skynet Logo' />
+				<h1 className={styles.h1}>SKY.NET</h1>
+				<h5 className={styles.h5}>STAY CONNECTED ACROSS THE GALAXY</h5>
 				<div className={`${styles.signupUpperdiv} mb-1`}></div>
 				<div className={styles.signupForm}>
 					<form onSubmit={submitForm}>
@@ -80,6 +80,7 @@ const Signup = () => {
 							placeholder='USERNAME'
 							type='text'
 							value={username}
+							className={styles.input}
 							required
 							onChange={(e) => setUsername(e.target.value)}
 						/>
@@ -88,6 +89,7 @@ const Signup = () => {
 							placeholder='EMAIL'
 							type='email'
 							value={email}
+							className={styles.input}
 							required
 							onChange={(e) => setEmail(e.target.value)}
 						/>
@@ -96,6 +98,7 @@ const Signup = () => {
 							placeholder='********'
 							type='password'
 							value={password}
+							className={styles.input}
 							required
 							onChange={(e) => setPassword(e.target.value)}
 						/>
@@ -103,6 +106,7 @@ const Signup = () => {
 							name='planets'
 							id='planets'
 							defaultValue={planets[0]?._id}
+							className={styles.select}
 							required
 							onChange={(e) => setLocation(e.target.value)}>
 							{planets.map((planet, index) => {
@@ -115,12 +119,12 @@ const Signup = () => {
 							{/* <option value='xenos-prime'>Xenos Prime</option> */}
 						</select>
 						<div className='mb-3'>
-							<button>SIGN UP</button>
+							<button className={`${styles.button}`}>SIGN UP</button>
 						</div>
 					</form>
 					<div className=''>
 						<span>Already a User. Login Below</span>
-						<button className={styles.signupButtonLogin}>LOG IN</button>
+						<button className={`${styles.signupButtonLogin} ${styles.button}`}>LOG IN</button>
 					</div>
 				</div>
 				<div className={`${styles.signupBottomdiv} mt-2`}></div>
