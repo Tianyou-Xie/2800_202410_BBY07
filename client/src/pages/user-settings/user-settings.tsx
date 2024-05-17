@@ -102,8 +102,8 @@ const UserSettings = () => {
 	//defining values from the info modal
 	const infoBody = {
 		showInfoBody: showInfoBody,
-		setInfoBody: setInfoBody
-	}
+		setInfoBody: setInfoBody,
+	};
 
 	return (
 		<>
@@ -155,11 +155,14 @@ const UserSettings = () => {
 								</ListGroup.Item>
 							</ListGroup>
 						</ListGroup.Item>
-						<ListGroup.Item>
+						<ListGroup.Item className={styles.groupItem}>
 							<div className='w-100 d-flex justify-content-center my-5'>
-								<button className='p-2'><h1 onClick={logout} className={`${styles.settingTitle}`}>Logout</h1></button>
+								<button className='p-2'>
+									<h1 onClick={logout} className={`${styles.settingTitle}`}>
+										Logout
+									</h1>
+								</button>
 							</div>
-						
 						</ListGroup.Item>
 						<ListGroup.Item className={styles.dangerZone}>
 							<h1 className={`${styles.settingTitle} ms-3`}>Danger Zone</h1>

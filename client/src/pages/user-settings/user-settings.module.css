@@ -11,7 +11,7 @@
 
 .danger-zone, .danger-zone * {
     background-color: #242C38;
-    color: aliceblue;
+    color: red;
 }
 
 .group-item, .group-item * {
