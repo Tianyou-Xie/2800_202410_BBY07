@@ -1,5 +1,4 @@
 import styles from './home.module.css';
-import Container from 'react-bootstrap/Container';
 
 import Page from '../../components/Page/Page';
 import { Link } from 'wouter';
@@ -19,28 +18,24 @@ const Planets = (props: PlanetProps) => {
 
 const Home = () => {
 	const mainContainer = (
-		<Container className={styles.mainContainer}>
-			<div className={styles.title}>Choose your planet</div>
-			<Planets planet='GENERAL FEED' url='/feed' />
-			<Planets planet='Earth' url='/feed' />
-			<Planets planet='Moon' url='/feed' />
-			<Planets planet='Mercury' url='/feed' />
-			<Planets planet='Venus' url='/feed' />
-			<Planets planet='Mars' url='/feed' />
-			<Planets planet='Jupiter' url='/feed' />
-			<Planets planet='Saturn' url='/feed' />
-			<Planets planet='Uranus' url='/feed' />
-			<Planets planet='Neptune' url='/feed' />
-		</Container>
+		<div className='d-flex align-items-center justify-content-center p-3'>
+			<div className={styles.mainContainer}>
+				<h1 className={styles.title}>Choose your planet</h1>
+				<Planets planet='GENERAL FEED' url='/feed' />
+				<Planets planet='Earth' url='/feed' />
+				<Planets planet='Moon' url='/feed' />
+				<Planets planet='Mercury' url='/feed' />
+				<Planets planet='Venus' url='/feed' />
+				<Planets planet='Mars' url='/feed' />
+				<Planets planet='Jupiter' url='/feed' />
+				<Planets planet='Saturn' url='/feed' />
+				<Planets planet='Uranus' url='/feed' />
+				<Planets planet='Neptune' url='/feed' />
+			</div>
+		</div>
 	);
 
-	return (
-		<html>
-			<body>
-				<Page content={mainContainer} noHeader />
-			</body>
-		</html>
-	);
+	return <Page content={mainContainer} noHeader />;
 };
 
 export default Home;

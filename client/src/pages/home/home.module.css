@@ -1,25 +1,25 @@
 .main-container {
-    margin: 40% auto;
-    width: 60vw;
-    height: 60vh;
-    background-color: var(--signup-background);
-    border: 2px solid black;
-    box-shadow: 4px 5px 0px black;
-    display: grid;
-    text-align: center;
-    align-items: center;
-    padding: 12px;
+	background-color: var(--signup-background);
+	border: 2px solid black;
+	box-shadow: 4px 5px 0px black;
+	padding: 12px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	text-align: center;
+	gap: 1rem;
 }
 
 .title {
-    font-size: 15pt;
-    font-family: Bitsumishi;
+	font-family: Bitsumishi;
 }
 
 .planets {
-    border: 2px solid black;
-    box-shadow: 4px 5px 0px black;
-    height: 80%;
+	font-size: 1.2rem;
+	border: 2px solid black;
+	box-shadow: 4px 5px 0px black;
 }
 
 .planets:active {
@@ -28,6 +28,6 @@
 }
 
 .planets-link {
-    text-decoration: none;
-    color: inherit;
+	text-decoration: none;
+	color: inherit;
 }

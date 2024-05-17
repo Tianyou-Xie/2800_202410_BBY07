@@ -5,8 +5,8 @@ import { api } from '../../lib/axios';
 
 const Changepassword = () => {
     const [password, setPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [newpassword, setNewPassword] = useState('');
+    const [confirmpassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -14,8 +14,8 @@ const Changepassword = () => {
         try {
             const response = await api.patch('/user/changepassword', {
                 password,
-                newpassword: newPassword,
-                confirmpassword: confirmPassword
+                newpassword,
+                confirmpassword
             });
             setMessage(response.data.message);
         } catch (error: any) {
@@ -45,7 +45,7 @@ const Changepassword = () => {
                             name='newpassword'
                             placeholder='New Password'
                             type='password'
-                            value={newPassword}
+                            value={newpassword}
                             onChange={(event) => setNewPassword(event.target.value)}
                             required
                         />
@@ -54,7 +54,7 @@ const Changepassword = () => {
                             name='confirmpassword'
                             placeholder='Confirm New Password'
                             type='password'
-                            value={confirmPassword}
+                            value={confirmpassword}
                             onChange={(event) => setConfirmPassword(event.target.value)}
                             required
                         />

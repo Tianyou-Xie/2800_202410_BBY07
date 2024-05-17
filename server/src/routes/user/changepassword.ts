@@ -33,7 +33,7 @@ export const patch: Handler[] = [
 		});
 
 		const bodyValidationResult = bodySchema.validate(req.body);
-		if (bodyValidationResult.error) return res.status(400).json({ error: bodyValidationResult.error.message });
+		if (bodyValidationResult.error) return Resolve(res).created(patch, bodyValidationResult.error.message);
 
 		const { value: body } = bodyValidationResult;
 
