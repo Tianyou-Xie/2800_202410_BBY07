@@ -1,4 +1,4 @@
-import './forgetpassword.css';
+import './forgetpassword.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import React, {useState} from 'react';
 import { api } from '../../lib/axios';

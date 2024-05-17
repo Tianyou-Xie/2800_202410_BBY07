@@ -17,6 +17,7 @@ import Home from './pages/home/home';
 
 import Test from './pages/test-page/test-page';
 import { Auth } from './lib/auth';
+import Resetpassword from './pages/resetpassword/resetpassword';
 
 Auth.resaveToken();
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -32,7 +33,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 			<Route path='/feed' component={GeneralFeed} />
 			<Route path='/myfeed' component={MyFeed} />
 			<Route path='/home' component={Home} />
-
+			<Route path='/resetpassword/:token'>
+                {/* Pass the random token as a prop */}
+                {(params) => <Resetpassword token={params.token} />}
+            </Route>
 			{/* Page to test components */}
 			<Route path='/test' component={Test} />
 

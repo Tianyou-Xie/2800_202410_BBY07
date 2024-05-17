@@ -12,14 +12,13 @@ interface PostBody {
 }
 
 export const patch: Handler = async (req, res) => {
-
     const token = crypto.createHash('sha256').update(req.params.token).digest('hex');
 
     const tokenUser = await TokenModel.findOne({ passwordResetToken: token, passwordResetExpires: { $gt: Date.now() } });
-    if (!tokenUser) return Resolve(res).notFound('Token is invalid or has expired!');
+    if (!tokenUser) return Resolve(res).created(patch, 'Token is invalid or has expired!');
 
     const user = await UserModel.findById(tokenUser.userId);
-    if (!user) return Resolve(res).notFound('No valid user found. Please try again.');
+    if (!user) return Resolve(res).created(patch, 'No valid user found. Please try again.');
 
     const bodySchema = Joi.object<PostBody>({
         password: Joi.string().trim().required().messages({
@@ -34,7 +33,7 @@ export const patch: Handler = async (req, res) => {
     });
 
     const bodyValidationResult = bodySchema.validate(req.body);
-    if (bodyValidationResult.error) return res.status(400).json({ error: bodyValidationResult.error.message });
+    if (bodyValidationResult.error) return Resolve(res).created(patch, bodyValidationResult.error.message);
 
     const { value: body } = bodyValidationResult;
 
@@ -42,6 +41,6 @@ export const patch: Handler = async (req, res) => {
 
     await tokenUser.deleteOne();
 
-    res.json({ message: 'Password has been reset successfully.' });
+    return Resolve(res).created(patch, 'Password has been reset successfully.');
 
 };

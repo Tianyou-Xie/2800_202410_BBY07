@@ -40,7 +40,7 @@ export const post: Handler = async (req, res) => {
 
 	await token.save();
 
-	const resetURL = `${req.protocol}://${req.get('host')}/user/resetpassword/${resetToken}`;
+	const resetURL = `${req.protocol}://localhost:8000/resetpassword/${resetToken}`;
 	const message = `We have received a request to reset the password for your account.
 					\nYou can reset your password using the following link:\n${resetURL}
 					\nThe link is only valid for 10 minutes.\nIf you did not make this request, simply ignore this email.`;
