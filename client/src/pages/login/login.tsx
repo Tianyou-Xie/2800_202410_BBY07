@@ -9,9 +9,8 @@ import { Auth } from '../../lib/auth';
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [_, setLocation] = useLocation();
 
-	const [location, setLocation] = useLocation();
+	const [_, setLocation] = useLocation();
 
 	const submitForm = async (e: any) => {
 		e.preventDefault();
