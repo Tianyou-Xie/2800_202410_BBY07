@@ -20,6 +20,7 @@
 }
 
 .header {
+	z-index: 1;
 	grid-area: header;
 	position: fixed;
 	width: 100%;
