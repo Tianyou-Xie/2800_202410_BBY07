@@ -26,3 +26,8 @@
 	box-shadow: 0px 0px var(--signup-button-active);
 	transform: translateY(5px);
 }
+
+.planets-link {
+    text-decoration: none;
+    color: inherit;
+}

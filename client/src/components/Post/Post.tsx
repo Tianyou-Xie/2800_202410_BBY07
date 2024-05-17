@@ -2,16 +2,16 @@ import { useState } from 'react';
 
 import styles from './Post.module.css';
 
-import Container from 'react-bootstrap/Container';
-import Para from '../para/Para';
+import { Container } from 'react-bootstrap';
 
 // Icons
 import { FaRegHeart } from 'react-icons/fa'; //<FaRegHeart />	//Empty heart
 import { FaHeart } from 'react-icons/fa'; //<FaHeart />	// Filled heart
-import { RiShareBoxLine } from "react-icons/ri"; //<RiShareBoxLine />
-import { FaRegBookmark } from "react-icons/fa"; //<FaRegBookmark />	//Empty bookmark
+import { RiShareBoxLine } from 'react-icons/ri'; //<RiShareBoxLine />
+import { FaRegBookmark } from 'react-icons/fa'; //<FaRegBookmark />	//Empty bookmark
 import { FaBookmark } from 'react-icons/fa'; //<FaBookmark />	//Filled bookmark
 import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
+import { Link } from 'wouter';
 
 interface PostProp {
 	username: string;
@@ -24,12 +24,12 @@ interface PostProp {
 interface UserProp {
 	username: string;
 	userURL: string;
-	imageURL? : string;
+	imageURL?: string;
 }
 
 /**
  * Component representing the user part of the post (image and username).
- * 
+ *
  * @param props.username - Username of the author of the post (got from the Post's props).
  * @param props.imageURL - (TODO) Will represent the user's profile pictures as an URL or image file.
  * @param props.userURL - (TODO) Will link to the user's profile page.
@@ -38,9 +38,9 @@ const User = (props: UserProp): JSX.Element => {
 	return (
 		<>
 			<Container className={styles.userContainer}>
-				<a href={props.userURL} style={{ textDecoration: 'none', color: 'inherit' }}>
+				<Link href={props.userURL} className={styles.link}>
 					{props.username}
-				</a>
+				</Link>
 			</Container>
 		</>
 	);
@@ -48,7 +48,7 @@ const User = (props: UserProp): JSX.Element => {
 
 /**
  * Post component representing the thumbnail post of an user.
- * 
+ *
  * @param props.username string - Username of the author of the post
  * @param props.text string - Text of the post
  * @param props.postURL string - URL of the complete version of the post with comments and more information
@@ -58,17 +58,13 @@ const Post = (props: PostProp): JSX.Element => {
 	const [bookmarked, setBookmarked] = useState(false);
 	const [liked, setLiked] = useState(false);
 
-	function onShare() {
-		
-	}
+	function onShare() {}
 
 	function onBookmark() {
 		setBookmarked(!bookmarked);
 	}
 
-	function onComment() {
-		
-	}
+	function onComment() {}
 
 	function onLike() {
 		setLiked(!liked);
@@ -76,25 +72,25 @@ const Post = (props: PostProp): JSX.Element => {
 
 	return (
 		<Container className={styles.postContainer}>
-			<User username={props.username} userURL={props.userURL}/>
+			<User username={props.username} userURL={props.userURL} />
 			<Container className={styles.paraContainer}>
-				<a href={props.postURL} style={{ textDecoration: 'none', color: 'inherit' }}>
-					<Para className={styles.postText} text={props.text} />
-					<Para className={styles.postDate} text={props.createdAt?.toLocaleDateString() || ""}/>
-				</a>
+				<Link href={props.postURL} className={styles.link}>
+					<p>{props.text}</p>
+					<p className={styles.postDate}>{props.createdAt?.toLocaleDateString() || 'Tuesday'}</p>
+				</Link>
 				<div className={styles.iconsContainer}>
-					<div className={styles.share}>
+					<button className={styles.share}>
 						<RiShareBoxLine />
-					</div>
-					<div className={styles.book}>
-						{bookmarked ? <FaBookmark size={12} onClick={onBookmark}/> : <FaRegBookmark size={12} onClick={onBookmark}/>}
-					</div>
-					<div className={styles.comment}>
+					</button>
+					<button className={styles.book}>
+						{bookmarked ? <FaBookmark onClick={onBookmark} /> : <FaRegBookmark onClick={onBookmark} />}
+					</button>
+					<button className={styles.comment}>
 						<FaRocketchat />
-					</div>
-					<div className={styles.like}>
-						{liked ? <FaHeart onClick={onLike}/> : <FaRegHeart onClick={onLike}/>}
-					</div>
+					</button>
+					<button onClick={onLike} className={styles.like}>
+						{liked ? <FaHeart /> : <FaRegHeart />}
+					</button>
 				</div>
 			</Container>
 		</Container>

@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react';
-import { api } from '../../lib/axios';
-
 import styles from './home.module.css';
 import Container from 'react-bootstrap/Container';
 
 import Page from '../../components/Page/Page';
-import Para from '../../components/para/Para';
+import { Link } from 'wouter';
 
 interface PlanetProps {
 	planet: string;
@@ -14,9 +11,9 @@ interface PlanetProps {
 
 const Planets = (props: PlanetProps) => {
 	return (
-		<a href={props.url} style={{ textDecoration: 'none', color: 'inherit' }}>
+		<Link href={props.url} className={styles.planetsLink}>
 			<div className={styles.planets}>{props.planet}</div>
-		</a>
+		</Link>
 	);
 };
 
