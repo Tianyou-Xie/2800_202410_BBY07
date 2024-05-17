@@ -155,6 +155,7 @@
 }
 
 .back-drop-div {
+    pointer-events: none;
     background-color: rgba(255, 255, 255, 0.4);
     position: absolute;
     right: 50%;
