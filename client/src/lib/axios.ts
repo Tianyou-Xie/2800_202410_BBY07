@@ -24,6 +24,8 @@ api.interceptors.response.use(
 	},
 	(err) => {
 		if (!(err instanceof AxiosError)) return Promise.reject(err);
-		if (err.response?.status === HttpStatusCode.Unauthorized) location.assign('/login');
+		// if (err.response?.status === HttpStatusCode.Unauthorized && location.pathname !== '/login')
+		// 	location.assign('/login');
+		// else return Promise.reject(err);
 	},
 );

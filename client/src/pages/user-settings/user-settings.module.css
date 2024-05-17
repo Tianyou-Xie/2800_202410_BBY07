@@ -1,0 +1,17 @@
+.setting-body {
+    font-size: x-large;
+    font-family: BabaPro;
+}
+
+.setting-title {
+    font-size: 30pt;
+    font-family: Bitsumishi;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: red;
+}

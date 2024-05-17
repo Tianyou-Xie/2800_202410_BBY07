@@ -4,11 +4,14 @@ import { UserModel } from '../../models/user';
 import { compareToHashed } from '../../utils/bcrypt';
 import { assertRequestBody, Resolve } from '../../utils/express';
 import { AuthToken } from '../../utils/auth-token';
+import { requireLogin } from '../../middlewares/require-login';
 
 interface PostBody {
 	email: string;
 	password: string;
 }
+
+export const get: Handler[] = [requireLogin, async (_, res) => Resolve(res).ok()];
 
 export const post: Handler = async (req, res) => {
 	const body = assertRequestBody(

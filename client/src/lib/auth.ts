@@ -48,4 +48,17 @@ export namespace Auth {
 		saveToken(token);
 		return true;
 	}
+
+	/**
+	 * Returns whether there is an active and valid token
+	 * currently set.
+	 */
+	export async function isAuthorized() {
+		try {
+			await api.get('/user/login');
+			return true;
+		} catch {
+			return false;
+		}
+	}
 }

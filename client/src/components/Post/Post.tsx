@@ -38,7 +38,7 @@ const User = (props: UserProp): JSX.Element => {
 	return (
 		<>
 			<Container className={styles.userContainer}>
-				<Link href={props.userURL} className={styles.link}>
+				<Link href={props.userURL ?? '/'} className={styles.link}>
 					{props.username}
 				</Link>
 			</Container>
@@ -76,7 +76,9 @@ const Post = (props: PostProp): JSX.Element => {
 			<div className={styles.paraContainer}>
 				<Link href={props.postURL} className={styles.link}>
 					<p>{props.text}</p>
-					{props.createdAt ? <p className={styles.postDate}>{props.createdAt.toLocaleDateString()}</p> : undefined}
+					{props.createdAt ? (
+						<p className={styles.postDate}>{props.createdAt.toLocaleDateString()}</p>
+					) : undefined}
 				</Link>
 				<div className={styles.iconsContainer}>
 					<button className={styles.share}>
