@@ -19,9 +19,8 @@ const Login = () => {
 			password: password,
 		};
 
-		const apiUrl = import.meta.env.VITE_LOCALHOST + '/user/login';
 		try {
-			const { data: res } = await api.post(apiUrl, newUser);
+			const { data: res } = await api.post('/user/login', newUser);
 			if (res.success !== true || !res.value) throw 'Invalid password';
 
 			const token = res.value;
