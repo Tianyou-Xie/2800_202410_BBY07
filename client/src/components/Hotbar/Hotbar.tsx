@@ -43,7 +43,7 @@ const Hotbar = () => {
 						<div className={styles.backDropDiv}></div>
 							<ul className={styles.submenu}>
 							<li>
-								<a href='#FEED'>
+								<a href='/myfeed'>
 									<MdFeed className={`${styles.menuSubIcons}`} />
 									<p className='text-center'>FEED</p>
 								</a>
@@ -70,11 +70,15 @@ const Hotbar = () => {
 					</div>
 
 					<div className={styles.menuBackdrop}></div>
-					<GoHomeFill className={`${styles.navIcon} ${styles.iconLeft} ms-2 mt-5`} />
+					<a href='/home'>
+						<GoHomeFill className={`${styles.navIcon} ${styles.iconLeft} ms-2 mt-5`} />
+					</a>
 					<div className={`${styles.circle} ${styles.circleLeft}`}></div>
 					<div className={styles.bar}></div>
 					<div className={`${styles.circle} ${styles.circleRight}`}></div>
-					<IoMdPerson className={`${styles.navIcon} ${styles.iconRight} me-2 mt-5`} />
+					<a href="#PROFILE">
+						<IoMdPerson className={`${styles.navIcon} ${styles.iconRight} me-2 mt-5`} />
+					</a>
 				</div>
 			</div>
 		</>
