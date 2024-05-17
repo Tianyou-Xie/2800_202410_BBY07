@@ -37,8 +37,8 @@
 }
 
 input,
-button,
-select {
+.button,
+.select {
 	font-size: 14pt;
 	font-family: 'BabaPro';
 	background: var(--signup-background);
@@ -47,7 +47,7 @@ select {
 	padding-left: 5px;
 }
 
-input {
+.input {
 	display: block;
 	width: 100%;
 	line-height: 28pt;
@@ -55,40 +55,40 @@ input {
 	box-shadow: 4px 5px;
 }
 
-button {
+.button {
 	padding: 2px;
 	width: 50%;
 	box-shadow: 4px 5px;
 }
 
-button:active {
+.button:active {
 	box-shadow: 4px 4px var(--signup-button-active) 5;
 	transform: translateY(5px);
 }
 
-select {
+.select {
 	width: 100%;
 	margin-bottom: 20pt;
 	box-shadow: 4px 5px;
 	padding: 6px;
 }
 
-img {
+.img {
 	max-width: 250px !important;
 }
 
-input:focus {
+.input:focus {
 	background: var(--signup-input-focus);
 }
 
-h1 {
+.h1 {
 	font-family: Bitsumishi;
 }
 
-h5 {
+.h5 {
 	font-family: BabaPro;
 }
 
-span {
+.span {
     font-family: TTOctosquares;
 }

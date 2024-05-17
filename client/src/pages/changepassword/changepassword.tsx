@@ -1,72 +1,77 @@
-import './changepassword.css';
+import styles from './changepassword.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { api } from '../../lib/axios';
 
 const Changepassword = () => {
-    const [password, setPassword] = useState('');
-    const [newpassword, setNewPassword] = useState('');
-    const [confirmpassword, setConfirmPassword] = useState('');
-    const [message, setMessage] = useState('');
+	const [password, setPassword] = useState('');
+	const [newpassword, setNewPassword] = useState('');
+	const [confirmpassword, setConfirmPassword] = useState('');
+	const [message, setMessage] = useState('');
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        try {
-            const response = await api.patch('/user/changepassword', {
-                password,
-                newpassword,
-                confirmpassword
-            });
-            setMessage(response.data.message);
-        } catch (error: any) {
-            setMessage(error.response.data.message);
-        }
-    };
+		event.preventDefault();
+		try {
+			const response = await api.patch('/user/changepassword', {
+				password,
+				newpassword,
+				confirmpassword,
+			});
+			setMessage(response.data.message);
+		} catch (error: any) {
+			setMessage(error.response.data.message);
+		}
+	};
 
 	return (
-		<div className='changepassword-container'>
-			<div className='px-4 pb-2 text-center'>
-				<img className='img-fluid' src={logoUrl} alt='Skynet Logo' />
-				<h1>CHANGE PASSWORD</h1>
+		<div className={styles.changepasswordContainer}>
+			<div className={`px-4 pb-2 text-center`}>
+				<img className={`${styles.img} img-fluid`} src={logoUrl} alt='Skynet Logo' />
+				<h1 className={styles.h1}>CHANGE PASSWORD</h1>
 				{/* <h5>FORGET YOUR PASSWORD? WE ARE HERE TO HELP!</h5> */}
-				<div className='changepassword-upperdiv mb-1'></div>
-				<div className='changepassword-form'>
+				<div className={`${styles.changepasswordUpperdiv} mb-1`}></div>
+				<div className={`${styles.changepasswordForm}`}>
 					<form onSubmit={handleSubmit}>
-					<input
-                            name='password'
-                            placeholder='Current Password'
-                            type='password'
-                            value={password}
-                            onChange={(event) => setPassword(event.target.value)}
-                            required
-                        />
-                        <br />
-                        <input
-                            name='newpassword'
-                            placeholder='New Password'
-                            type='password'
-                            value={newpassword}
-                            onChange={(event) => setNewPassword(event.target.value)}
-                            required
-                        />
-                        <br />
-                        <input
-                            name='confirmpassword'
-                            placeholder='Confirm New Password'
-                            type='password'
-                            value={confirmpassword}
-                            onChange={(event) => setConfirmPassword(event.target.value)}
-                            required
-                        />
-                        <br />
-                        <div className='text-center'>
-                            <button type="submit">Change Password</button>
-                        </div>
-                    </form>
+						<input
+							name='password'
+							placeholder='Current Password'
+							type='password'
+							className={styles.input}
+							value={password}
+							onChange={(event) => setPassword(event.target.value)}
+							required
+						/>
+						<br />
+						<input
+							name='newpassword'
+							placeholder='New Password'
+							type='password'
+							className={styles.input}
+							value={newpassword}
+							onChange={(event) => setNewPassword(event.target.value)}
+							required
+						/>
+						<br />
+						<input
+							name='confirmpassword'
+							placeholder='Confirm New Password'
+							type='password'
+							className={styles.input}
+							value={confirmpassword}
+							onChange={(event) => setConfirmPassword(event.target.value)}
+							required
+						/>
+						<br />
+						<div className={`text-center`}>
+							<button type='submit' className={styles.button}>
+								Change Password
+							</button>
+						</div>
+					</form>
 				</div>
-				<div className='changepassword-bottomdiv mt-2'></div>
+				<div className={`${styles.changepasswordBottomdiv} mt-2`}></div>
 				<br />
-				<div className='message'>{message}</div>
+				<div className={styles.message}>{message}</div>
 			</div>
 		</div>
 	);
