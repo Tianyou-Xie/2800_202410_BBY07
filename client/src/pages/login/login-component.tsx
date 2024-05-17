@@ -25,7 +25,7 @@ const Login = () => {
 
 			const token = res.value;
 			Auth.saveToken(token);
-			setLocation('/');
+			setLocation('/home');
 			toast.success('login successfully');
 		} catch (error: any) {
 			let err = error.response.data.success;

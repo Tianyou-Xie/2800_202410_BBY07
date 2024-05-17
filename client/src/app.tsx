@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import { Switch, Route, Redirect } from 'wouter';
+import { Switch, Route, Redirect, useLocation } from 'wouter';
 import About from './pages/about/about';
 import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
@@ -19,13 +19,15 @@ import { Else, If, Then } from 'react-if';
 
 export const App = () => {
 	const [authorized, setAuthorized] = useState<boolean | undefined>(undefined);
+	const [loc] = useLocation();
 
 	useEffect(() => {
 		Auth.resaveToken();
-		Auth.isAuthorized().then((v) => {
-			setAuthorized(v === true);
-		});
 	}, []);
+
+	useEffect(() => {
+		Auth.isAuthorized().then((v) => setAuthorized(v === true));
+	}, [loc]);
 
 	const commonRoutes = (
 		<>

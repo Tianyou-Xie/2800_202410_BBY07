@@ -11,6 +11,7 @@ import Page from '../../components/Page/Page';
 import ChangePasswordModal from './options/change-password';
 import DeleteAccountModal from './options/delete-account';
 import YourInfoModal from './options/your-info';
+import { Auth } from '../../lib/auth';
 
 const UserSettings = () => {
 	const [_, setLocation] = useLocation();
@@ -62,6 +63,12 @@ const UserSettings = () => {
 		}
 	};
 
+	function logout() {
+		console.log('here');
+		Auth.loseToken();
+		setLocation('/login');
+	}
+
 	// defining values for the Change Password Modal
 	const passBody1 = {
 		showPassBody1: showPassBody1,
@@ -95,8 +102,8 @@ const UserSettings = () => {
 	//defining values from the info modal
 	const infoBody = {
 		showInfoBody: showInfoBody,
-		setInfoBody: setInfoBody
-	}
+		setInfoBody: setInfoBody,
+	};
 
 	return (
 		<>
@@ -149,6 +156,15 @@ const UserSettings = () => {
 							</ListGroup>
 						</ListGroup.Item>
 						<ListGroup.Item className={styles.groupItem}>
+							<div className='w-100 d-flex justify-content-center my-5'>
+								<button className='p-2'>
+									<h1 onClick={logout} className={`${styles.settingTitle}`}>
+										Logout
+									</h1>
+								</button>
+							</div>
+						</ListGroup.Item>
+						<ListGroup.Item className={styles.dangerZone}>
 							<h1 className={`${styles.settingTitle} ms-3`}>Danger Zone</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`${styles.clickable} ms-5`}>
