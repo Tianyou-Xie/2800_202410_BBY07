@@ -19,11 +19,7 @@ const MyFeed = () => {
 	}
 
 	return (
-		<html>
-			<body>
-				<Page pageName="My Feed" content={displayedPosts} />
-			</body>
-		</html>
+		<Page pageName="My Feed" content={displayedPosts} />
 	);
 };
 
