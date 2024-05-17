@@ -15,37 +15,41 @@ import { useEffect, useState } from 'react';
 import { Auth } from './lib/auth';
 
 import './index.css';
+import { Else, If, Then } from 'react-if';
 
 export const App = () => {
 	const [authorized, setAuthorized] = useState<boolean | undefined>(undefined);
 
 	useEffect(() => {
 		Auth.resaveToken();
-		Auth.isAuthorized().then((v) => setAuthorized(v));
+		Auth.isAuthorized().then((v) => {
+			setAuthorized(v === true);
+		});
 	}, []);
 
 	return (
 		<>
 			<ToastContainer />
 			<Switch>
-				{authorized === undefined ? (
-					<></>
-				) : (
-					<>
-						<Route path='/about' component={About} />
-						<Route path='/signup' component={Signup} />
-						<Route path='/forgetpassword' component={Forgetpassword} />
+				<If condition={authorized === true}>
+					<Then>
+						<Route path='/' component={Home} />
 						<Route path='/changepassword' component={Changepassword} />
-						<Route path='/login' component={Login} />
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
-						<Route path='/home' component={Home} />
 						<Route path='/settings' component={UserSettings} />
-						<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
+					</Then>
 
-						{authorized === false ? <Redirect href='/login' /> : <Route path='/' component={Home} />}
-					</>
-				)}
+					<Else>
+						<Route path='/' component={Login} />
+					</Else>
+				</If>
+
+				<Route path='/signup' component={Signup} />
+				<Route path='/login' component={Login} />
+				<Route path='/about' component={About} />
+				<Route path='/forgetpassword' component={Forgetpassword} />
+				<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 
 				{/* Page to test components */}
 				<Route path='/test' component={Test} />

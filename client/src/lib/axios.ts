@@ -1,7 +1,7 @@
 import axios, { AxiosError, HttpStatusCode } from 'axios';
 
 const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-const isDev = import.meta.env.DEV
+const isDev = import.meta.env.DEV;
 
 /**
  * API Axios instance to access server API routes.
@@ -25,8 +25,8 @@ api.interceptors.response.use(
 	(err) => {
 		if (!(err instanceof AxiosError)) return Promise.reject(err);
 		if (err.response?.status === HttpStatusCode.Unauthorized && location.pathname !== '/login')
-		// 	location.assign('/login');
-            console.log(err)
-		else return Promise.reject(err);
+			// 	location.assign('/login');
+			console.log(err);
+		return Promise.reject(err);
 	},
 );
