@@ -48,6 +48,7 @@
 }
 
 .icons-container button {
+	background-color: transparent;
 	padding: 5px;
 	width: auto;
 	box-shadow: none;

@@ -17,6 +17,7 @@
 }
 
 .planets {
+	font-family: TTOctosquares;
 	font-size: 1.2rem;
 	border: 2px solid black;
 	box-shadow: 4px 5px 0px black;
