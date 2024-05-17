@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import { Switch, Route, Redirect, useLocation } from 'wouter';
+import { Switch, Route, Redirect } from 'wouter';
 import About from './pages/about/about';
 import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
@@ -35,29 +35,46 @@ export const App = () => {
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/test' component={Test} />
+
+			<Route>404 Not Found</Route>
 		</>
 	);
 
 	return (
 		<>
 			<ToastContainer />
-			<Switch>
-				<If condition={authorized === true}>
-					<Then>
+
+			<If condition={authorized === true}>
+				<Then>
+					<Switch>
 						<Route path='/' component={Home} />
 						<Route path='/changepassword' component={Changepassword} />
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
 						<Route path='/settings' component={UserSettings} />
 						{commonRoutes}
-					</Then>
+					</Switch>
+				</Then>
 
-					<Else>
-						<Route path='/' component={Login} />
-						{commonRoutes}
-					</Else>
-				</If>
-			</Switch>
+				<Else>
+					<If condition={authorized === false}>
+						<Then>
+							<Switch>
+								<Route path='/' component={Login} />
+								{commonRoutes}
+
+								<Route children={<Redirect href='/' />} />
+							</Switch>
+						</Then>
+
+						<Else>
+							<div className='w-100 h-100 d-flex flex-column align-items-center justify-content-center'>
+								<h1 className='display-2 '>Loading...</h1>
+							</div>
+						</Else>
+					</If>
+				</Else>
+			</If>
 		</>
 	);
 };
