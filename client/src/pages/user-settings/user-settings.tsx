@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { api } from '../../lib/axios';
-import { Redirect, useLocation } from 'wouter';
+import { useLocation } from 'wouter';
 import { toast } from 'react-toastify';
 
 import styles from './user-settings.module.css';
@@ -11,7 +11,6 @@ import Page from '../../components/Page/Page';
 import ChangePasswordModal from './options/change-password';
 import DeleteAccountModal from './options/delete-account';
 import YourInfoModal from './options/your-info';
-import { BiLogOut } from 'react-icons/bi';
 import { Auth } from '../../lib/auth';
 
 const UserSettings = () => {

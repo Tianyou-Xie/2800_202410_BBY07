@@ -1,4 +1,5 @@
 import { api } from '../../../lib/axios';
+import { useState } from 'react';
 
 import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
 import Button from 'react-bootstrap/Button';
@@ -11,20 +12,24 @@ interface Props {
 }
 
 const YourInfoModal = (props: Props) => {
-
-	const changePassword = async () => {
-		try {
-			
+	const userInfo = async () => {
+		try {			
 			const response = await api.get('/user/');
 			const data = response.data.value;
-			//toast.success('Password changed!');
+			document.getElementById('username')!.innerHTML = data.userName;
+			document.getElementById('email')!.innerHTML = data.email;
+
+			if (data.bio) {
+				document.getElementById('bio')!.innerHTML = "Bio: " + data.bio;
+			} else {
+				document.getElementById('bio')!.innerHTML = "Follower Count: " + data.followerCount;
+			}		
+
 		} catch (error: any) {
-			//toast.error('Could not change password.');
-			alert('could not get information');
+			console.log('could not get information');
 		}
 	};
-
-	changePassword();
+	userInfo();
 
 	return (
 		<>
@@ -35,9 +40,9 @@ const YourInfoModal = (props: Props) => {
 				body={
 					<>
                         <p>
-							Username: <span></span><br/>
-							Email: <span></span><br/>
-							Bio: <span></span><br/>
+							Username: <span id='username'></span><br/>
+							Email: <span id='email'></span><br/>
+							<span id='bio'></span><br/>
 						</p>
                     </>
 				}
