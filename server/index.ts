@@ -2,8 +2,8 @@ import './src/load-env.js';
 
 import express from 'express';
 import createRouter from 'express-file-routing';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
+// import session from 'express-session';
+// import MongoStore from 'connect-mongo';
 import path from 'path';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -23,7 +23,7 @@ const PORT = process.env.PORT;
 	const mongoUrl = process.env.MONGO_URL!;
 	await mongoose.connect(mongoUrl);
 
-	app.use(
+	/*app.use(
 		session({
 			secret: process.env.SESSION_COOKIE_SECRET!,
 			resave: false,
@@ -34,7 +34,7 @@ const PORT = process.env.PORT;
 				crypto: { secret: process.env.SESSION_DATA_SECRET! },
 			}),
 		}),
-	);
+	);*/
 
 	await createRouter(app, { directory: path.join(PROJECT_ROOT, 'routes') });
 
