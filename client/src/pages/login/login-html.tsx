@@ -32,6 +32,7 @@ const LoginHtml = ({ email, password, setEmail, setPassword, submitForm }: any) 
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<div className='mb-3'>
+							<a href='/forgetpassword' className={styles.span}>Forget your password?</a>
 							<button className={`${styles.button}`}>Login</button>
 						</div>
 					</form>
