@@ -46,7 +46,7 @@ const GeneralFeed = () => {
 	return (
 		<Page
 			pageName='General Feed'
-			content={<div className='d-flex flex-column gap-4 p-3 align-items-center '>{displayedPosts}</div>}
+			content={<div className='d-flex flex-column gap-4 p-3 align-items-center'>{displayedPosts}</div>}
 		/>
 	);
 };
