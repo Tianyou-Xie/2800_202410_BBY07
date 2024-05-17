@@ -20,7 +20,10 @@
 
 body {
 	min-height: 100vh;
-    background: aliceblue;
+	/*This margin bottom is needed to make hotbar not interfere with other componenet*/
+	/*If this margin bottom is doing something else bad please talk to sam. Thank you!*/
+	margin-bottom: 20px;
+	background-color: aliceblue;
 }
 
 @font-face {

@@ -104,7 +104,7 @@ const ChangePasswordModal = (props: Props) => {
 									/>
 									<br />
 									<div className='text-center mb-3'>
-										<button type='submit'>Change Password</button>
+										<button type='submit' onClick={() => props.passBody2.setShowPass2(false)}>Change Password</button>
 									</div>
 									<div className='text-center'>
 										<button type='button' onClick={() => props.passBody2.setShowPass2(false)}>
