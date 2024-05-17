@@ -8,6 +8,15 @@
     font-family: Bitsumishi;
 }
 
+
+.group-item {
+    background-color: aliceblue;
+}
+
+.group-item * {
+    background-color: aliceblue;
+}
+
 .clickable {
     cursor: pointer;
 }

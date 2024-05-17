@@ -2,7 +2,6 @@ import styles from '../user-settings.module.css';
 
 import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
 import Button from 'react-bootstrap/Button';
-import logoUrl from '../../../assets/images/SkynetLogo.png';
 
 interface Props {
     deleteBody1: {
