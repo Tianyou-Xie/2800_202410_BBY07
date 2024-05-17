@@ -4,6 +4,8 @@ import { requireLogin } from '../../../middlewares/require-login';
 import { PostModel } from '../../../models/post';
 import { Resolve } from '../../../utils/express';
 import { UserModel } from '../../../models/user';
+import { CommentRelationship } from '../../../models/comment-relationship';
+import { LikeInteraction } from '../../../models/like-interaction';
 
 export const get: Handler = async (req, res) => {
 	const id = req.params.id;
@@ -12,6 +14,7 @@ export const get: Handler = async (req, res) => {
 	const post = await PostModel.findById(id);
 	if (!post) return Resolve(res).notFound('Invalid post ID provided.');
 
+	if (post.deleted) return Resolve(res).gone('Post has been deleted.');
 	return Resolve(res).okWith(post);
 };
 
@@ -27,12 +30,27 @@ export const del: Handler[] = [
 		const loggedInId = req.session.user!.id;
 		if (!post.authorId.equals(loggedInId)) return Resolve(res).forbidden('You cannot delete this post.');
 
+		if (post.deleted) return Resolve(res).gone('Post is already deleted.');
+
 		const session = await mongoose.startSession();
 
 		try {
 			const deletedPost = await session.withTransaction(async () => {
-				await post.deleteOne({ session });
+				await post.updateOne({ deleted: true, content: '', likeCount: 0 }, { session });
 				await UserModel.findByIdAndUpdate(loggedInId, { $inc: { postCount: -1 } }, { session });
+
+				const commentOfRelationship = await CommentRelationship.findOne({ childPost: post._id });
+				if (commentOfRelationship) {
+					await commentOfRelationship.deleteOne({ session });
+					await PostModel.updateOne(
+						{ _id: commentOfRelationship.parentPost },
+						{ $inc: { commentCount: -1 } },
+						{ session },
+					);
+				}
+
+				await LikeInteraction.deleteMany({ postId: post._id }, { session });
+
 				return post;
 			});
 

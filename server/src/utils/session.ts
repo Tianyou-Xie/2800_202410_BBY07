@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { IUser } from '../models/user';
+import { IUser, UserModel } from '../models/user';
 import { HydratedDocument } from 'mongoose';
 
 /**
@@ -20,4 +20,20 @@ export function setSession(req: Request, user: HydratedDocument<IUser>) {
  */
 export function isSessionOf(req: Request, user: HydratedDocument<IUser>) {
 	return req.session.user && req.session.user.id === user._id.toString();
+}
+
+/**
+ * Returns the user of the current session, based on the request,
+ * as a hydrated model.
+ *
+ * @param req the request object
+ * @returns the hydrated model, or nothing if there is no current user
+ */
+export async function getHydratedUser(req: Request) {
+	try {
+		const id = req.session.user?.id;
+		if (!id) return;
+
+		return await UserModel.findById(id);
+	} catch {}
 }
