@@ -48,6 +48,7 @@ export const App = () => {
 				<Then>
 					<Switch>
 						<Route path='/' component={Home} />
+						<Route path='/home' component={Home} />
 						<Route path='/changepassword' component={Changepassword} />
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
