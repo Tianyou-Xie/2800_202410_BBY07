@@ -27,6 +27,7 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [Wouter](https://www.npmjs.com/package/wouter)
 -   [CSS Modules](https://github.com/css-modules/css-modules) (implemented by Vite)
 -   [Bootstrap](https://getbootstrap.com/)
+-   [axios](https://axios-http.com/)
 
 **Server (built with [esno](https://www.npmjs.com/package/esno)):**
 
@@ -39,6 +40,7 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [connect-mongo](https://www.npmjs.com/package/connect-mongo)
 -   [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 -   [http-status-codes](https://www.npmjs.com/package/http-status-codes)
+-   [nodemailer](https://www.nodemailer.com/)
 
 **Development Utilities:**
 
@@ -64,9 +66,10 @@ Both the server and client utilize a `.env` file.
 ```
 
 **Client Variables:**
-| Key                   | Usage                                            |
-| --------------------- | ------------------------------------------------ |
-| PORT                  | Port used for the frontend app                   |                 
+
+| Key  | Usage                          |
+| ---- | ------------------------------ |
+| PORT | Port used for the frontend app |
 
 **Server Variables:**
 
@@ -77,6 +80,10 @@ Both the server and client utilize a `.env` file.
 | SESSION_TTL           | The session expiry time, in milliseconds          |
 | SESSION_COOKIE_SECRET | The secret phrase used to sign the session cookie |
 | SESSION_DATA_SECRET   | The secret phrased used to encrypt session data   |
+| EMAIL_HOST            | The email transporter host                        |
+| EMAIL_PORT            | The email transporter port                        |
+| EMAIL_USER            | The email transporter username                    |
+| EMAIL_PASS            | The email transporter password                    |
 
 ## Running Locally & Deployment
 

@@ -1,38 +1,38 @@
-.signup-container {
+.login-container {
 	display: grid;
 	align-items: center;
 	justify-items: center;
 }
 
-.signup-form {
-	background: var(--signup-background);
+.login-form {
+	background: var(--login-background);
 	padding: 29px 59px;
 	border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
 }
 
-.signup-upperdiv {
-	background: var(--signup-background);
+.login-upperdiv {
+	background: var(--login-background);
 	padding: 4px 0px;
 	border: 2px solid black;
 	box-shadow: 4px 3px 0px #000;
 }
 
-.signup-bottomdiv {
-	background: var(--signup-background);
+.login-bottomdiv {
+	background: var(--login-background);
 	padding: 4px 0px;
 	border: 2px solid black;
 	box-shadow: 4px 4px 0px #000;
 }
 
-.signup-button-login {
+.login-button-login {
 	box-shadow: 4px 5px gray !important;
 	background: black !important;
 	color: white !important;
 }
 
-.signup-button-login:active {
-    box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+.login-button-login:active {
+    box-shadow: 4px 4px var(--login-button-active) 5 !important;
 	transform: translateY(5px) !important;
 }
 
@@ -41,7 +41,7 @@ button,
 select {
 	font-size: 14pt;
 	font-family: 'BabaPro';
-	background: var(--signup-background);
+	background: var(--login-background);
 	border: 2px solid black;
 	outline: none;
 	padding-left: 5px;
@@ -62,7 +62,7 @@ button {
 }
 
 button:active {
-	box-shadow: 4px 4px var(--signup-button-active) 5;
+	box-shadow: 4px 4px var(--login-button-active) 5;
 	transform: translateY(5px);
 }
 
@@ -78,7 +78,7 @@ img {
 }
 
 input:focus {
-	background: var(--signup-input-focus);
+	background: var(--login-input-focus);
 }
 
 h1 {

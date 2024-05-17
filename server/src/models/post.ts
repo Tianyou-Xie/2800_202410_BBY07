@@ -11,6 +11,7 @@ export interface IPost {
 	createdAt: Date;
 	location: ILocation;
 	media: Array<IMedia>;
+	deleted: boolean;
 }
 
 const schema = new Schema<IPost>(
@@ -21,6 +22,7 @@ const schema = new Schema<IPost>(
 		commentCount: { type: 'number', required: true, default: 0 },
 		repostCount: { type: 'number', required: true, default: 0 },
 		location: { type: LocationSchema, required: true },
+		deleted: { type: 'boolean', required: true, default: false },
 		media: {
 			required: true,
 			default: [],
