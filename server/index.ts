@@ -1,4 +1,4 @@
-import './src/load-env.js';
+import { isDev } from './src/load-env';
 
 import express from 'express';
 import createRouter from 'express-file-routing';
@@ -16,13 +16,7 @@ const PORT = process.env.PORT;
 
 	app.use(
 		cors({
-			origin: [
-				'http://localhost:8000',
-				'http://localhost:8001',
-				'https://skynetwork.app',
-				'https://dev.skynetwork.app',
-				'http://localhost:5174',
-			],
+			origin: isDev() ? '*' : ['https://skynetwork.app', 'https://dev.skynetwork.app'],
 			optionsSuccessStatus: 200,
 		}),
 	);
