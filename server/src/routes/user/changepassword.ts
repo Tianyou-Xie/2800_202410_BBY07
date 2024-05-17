@@ -33,14 +33,14 @@ export const patch: Handler[] = [
 		});
 
 		const bodyValidationResult = bodySchema.validate(req.body);
-		if (bodyValidationResult.error) return Resolve(res).created(patch, bodyValidationResult.error.message);
+		if (bodyValidationResult.error) return Resolve(res).badRequest(bodyValidationResult.error.message);
 
 		const { value: body } = bodyValidationResult;
 
 		const passwordsMatch = await compareToHashed(body.password, user.password);
-		if (!passwordsMatch) return Resolve(res).created(patch, 'Password is incorrect.');
+		if (!passwordsMatch) return Resolve(res).forbidden('Password is incorrect.');
 
 		await user.updateOne({ password: await createHash(body.newpassword) });
-		return Resolve(res).created(patch, 'Password changed successfully.');
+		return Resolve(res).okWith(patch, 'Password changed successfully.');
 	},
 ];
