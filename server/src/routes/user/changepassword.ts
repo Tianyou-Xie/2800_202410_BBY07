@@ -2,8 +2,8 @@ import Joi from 'joi';
 import { Handler } from 'express';
 import { UserModel } from '../../models/user';
 import { createHash } from '../../utils/bcrypt';
-import { requireLogin } from '../../middlewares/require-login';
 import { compareToHashed } from '../../utils/bcrypt';
+import { Resolve } from '../../utils/express';
 
 interface PostBody {
 	password: string;
@@ -12,9 +12,8 @@ interface PostBody {
 }
 
 export const patch: Handler [] = [
-    requireLogin,
 	async (req, res) => {
-		if (!req.session.user) return res.status(401).json({ error: 'You are not logged in.' });
+		if (!req.session.user) return Resolve(res).created(patch, 'You are not logged in.' );
 
 		const bodySchema = Joi.object<PostBody>({
 			password: Joi.string().trim().required().messages({
@@ -39,12 +38,12 @@ export const patch: Handler [] = [
 
 		const id = req.session.user.id;
 		const user = await UserModel.findById(id);
-		if (!user) return res.status(404).json({ error: 'No user found by the given ID.' });
+		if (!user) return Resolve(res).created(patch, 'No user found by the given ID.' );
 
 		const passwordsMatch = await compareToHashed(body.password, user.password);
-		if (!passwordsMatch) return res.status(401).json({ error: 'Password is incorrect.' });
+		if (!passwordsMatch) return Resolve(res).created(patch, 'Password is incorrect.' );
 
 		await user.updateOne({ password: await createHash(body.newpassword) });
-		res.json({ message: 'Password changed successfully.' });
+		return Resolve(res).created(patch, 'Password changed successfully.' );
 	},
 ];
