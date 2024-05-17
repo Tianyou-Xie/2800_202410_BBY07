@@ -16,20 +16,21 @@ import MyFeed from './pages/my-feed/my-feed';
 import Home from './pages/home/home';
 
 import Test from './pages/test-page/test-page';
+import { Auth } from './lib/auth';
 
+Auth.resaveToken();
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<>
-		<ToastContainer />
-		<Switch>
-			<Route path='/' component={Signup} />
-			<Route path='/about' component={About} />
-			<Route path='/signup' component={Signup} />
-			<Route path='/forgetpassword' component={Forgetpassword} />
-			<Route path='/changepassword' component={Changepassword} />
-			<Route path='/login' component={Login} />
-			<Route path='/feed' component={GeneralFeed} />
-			<Route path='/myfeed' component={MyFeed} />
-			<Route path='/home' component={Home} />
+	// <React.StrictMode>
+	<Switch>
+		<Route path='/' component={Signup} />
+		<Route path='/about' component={About} />
+		<Route path='/signup' component={Signup} />
+		<Route path='/forgetpassword' component={Forgetpassword} />
+		<Route path='/changepassword' component={Changepassword} />
+		<Route path='/login' component={Login} />
+		<Route path='/feed' component={GeneralFeed} />
+		<Route path='/myfeed' component={MyFeed} />
+		<Route path='/home' component={Home} />
 
 			{/* Page to test components */}
 			<Route path='/test' component={Test} />
