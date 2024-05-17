@@ -11,10 +11,10 @@ export async function requireLogin(req: Request, res: Response, next: NextFuncti
 	if (!authHeader || !authHeader.startsWith('Bearer'))
 		return Resolve(res).unauthorized('Authentication is required.');
 
-	const [_, token] = authHeader.split(' ')[1];
+	const [_, token] = authHeader.split(' ');
 
 	const user = await AuthToken.verifyToUser(token);
-	if (!user) return Resolve(res).unauthorized('Authentication is required.');
+	if (!user) return Resolve(res).unauthorized('Invalid token provided.');
 
 	req.user = user;
 	next();
