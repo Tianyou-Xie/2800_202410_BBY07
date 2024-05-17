@@ -7,12 +7,14 @@ import Post from '../Post/Post';
 
 interface PageProp {
 	content: JSX.Element | JSX.Element[];
+	pageName?: string;
 	noHeader?: boolean;
 }
 
 /**
  * Component for a page with content wrapped with header and hotbar.
  *
+ * @param props.pageName string - (Optional) Name of the page
  * @param props.content JSX.Element | JSX.Element[] - Content that will be added in the middle
  * @param props.noHeader boolean - (Optional) Takes off the header
  * @returns JSX.Element
@@ -29,11 +31,11 @@ const Page = (props: PageProp) => {
 						<></>
 					) : (
 						<div className={styles.header}>
-							<Header pageName='General feed' />
+							<Header pageName={(props.pageName) ? props.pageName : ""} />
 						</div>
 					)}
 					<Container className={styles.content}>{props.content}</Container>
-					<div><Hotbar /></div>
+					<div className={styles.navbar}><Hotbar /></div>
 				</Container>
 			</body>
 		</html>

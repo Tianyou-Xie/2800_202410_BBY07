@@ -15,6 +15,7 @@ import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
 
 interface PostProp {
 	username: string;
+	userURL: string;
 	text: string;
 	postURL: string;
 	createdAt?: Date;
@@ -22,19 +23,25 @@ interface PostProp {
 
 interface UserProp {
 	username: string;
+	userURL: string;
 	imageURL? : string;
 }
 
 /**
  * Component representing the user part of the post (image and username).
  * 
- * @param props.username - Username of the author of the post (got from the Post's props)
+ * @param props.username - Username of the author of the post (got from the Post's props).
  * @param props.imageURL - (TODO) Will represent the user's profile pictures as an URL or image file.
+ * @param props.userURL - (TODO) Will link to the user's profile page.
  */
 const User = (props: UserProp): JSX.Element => {
 	return (
 		<>
-			<Container className={styles.userContainer}>{props.username}</Container>
+			<Container className={styles.userContainer}>
+				<a href={props.userURL} style={{ textDecoration: 'none', color: 'inherit' }}>
+					{props.username}
+				</a>
+			</Container>
 		</>
 	);
 };
@@ -69,7 +76,7 @@ const Post = (props: PostProp): JSX.Element => {
 
 	return (
 		<Container className={styles.postContainer}>
-			<User username={props.username} />
+			<User username={props.username} userURL={props.userURL}/>
 			<Container className={styles.paraContainer}>
 				<a href={props.postURL} style={{ textDecoration: 'none', color: 'inherit' }}>
 					<Para className={styles.postText} text={props.text} />
