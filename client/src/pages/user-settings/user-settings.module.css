@@ -1,0 +1,27 @@
+.setting-body {
+    font-size: x-large;
+    font-family: BabaPro;
+    background-color: aliceblue;
+}
+
+.setting-title {
+    font-size: 30pt;
+    font-family: Bitsumishi;
+}
+
+.danger-zone, .danger-zone * {
+    background-color: #242C38;
+    color: red;
+}
+
+.group-item, .group-item * {
+    background-color: aliceblue;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: red;
+}

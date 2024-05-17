@@ -1,3 +1,5 @@
 {
-	"cssModules.camelCase": true
+	"cssModules.camelCase": true,
+	"editor.formatOnSave": true,
+	"files.autoSave": "afterDelay"
 }

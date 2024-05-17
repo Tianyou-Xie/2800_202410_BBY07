@@ -1,7 +1,54 @@
+:root {
+	--signup-background: #f8f4e5;
+	--signup-input-focus: #ebe2c2;
+	--signup-button-active: #ebe2c2;
+
+	--login-background: #f8f4e5;
+	--login-input-focus: #ebe2c2;
+	--login-button-active: #ebe2c2;
+
+	--soft-shadow: #b8b199;
+}
+
 *,
 *::before,
 *::after {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	/*This margin bottom is needed to make hotbar not interfere with other componenet*/
+	/*If this margin bottom is doing something else bad please talk to sam. Thank you!*/
+	margin-bottom: 20px;
+	background-color: aliceblue;
+}
+
+@font-face {
+	font-family: Fjalla One;
+	src: url(./assets/fonts/FjallaOne-Regular.ttf);
+}
+
+@font-face {
+	font-family: TTOctosquares;
+	src: url(./assets/fonts/TT-Octosquares-Trial-Regular.ttf);
+}
+
+@font-face {
+	font-family: Bitsumishi;
+	src: url(./assets/fonts/BITSUMIS.TTF);
+}
+
+@font-face {
+	font-family: BabaPro;
+	src: url(./assets/fonts/BabaPro-Bold.ttf);
 }
