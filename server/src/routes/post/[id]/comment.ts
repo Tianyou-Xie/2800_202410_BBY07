@@ -16,6 +16,26 @@ interface PostBody {
 	media?: RawDocument<IMedia>;
 }
 
+export const get: Handler = async (req, res) => {
+	const parentPostId = req.params.id;
+
+	const rawLimit = req.query.limit;
+	let limit = typeof rawLimit === 'string' ? parseInt(rawLimit) : NaN;
+	if (isNaN(limit)) limit = 10;
+	limit = Math.max(0, Math.min(limit, 100));
+
+	if (!mongoose.isValidObjectId(parentPostId)) return Resolve(res).badRequest('Invalid post ID provided.');
+
+	const relationships = await CommentRelationship.find({ parentPost: parentPostId }).limit(limit);
+	const comments = await Promise.all(
+		relationships.map(async (v) => {
+			return await PostModel.findById(v.childPost).lean();
+		}),
+	);
+
+	Resolve(res).okWith(comments);
+};
+
 export const post: Handler[] = [
 	requireLogin,
 	async (req, res) => {
