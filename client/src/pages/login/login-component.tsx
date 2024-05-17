@@ -19,7 +19,6 @@ const Login = () => {
 			password: password,
 		};
 
-		console.log(newUser);
 		const apiUrl = import.meta.env.VITE_LOCALHOST + '/user/login';
 		try {
 			const { data: res } = await api.post(apiUrl, newUser);
@@ -29,9 +28,19 @@ const Login = () => {
 			Auth.saveToken(token);
 			setLocation('/');
 			toast.success('login successfully');
-		} catch (error) {
-			alert('Error: check console');
-			console.log(error);
+		} catch (error: any) {
+			let err = error.response.data.success;
+			console.log(err);
+			toast.error('🦄 Wrong Credentials', {
+				position: 'top-right',
+				autoClose: 55000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'colored',
+			});
 		}
 	};
 
