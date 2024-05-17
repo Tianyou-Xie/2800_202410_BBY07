@@ -1,3 +1,4 @@
+import styles from './my-feed.module.css';
 import Page from '../../components/Page/Page';
 import Post from '../../components/Post/Post';
 

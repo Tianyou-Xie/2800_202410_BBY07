@@ -30,7 +30,9 @@ const Page = (props: PageProp) => {
 					<Header pageName={props.pageName ? props.pageName : ''} />
 				</div>
 			)}
-			<div className={styles.content}>{props.content}</div>
+			<div className={styles.content}>
+				<div className='d-flex flex-column gap-4 p-3 align-items-center'>{props.content}</div>
+			</div>
 			<div className={styles.navbar}>
 				<Hotbar />
 			</div>
