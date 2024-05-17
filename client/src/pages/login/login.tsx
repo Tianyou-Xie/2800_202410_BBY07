@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './login.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import { api } from '../../lib/axios';
+import { useLocation } from 'wouter';
+import { Auth } from '../../lib/auth';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [_, setLocation] = useLocation();
 
 	const submitForm = async (e: any) => {
 		e.preventDefault();
@@ -19,12 +22,12 @@ const Login = () => {
 
 		const apiUrl = '/user/login';
 		try {
-			const res = await api.post(apiUrl, {
-				method: 'POST',
-				body: newUser,
-			});
-			const data = await res.data;
-			alert('logged in successfully');
+			const { data: res } = await api.post(apiUrl, newUser);
+			if (res.success !== true || !res.value) throw 'Invalid password';
+
+			const token = res.value;
+			Auth.saveToken(token);
+			setLocation('/');
 		} catch (error) {
 			alert('Error: check console');
 			console.log(error);
