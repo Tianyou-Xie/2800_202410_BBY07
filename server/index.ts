@@ -14,7 +14,13 @@ const PORT = process.env.PORT;
 (async () => {
 	const app = express();
 
-	app.use(cors());
+	app.use(
+		cors({
+			origin: ['http://localhost:8000', 'https://skynetwork.app', 'https://dev.skynetwork.app'],
+			optionsSuccessStatus: 200,
+		}),
+	);
+
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());
 	app.use(requestLogger);
