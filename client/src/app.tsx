@@ -8,6 +8,7 @@ import Home from './pages/home/home';
 import Login from './pages/login/login';
 import MyFeed from './pages/my-feed/my-feed';
 import Signup from './pages/signup/signup';
+import UserSettings from './pages/user-settings/user-settings';
 import Test from './pages/test-page/test-page';
 import { useEffect, useState } from 'react';
 import { Auth } from './lib/auth';
@@ -38,6 +39,7 @@ export const App = () => {
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
 						<Route path='/home' component={Home} />
+						<Route path='/settings' component={UserSettings} />
 
 						{authorized === false ? <Redirect href='/login' /> : <Route path='/' component={Home} />}
 					</>

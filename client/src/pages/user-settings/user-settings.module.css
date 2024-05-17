@@ -11,3 +11,7 @@
 .clickable {
     cursor: pointer;
 }
+
+.delete-btn {
+    background-color: red;
+}
