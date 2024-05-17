@@ -36,11 +36,10 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [Express](https://expressjs.com/)
 -   [Express File Routing](https://www.npmjs.com/package/express-file-routing)
 -   [Joi](https://joi.dev/)
--   [Express Sessions](https://github.com/expressjs/session)
--   [connect-mongo](https://www.npmjs.com/package/connect-mongo)
 -   [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 -   [http-status-codes](https://www.npmjs.com/package/http-status-codes)
 -   [nodemailer](https://www.nodemailer.com/)
+-   [JWT](https://jwt.io/)
 
 **Development Utilities:**
 
@@ -73,17 +72,12 @@ Both the server and client utilize a `.env` file.
 
 **Server Variables:**
 
-| Key                   | Usage                                             |
-| --------------------- | ------------------------------------------------- |
-| PORT                  | Port used for the express server                  |
-| MONGO_URL             | The MongoDB connection string                     |
-| SESSION_TTL           | The session expiry time, in milliseconds          |
-| SESSION_COOKIE_SECRET | The secret phrase used to sign the session cookie |
-| SESSION_DATA_SECRET   | The secret phrased used to encrypt session data   |
-| EMAIL_HOST            | The email transporter host                        |
-| EMAIL_PORT            | The email transporter port                        |
-| EMAIL_USER            | The email transporter username                    |
-| EMAIL_PASS            | The email transporter password                    |
+| Key        | Usage                                         |
+| ---------- | --------------------------------------------- |
+| PORT       | Port used for the express server              |
+| MONGO_URL  | The MongoDB connection string                 |
+| JWT_TTL    | The JWT token expiry time, in seconds         |
+| JWT_SECRET | The secret used to sign and verify JWT tokens |
 
 ## Running Locally & Deployment
 
