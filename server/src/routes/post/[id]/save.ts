@@ -24,8 +24,10 @@ export const post: Handler[] = [
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
 
-		const validPost = await PostModel.exists({ _id: id });
+		const validPost = await PostModel.findById(id);
 		if (!validPost) return Resolve(res).notFound('Invalid post ID provided.');
+
+		if (validPost.deleted) return Resolve(res).gone('The given post is deleted.');
 
 		const user = await getHydratedUser(req);
 		if (!user) return Resolve(res).error('Unable to save post, user hydration failed.');
