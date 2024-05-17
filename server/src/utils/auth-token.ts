@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { IUser, UserModel } from '../models/user';
+import Joi from 'joi';
 
 /**
  * The interface describing the payload
@@ -8,7 +9,16 @@ import { IUser, UserModel } from '../models/user';
  */
 interface JWTPayload {
 	userId: string;
+	passwordHash: string;
 }
+
+/**
+ * Schema to validate a decoded payload.
+ */
+const PayloadSchema = Joi.object<JWTPayload>({
+	userId: Joi.string().required(),
+	passwordHash: Joi.string().required(),
+});
 
 /**
  * Utilities related to signing and verifying JWT payloads.
@@ -24,12 +34,16 @@ export namespace AuthToken {
 	export async function verifyToUser(token: string) {
 		try {
 			const payload = jwt.verify(token, process.env.JWT_SECRET!) as JWTPayload;
-			if (!payload || !('userId' in payload)) return;
+			const { error } = PayloadSchema.validate(payload);
+			if (error) return;
 
 			const userId = payload.userId;
 			if (!mongoose.isValidObjectId(userId)) return;
 
-			return await UserModel.findById(userId);
+			const user = await UserModel.findById(userId);
+			if (!user || user.password !== payload.passwordHash) return;
+
+			return user;
 		} catch {}
 	}
 
@@ -40,8 +54,10 @@ export namespace AuthToken {
 	 * @returns the signed token
 	 */
 	export function signAs(user: HydratedDocument<IUser>) {
-		return jwt.sign({ userId: user._id.toString() } satisfies JWTPayload, process.env.JWT_SECRET!, {
-			expiresIn: parseInt(process.env.JWT_TTL!),
-		});
+		return jwt.sign(
+			{ userId: user._id.toString(), passwordHash: user.password } satisfies JWTPayload,
+			process.env.JWT_SECRET!,
+			{ expiresIn: parseInt(process.env.JWT_TTL!) },
+		);
 	}
 }
