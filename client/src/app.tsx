@@ -5,7 +5,7 @@ import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
 import GeneralFeed from './pages/general-feed/general-feed';
 import Home from './pages/home/home';
-import Login from './pages/login/login';
+import Login from './pages/login/login-component';
 import MyFeed from './pages/my-feed/my-feed';
 import Signup from './pages/signup/signup';
 import Test from './pages/test-page/test-page';
