@@ -11,6 +11,9 @@ import Signup from './pages/signup/signup';
 import Hotbar from './components/Hotbar/Hotbar';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
 import Changepassword from './pages/changepassword/changepassword';
+import Login from './pages/login/login';
+
+import Test from './pages/test-page/test-page';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	// <React.StrictMode>
@@ -21,6 +24,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 		<Route path='/signup' component={Signup} />
 		<Route path='/forgetpassword' component={Forgetpassword} />
 		<Route path='/changepassword' component={Changepassword} />
+		<Route path='/login' component={Login} />
+
+		{/* Page to test components */}
+		<Route path='/test' component={Test} />
+
 		<Route>404 Not Found</Route>
 	</Switch>,
 	// <Hotbar />

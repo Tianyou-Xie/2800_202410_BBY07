@@ -27,6 +27,8 @@ export const post: Handler[] = [
 		const post = await PostModel.findById(id);
 		if (!post) return Resolve(res).notFound('Invalid post ID provided.');
 
+		if (post.deleted) return Resolve(res).gone('The given post is deleted.');
+
 		const currentUserId = req.session.user!.id;
 		const existingInteraction = await LikeInteraction.exists({ postId: id, userId: currentUserId }).lean();
 		if (existingInteraction) return Resolve(res).badRequest('Post is already liked.');

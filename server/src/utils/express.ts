@@ -154,10 +154,21 @@ export class Resolver {
 	 * Indicates that there was a conflict with the current state of the resource.
 	 *
 	 * @see {@link StatusCodes.CONFLICT}
-	 * @param message the  message specifying details about the conflict origins
+	 * @param message the message specifying details about the conflict origins
 	 */
 	public conflict(message: string) {
 		this.body = Resolver.responseOf(StatusCodes.CONFLICT, message);
+		this.send();
+	}
+
+	/**
+	 * Indicates that the specified resource was removed, likely permanently.
+	 *
+	 * @see {@link StatusCodes.GONE}
+	 * @param message the message specifying detials about the removal
+	 */
+	public gone(message: string) {
+		this.body = Resolver.responseOf(StatusCodes.GONE, message);
 		this.send();
 	}
 
