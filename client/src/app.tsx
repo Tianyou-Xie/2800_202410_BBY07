@@ -27,6 +27,17 @@ export const App = () => {
 		});
 	}, []);
 
+	const commonRoutes = (
+		<>
+			<Route path='/signup' component={Signup} />
+			<Route path='/login' component={Login} />
+			<Route path='/about' component={About} />
+			<Route path='/forgetpassword' component={Forgetpassword} />
+			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
+			<Route path='/test' component={Test} />
+		</>
+	);
+
 	return (
 		<>
 			<ToastContainer />
@@ -38,23 +49,14 @@ export const App = () => {
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
 						<Route path='/settings' component={UserSettings} />
+						{commonRoutes}
 					</Then>
 
 					<Else>
 						<Route path='/' component={Login} />
+						{commonRoutes}
 					</Else>
 				</If>
-
-				<Route path='/signup' component={Signup} />
-				<Route path='/login' component={Login} />
-				<Route path='/about' component={About} />
-				<Route path='/forgetpassword' component={Forgetpassword} />
-				<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
-
-				{/* Page to test components */}
-				<Route path='/test' component={Test} />
-
-				{/* <Route>404 Not Found</Route> */}
 			</Switch>
 		</>
 	);
