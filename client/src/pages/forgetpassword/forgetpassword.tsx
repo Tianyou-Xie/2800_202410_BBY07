@@ -28,7 +28,7 @@ const Forgetpassword = () => {
 					<form onSubmit={handleSubmit}>
 						<input
 							name='email'
-							placeholder='PLEASE ENTER YOUR EMAIL'
+							placeholder='ENTER YOUR EMAIL'
 							type='email'
 							className={styles.input}
 							value={email}

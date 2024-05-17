@@ -1,5 +1,5 @@
 import { isDev } from './src/load-env';
-
+import './src/load-env';
 import express from 'express';
 import createRouter from 'express-file-routing';
 import path from 'path';
@@ -14,12 +14,7 @@ const PORT = process.env.PORT;
 (async () => {
 	const app = express();
 
-	app.use(
-		cors({
-			origin: isDev() ? '*' : ['https://skynetwork.app', 'https://dev.skynetwork.app'],
-			optionsSuccessStatus: 200,
-		}),
-	);
+	app.use(cors());
 
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());

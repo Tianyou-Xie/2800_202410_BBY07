@@ -33,7 +33,7 @@ export const patch: Handler = async (req, res) => {
     });
 
     const bodyValidationResult = bodySchema.validate(req.body);
-    if (bodyValidationResult.error) return Resolve(res).created(patch, bodyValidationResult.error.message);
+    if (bodyValidationResult.error) return Resolve(res).created(patch, 'New passwords do not match.');
 
     const { value: body } = bodyValidationResult;
 
