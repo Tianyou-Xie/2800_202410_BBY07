@@ -1,3 +1,17 @@
 .modal button {
     box-shadow: none;
 }
+
+.header-font {
+    font-family: Bitsumishi;
+    font-size: 2em;
+}
+
+.body-font {
+    font-family: TTOctosquares;
+    font-size: 14pt;
+}
+
+.footer-font {
+    font-family: BabaPro;
+}

@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 		<Route path='/about' component={About} />
 		<Route path='/signup' component={Signup} />
 		<Route path='/settings' component={UserSettings}/>
-
+		
 		{/* Page to test components */}
 		<Route path='/test' component={Test} />
 

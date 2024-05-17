@@ -1,55 +1,40 @@
 import { useState, useEffect } from 'react';
+import { api } from '../../lib/axios';
 
 import styles from './user-settings.module.css';
+import logoUrl from '../../assets/images/SkynetLogo.png';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import Nav from 'react-bootstrap/Nav';
 import Header from '../../components/Header/Header';
 import ModalConfirmation from '../../components/ModalConfirmation/ModalConfirmation';
 import Hotbar from '../../components/Hotbar/Hotbar';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const UserSettings = () => {
-	const initBody = (bodyDesc: string) => {
-		return (
-			<>
-				<p>
-					Are you sure you want to {bodyDesc}?
-					<br />
-					This action cannot be undone.
-				</p>
-			</>
-		);
-	};
-
+	// variables responsible for showing modals
 	const [showPassBody, setShowPass] = useState(false);
-	const [showEmailBody, setShowEmail] = useState(false);
-	const [showNameBody, setShowName] = useState(false);
-	const [showDeleteBod, setShowDelete] = useState(false);
+	const [showPassBody2, setShowPass2] = useState(false);
 
-	const [modalPasswordBody, setPasswordBody] = useState(initBody('change your password'));
-	const [modalEmailBody, setEmailBody] = useState(initBody('change your email'));
-	const [modalNameBody, setNameBody] = useState(initBody('change your name'));
-	const [modalDeleteBody, setDeleteBody] = useState(initBody('delete your account'));
-
-	const handlePasswordChange = () => setPasswordBody(changePasswordForm());
-
-	function changePasswordForm(): JSX.Element {
-		return (
-			<form>
-				<FloatingLabel controlId='currentPassword' label='Current Password' className='mb-3'>
-					<Form.Control type='password' placeholder='Current Password' />
-				</FloatingLabel>
-				<FloatingLabel controlId='newPassword' label='New Password'>
-					<Form.Control type='password' placeholder='New Password' />
-				</FloatingLabel>
-				<FloatingLabel controlId='confirmPassword' label='Confirm Password'>
-					<Form.Control type='password' placeholder='Confirm Password' />
-				</FloatingLabel>
-			</form>
-		);
-	}
+	//variables resposible for grabbing the form fields present in the 2nd modal
+	const [password, setPassword] = useState('');
+	const [newPassword, setNewPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [message, setMessage] = useState('');
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		try {
+			const response = await api.patch('/user/changepassword', {
+				password,
+				newpassword: newPassword,
+				confirmpassword: confirmPassword,
+			});
+			setMessage(response.data.message);
+		} catch (error: any) {
+			setMessage(error.response.data.message);
+		}
+	};
 
 	return (
 		<>
@@ -114,15 +99,103 @@ const UserSettings = () => {
 			</ListGroup>
 			<Hotbar />
 
+			{/* First Modal for password change */}
 			<ModalConfirmation
 				title='Change Password'
-				body={modalPasswordBody}
-				show={true}
-				onHide={() => {
-					setShowPass(false);
-					setPasswordBody(initBody('change your password'));
-				}}
-				onContinue={handlePasswordChange}
+				show={showPassBody}
+				onHide={() => setShowPass(false)}
+				body={
+					<p>
+						Are you sure you want to change your password?
+						<br />
+						This action cannot be undone.
+					</p>
+				}
+				disableFooter={false}
+				footer={
+					<div className='w-100 d-flex justify-content-center'>
+						<Button
+							className='me-3'
+							variant='secondary'
+							onClick={() => {
+								setShowPass(false);
+							}}>
+							Close
+						</Button>
+						<Button
+							className='ms-3'
+							variant='danger'
+							onClick={() => {
+								setShowPass(false);
+								setShowPass2(true);
+							}}>
+							Continue
+						</Button>
+					</div>
+				}
+			/>
+
+			{/* Second Modal for password change */}
+			<ModalConfirmation
+				title='Change Password'
+				show={showPassBody2}
+				onHide={() => setShowPass2(false)}
+				disableFooter={true}
+				header={
+					<>
+						<img className={`img-fluid w-25`} src={logoUrl} alt='Skynet Logo' />
+						<p>Change Password</p>
+					</>
+				}
+				body={
+					<>
+						<div className='px-4 pb-2 text-center'>
+							<div className='changepassword-upperdiv mb-1'></div>
+							<div className='changepassword-form'>
+								<form onSubmit={handleSubmit}>
+									<input
+										name='password'
+										placeholder='Current Password'
+										type='password'
+										value={password}
+										onChange={(event) => setPassword(event.target.value)}
+										required
+									/>
+									<br />
+									<input
+										name='newpassword'
+										placeholder='New Password'
+										type='password'
+										value={newPassword}
+										onChange={(event) => setNewPassword(event.target.value)}
+										required
+									/>
+									<br />
+									<input
+										name='confirmpassword'
+										placeholder='Confirm New Password'
+										type='password'
+										value={confirmPassword}
+										onChange={(event) => setConfirmPassword(event.target.value)}
+										required
+									/>
+									<br />
+									<div className='text-center mb-3'>
+										<button type='submit'>Change Password</button>
+									</div>
+									<div className='text-center'>
+										<button type='button' onClick={() => setShowPass2(false)}>
+											Cancel
+										</button>
+									</div>
+								</form>
+							</div>
+							<div className='changepassword-bottomdiv mt-2'></div>
+							<br />
+							<div className='message'>{message}</div>
+						</div>
+					</>
+				}
 			/>
 		</>
 	);
