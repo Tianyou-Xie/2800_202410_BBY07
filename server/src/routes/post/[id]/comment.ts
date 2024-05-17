@@ -6,7 +6,6 @@ import { PostModel } from '../../../models/post';
 import { RawDocument } from '../../../@types/model';
 import { ILocation, RawLocationSchema } from '../../../models/location';
 import { IMedia, RawMediaSchema } from '../../../models/media';
-import { getHydratedUser } from '../../../utils/session';
 import Joi from 'joi';
 import { CommentRelationship } from '../../../models/comment-relationship';
 
@@ -59,9 +58,7 @@ export const post: Handler[] = [
 
 		if (!body) return;
 
-		const currentUser = await getHydratedUser(req);
-		if (!currentUser) return Resolve(res).unauthorized('You are not authorized to comment.');
-
+		const currentUser = req.user!;
 		const session = await mongoose.startSession();
 
 		try {

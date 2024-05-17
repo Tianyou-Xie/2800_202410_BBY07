@@ -8,5 +8,4 @@ const isDev = import.meta.env.MODE === 'development';
  */
 export const api = axios.create({
     baseURL: isLocal ? 'http://localhost:3000/' : isDev ? 'https://api.dev.skynetwork.app' : 'https://api.skynetwork.app',
-    withCredentials: true,
 });
