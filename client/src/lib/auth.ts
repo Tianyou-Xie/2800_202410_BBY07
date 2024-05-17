@@ -27,6 +27,15 @@ export namespace Auth {
 	}
 
 	/**
+	 * Removes the current authorization header and removes the
+	 * token from local storage.
+	 */
+	export function loseToken() {
+		api.defaults.headers.common.Authorization = '';
+		localStorage.removeItem(LS_KEY);
+	}
+
+	/**
 	 * Retrieves the current token from local storage, if it exists.
 	 *
 	 * @returns the token, if one exists
