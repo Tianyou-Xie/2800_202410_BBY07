@@ -2,10 +2,14 @@ import { useState, useEffect } from 'react';
 import styles from './login.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import { api } from '../../lib/axios';
+import { useLocation } from 'wouter';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const [location, setLocation] = useLocation();
 
 	const submitForm = async (e: any) => {
 		e.preventDefault();
@@ -16,15 +20,16 @@ const Login = () => {
 		};
 
 		console.log(newUser);
-
-		const apiUrl = '/user/login';
+		const apiUrl = import.meta.env.VITE_LOCALHOST + '/user/login';
 		try {
-			const res = await api.post(apiUrl, {
+			const res = await fetch(apiUrl, {
 				method: 'POST',
-				body: newUser,
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(newUser),
 			});
-			const data = await res.data;
-			alert('logged in successfully');
+			const data = await res.json();
+			toast.success('Job added successfully');
+			setLocation('/signup');
 		} catch (error) {
 			alert('Error: check console');
 			console.log(error);

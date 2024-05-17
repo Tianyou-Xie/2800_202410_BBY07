@@ -58,10 +58,6 @@ const Signup = () => {
 			alert('Error: check console');
 			console.log(error);
 		}
-
-		// addJobSubmit(newJob);
-		// toast.success('Job added successfully');
-		// return navigate('/jobs');
 	};
 
 	return (
