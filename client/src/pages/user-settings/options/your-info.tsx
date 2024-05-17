@@ -12,16 +12,19 @@ interface Props {
 
 const YourInfoModal = (props: Props) => {
 
-	const changePassword = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const changePassword = async () => {
 		try {
-			const response = await api.post('/user/index');
+			
+			const response = await api.get('/user/');
+			const data = response.data.value;
 			//toast.success('Password changed!');
 		} catch (error: any) {
 			//toast.error('Could not change password.');
 			alert('could not get information');
 		}
 	};
+
+	changePassword();
 
 	return (
 		<>

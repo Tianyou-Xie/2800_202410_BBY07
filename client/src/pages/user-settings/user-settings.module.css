@@ -1,6 +1,7 @@
 .setting-body {
     font-size: x-large;
     font-family: BabaPro;
+    background-color: aliceblue;
 }
 
 .setting-title {
@@ -8,12 +9,12 @@
     font-family: Bitsumishi;
 }
 
-
-.group-item {
-    background-color: aliceblue;
+.danger-zone, .danger-zone * {
+    background-color: #242C38;
+    color: aliceblue;
 }
 
-.group-item * {
+.group-item, .group-item * {
     background-color: aliceblue;
 }
 

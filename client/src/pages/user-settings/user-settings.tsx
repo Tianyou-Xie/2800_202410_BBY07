@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { api } from '../../lib/axios';
-import { useLocation } from 'wouter';
+import { Redirect, useLocation } from 'wouter';
 import { toast } from 'react-toastify';
 
 import styles from './user-settings.module.css';
@@ -11,6 +11,8 @@ import Page from '../../components/Page/Page';
 import ChangePasswordModal from './options/change-password';
 import DeleteAccountModal from './options/delete-account';
 import YourInfoModal from './options/your-info';
+import { BiLogOut } from 'react-icons/bi';
+import { Auth } from '../../lib/auth';
 
 const UserSettings = () => {
 	const [_, setLocation] = useLocation();
@@ -61,6 +63,12 @@ const UserSettings = () => {
 			toast.error('Invalid Phrase');
 		}
 	};
+
+	function logout() {
+		console.log('here');
+		Auth.loseToken();
+		setLocation('/login');
+	}
 
 	// defining values for the Change Password Modal
 	const passBody1 = {
@@ -148,7 +156,13 @@ const UserSettings = () => {
 								</ListGroup.Item>
 							</ListGroup>
 						</ListGroup.Item>
-						<ListGroup.Item className={styles.groupItem}>
+						<ListGroup.Item>
+							<div className='w-100 d-flex justify-content-center my-5'>
+								<button className='p-2'><h1 onClick={logout} className={`${styles.settingTitle}`}>Logout</h1></button>
+							</div>
+						
+						</ListGroup.Item>
+						<ListGroup.Item className={styles.dangerZone}>
 							<h1 className={`${styles.settingTitle} ms-3`}>Danger Zone</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`${styles.clickable} ms-5`}>
