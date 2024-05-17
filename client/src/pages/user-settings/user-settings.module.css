@@ -1,4 +1,5 @@
 .setting-body {
+    z-index: -1;
     font-size: x-large;
     font-family: BabaPro;
     background-color: aliceblue;
