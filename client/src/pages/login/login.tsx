@@ -24,7 +24,8 @@ const Login = () => {
 		try {
 			const res = await fetch(apiUrl, {
 				method: 'POST',
-				body: newUser,
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(newUser),
 			});
 			const data = await res.json();
 			toast.success('Job added successfully');
