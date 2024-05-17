@@ -1,0 +1,41 @@
+/* * {
+    font-family: TTOctosquares;
+} */
+
+.page-container {
+	width: 100%;
+	max-width: 100vw;
+	padding: 0px;
+
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 84px 1fr 90px;
+	grid-template-areas:
+		'header'
+		'content'
+		'navbar';
+}
+
+.noHeader {
+	grid-template-areas:
+		'content'
+		'content'
+		'navbar';
+}
+
+.header {
+	grid-area: header;
+	position: fixed;
+	width: 100%;
+}
+
+.content {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	grid-area: content;
+}
+
+.navbar {
+	grid-area: navbar;
+}

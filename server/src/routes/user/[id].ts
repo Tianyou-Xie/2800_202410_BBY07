@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import { Handler } from 'express';
 import { UserModel } from '../../models/user';
 import { requireLogin } from '../../middlewares/require-login';
-import { isSessionOf } from '../../utils/session';
 import { assertRequestBody, Resolve } from '../../utils/express';
 
 export const get: Handler = async (req, res) => {
@@ -27,10 +26,8 @@ export const patch: Handler[] = [
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid user ID provided');
 
-		const user = await UserModel.findById(id);
-		if (!user) return Resolve(res).notFound('No user found by the given ID.');
-
-		if (!isSessionOf(req, user)) return Resolve(res).forbidden('You are not authorized to modify this user.');
+		const user = req.user!;
+		if (!user._id.equals(id)) return Resolve(res).forbidden('You are not authorized to modify this user.');
 
 		const body = assertRequestBody(
 			req,

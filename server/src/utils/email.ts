@@ -11,7 +11,7 @@ const sendEmail = async (option: { email: string, subject: string, text: string 
     } as nodemailer.TransportOptions);
 
     const emailOptions = {
-        from: 'Sky.net Support <support@skynet.com>',
+        from: 'Sky.net Support <support@skynetwork.app>',
         to: option.email,
         subject: option.subject,
         text: option.text,

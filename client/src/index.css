@@ -3,7 +3,11 @@
     --signup-input-focus: #ebe2c2;
     --signup-button-active: #ebe2c2;
 
-    --soft-shadow: #aaa;
+    --login-background: #f8f4e5;
+    --login-input-focus: #ebe2c2;
+    --login-button-active: #ebe2c2;
+
+    --soft-shadow: #b8b199;
 }
 
 *,

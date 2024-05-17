@@ -4,10 +4,10 @@ import { Handler } from 'express';
 import { UserModel } from '../../models/user';
 import { createHash } from '../../utils/bcrypt';
 import { PlanetModel } from '../../models/planet';
-import { setSession } from '../../utils/session';
 import { assertRequestBody, Resolve } from '../../utils/express';
 import { ILocation, RawLocationSchema } from '../../models/location';
 import { RawDocument } from '../../@types/model';
+import { AuthToken } from '../../utils/auth-token';
 
 interface PostBody {
 	email: string;
@@ -53,9 +53,7 @@ export const post: Handler = async (req, res) => {
 		});
 
 		await user.save();
-
-		setSession(req, user);
-		Resolve(res).created(undefined, 'User and session created, signup successful.');
+		Resolve(res).okWith(AuthToken.signAs(user));
 	} finally {
 		inflightEmails.delete(body.email);
 	}

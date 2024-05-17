@@ -1,0 +1,54 @@
+import { useEffect } from 'react';
+import { api } from '../../lib/axios';
+
+import Page from '../../components/Page/Page';
+import Post from '../../components/Post/Post';
+
+const GeneralFeed = () => {
+	const displayedPosts: JSX.Element[] = [];
+
+	// interface Reference {
+	// 	authorId: { username: string; userURL: string };
+	// 	content: string;
+	// 	likeCount: number;
+	// 	commentCount: number;
+	// 	repostCount: number;
+	// 	createdAt: Date;
+	// }
+
+	// const [planets, setPlanets] = useState<Array<Planet>>([]);
+	useEffect(() => {
+		async function fetchPost() {
+			try {
+				const res = await api.post('/post/6646a3b24b2d7d6a935eeea3');
+				console.log(res);
+			} catch (err) {
+				console.log(err);
+			}
+		}
+
+		fetchPost();
+	}, []);
+
+	const dummyPost = (
+		<Post
+			username='@MarcusTheDumbs'
+			text='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
+			postURL='./about'
+			userURL='#USER_URL'
+		/>
+	);
+
+	for (let i = 1; i < 10; i++) {
+		displayedPosts.push({ ...dummyPost, key: i.toString() });
+	}
+
+	return (
+		<Page
+			pageName='General Feed'
+			content={<div className='d-flex flex-column gap-4 p-3 align-items-center '>{displayedPosts}</div>}
+		/>
+	);
+};
+
+export default GeneralFeed;
