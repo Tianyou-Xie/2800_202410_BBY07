@@ -21,8 +21,7 @@ const Login = () => {
 		try {
 			const res = await api.post(apiUrl, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(newUser),
+				body: newUser,
 			});
 			const data = await res.data;
 			alert('logged in successfully');
