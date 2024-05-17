@@ -20,6 +20,7 @@ const Signup = () => {
 			const { data: res } = await api.get('/planet');
 			try {
 				setPlanets(res.value);
+				setLocation(res.value[0]._id);
 			} catch (error) {
 				console.log(error);
 			}
@@ -101,12 +102,12 @@ const Signup = () => {
 						<select
 							name='planets'
 							id='planets'
-							value={location}
+							defaultValue={planets[0]?._id}
 							required
 							onChange={(e) => setLocation(e.target.value)}>
 							{planets.map((planet, index) => {
 								return (
-									<option key={index} value={planet._id} selected={index === 0}>
+									<option key={index} value={planet._id}>
 										{planet.name}
 									</option>
 								);
