@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './signup.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
+import { api } from '../../lib/axios';
+import { Auth } from '../../lib/auth';
 
 const Signup = () => {
 	interface Planet {
@@ -15,12 +17,9 @@ const Signup = () => {
 
 	useEffect(() => {
 		const fetchPlanets = async () => {
-			const apiUrl = import.meta.env.VITE_DEV + '/planet';
-			console.log(apiUrl);
+			const { data: res } = await api.get('/planet');
 			try {
-				const res = await fetch(apiUrl);
-				const data = await res.json();
-				setPlanets(data.value);
+				setPlanets(res.value);
 			} catch (error) {
 				console.log(error);
 			}
@@ -32,32 +31,38 @@ const Signup = () => {
 	const submitForm = async (e: any) => {
 		e.preventDefault();
 
+		const geoLoc = await new Promise<GeolocationPosition | undefined>((res) => {
+			navigator.geolocation.getCurrentPosition(
+				(p) => res(p),
+				() => res(undefined),
+			);
+		});
+
 		const newUser = {
 			email: email,
 			userName: username,
 			password: password,
 			location: {
-				latitude: '49.285061',
-				longitude: '-122.794594',
-				planetId: '664399a3036de6e77d00332f',
+				latitude: geoLoc ? geoLoc.coords.latitude : 0,
+				longitude: geoLoc ? geoLoc.coords.longitude : 0,
+				planetId: location,
 			},
 		};
 
 		console.log(newUser);
 
-		const apiUrl = import.meta.env.VITE_DEV + '/user/signup';
 		try {
-			const res = await fetch(apiUrl, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(newUser),
-			});
-			const data = await res.json();
-			alert('new user created');
-		} catch (error) {
-			alert('Error: check console');
-			console.log(error);
+			const { data: res } = await api.post('/user/signup', newUser);
+			const token = res.value;
+			Auth.saveToken(token);
+			setLocation('/');
+		} catch (err) {
+			console.log(err);
+			alert('Failed');
 		}
+
+		// if (!res.success) throw res.error;
+		// else alert('new user created');
 	};
 
 	return (
@@ -74,6 +79,7 @@ const Signup = () => {
 							placeholder='USERNAME'
 							type='text'
 							value={username}
+							required
 							onChange={(e) => setUsername(e.target.value)}
 						/>
 						<input
@@ -81,6 +87,7 @@ const Signup = () => {
 							placeholder='EMAIL'
 							type='email'
 							value={email}
+							required
 							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<input
@@ -88,17 +95,18 @@ const Signup = () => {
 							placeholder='********'
 							type='password'
 							value={password}
+							required
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<select
 							name='planets'
 							id='planets'
 							value={location}
+							required
 							onChange={(e) => setLocation(e.target.value)}>
-							<option value='select'>Select Location</option>
 							{planets.map((planet, index) => {
 								return (
-									<option key={index} value={planet.name}>
+									<option key={index} value={planet._id} selected={index === 0}>
 										{planet.name}
 									</option>
 								);
