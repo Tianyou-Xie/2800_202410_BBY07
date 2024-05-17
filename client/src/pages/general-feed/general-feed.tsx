@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { api } from '../../lib/axios';
-
-import styles from './general-feed.module.css';
-import Container from 'react-bootstrap/Container';
 
 import Page from '../../components/Page/Page';
 import Post from '../../components/Post/Post';
@@ -25,7 +22,7 @@ const GeneralFeed = () => {
 			try {
 				const res = await api.post('/post/6646a3b24b2d7d6a935eeea3');
 				console.log(res);
-			} catch(err) {
+			} catch (err) {
 				console.log(err);
 			}
 		}
@@ -43,15 +40,14 @@ const GeneralFeed = () => {
 	);
 
 	for (let i = 1; i < 10; i++) {
-		displayedPosts.push(dummyPost);
+		displayedPosts.push({ ...dummyPost, key: i.toString() });
 	}
 
 	return (
-		<html>
-			<body>
-				<Page pageName="General Feed" content={displayedPosts} />
-			</body>
-		</html>
+		<Page
+			pageName='General Feed'
+			content={<div className='d-flex flex-column gap-4 p-3 align-items-center '>{displayedPosts}</div>}
+		/>
 	);
 };
 

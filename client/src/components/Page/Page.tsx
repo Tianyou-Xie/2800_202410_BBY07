@@ -1,9 +1,7 @@
 import styles from './Page.module.css';
-import Container from 'react-bootstrap/Container';
 
 import Header from '../Header/Header';
 import Hotbar from '..//Hotbar/Hotbar';
-import Post from '../Post/Post';
 
 interface PageProp {
 	content: JSX.Element | JSX.Element[];
@@ -20,25 +18,23 @@ interface PageProp {
  * @returns JSX.Element
  */
 const Page = (props: PageProp) => {
-	const noHeader = (props.noHeader) ? styles.noHeader : "";
+	const noHeader = props.noHeader ? styles.noHeader : '';
 	const pageClass = styles.pageContainer + noHeader;
 
 	return (
-		<html>
-			<body>
-				<Container className={pageClass}>
-					{props.noHeader ? (
-						<></>
-					) : (
-						<div className={styles.header}>
-							<Header pageName={(props.pageName) ? props.pageName : ""} />
-						</div>
-					)}
-					<Container className={styles.content}>{props.content}</Container>
-					<div className={styles.navbar}><Hotbar /></div>
-				</Container>
-			</body>
-		</html>
+		<div className={pageClass}>
+			{props.noHeader ? (
+				<></>
+			) : (
+				<div className={styles.header}>
+					<Header pageName={props.pageName ? props.pageName : ''} />
+				</div>
+			)}
+			<div className={styles.content}>{props.content}</div>
+			<div className={styles.navbar}>
+				<Hotbar />
+			</div>
+		</div>
 	);
 };
 

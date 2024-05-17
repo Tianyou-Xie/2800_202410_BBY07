@@ -1,9 +1,3 @@
-import { useState, useEffect } from 'react';
-import { api } from '../../lib/axios';
-
-import styles from './my-feed.module.css';
-import Container from 'react-bootstrap/Container';
-
 import Page from '../../components/Page/Page';
 import Post from '../../components/Post/Post';
 

@@ -71,12 +71,12 @@ const Post = (props: PostProp): JSX.Element => {
 	}
 
 	return (
-		<Container className={styles.postContainer}>
+		<div className={styles.postContainer}>
 			<User username={props.username} userURL={props.userURL} />
-			<Container className={styles.paraContainer}>
+			<div className={styles.paraContainer}>
 				<Link href={props.postURL} className={styles.link}>
 					<p>{props.text}</p>
-					<p className={styles.postDate}>{props.createdAt?.toLocaleDateString() || 'Tuesday'}</p>
+					{props.createdAt ? <p className={styles.postDate}>{props.createdAt.toLocaleDateString()}</p> : undefined}
 				</Link>
 				<div className={styles.iconsContainer}>
 					<button className={styles.share}>
@@ -92,8 +92,8 @@ const Post = (props: PostProp): JSX.Element => {
 						{liked ? <FaHeart /> : <FaRegHeart />}
 					</button>
 				</div>
-			</Container>
-		</Container>
+			</div>
+		</div>
 	);
 };
 
