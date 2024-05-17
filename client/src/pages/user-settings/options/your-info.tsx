@@ -1,3 +1,5 @@
+import { api } from '../../../lib/axios';
+
 import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
 import Button from 'react-bootstrap/Button';
 
@@ -9,6 +11,18 @@ interface Props {
 }
 
 const YourInfoModal = (props: Props) => {
+
+	const changePassword = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		try {
+			const response = await api.post('/user/index');
+			//toast.success('Password changed!');
+		} catch (error: any) {
+			//toast.error('Could not change password.');
+			alert('could not get information');
+		}
+	};
+
 	return (
 		<>
 			<ModalConfirmation
@@ -17,7 +31,11 @@ const YourInfoModal = (props: Props) => {
 				onHide={() => props.infoBody.setInfoBody(false)}
 				body={
 					<>
-                        user info
+                        <p>
+							Username: <span></span><br/>
+							Email: <span></span><br/>
+							Bio: <span></span><br/>
+						</p>
                     </>
 				}
 				disableFooter={false}

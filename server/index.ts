@@ -18,6 +18,7 @@ const PORT = process.env.PORT;
 		cors({
 			origin: [
 				'http://localhost:8000',
+				'http://localhost:8001',
 				'https://skynetwork.app',
 				'https://dev.skynetwork.app',
 				'http://localhost:5174',
