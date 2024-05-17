@@ -6,7 +6,6 @@ import { IMedia, RawMediaSchema } from '../../models/media';
 import { ILocation, RawLocationSchema } from '../../models/location';
 import { RawDocument } from '../../@types/model';
 import { PostModel } from '../../models/post';
-import { UserModel } from '../../models/user';
 import mongoose from 'mongoose';
 
 interface PostBody {
@@ -18,8 +17,6 @@ interface PostBody {
 export const post: Handler[] = [
 	requireLogin,
 	async (req, res) => {
-		const authorId = req.session.user!.id;
-
 		const body = assertRequestBody(
 			req,
 			res,
@@ -32,15 +29,13 @@ export const post: Handler[] = [
 
 		if (!body) return;
 
-		const currentUser = await UserModel.findById(authorId);
-		if (!currentUser) return Resolve(res).unauthorized('You are not authorized to post.');
-
+		const currentUser = req.user!;
 		const session = await mongoose.startSession();
 
 		try {
 			const post = await session.withTransaction(async () => {
 				const post = new PostModel({
-					authorId,
+					authorId: currentUser._id,
 					content: body.content,
 					media: body.media,
 					location: body.location ?? currentUser.location,
