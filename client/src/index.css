@@ -19,8 +19,8 @@
 }
 
 body {
-    min-height: 100vh;
-    margin-bottom: 100px;
+	min-height: 100vh;
+    background: aliceblue;
 }
 
 @font-face {

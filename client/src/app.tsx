@@ -7,10 +7,10 @@ import GeneralFeed from './pages/general-feed/general-feed';
 import Home from './pages/home/home';
 import Login from './pages/login/login-component';
 import MyFeed from './pages/my-feed/my-feed';
-import Signup from './pages/signup/signup';
+import Signup from './pages/signup/signup-component';
+import Test from './pages/test-page/test-page';
 import UserSettings from './pages/user-settings/user-settings';
 import Resetpassword from './pages/resetpassword/resetpassword';
-import Test from './pages/test-page/test-page';
 import { useEffect, useState } from 'react';
 import { Auth } from './lib/auth';
 
@@ -41,9 +41,7 @@ export const App = () => {
 						<Route path='/myfeed' component={MyFeed} />
 						<Route path='/home' component={Home} />
 						<Route path='/settings' component={UserSettings} />
-						<Route path='/resetpassword/:token'>
-                			{(params) => <Resetpassword token={params.token} />}
-           				</Route>
+						<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 
 						{authorized === false ? <Redirect href='/login' /> : <Route path='/' component={Home} />}
 					</>
@@ -52,7 +50,7 @@ export const App = () => {
 				{/* Page to test components */}
 				<Route path='/test' component={Test} />
 
-				<Route>404 Not Found</Route>
+				{/* <Route>404 Not Found</Route> */}
 			</Switch>
 		</>
 	);
