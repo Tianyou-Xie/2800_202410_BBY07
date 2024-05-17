@@ -2,9 +2,8 @@ import Joi from 'joi';
 import { Handler } from 'express';
 import { UserModel } from '../../models/user';
 import { compareToHashed } from '../../utils/bcrypt';
-import { setSession } from '../../utils/session';
 import { assertRequestBody, Resolve } from '../../utils/express';
-import jwt from 'jsonwebtoken'
+import { AuthToken } from '../../utils/auth-token';
 
 interface PostBody {
 	email: string;
@@ -29,23 +28,5 @@ export const post: Handler = async (req, res) => {
 	const passwordsMatch = await compareToHashed(body.password, existingUser.password);
 	if (!passwordsMatch) return Resolve(res).unauthorized('Password is incorrect.');
 
-	res.json({
-        success: true,
-        _id: existingUser.id,
-        name: existingUser.userName,
-        email: existingUser.email,
-        token: generateToken(existingUser._id)
-    })
+	Resolve(res).okWith(AuthToken.signAs(existingUser));
 };
-
-const generateToken = (id:any) => {
-    return jwt.sign({ id }, 'abc123', {
-        expiresIn: '30d'
-    })
-}
-
-
-// export const post: Handler = async (req, res) => {
-
-// }
-
