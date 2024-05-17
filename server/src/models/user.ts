@@ -1,15 +1,17 @@
 import { model, Schema, Types } from 'mongoose';
+import { ILocation, LocationSchema } from './location';
 
 export interface IUser {
 	email: string;
 	password: string;
 	userName: string;
 	bio?: string;
-	location: { planetId: Types.ObjectId; latitude: number; longitude: number };
+	location: ILocation;
 	birthDate?: Date;
 	avatarUrl?: string;
 	followerCount: number;
 	followingCount: number;
+	postCount: number;
 	admin: boolean;
 	savedPosts: Array<Types.ObjectId>;
 	createdAt: Date;
@@ -21,18 +23,12 @@ const schema = new Schema<IUser>(
 		password: { type: 'string', required: true },
 		userName: { type: 'string', required: true },
 		bio: { type: 'string' },
-		location: {
-			type: {
-				planetId: { type: 'ObjectId', ref: 'Planet', required: true },
-				latitude: { type: 'number', required: true, default: 0 },
-				longitude: { type: 'number', required: true, default: 0 },
-			},
-			required: true,
-		},
+		location: { type: LocationSchema, required: true },
 		birthDate: { type: 'date' },
 		avatarUrl: { type: 'string' },
 		followerCount: { type: 'number', required: true, default: 0 },
 		followingCount: { type: 'number', required: true, default: 0 },
+		postCount: { type: 'number', required: true, default: 0 },
 		savedPosts: { type: ['ObjectId'], required: true, default: [] },
 		admin: { type: 'boolean', required: true, default: false },
 	},

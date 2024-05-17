@@ -15,15 +15,19 @@ An interplanetary town square that maintains connections between cultures and id
 -   Samarjit Bhogal ([@SamarjitBhogal](https://github.com/SamarjitBhogal))
 -   Marcus Lages ([@MarcusLages](https://github.com/MarcusLages))
 
-## Core Technologies
+## Technologies
 
-The project is built using Typescript, and split into two modules, the client and server.
+The project is built using [Typescript](https://www.typescriptlang.org/), and split into two modules, the client and server.
 
 **Client (built with [Vite](https://vitejs.dev/)):**
 
 -   [React](https://react.dev/)
+-   [React Bootstrap](https://react-bootstrap.netlify.app/)
+-   [React Icons](https://react-icons.github.io/react-icons/)
 -   [Wouter](https://www.npmjs.com/package/wouter)
 -   [CSS Modules](https://github.com/css-modules/css-modules) (implemented by Vite)
+-   [Bootstrap](https://getbootstrap.com/)
+-   [axios](https://axios-http.com/)
 
 **Server (built with [esno](https://www.npmjs.com/package/esno)):**
 
@@ -32,10 +36,21 @@ The project is built using Typescript, and split into two modules, the client an
 -   [Express](https://expressjs.com/)
 -   [Express File Routing](https://www.npmjs.com/package/express-file-routing)
 -   [Joi](https://joi.dev/)
+-   [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+-   [http-status-codes](https://www.npmjs.com/package/http-status-codes)
+-   [nodemailer](https://www.nodemailer.com/)
+-   [JWT](https://jwt.io/)
 
-**Repository Management:**
+**Development Utilities:**
 
 -   [Prettier](https://prettier.io/) for consistent code formatting, see `.prettierrc`.
+-   [morgan](https://expressjs.com/en/resources/middleware/morgan.html) for request logging
+-   [picocolors](https://www.npmjs.com/package/picocolors) for adding colour to request logging
+
+## Code Attributions
+
+-   Regex escape utility: [(`./server/utils/regex.ts:10`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/server/src/utils/regex.ts#L10)
+    > https://github.com/component/escape-regexp/blob/master/index.js
 
 ## Environment Variables
 
@@ -51,17 +66,18 @@ Both the server and client utilize a `.env` file.
 
 **Client Variables:**
 
-(TODO)
+| Key  | Usage                          |
+| ---- | ------------------------------ |
+| PORT | Port used for the frontend app |
 
 **Server Variables:**
 
-| Key                   | Usage                                             |
-| --------------------- | ------------------------------------------------- |
-| PORT                  | Port used for the express server                  |
-| MONGO_URL             | The MongoDB connection string                     |
-| SESSION_TTL           | The session expiry time, in milliseconds          |
-| SESSION_COOKIE_SECRET | The secret phrase used to sign the session cookie |
-| SESSION_DATA_SECRET   | The secret phrased used to encrypt session data   |
+| Key        | Usage                                         |
+| ---------- | --------------------------------------------- |
+| PORT       | Port used for the express server              |
+| MONGO_URL  | The MongoDB connection string                 |
+| JWT_TTL    | The JWT token expiry time, in seconds         |
+| JWT_SECRET | The secret used to sign and verify JWT tokens |
 
 ## Running Locally & Deployment
 
