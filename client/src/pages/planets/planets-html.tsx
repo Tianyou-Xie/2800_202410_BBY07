@@ -1,7 +1,11 @@
 import styles from './planets.module.css';
 
 const PlanetsHtml = () => {
-	return <h1>Planets</h1>;
+	return (
+		<div className={styles.planetsContainer}>
+			<div className={styles.planetsSun}></div>
+		</div>
+	);
 };
 
 export default PlanetsHtml;
