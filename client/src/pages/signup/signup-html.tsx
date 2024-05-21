@@ -1,6 +1,7 @@
 import { useLocation } from 'wouter';
 import styles from './signup.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
+import { GoogleAuthButton } from '../../components/google-auth-btn/google-auth-btn';
 
 const SignupHtml = ({
 	planets,
@@ -72,6 +73,13 @@ const SignupHtml = ({
 							<button className={`${styles.button}`}>SIGN UP</button>
 						</div>
 					</form>
+
+					<hr />
+
+					<GoogleAuthButton className={styles.button} text='Sign Up with Google' />
+
+					<hr />
+
 					<div>
 						<span className={styles.span}>Already a User. Login Below</span>
 						<button

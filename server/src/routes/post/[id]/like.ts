@@ -1,12 +1,12 @@
 import { Handler } from 'express';
-import { requireLogin } from '../../../middlewares/require-login';
+import { authProtected } from '../../../middlewares/auth-protected';
 import { PostModel } from '../../../models/post';
 import mongoose from 'mongoose';
 import { Resolve } from '../../../utils/express';
 import { LikeInteraction } from '../../../models/like-interaction';
 
 export const get: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
@@ -19,7 +19,7 @@ export const get: Handler[] = [
 ];
 
 export const post: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
@@ -60,7 +60,7 @@ export const post: Handler[] = [
 ];
 
 export const del: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');

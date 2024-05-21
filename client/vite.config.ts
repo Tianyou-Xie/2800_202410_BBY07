@@ -8,6 +8,6 @@ export default defineConfig({
 	plugins: [react()],
 	css: { modules: { localsConvention: 'camelCaseOnly' } },
 	server: {
-		port: parseInt(process.env.VITE_PORT!),
+		port: parseInt(process.env.PORT!),
 	},
 });

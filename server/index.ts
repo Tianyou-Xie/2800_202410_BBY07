@@ -1,4 +1,3 @@
-import { isDev } from './src/load-env';
 import './src/load-env';
 import express from 'express';
 import createRouter from 'express-file-routing';
