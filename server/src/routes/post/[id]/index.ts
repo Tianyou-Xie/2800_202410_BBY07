@@ -1,6 +1,6 @@
 import { Handler } from 'express';
 import mongoose from 'mongoose';
-import { requireLogin } from '../../../middlewares/require-login';
+import { authProtected } from '../../../middlewares/auth-protected';
 import { PostModel } from '../../../models/post';
 import { Resolve } from '../../../utils/express';
 import { CommentRelationship } from '../../../models/comment-relationship';
@@ -18,7 +18,7 @@ export const get: Handler = async (req, res) => {
 };
 
 export const del: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');

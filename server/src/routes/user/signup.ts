@@ -7,7 +7,7 @@ import { PlanetModel } from '../../models/planet';
 import { assertRequestBody, Resolve } from '../../utils/express';
 import { ILocation, RawLocationSchema } from '../../models/location';
 import { RawDocument } from '../../@types/model';
-import { AuthToken } from '../../utils/auth-token';
+import { AuthToken } from '../../utils/jwt';
 
 interface PostBody {
 	email: string;
