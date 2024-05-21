@@ -9,7 +9,9 @@ export const get: Handler = async (req, res) => {
 	const id = req.params.id;
 	if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid user ID provided.');
 
-	const user = await UserModel.findById(id).lean().select('-admin -email -password');
+	const user = await UserModel.findById(id)
+		.lean()
+		.select('userName bio location avatarUrl followerCount followingCount postCount createdAt');
 	if (!user) Resolve(res).notFound('No user found by the given ID.');
 	else Resolve(res).okWith(user);
 };
