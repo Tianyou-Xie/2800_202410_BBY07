@@ -4,16 +4,29 @@ import { IoArrowBackCircleOutline } from 'react-icons/io5';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
+/**
+ * The props types for the Header.
+ * 
+ * pageName: the name of the page.
+ */
 interface Props {
-	pageName: string
+	pageName: string;
 }
 
+/**
+ * Returns the customized header for the page with the provided properties.
+ * 
+ * @param props the props for this header, as seen outlined in the interface.
+ * @returns Returns the customized header for the page.
+ */
 const Header = (props: Props) => {
 	return (
 		<Navbar expand='lg' className={`${styles.headerContainer}`}>
 			<Container>
-				<Navbar.Text onClick={handlePageReturn}><IoArrowBackCircleOutline className={styles.returnIcon} /></Navbar.Text>
-                <Navbar.Text className={styles.pageTitle}>{props.pageName}</Navbar.Text>			
+				<Navbar.Text onClick={handlePageReturn}>
+					<IoArrowBackCircleOutline className={styles.returnIcon} />
+				</Navbar.Text>
+				<Navbar.Text className={styles.pageTitle}>{props.pageName}</Navbar.Text>
 			</Container>
 		</Navbar>
 	);
@@ -21,6 +34,9 @@ const Header = (props: Props) => {
 
 export default Header;
 
+/**
+ * Redirects the window back to the previous page.
+ */
 function handlePageReturn() {
 	history.back();
 }

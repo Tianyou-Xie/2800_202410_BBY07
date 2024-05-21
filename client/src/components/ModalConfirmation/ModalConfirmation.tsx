@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 /**
- * Props for the Confirmation Modal.
+ * The props types for the Confirmation Modal.
  * 
  * header?: Header of the modal. A default header that contians the title is provided if none is given.
  * title: Title of the modal.
