@@ -4,6 +4,7 @@ import { UserModel } from '../../models/user';
 import { compareToHashed } from '../../utils/bcrypt';
 import { assertRequestBody, Resolve } from '../../utils/express';
 import { authProtected } from '../../middlewares/auth-protected';
+import { JWT } from '../../utils/jwt';
 
 interface PostBody {
 	email: string;
@@ -25,11 +26,13 @@ export const post: Handler = async (req, res) => {
 	if (!body) return;
 
 	const existingUser = await UserModel.findOne({ email: body.email });
-	if (!existingUser) return Resolve(res).notFound('No user with that email exists.');
+	if (!existingUser) return Resolve(res).forbidden('Invalid credentials provided.');
 
-	const hasPassword = 
-	const passwordsMatch = await compareToHashed(body.password, existingUser.password);
-	if (!passwordsMatch) return Resolve(res).unauthorized('Password is incorrect.');
+	const userPassword = existingUser.password;
+	if (!userPassword) return Resolve(res).forbidden('Invalid credentials provided.');
 
-	Resolve(res).okWith(AuthToken.signAs(existingUser));
+	const passwordsMatch = await compareToHashed(body.password, userPassword);
+	if (!passwordsMatch) return Resolve(res).forbidden('Invalid credentials provided.');
+
+	Resolve(res).okWith(JWT.signAs(existingUser));
 };

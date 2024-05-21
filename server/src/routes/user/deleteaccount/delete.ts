@@ -13,7 +13,7 @@ export const post: Handler[] = [
 		const User = mongoose.model('User', UserModel.schema);
 
 		const user = await UserModel.findById(userID);
-		if (!user) return res.status(404).json({ error: 'No user found by the given ID.' });
+		if (!user) return Resolve(res).notFound('No user foudn by the given ID.');
 
 		const result = await User.findByIdAndDelete(userID);
 		Resolve(res).okWith('Account Deleted!');

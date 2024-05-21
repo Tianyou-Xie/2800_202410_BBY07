@@ -7,7 +7,7 @@ import { PlanetModel } from '../../models/planet';
 import { assertRequestBody, Resolve } from '../../utils/express';
 import { ILocation, RawLocationSchema } from '../../models/location';
 import { RawDocument } from '../../@types/model';
-import { AuthToken } from '../../utils/jwt';
+import { JWT } from '../../utils/jwt';
 
 interface PostBody {
 	email: string;
@@ -53,7 +53,7 @@ export const post: Handler = async (req, res) => {
 		});
 
 		await user.save();
-		Resolve(res).okWith(AuthToken.signAs(user));
+		Resolve(res).okWith(JWT.signAs(user));
 	} finally {
 		inflightEmails.delete(body.email);
 	}
