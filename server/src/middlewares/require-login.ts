@@ -1,21 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import { Resolve } from '../utils/express';
-import { AuthToken } from '../utils/auth-token';
+import { AuthWorker } from '../lib/auth/auth-worker';
 
 /**
  * Middleware to ensure that the request includes a valid authorization token.
  * If it does not, it will resolve the request with an unautorized response.
  */
 export async function requireLogin(req: Request, res: Response, next: NextFunction) {
-	const authHeader = req.headers.authorization;
-	if (!authHeader || !authHeader.startsWith('Bearer'))
-		return Resolve(res).unauthorized('Authentication is required.');
+	const worker = AuthWorker.fromRequest(req);
 
-	const [_, token] = authHeader.split(' ');
+	const didAuthenticate = await worker.authenticate();
+	if (!didAuthenticate) return Resolve(res).unauthorized('Authentication is required.');
 
-	const user = await AuthToken.verifyToUser(token);
-	if (!user) return Resolve(res).unauthorized('Invalid token provided.');
-
-	req.user = user;
 	next();
 }
