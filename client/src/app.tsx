@@ -12,6 +12,7 @@ import Test from './pages/test-page/test-page';
 import UserSettings from './pages/user-settings/user-settings';
 import Resetpassword from './pages/resetpassword/resetpassword';
 import Planets from './pages/planets/planets-component';
+import Messages from './pages/messages/messages-component';
 import { useEffect, useState } from 'react';
 import { Auth } from './lib/auth';
 
@@ -39,6 +40,7 @@ export const App = () => {
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/test' component={Test} />
 			<Route path='/planets' component={Planets} />
+			<Route path='/messages' component={Messages} />
 
 			<Route>404 Not Found</Route>
 		</>
