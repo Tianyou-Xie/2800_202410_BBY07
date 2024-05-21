@@ -4,23 +4,35 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 /**
- *
+ * Props for the Confirmation Modal.
+ * 
+ * header?: Header of the modal. A default header that contians the title is provided if none is given.
+ * title: Title of the modal.
+ * body: Body of the modal.
+ * disableFooter: True if the footer needs to be disabled, false otherwise.
+ * footer?: Footer of the modal. A default footer will be provided if none is given.
+ * show: The variable which dictates if the modal should appear. Changing this variable state must be handled.
+ * 
+ * Needs to be defined if using the default footer:
+ * onHide?: The function that hides the modal.
+ * onContinue?: The function that initiates when the continue btn is pressed.
  */
 interface Props {
-	title: string;
 	header?: JSX.Element;
+	title: string;
 	body: JSX.Element;
-	footer?: JSX.Element;
 	disableFooter: boolean;
+	footer?: JSX.Element;
 	show: boolean;
-	onHide: () => void;
+	onHide?: () => void;
 	onContinue?: any;
 }
 
 /**
+ * Creates a customized confirmation modal based upon given the properties. 
  *
- * @param props
- * @returns
+ * @param props the props for this modal as seen outlined in the interface.
+ * @returns The customized modal
  */
 const ModalConfirmation = (props: Props) => {
 	return (
