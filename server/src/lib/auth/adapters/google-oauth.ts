@@ -4,6 +4,7 @@ import { UserModel } from '../../../models/user';
 import { Request } from 'express';
 import { AuthAdapter } from '../auth-adapter';
 import { PlanetModel } from '../../../models/planet';
+import { isDev } from '../../../load-env';
 
 export class GoogleOAuthAdapter implements AuthAdapter {
 	/**
@@ -50,7 +51,9 @@ export class GoogleOAuthAdapter implements AuthAdapter {
 		if (typeof secret !== 'string') throw 'GOOGLE_OAUTH_ID is not present in environment variables.';
 
 		this.SECRET = secret;
-		this.REDIRECT_URL = 'http://127.0.0.1:3000/user/login';
+		this.REDIRECT_URL = isDev()
+			? 'https://dev.skynetwork.app/login?token=refresh'
+			: 'https://skynetwork.app/login?token=refresh';
 	}
 
 	public parseToken(req: Request) {

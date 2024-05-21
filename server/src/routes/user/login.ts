@@ -15,7 +15,10 @@ export const get: Handler[] = [
 	authProtected,
 	async (req, res) => {
 		if (!req.user) return Resolve(res).forbidden('Invalid credentials provided.');
-		Resolve(res).okWith(JWT.signAs(req.user));
+
+		const refreshToken = req.query.token === 'refresh';
+		if (refreshToken) Resolve(res).okWith(JWT.signAs(req.user));
+		else Resolve(res).ok();
 	},
 ];
 
