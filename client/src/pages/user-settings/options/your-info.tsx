@@ -5,26 +5,29 @@ import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfir
 import Button from 'react-bootstrap/Button';
 
 interface Props {
-    infoBody: {
-        showInfoBody: boolean,
-        setInfoBody: any
-    }
+	infoBody: {
+		showInfoBody: boolean;
+		setInfoBody: any;
+	};
 }
 
 const YourInfoModal = (props: Props) => {
 	const userInfo = async () => {
-		try {			
+		try {
 			const response = await api.get('/user/');
 			const data = response.data.value;
 			document.getElementById('username')!.innerHTML = data.userName;
-			document.getElementById('email')!.innerHTML = data.email;
+
+			if (!data.email) {
+				document.getElementById('email')!.innerHTML = 'Authenticated with Google';
+			} else document.getElementById('email')!.innerHTML = data.email;
 
 			if (data.bio) {
-				document.getElementById('bio')!.innerHTML = "Bio: " + data.bio;
+				// TODO innerHtml?
+				document.getElementById('bio')!.innerHTML = 'Bio: ' + data.bio;
 			} else {
-				document.getElementById('bio')!.innerHTML = "Follower Count: " + data.followerCount;
-			}		
-
+				document.getElementById('bio')!.innerHTML = 'Follower Count: ' + data.followerCount;
+			}
 		} catch (error: any) {
 			console.log('could not get information');
 		}
@@ -39,12 +42,15 @@ const YourInfoModal = (props: Props) => {
 				onHide={() => props.infoBody.setInfoBody(false)}
 				body={
 					<>
-                        <p>
-							Username: <span id='username'></span><br/>
-							Email: <span id='email'></span><br/>
-							<span id='bio'></span><br/>
+						<p>
+							Username: <span id='username'></span>
+							<br />
+							Email: <span id='email'></span>
+							<br />
+							<span id='bio'></span>
+							<br />
 						</p>
-                    </>
+					</>
 				}
 				disableFooter={false}
 				footer={

@@ -64,7 +64,9 @@ export namespace Auth {
 	 */
 	export async function isAuthorized() {
 		try {
-			await api.get('/user/login');
+			const res = await api.get('/user/login');
+			const token = res.data?.value;
+			if (token) saveToken(token);
 			return true;
 		} catch {
 			return false;
