@@ -52,8 +52,8 @@ export class GoogleOAuthAdapter implements AuthAdapter {
 
 		this.SECRET = secret;
 		this.REDIRECT_URL = isDev()
-			? 'https://dev.skynetwork.app/login?token=refresh'
-			: 'https://skynetwork.app/login?token=refresh';
+			? 'https://dev.skynetwork.app/login'
+			: 'https://skynetwork.app/login';
 	}
 
 	public parseToken(req: Request) {
