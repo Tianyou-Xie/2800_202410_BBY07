@@ -11,7 +11,13 @@ interface PostBody {
 	password: string;
 }
 
-export const get: Handler[] = [authProtected, async (_, res) => Resolve(res).ok()];
+export const get: Handler[] = [
+	authProtected,
+	async (req, res) => {
+		if (!req.user) return Resolve(res).forbidden('Invalid credentials provided.');
+		Resolve(res).okWith(JWT.signAs(req.user));
+	},
+];
 
 export const post: Handler = async (req, res) => {
 	const body = assertRequestBody(

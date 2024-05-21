@@ -3,6 +3,7 @@ import { OAuth2Client } from 'google-auth-library';
 import { UserModel } from '../../../models/user';
 import { Request } from 'express';
 import { AuthAdapter } from '../auth-adapter';
+import { PlanetModel } from '../../../models/planet';
 
 export class GoogleOAuthAdapter implements AuthAdapter {
 	/**
@@ -49,7 +50,7 @@ export class GoogleOAuthAdapter implements AuthAdapter {
 		if (typeof secret !== 'string') throw 'GOOGLE_OAUTH_ID is not present in environment variables.';
 
 		this.SECRET = secret;
-		this.REDIRECT_URL = 'http://127.0.0.1:3000/user/oauth/google';
+		this.REDIRECT_URL = 'http://127.0.0.1:3000/user/login';
 	}
 
 	public parseToken(req: Request) {
@@ -73,12 +74,20 @@ export class GoogleOAuthAdapter implements AuthAdapter {
 		const newUser = new UserModel({
 			userName: userName,
 			avatarUrl: googleUser.picture,
+			sso: { provider: 'google', id: googleId },
+			location: {
+				planetId: await PlanetModel.findOne({ name: 'Earth' }),
+				latitude: 0,
+				longitude: 0,
+			},
 		});
 
 		try {
 			await newUser.save();
 			return newUser;
-		} catch {}
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
