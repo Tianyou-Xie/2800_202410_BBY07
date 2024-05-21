@@ -12,6 +12,7 @@ import Test from './pages/test-page/test-page';
 import UserSettings from './pages/user-settings/user-settings';
 import Resetpassword from './pages/resetpassword/resetpassword';
 import Planets from './pages/planets/planets-component';
+import ManageAccount from './pages/user-settings/options/manage-account';
 import { useEffect, useState } from 'react';
 import { Auth } from './lib/auth';
 
@@ -57,6 +58,7 @@ export const App = () => {
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
 						<Route path='/settings' component={UserSettings} />
+						<Route path='/settings/manageAccount' component={ManageAccount}/>
 						{commonRoutes}
 					</Switch>
 				</Then>

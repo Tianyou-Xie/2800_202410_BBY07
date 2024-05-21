@@ -23,7 +23,6 @@ const DeleteAccountModal = (props: Props) => {
 			<ModalConfirmation
 				title='Delete Account'
 				show={props.deleteBody1.showDeleteBody1}
-				onHide={() => props.deleteBody1.setShowDelete1(false)}
 				body={
 					<p>
 						Are you sure you want to delete your account?
