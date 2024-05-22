@@ -15,6 +15,10 @@
     color: red;
 }
 
+.group-item {
+    margin-bottom: 20px;
+}
+
 .group-item, .group-item * {
     background-color: aliceblue;
 }
@@ -24,5 +28,9 @@
 }
 
 .delete-btn {
+    background-color: red;
+}
+
+.logout-btn, .logout-btn > * {
     background-color: red;
 }

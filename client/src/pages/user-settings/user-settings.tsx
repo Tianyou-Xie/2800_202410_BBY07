@@ -38,7 +38,7 @@ const UserSettings = () => {
 					<ListGroup variant='flush' className={`${styles.settingBody}`}>
 						{/* put them in a card */}
 						<ListGroup.Item className={styles.groupItem}>
-							<h1 className={`${styles.settingTitle} ms-3`}>Account</h1>
+							<h1 className={`${styles.settingTitle} ms-1`}>Account</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`ms-5`}>
 									<Nav.Link href=''>Followers</Nav.Link>
@@ -59,7 +59,7 @@ const UserSettings = () => {
 							</ListGroup>
 						</ListGroup.Item>
 						<ListGroup.Item className={styles.groupItem}>
-							<h1 className={`${styles.settingTitle} ms-3`}>History</h1>
+							<h1 className={`${styles.settingTitle} ms-1`}>History</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`ms-5`}>
 									<Nav.Link href=''>Saved</Nav.Link>
@@ -73,11 +73,12 @@ const UserSettings = () => {
 							</ListGroup>
 						</ListGroup.Item>
 						<ListGroup.Item className={styles.groupItem}>
-							<h1 className={`${styles.settingTitle} ms-3`}>General</h1>
+							<h1 className={`${styles.settingTitle} ms-1`}>General</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`ms-5`}>
 									<Nav.Link href=''>About</Nav.Link>
 								</ListGroup.Item>
+
 								<ListGroup.Item className={`ms-5`}>
 									<Nav.Link href=''>FAQs</Nav.Link>
 								</ListGroup.Item>
@@ -87,8 +88,8 @@ const UserSettings = () => {
 							</ListGroup>
 						</ListGroup.Item>
 						<ListGroup.Item className={styles.groupItem}>
-							<div className='w-100 d-flex justify-content-center my-5'>
-								<button className='px-3 py-2'>
+							<div className='w-100 d-flex justify-content-center'>
+								<button className={`${styles.logoutBtn} px-3 py-2`}>
 									<h1 onClick={logout} className={`${styles.settingTitle}`}>
 										Logout
 									</h1>
