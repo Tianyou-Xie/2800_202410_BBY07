@@ -13,6 +13,8 @@ import UserSettings from './pages/user-settings/user-settings';
 import Resetpassword from './pages/resetpassword/resetpassword';
 import Planets from './pages/planets/planets-component';
 import ManageAccount from './pages/user-settings/options/manage-account';
+import Policy from './pages/about/options/policy';
+import Terms from './pages/about/options/terms';
 import { useEffect, useState } from 'react';
 import { Auth } from './lib/auth';
 import Cursors from './components/cursor/cursor';
@@ -40,6 +42,8 @@ export const App = () => {
 			<Route path='/signup' component={Signup} />
 			<Route path='/login' component={Login} />
 			<Route path='/about' component={About} />
+			<Route path='/about/policy' component={Policy} />
+			<Route path='/about/terms' component={Terms} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/test' component={Test} />
@@ -62,7 +66,8 @@ export const App = () => {
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
 						<Route path='/settings' component={UserSettings} />
-						<Route path='/settings/manageAccount' component={ManageAccount}/>
+						<Route path='/settings/manageAccount' component={ManageAccount} />
+
 						{commonRoutes}
 					</Switch>
 				</Then>

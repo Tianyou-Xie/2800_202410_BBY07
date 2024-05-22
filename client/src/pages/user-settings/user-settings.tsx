@@ -5,6 +5,7 @@ import styles from './user-settings.module.css';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import Nav from 'react-bootstrap/Nav';
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import Page from '../../components/Page/Page';
 import YourInfoModal from './options/your-info';
 import { Auth } from '../../lib/auth';
@@ -18,7 +19,7 @@ const UserSettings = () => {
 	// varriables responsible for grabbing form fields in the delete account modal
 	const [confInput, setConfInput] = useState('');
 
-	// calls loseToken() and logs the user out 
+	// calls loseToken() and logs the user out
 	function logout() {
 		console.log('here');
 		Auth.loseToken();
@@ -41,20 +42,32 @@ const UserSettings = () => {
 							<h1 className={`${styles.settingTitle} ms-1`}>Account</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link href=''>Followers</Nav.Link>
+									<Nav.Link className={styles.groupItemBody} href=''>
+										<p>Followers</p>
+										<MdOutlineArrowForwardIos />
+									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link href=''>Following</Nav.Link>
+									<Nav.Link className={styles.groupItemBody} href=''>
+										<p>Following</p>
+										<MdOutlineArrowForwardIos />
+									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item
 									className={`${styles.clickable} ${styles.groupItem} ms-5`}
 									onClick={() => setInfoBody(true)}>
-									Your Info
+									<div className={styles.groupItemBody}>
+										<p>Your Info</p>
+										<MdOutlineArrowForwardIos />
+									</div>
 								</ListGroup.Item>
 								<ListGroup.Item
-									className={`${styles.clickable} ${styles.manageAccBtn} ${styles.groupItem} ms-5`}
+									className={`${styles.clickable} ${styles.groupItem} ms-5`}
 									onClick={() => setLocation('/settings/manageAccount')}>
-									Manage Account
+									<div className={styles.groupItemBody}>
+										<p className={styles.warningColor}>Manage Account</p>
+										<MdOutlineArrowForwardIos />
+									</div>
 								</ListGroup.Item>
 							</ListGroup>
 						</div>
@@ -62,13 +75,22 @@ const UserSettings = () => {
 							<h1 className={`${styles.settingTitle} ms-1`}>History</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link href=''>Saved</Nav.Link>
+									<Nav.Link className={styles.groupItemBody} href=''>
+										<p>Saved</p>
+										<MdOutlineArrowForwardIos />
+									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link href=''>Liked</Nav.Link>
+									<Nav.Link className={styles.groupItemBody} href=''>
+										<p>Liked</p>
+										<MdOutlineArrowForwardIos />
+									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link href=''>Commented Posts</Nav.Link>
+									<Nav.Link className={styles.groupItemBody} href=''>
+										<p>Commented Posts</p>
+										<MdOutlineArrowForwardIos />
+									</Nav.Link>
 								</ListGroup.Item>
 							</ListGroup>
 						</div>
@@ -76,13 +98,22 @@ const UserSettings = () => {
 							<h1 className={`${styles.settingTitle} ms-1`}>General</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link href=''>About</Nav.Link>
+									<Nav.Link className={styles.groupItemBody} href='/about'>
+										<p>About</p>
+										<MdOutlineArrowForwardIos />
+									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link href=''>FAQs</Nav.Link>
+									<Nav.Link className={styles.groupItemBody} href=''>
+										<p>FAQs</p>
+										<MdOutlineArrowForwardIos />
+									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link href=''>Support</Nav.Link>
+									<Nav.Link className={styles.groupItemBody} href=''>
+										<p>Support</p>
+										<MdOutlineArrowForwardIos />
+									</Nav.Link>
 								</ListGroup.Item>
 							</ListGroup>
 						</div>

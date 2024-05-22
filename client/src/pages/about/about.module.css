@@ -1,3 +1,30 @@
-ul {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.about-body {
+    width: 100%;
+    font-family: BabaPro;
+     background-color: var(--signup-background);
+     border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
+
+.about-body * {   
+    background-color: var(--signup-background);
+}
+
+.about-body h2 {
+    font-size: 16pt;
+}
+
+.group-item-body {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.group-item {    
+    border-color: gray;
+}
+
+.offical-pages-body {
+    font-family: Fjalla One;
 }

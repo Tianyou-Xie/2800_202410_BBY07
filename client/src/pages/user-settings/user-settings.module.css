@@ -4,12 +4,16 @@
     font-family: BabaPro;
 }
 
+.setting-body p {
+    margin: 0;
+}
+
 .setting-title {
     font-size: 30pt;
     font-family: Bitsumishi;
 }
 
-.manage-acc-btn {
+.warning-color {
     color: red !important;
 }
 
@@ -37,8 +41,15 @@
     background-color: var(--signup-background);
 }
 
-.group-item {
+.group-item {    
     border-color: gray;
+}
+
+.group-item-body {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .clickable {
