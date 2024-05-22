@@ -1,0 +1,51 @@
+.general {
+	font-family: TTOctosquares;
+	width: 100%;
+}
+
+.username {
+	padding: 2px 8px;
+	margin: 2px 0px;
+	width: max-content;
+	text-align: left;
+	font-size: 1rem;
+}
+
+.post {
+	padding: 10px;
+	margin: 2px 0px;
+	text-align: left;
+	word-break: break-word;
+	font-size: 1.1rem;
+}
+
+.text-box {
+	border: none;
+	font-family: TTOctosquares;
+}
+
+.side-buttons {
+	display: flex;
+	padding: 6px;
+	justify-content: right;
+}
+
+.select {
+	color: #fff;
+	background-color: #000;
+	border-radius: 10px;
+	margin-right: 10px;
+	border: #000;
+	box-shadow: 4px 5px 0px var(--soft-shadow);
+	text-align: center;
+}
+
+.submit {
+	border: none;
+	background-color: transparent;
+}
+
+.submit:active div {
+	box-shadow: 4px 4px var(--signup-button-active) 5;
+	transform: translateY(5px);
+}
