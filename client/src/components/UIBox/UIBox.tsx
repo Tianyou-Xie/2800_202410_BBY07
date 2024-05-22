@@ -2,7 +2,7 @@ import styles from './UIBox.module.css';
 import { Container } from 'react-bootstrap';
 
 interface UIBoxProp {
-	content: JSX.Element;
+	content: JSX.Element | string;
 	curved?: boolean;
 	dark?: boolean;
 	className?: string;

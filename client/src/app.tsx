@@ -42,7 +42,7 @@ export const App = () => {
 			<Route path='/about' component={About} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
-			<Route path='/test' component={PostPage} />
+			<Route path='/test' component={Test} />
 			<Route path='/planets' component={Planets} />
 			<Route>404 Not Found</Route>
 		</>
@@ -61,6 +61,7 @@ export const App = () => {
 						<Route path='/changepassword' component={Changepassword} />
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
+						<Route path='/post' component={PostPage} />
 						<Route path='/settings' component={UserSettings} />
 						{commonRoutes}
 					</Switch>

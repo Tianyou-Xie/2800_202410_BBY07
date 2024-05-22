@@ -41,7 +41,7 @@ const Hotbar = () => {
 						</div>
 						<input type='checkbox' id='label' defaultChecked={isChecked} onClick={toggleMenu} hidden />
 						<div className={styles.backDropDiv}></div>
-							<ul className={styles.submenu}>
+						<ul className={styles.submenu}>
 							<li>
 								<a href='/myfeed'>
 									<MdFeed className={`${styles.menuSubIcons}`} />
@@ -49,7 +49,7 @@ const Hotbar = () => {
 								</a>
 							</li>
 							<li>
-								<a href='#POST'>
+								<a href='/post'>
 									<IoIosAddCircle className={`${styles.menuSubIcons}`} />
 									<p className='text-center'>POST</p>
 								</a>
@@ -76,7 +76,7 @@ const Hotbar = () => {
 					<div className={`${styles.circle} ${styles.circleLeft}`}></div>
 					<div className={styles.bar}></div>
 					<div className={`${styles.circle} ${styles.circleRight}`}></div>
-					<a href="/settings">
+					<a href='/settings'>
 						<IoMdPerson className={`${styles.navIcon} ${styles.iconRight} me-2 mt-5`} />
 					</a>
 				</div>
