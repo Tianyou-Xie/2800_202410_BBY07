@@ -18,6 +18,10 @@ interface Props {
 }
 
 const DeleteAccountModal = (props: Props) => {
+	const clearFields = () => {
+		props.deleteBody2.setConfInput('');
+	};
+
 	return (
 		<>
 			<ModalConfirmation
@@ -78,13 +82,21 @@ const DeleteAccountModal = (props: Props) => {
 								required
 							/>
 							<div className='d-flex justify-content-evenly align-items-center'>
-								<button className='btn btn-danger' type='submit'>
+								<button
+									className='btn btn-danger'
+									type='submit'
+									onClick={() => {
+										clearFields();
+									}}>
 									DELETE ACCOUNT
 								</button>
 								<button
 									className='btn btn-secondary'
 									type='button'
-									onClick={() => props.deleteBody2.setShowDelete2(false)}>
+									onClick={() => {
+										props.deleteBody2.setShowDelete2(false);
+										clearFields();
+									}}>
 									Cancel
 								</button>
 							</div>
