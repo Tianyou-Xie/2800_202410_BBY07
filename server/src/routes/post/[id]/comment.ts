@@ -1,5 +1,5 @@
 import { Handler } from 'express';
-import { requireLogin } from '../../../middlewares/require-login';
+import { authProtected } from '../../../middlewares/auth-protected';
 import mongoose from 'mongoose';
 import { assertRequestBody, Resolve } from '../../../utils/express';
 import { PostModel } from '../../../models/post';
@@ -36,7 +36,7 @@ export const get: Handler = async (req, res) => {
 };
 
 export const post: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const parentPostId = req.params.id;
 		if (!mongoose.isValidObjectId(parentPostId)) return Resolve(res).badRequest('Invalid post ID provided.');

@@ -3,7 +3,7 @@ import { Handler } from 'express';
 import { createHash } from '../../utils/bcrypt';
 import { compareToHashed } from '../../utils/bcrypt';
 import { Resolve } from '../../utils/express';
-import { requireLogin } from '../../middlewares/require-login';
+import { authProtected } from '../../middlewares/auth-protected';
 
 interface PostBody {
 	password: string;
@@ -12,7 +12,7 @@ interface PostBody {
 }
 
 export const patch: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const user = req.user!;
 
@@ -37,7 +37,10 @@ export const patch: Handler[] = [
 
 		const { value: body } = bodyValidationResult;
 
-		const passwordsMatch = await compareToHashed(body.password, user.password);
+		const password = user.password;
+		if (!password) return Resolve(res).forbidden('Password is incorrect.');
+
+		const passwordsMatch = await compareToHashed(body.password, password);
 		if (!passwordsMatch) return Resolve(res).forbidden('Password is incorrect.');
 
 		await user.updateOne({ password: await createHash(body.newpassword) });

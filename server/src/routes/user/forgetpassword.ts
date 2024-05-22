@@ -4,7 +4,7 @@ import { UserModel } from '../../models/user';
 import { TokenModel } from '../../models/token';
 import { Resolve } from '../../utils/express';
 import crypto from 'crypto';
-import {sendEmail} from '../../utils/email';
+import { sendEmail } from '../../utils/email';
 
 interface PostBody {
 	email: string;
@@ -20,12 +20,15 @@ export const post: Handler = async (req, res) => {
 	});
 
 	const bodyValidationResult = bodySchema.validate(req.body);
-	if (bodyValidationResult.error) return res.status(400).json({ error: bodyValidationResult.error.message });
-    
-    const { value: body } = bodyValidationResult;
+	if (bodyValidationResult.error) return Resolve(res).badRequest(bodyValidationResult.error.message);
+
+	const { value: body } = bodyValidationResult;
 
 	const existingUser = await UserModel.findOne({ email: body.email });
-	if (!existingUser) return Resolve(res).created(post, 'Sorry, no user with that email exists.');
+	if (!existingUser) return Resolve(res).badRequest('Sorry, no user with that email exists.');
+
+	const submittedEmail = existingUser.email;
+	if (!submittedEmail) return Resolve(res).badRequest('Sorry, no user with that email exists.');
 
 	const resetToken = crypto.randomBytes(32).toString('hex');
 	const passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
@@ -33,7 +36,7 @@ export const post: Handler = async (req, res) => {
 
 	const token = new TokenModel({
 		userId: existingUser._id,
-		email: body.email,
+		email: submittedEmail,
 		passwordResetToken,
 		passwordResetExpires: new Date(passwordResetExpires),
 	});
@@ -47,15 +50,15 @@ export const post: Handler = async (req, res) => {
 
 	try {
 		await sendEmail({
-			email: existingUser.email,
+			email: submittedEmail,
 			subject: 'Password Reset Request',
-			text: message
+			text: message,
 		});
-		Resolve(res).created(post, 'Password rest link has been sent your email.');
-	} catch (error) {
-		token.deleteOne();
-		console.log(error);
-		return res.status(500).json({ error: 'There was an error sending the email. Try again later.' });
-	}
 
+		return Resolve(res).badRequest('Password rest link has been sent your email.');
+	} catch (error) {
+		await token.deleteOne();
+		console.log(error);
+		return Resolve(res).error('There was an error sending the email. Try again later.');
+	}
 };
