@@ -52,7 +52,7 @@ const UserSettings = () => {
 									Your Info
 								</ListGroup.Item>
 								<ListGroup.Item
-									className={`${styles.clickable} ${styles.dangerZone} ${styles.groupItem} ms-5`}
+									className={`${styles.clickable} ${styles.manageAccBtn} ${styles.groupItem} ms-5`}
 									onClick={() => setLocation('/settings/manageAccount')}>
 									Manage Account
 								</ListGroup.Item>

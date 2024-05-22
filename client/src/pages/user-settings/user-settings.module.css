@@ -9,6 +9,15 @@
     font-family: Bitsumishi;
 }
 
+.manage-acc-btn {
+    color: red !important;
+}
+
+.danger-zone {
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
+
 .danger-zone, .danger-zone * {
     background-color: #242C38;
     color: red !important;
@@ -50,5 +59,6 @@
 }
 
 .logout-btn, .logout-btn > * {
-    background-color: red;
+    background-color: #242C38;
+    color: red;
 }
