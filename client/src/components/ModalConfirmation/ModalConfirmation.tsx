@@ -37,7 +37,7 @@ interface Props {
 const ModalConfirmation = (props: Props) => {
 	return (
 		<>
-			<Modal className={`${styles.modal} p-2`} show={props.show} onHide={props.onHide} centered>
+			<Modal dialogClassName={`${styles.modal} p-2`} show={props.show} onHide={props.onHide} centered>
 				{!props.header ? (
 					<Modal.Header>
 						<Modal.Title className={`${styles.headerFont} w-100 text-center`}>{props.title}</Modal.Title>
@@ -45,10 +45,10 @@ const ModalConfirmation = (props: Props) => {
 				) : (
 					<div className={`${styles.headerFont} w-100 text-center`}>{props.header}</div>
 				)}
-				<Modal.Body className={`${styles.bodyFont} w-100 text-center`}>{props.body}</Modal.Body>
+				<Modal.Body className={`${styles.modalBody} w-100 text-center`}>{props.body}</Modal.Body>
 				{!props.disableFooter ? (
 					!props.footer ? (
-						<Modal.Footer className={styles.footerFont}>
+						<Modal.Footer className={styles.modalFooter}>
 							<div className='w-100 d-flex justify-content-center'>
 								<Button className='me-3' variant='secondary' onClick={props.onHide}>
 									Close
@@ -59,7 +59,7 @@ const ModalConfirmation = (props: Props) => {
 							</div>
 						</Modal.Footer>
 					) : (
-						<div className={`${styles.footerFont} p-4`}>{props.footer}</div>
+						<div className={`${styles.modalFooter} p-4`}>{props.footer}</div>
 					)
 				) : (
 					<></>

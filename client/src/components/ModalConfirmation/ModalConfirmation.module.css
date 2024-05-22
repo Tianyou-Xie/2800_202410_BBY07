@@ -1,5 +1,21 @@
+.modal {
+    
+}
+
+.modal > div {
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+    background-color: var(--signup-background);
+}
+
+.modal, .modal > div {
+    border-radius: 0;
+}
+
 .modal button {
-    box-shadow: none;
+    border-radius: 0;
+    border: 2px solid black;
+    box-shadow: 4px 5px 0px #000;
 }
 
 .header-font {
@@ -7,11 +23,11 @@
     font-size: 2em;
 }
 
-.body-font {
+.modal-body {
     font-family: TTOctosquares;
     font-size: 14pt;
 }
 
-.footer-font {
+.modal-footer {
     font-family: BabaPro;
 }
