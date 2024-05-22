@@ -25,7 +25,11 @@ interface Props {
 }
 
 const ChangePasswordModal = (props: Props) => {
-	const clearFields = () => {};
+	const clearFields = () => {
+		props.passBody2.setPassword('');
+		props.passBody2.setNewPassword('');
+		props.passBody2.setConfPassword('');
+	};
 
 	return (
 		<>
