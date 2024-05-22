@@ -1,5 +1,4 @@
 .loading-text {
-	position: relative;
 	font-family: Bitsumishi;
 	text-shadow: #fc0 1px 0 10px;
 	animation: text-shadow-pulse 1s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
@@ -7,12 +6,14 @@
 
 .loading-text::before {
 	content: '';
+	transform: translateX(-1.5rem);
 	animation: loading-indicators-left 1.25s infinite;
 }
 
 .loading-text::after {
 	content: '';
 	text-shadow: #fc0 1px 0 10px;
+	transform: translateX(1.5rem);
 	animation: loading-indicators-right 1.25s infinite;
 }
 
