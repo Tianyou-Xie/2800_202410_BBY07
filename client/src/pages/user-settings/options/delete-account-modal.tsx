@@ -4,17 +4,17 @@ import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfir
 import Button from 'react-bootstrap/Button';
 
 interface Props {
-    deleteBody1: {
-        showDeleteBody1: boolean,
-        setShowDelete1: any
-    },
-    deleteBody2: {
-        showDeleteBody2: boolean,
-        setShowDelete2: any
-        deleteAccount: any,
-        confInput: string,
-        setConfInput: any
-    },
+	deleteBody1: {
+		showDeleteBody1: boolean;
+		setShowDelete1: any;
+	};
+	deleteBody2: {
+		showDeleteBody2: boolean;
+		setShowDelete2: any;
+		deleteAccount: any;
+		confInput: string;
+		setConfInput: any;
+	};
 }
 
 const DeleteAccountModal = (props: Props) => {
@@ -60,20 +60,31 @@ const DeleteAccountModal = (props: Props) => {
 				onHide={() => props.deleteBody2.setShowDelete2(false)}
 				body={
 					<>
-					<p>Type in the following phrase to delete this account:<br/><i><b>I-WANT-TO-DELTE-THIS-ACCOUNT</b></i></p>
+						<p>
+							Type in the following phrase to delete this account:
+							<br />
+							<i>
+								<b>I-WANT-TO-DELETE-THIS-ACCOUNT</b>
+							</i>
+						</p>
 						<form onSubmit={props.deleteBody2.deleteAccount}>
 							<input
 								className='mb-5'
 								name='confirminput'
-								placeholder='"I-WANT-TO-DELTE-THIS-ACCOUNTt"'
+								placeholder='"I-WANT-TO-DELETE-THIS-ACCOUNTt"'
 								type='text'
 								value={props.deleteBody2.confInput}
 								onChange={(event) => props.deleteBody2.setConfInput(event.target.value)}
 								required
 							/>
-							<div className='d-flex justify-content-center align-items-center'>
-								<button className={`${styles.deleteBtn} me-3`} type='submit'>DELETE ACCOUNT</button>
-								<button className='ms-3' type='button' onClick={() => props.deleteBody2.setShowDelete2(false)}>
+							<div className='d-flex justify-content-evenly align-items-center'>
+								<button className='btn btn-danger' type='submit'>
+									DELETE ACCOUNT
+								</button>
+								<button
+									className='btn btn-secondary'
+									type='button'
+									onClick={() => props.deleteBody2.setShowDelete2(false)}>
 									Cancel
 								</button>
 							</div>

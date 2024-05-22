@@ -45,10 +45,6 @@
     cursor: pointer;
 }
 
-.delete-btn {
-    background-color: red;
-}
-
 .logout-btn {
     border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;

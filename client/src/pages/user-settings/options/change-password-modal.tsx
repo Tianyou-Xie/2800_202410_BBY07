@@ -1,26 +1,32 @@
+import { useState } from 'react';
+
+import styles from '../user-settings.module.css';
+
 import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
 import Button from 'react-bootstrap/Button';
 import logoUrl from '../../../assets/images/SkynetLogo.png';
 
 interface Props {
-    passBody1: {
-        showPassBody1: boolean,
-        setShowPass1: any
-    },
-    passBody2: {
-        showPassBody2: boolean,
-        setShowPass2: any
-        changePassword: any,
-        password: string,
-        setPassword: any,
-        newPassword: string,
-        setNewPassword: any,
-        confPassword: string,
-        setConfPassword: any
-    },
+	passBody1: {
+		showPassBody1: boolean;
+		setShowPass1: any;
+	};
+	passBody2: {
+		showPassBody2: boolean;
+		setShowPass2: any;
+		changePassword: any;
+		password: string;
+		setPassword: any;
+		newPassword: string;
+		setNewPassword: any;
+		confPassword: string;
+		setConfPassword: any;
+	};
 }
 
 const ChangePasswordModal = (props: Props) => {
+	const clearFields = () => {};
+
 	return (
 		<>
 			{/* First Modal for password change */}
@@ -66,53 +72,70 @@ const ChangePasswordModal = (props: Props) => {
 				onHide={() => props.passBody2.setShowPass2(false)}
 				disableFooter={true}
 				header={
-					<>
+					<div className='mt-3'>
 						<img className={`img-fluid w-25`} src={logoUrl} alt='Skynet Logo' />
 						<p>Change Password</p>
-					</>
+					</div>
 				}
 				body={
 					<>
-						<div className='px-4 pb-2 text-center'>
-							<div className='changepassword-form'>
-								<form onSubmit={props.passBody2.changePassword}>
-									<input
-										name='password'
-										placeholder='Current Password'
-										type='password'
-										value={props.passBody2.password}
-										onChange={(event) => props.passBody2.setPassword(event.target.value)}
-										required
-									/>
-									<br />
-									<input
-										name='newpassword'
-										placeholder='New Password'
-										type='password'
-										value={props.passBody2.newPassword}
-										onChange={(event) => props.passBody2.setNewPassword(event.target.value)}
-										required
-									/>
-									<br />
-									<input
-										name='confirmpassword'
-										placeholder='Confirm New Password'
-										type='password'
-										value={props.passBody2.confPassword}
-										onChange={(event) => props.passBody2.setConfPassword(event.target.value)}
-										required
-									/>
-									<br />
-									<div className='text-center mb-3'>
-										<button type='submit' onClick={() => props.passBody2.setShowPass2(false)}>Change Password</button>
+						<div className='text-center'>
+							<form onSubmit={props.passBody2.changePassword}>
+								<input
+									className='mb-2'
+									name='password'
+									placeholder='Current Password'
+									type='password'
+									value={props.passBody2.password}
+									onChange={(event) => props.passBody2.setPassword(event.target.value)}
+									required
+								/>
+								<br />
+								<input
+									className='mb-2'
+									name='newpassword'
+									placeholder='New Password'
+									type='password'
+									value={props.passBody2.newPassword}
+									onChange={(event) => props.passBody2.setNewPassword(event.target.value)}
+									required
+								/>
+								<br />
+								<input
+									className='mb-2'
+									name='confirmpassword'
+									placeholder='Confirm New Password'
+									type='password'
+									value={props.passBody2.confPassword}
+									onChange={(event) => props.passBody2.setConfPassword(event.target.value)}
+									required
+								/>
+								<br />
+								<div className='d-flex justify-content-evenly align-items-center my-3'>
+									<div className='text-center'>
+										<button
+											className='btn btn-danger'
+											type='submit'
+											onClick={() => {
+												props.passBody2.setShowPass2(false);
+												clearFields();
+											}}>
+											Change Password
+										</button>
 									</div>
 									<div className='text-center'>
-										<button type='button' onClick={() => props.passBody2.setShowPass2(false)}>
+										<button
+											className='btn btn-secondary'
+											type='button'
+											onClick={() => {
+												props.passBody2.setShowPass2(false);
+												clearFields();
+											}}>
 											Cancel
 										</button>
 									</div>
-								</form>
-							</div>
+								</div>
+							</form>
 						</div>
 					</>
 				}

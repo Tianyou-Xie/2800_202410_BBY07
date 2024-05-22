@@ -37,7 +37,7 @@ const ManageAccount = () => {
 				newpassword: newPassword,
 				confirmpassword: confirmPassword,
 			});
-			toast.success('Password changed!');
+			toast.success('Password changed!');			
 		} catch (error: any) {
 			toast.error('Could not change password.');
 		}
@@ -45,7 +45,7 @@ const ManageAccount = () => {
 
 	const deleteAccount = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		if (confInput === 'I-WANT-TO-DELTE-THIS-ACCOUNT') {
+		if (confInput === 'I-WANT-TO-DELETE-THIS-ACCOUNT') {
 			try {
 				const response = await api.post('/user/deleteaccount/delete');
 				setLocation('/login');
