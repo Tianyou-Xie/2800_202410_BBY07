@@ -1,0 +1,28 @@
+.loader {
+	position: relative;
+	font-family: Bitsumishi;
+}
+
+.loader::before {
+	content: '[';
+	transform: translateX(-0.75rem);
+	animation: back-and-forth-left 1s infinite;
+}
+
+.loader::after {
+	content: ']';
+	transform: translateX(0.75rem);
+	animation: back-and-forth-right 1s infinite;
+}
+
+@keyframes back-and-forth-left {
+	50% {
+		transform: translateX(-1rem);
+	}
+}
+
+@keyframes back-and-forth-right {
+	50% {
+		transform: translateX(1rem);
+	}
+}
