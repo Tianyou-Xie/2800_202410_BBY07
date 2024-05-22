@@ -18,6 +18,7 @@ const UserSettings = () => {
 	// varriables responsible for grabbing form fields in the delete account modal
 	const [confInput, setConfInput] = useState('');
 
+	// calls loseToken() and logs the user out 
 	function logout() {
 		console.log('here');
 		Auth.loseToken();
@@ -36,52 +37,51 @@ const UserSettings = () => {
 				pageName='Settings'
 				content={
 					<ListGroup variant='flush' className={`${styles.settingBody} mt-3`}>
-						<div className={`${styles.groupItem} card p-4 rounded-0`}>
+						<div className={`${styles.groupItemHolder} card p-4 rounded-0`}>
 							<h1 className={`${styles.settingTitle} ms-1`}>Account</h1>
 							<ListGroup variant='flush'>
-								<ListGroup.Item className='ms-5'>
+								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
 									<Nav.Link href=''>Followers</Nav.Link>
 								</ListGroup.Item>
-								<ListGroup.Item className='ms-5'>
+								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
 									<Nav.Link href=''>Following</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item
-									className={`${styles.clickable} ms-5`}
+									className={`${styles.clickable} ${styles.groupItem} ms-5`}
 									onClick={() => setInfoBody(true)}>
 									Your Info
 								</ListGroup.Item>
 								<ListGroup.Item
-									className={`${styles.clickable} ${styles.dangerZone} ms-5`}
+									className={`${styles.clickable} ${styles.dangerZone} ${styles.groupItem} ms-5`}
 									onClick={() => setLocation('/settings/manageAccount')}>
 									Manage Account
 								</ListGroup.Item>
 							</ListGroup>
 						</div>
-						<div className={`${styles.groupItem} card p-4 rounded-0`}>
+						<div className={`${styles.groupItemHolder} card p-4 rounded-0`}>
 							<h1 className={`${styles.settingTitle} ms-1`}>History</h1>
 							<ListGroup variant='flush'>
-								<ListGroup.Item className='ms-5'>
+								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
 									<Nav.Link href=''>Saved</Nav.Link>
 								</ListGroup.Item>
-								<ListGroup.Item className='ms-5'>
+								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
 									<Nav.Link href=''>Liked</Nav.Link>
 								</ListGroup.Item>
-								<ListGroup.Item className='ms-5'>
+								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
 									<Nav.Link href=''>Commented Posts</Nav.Link>
 								</ListGroup.Item>
 							</ListGroup>
 						</div>
-						<div className={`${styles.groupItem} card p-4 rounded-0`}>
+						<div className={`${styles.groupItemHolder} card p-4 rounded-0`}>
 							<h1 className={`${styles.settingTitle} ms-1`}>General</h1>
 							<ListGroup variant='flush'>
-								<ListGroup.Item className='ms-5'>
+								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
 									<Nav.Link href=''>About</Nav.Link>
 								</ListGroup.Item>
-
-								<ListGroup.Item className='ms-5'>
+								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
 									<Nav.Link href=''>FAQs</Nav.Link>
 								</ListGroup.Item>
-								<ListGroup.Item className='ms-5'>
+								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
 									<Nav.Link href=''>Support</Nav.Link>
 								</ListGroup.Item>
 							</ListGroup>

@@ -14,27 +14,23 @@
     color: red !important;
 }
 
-.group-item {
+.group-item-holder {
     margin-bottom: 30px;
     margin-left: 5px;
     margin-right: 5px;
     font-size: 16pt;
-    border: none;
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
 }
 
-.group-item, .group-item * {
+.group-item-holder, .group-item-holder * {
     color: black;
-    background-color: #75726F;
+    background-color: var(--signup-background);
 }
 
-/*
-    Experimenting with colors
-    Ivory: FBFFF0
-    Scarlet: F42C04
-    Batteship gray: 8B98982
-
-    Dim gray: #75726F
-    */
+.group-item {
+    border-color: gray;
+}
 
 .clickable {
     cursor: pointer;
@@ -45,7 +41,8 @@
 }
 
 .logout-btn {
-    border: none
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
 }
 
 .logout-btn h1 {
