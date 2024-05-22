@@ -54,8 +54,6 @@ const ManageAccount = () => {
 			});
 			toast.success(response.data.message);
 			logout();
-			
-			//setLocation('/login');
 		} catch (error: any) {
 			toast.error(error.response.data.error);
 		}
@@ -69,10 +67,7 @@ const ManageAccount = () => {
 		setConfInput('');
 	};
 
-	const logout = () => [
-		Auth.loseToken(),
-		setLocation('/login')
-	];
+	const logout = () => [Auth.loseToken(), setLocation('/login')];
 
 	// defining values for the Change Password Modal
 	const passBody1 = {
