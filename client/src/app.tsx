@@ -14,6 +14,7 @@ import Resetpassword from './pages/resetpassword/resetpassword';
 import Planets from './pages/planets/planets-component';
 import { useEffect, useState } from 'react';
 import { Auth } from './lib/auth';
+import Cursors from './components/cursor/cursor';
 
 import './index.css';
 import { Else, If, Then } from 'react-if';
@@ -47,6 +48,7 @@ export const App = () => {
 	return (
 		<>
 			<ToastContainer />
+			<Cursors />
 
 			<If condition={authorized === true}>
 				<Then>
