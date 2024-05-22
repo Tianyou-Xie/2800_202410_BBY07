@@ -2,7 +2,6 @@
     width: 100%;
     font-size: x-large;
     font-family: BabaPro;
-    background-color: aliceblue;
 }
 
 .setting-title {
@@ -12,16 +11,30 @@
 
 .danger-zone, .danger-zone * {
     background-color: #242C38;
-    color: red;
+    color: red !important;
 }
 
 .group-item {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 16pt;
+    border: none;
 }
 
 .group-item, .group-item * {
-    background-color: aliceblue;
+    color: black;
+    background-color: #75726F;
 }
+
+/*
+    Experimenting with colors
+    Ivory: FBFFF0
+    Scarlet: F42C04
+    Batteship gray: 8B98982
+
+    Dim gray: #75726F
+    */
 
 .clickable {
     cursor: pointer;
@@ -29,6 +42,14 @@
 
 .delete-btn {
     background-color: red;
+}
+
+.logout-btn {
+    border: none
+}
+
+.logout-btn h1 {
+    margin: 0;
 }
 
 .logout-btn, .logout-btn > * {

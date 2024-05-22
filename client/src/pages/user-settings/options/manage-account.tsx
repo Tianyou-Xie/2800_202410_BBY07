@@ -93,7 +93,7 @@ const ManageAccount = () => {
 				pageName='Manage Account'
 				content={
 					<ListGroup variant='flush' className={`${styles.settingBody}`}>
-						<ListGroup.Item className={styles.dangerZone}>
+						<ListGroup.Item className={`${styles.dangerZone}`}>
 							<h1 className={`${styles.settingTitle} ms-3`}>Danger Zone</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`${styles.clickable} ms-5`}>

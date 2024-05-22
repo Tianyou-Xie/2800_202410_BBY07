@@ -35,15 +35,14 @@ const UserSettings = () => {
 			<Page
 				pageName='Settings'
 				content={
-					<ListGroup variant='flush' className={`${styles.settingBody}`}>
-						{/* put them in a card */}
-						<ListGroup.Item className={styles.groupItem}>
+					<ListGroup variant='flush' className={`${styles.settingBody} mt-3`}>
+						<div className={`${styles.groupItem} card p-4 rounded-0`}>
 							<h1 className={`${styles.settingTitle} ms-1`}>Account</h1>
 							<ListGroup variant='flush'>
-								<ListGroup.Item className={`ms-5`}>
+								<ListGroup.Item className='ms-5'>
 									<Nav.Link href=''>Followers</Nav.Link>
 								</ListGroup.Item>
-								<ListGroup.Item className={`ms-5`}>
+								<ListGroup.Item className='ms-5'>
 									<Nav.Link href=''>Following</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item
@@ -52,50 +51,48 @@ const UserSettings = () => {
 									Your Info
 								</ListGroup.Item>
 								<ListGroup.Item
-									className={`${styles.clickable} ms-5`}
+									className={`${styles.clickable} ${styles.dangerZone} ms-5`}
 									onClick={() => setLocation('/settings/manageAccount')}>
-									Manage
+									Manage Account
 								</ListGroup.Item>
 							</ListGroup>
-						</ListGroup.Item>
-						<ListGroup.Item className={styles.groupItem}>
+						</div>
+						<div className={`${styles.groupItem} card p-4 rounded-0`}>
 							<h1 className={`${styles.settingTitle} ms-1`}>History</h1>
 							<ListGroup variant='flush'>
-								<ListGroup.Item className={`ms-5`}>
+								<ListGroup.Item className='ms-5'>
 									<Nav.Link href=''>Saved</Nav.Link>
 								</ListGroup.Item>
-								<ListGroup.Item className={`ms-5`}>
+								<ListGroup.Item className='ms-5'>
 									<Nav.Link href=''>Liked</Nav.Link>
 								</ListGroup.Item>
-								<ListGroup.Item className={`ms-5`}>
+								<ListGroup.Item className='ms-5'>
 									<Nav.Link href=''>Commented Posts</Nav.Link>
 								</ListGroup.Item>
 							</ListGroup>
-						</ListGroup.Item>
-						<ListGroup.Item className={styles.groupItem}>
+						</div>
+						<div className={`${styles.groupItem} card p-4 rounded-0`}>
 							<h1 className={`${styles.settingTitle} ms-1`}>General</h1>
 							<ListGroup variant='flush'>
-								<ListGroup.Item className={`ms-5`}>
+								<ListGroup.Item className='ms-5'>
 									<Nav.Link href=''>About</Nav.Link>
 								</ListGroup.Item>
 
-								<ListGroup.Item className={`ms-5`}>
+								<ListGroup.Item className='ms-5'>
 									<Nav.Link href=''>FAQs</Nav.Link>
 								</ListGroup.Item>
-								<ListGroup.Item className={`ms-5`}>
+								<ListGroup.Item className='ms-5'>
 									<Nav.Link href=''>Support</Nav.Link>
 								</ListGroup.Item>
 							</ListGroup>
-						</ListGroup.Item>
-						<ListGroup.Item className={styles.groupItem}>
-							<div className='w-100 d-flex justify-content-center'>
-								<button className={`${styles.logoutBtn} px-3 py-2`}>
-									<h1 onClick={logout} className={`${styles.settingTitle}`}>
-										Logout
-									</h1>
-								</button>
-							</div>
-						</ListGroup.Item>
+						</div>
+						<div className='w-100 d-flex justify-content-center mb-4'>
+							<button className={`${styles.logoutBtn} py-2 px-3`}>
+								<h1 onClick={logout} className={`${styles.settingTitle}`}>
+									Logout
+								</h1>
+							</button>
+						</div>
 					</ListGroup>
 				}
 			/>
