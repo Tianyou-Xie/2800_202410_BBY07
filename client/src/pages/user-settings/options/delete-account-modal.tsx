@@ -82,12 +82,7 @@ const DeleteAccountModal = (props: Props) => {
 								required
 							/>
 							<div className='d-flex justify-content-evenly align-items-center'>
-								<button
-									className='btn btn-danger'
-									type='submit'
-									onClick={() => {
-										clearFields();
-									}}>
+								<button className='btn btn-danger' type='submit'>
 									DELETE ACCOUNT
 								</button>
 								<button

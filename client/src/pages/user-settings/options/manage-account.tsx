@@ -37,17 +37,21 @@ const ManageAccount = () => {
 				newpassword: newPassword,
 				confirmpassword: confirmPassword,
 			});
-			toast.success('Password changed!');			
+			console.log(response);
+			toast.success(response.data.message);
 		} catch (error: any) {
-			toast.error('Could not change password.');
+			console.log(error);
+			toast.error(error.response.data.error);
 		}
+		clearFields();
 	};
 
 	const deleteAccount = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		if (confInput === 'I-WANT-TO-DELETE-THIS-ACCOUNT') {
+		if (confInput === 'I-WANT-TO-DELTE-THIS-ACCOUNT') {
 			try {
 				const response = await api.post('/user/deleteaccount/delete');
+				toast.success('Account deleted successfully');
 				setLocation('/login');
 			} catch (error: any) {
 				alert(error.response.data.message);
@@ -55,6 +59,14 @@ const ManageAccount = () => {
 		} else {
 			toast.error('Invalid Phrase');
 		}
+		clearFields();
+	};
+
+	const clearFields = () => {
+		setPassword('');
+		setNewPassword('');
+		setConfirmPassword('');
+		setConfInput('');
 	};
 
 	// defining values for the Change Password Modal

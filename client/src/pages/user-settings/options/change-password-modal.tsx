@@ -117,13 +117,7 @@ const ChangePasswordModal = (props: Props) => {
 								<br />
 								<div className='d-flex justify-content-evenly align-items-center my-3'>
 									<div className='text-center'>
-										<button
-											className='btn btn-danger'
-											type='submit'
-											onClick={() => {
-												props.passBody2.setShowPass2(false);
-												clearFields();
-											}}>
+										<button className='btn btn-danger' type='submit'>
 											Change Password
 										</button>
 									</div>
