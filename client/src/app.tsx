@@ -17,6 +17,7 @@ import { Auth } from './lib/auth';
 
 import './index.css';
 import { Else, If, Then } from 'react-if';
+import { Loader } from './components/loader/loader';
 
 export const App = () => {
 	const [authorized, setAuthorized] = useState<boolean | undefined>(undefined);
@@ -27,7 +28,9 @@ export const App = () => {
 	}, []);
 
 	useEffect(() => {
-		Auth.isAuthorized().then((v) => setAuthorized(v === true));
+		Auth.isAuthorized().then((v) => {
+			setAuthorized(v === true);
+		});
 	}, [loc]);
 
 	const commonRoutes = (
@@ -39,7 +42,6 @@ export const App = () => {
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/test' component={Test} />
 			<Route path='/planets' component={Planets} />
-
 			<Route>404 Not Found</Route>
 		</>
 	);
@@ -73,9 +75,7 @@ export const App = () => {
 						</Then>
 
 						<Else>
-							<div className='w-100 h-100 d-flex flex-column align-items-center justify-content-center'>
-								<h1 className='display-2 '>Loading...</h1>
-							</div>
+							<Loader />
 						</Else>
 					</If>
 				</Else>
