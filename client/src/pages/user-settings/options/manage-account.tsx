@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../../../lib/axios';
 import { useLocation } from 'wouter';
+import { Auth } from '../../../lib/auth';
+
 import styles from '../user-settings.module.css';
 
 import Nav from 'react-bootstrap/Nav';
@@ -37,10 +39,8 @@ const ManageAccount = () => {
 				newpassword: newPassword,
 				confirmpassword: confirmPassword,
 			});
-			console.log(response);
 			toast.success(response.data.message);
 		} catch (error: any) {
-			console.log(error);
 			toast.error(error.response.data.error);
 		}
 		clearFields();
@@ -48,16 +48,16 @@ const ManageAccount = () => {
 
 	const deleteAccount = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		if (confInput === 'I-WANT-TO-DELTE-THIS-ACCOUNT') {
-			try {
-				const response = await api.post('/user/deleteaccount/delete');
-				toast.success('Account deleted successfully');
-				setLocation('/login');
-			} catch (error: any) {
-				alert(error.response.data.message);
-			}
-		} else {
-			toast.error('Invalid Phrase');
+		try {
+			const response = await api.post('/user/deleteaccount/delete', {
+				confirmationInput: confInput,
+			});
+			toast.success(response.data.message);
+			logout();
+			
+			//setLocation('/login');
+		} catch (error: any) {
+			toast.error(error.response.data.error);
 		}
 		clearFields();
 	};
@@ -68,6 +68,11 @@ const ManageAccount = () => {
 		setConfirmPassword('');
 		setConfInput('');
 	};
+
+	const logout = () => [
+		Auth.loseToken(),
+		setLocation('/login')
+	];
 
 	// defining values for the Change Password Modal
 	const passBody1 = {

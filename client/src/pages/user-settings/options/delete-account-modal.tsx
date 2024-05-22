@@ -65,7 +65,7 @@ const DeleteAccountModal = (props: Props) => {
 				body={
 					<>
 						<p>
-							Type in the following phrase to delete this account:
+							Type in the following phrase exactly to delete this account:
 							<br />
 							<i>
 								<b>I-WANT-TO-DELETE-THIS-ACCOUNT</b>
@@ -73,9 +73,9 @@ const DeleteAccountModal = (props: Props) => {
 						</p>
 						<form onSubmit={props.deleteBody2.deleteAccount}>
 							<input
-								className='mb-5'
+								className={`${styles.confInput} mb-5 w-75`}
 								name='confirminput'
-								placeholder='"I-WANT-TO-DELETE-THIS-ACCOUNTt"'
+								placeholder='"I-WANT-TO-DELETE-THIS-ACCOUNT"'
 								type='text'
 								value={props.deleteBody2.confInput}
 								onChange={(event) => props.deleteBody2.setConfInput(event.target.value)}
