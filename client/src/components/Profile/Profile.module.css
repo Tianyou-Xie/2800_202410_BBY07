@@ -1,0 +1,21 @@
+.profileBox {
+	font-family: TTOctosquares;
+	width: 100%;
+	color: #2196f3;
+	background-color: #242c38;
+	border-color: #2196f3;
+	box-shadow: 0px 0px 0px #2196f3;
+	padding: 8px;
+}
+
+.username {
+	color: #fff;
+}
+
+h6 {
+	margin-bottom: 0.5rem;
+}
+
+.last-text {
+	margin: 0;
+}

@@ -20,6 +20,7 @@ import './index.css';
 import { Else, If, Then } from 'react-if';
 import { Loader } from './components/loader/loader';
 import PostPage from './pages/post-page/post-page';
+import UserPage from './pages/user-page/user-page';
 
 export const App = () => {
 	const [authorized, setAuthorized] = useState<boolean | undefined>(undefined);
@@ -42,7 +43,7 @@ export const App = () => {
 			<Route path='/about' component={About} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
-			<Route path='/test' component={Test} />
+			<Route path='/test' component={UserPage} />
 			<Route path='/planets' component={Planets} />
 			<Route>404 Not Found</Route>
 		</>
