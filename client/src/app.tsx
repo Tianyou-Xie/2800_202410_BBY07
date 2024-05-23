@@ -1,19 +1,17 @@
 import { ToastContainer } from 'react-toastify';
-import { Switch, Route, Redirect, useLocation } from 'wouter';
+import { Switch, Route, useLocation } from 'wouter';
 import About from './pages/about/about';
 import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
 import GeneralFeed from './pages/general-feed/general-feed';
-import Home from './pages/home/home';
 import Login from './pages/login/login-component';
 import MyFeed from './pages/my-feed/my-feed';
 import Signup from './pages/signup/signup-component';
 import Test from './pages/test-page/test-page';
 import UserSettings from './pages/user-settings/user-settings';
 import Resetpassword from './pages/resetpassword/resetpassword';
-import Planets from './pages/planets/planets-component';
 import { useEffect, useState } from 'react';
-import { Auth } from './lib/auth';
+import { Auth, UserAuthContext } from './lib/auth';
 import Cursors from './components/cursor/cursor';
 
 import './index.css';
@@ -22,16 +20,17 @@ import { Loader } from './components/loader/loader';
 import { PlanetMap } from './pages/planet-map/planet-map';
 
 export const App = () => {
-	const [authorized, setAuthorized] = useState<boolean | undefined>(undefined);
+	const [loading, setLoading] = useState(true);
+	const [authenticatedUser, setAuthenticatedUser] = useState<any>();
 	const [loc] = useLocation();
 
-	useEffect(() => {
-		Auth.resaveToken();
-	}, []);
+	useEffect(() => void Auth.resaveToken(), []);
 
 	useEffect(() => {
-		Auth.isAuthorized().then((v) => {
-			setAuthorized(v === true);
+		setLoading(true);
+		Auth.getAuthenticatedUser().then((user) => {
+			setAuthenticatedUser(user);
+			setLoading(false);
 		});
 	}, [loc]);
 
@@ -43,7 +42,6 @@ export const App = () => {
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/test' component={Test} />
-			<Route path='/planets' component={Planets} />
 			<Route>404 Not Found</Route>
 		</>
 	);
@@ -53,32 +51,32 @@ export const App = () => {
 			<ToastContainer />
 			<Cursors />
 
-			<If condition={authorized === true}>
+			<If condition={loading}>
 				<Then>
-					<Switch>
-						<Route path='/' component={Home} />
-						<Route path='/home' component={PlanetMap} />
-						<Route path='/changepassword' component={Changepassword} />
-						<Route path='/feed' component={GeneralFeed} />
-						<Route path='/myfeed' component={MyFeed} />
-						<Route path='/settings' component={UserSettings} />
-						{commonRoutes}
-					</Switch>
+					<Loader />
 				</Then>
 
 				<Else>
-					<If condition={authorized === false}>
+					<If condition={!authenticatedUser}>
 						<Then>
 							<Switch>
 								<Route path='/' component={Login} />
 								{commonRoutes}
-
-								<Route children={<Redirect href='/' />} />
 							</Switch>
 						</Then>
 
 						<Else>
-							<Loader />
+							<UserAuthContext.Provider value={authenticatedUser}>
+								<Switch>
+									<Route path='/' component={PlanetMap} />
+									<Route path='/home' component={PlanetMap} />
+									<Route path='/changepassword' component={Changepassword} />
+									<Route path='/feed' component={GeneralFeed} />
+									<Route path='/myfeed' component={MyFeed} />
+									<Route path='/settings' component={UserSettings} />
+									{commonRoutes}
+								</Switch>
+							</UserAuthContext.Provider>
 						</Else>
 					</If>
 				</Else>

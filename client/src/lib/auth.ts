@@ -1,5 +1,8 @@
 import { HttpStatusCode } from 'axios';
 import { api } from './axios';
+import { createContext } from 'react';
+
+export const UserAuthContext = createContext(undefined);
 
 /**
  * Utility namespace for JWT token authorization.
@@ -76,10 +79,26 @@ export namespace Auth {
 	}
 
 	/**
+	 * Fetches the currently authenticated user from the API,
+	 * if a user is authenticated.
+	 *
+	 * @returns the authenticated user, or undefined if none
+	 */
+	export async function getAuthenticatedUser() {
+		try {
+			const res = await api.get('/user');
+			if (!res.data) return;
+
+			const { value: user } = res.data;
+			return user;
+		} catch {}
+	}
+
+	/**
 	 * Returns whether there is an active and valid token
 	 * currently set.
 	 */
-	export async function isAuthorized() {
+	export async function isAuthenticated() {
 		try {
 			const res = await api.get('/user/login');
 			return res.status === HttpStatusCode.Ok;
