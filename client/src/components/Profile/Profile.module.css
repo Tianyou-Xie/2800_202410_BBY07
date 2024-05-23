@@ -1,4 +1,8 @@
-.profileBox {
+.profile-box {
+	width: 100%;
+}
+
+.profile-info-box {
 	font-family: TTOctosquares;
 	width: 100%;
 	color: #2196f3;
@@ -18,4 +22,22 @@ h6 {
 
 .last-text {
 	margin: 0;
+}
+
+button {
+	border: none;
+	background-color: transparent;
+	padding: 6px;
+}
+
+.bottomButtons {
+	display: flex;
+	width: 100%;
+	justify-content: right;
+}
+
+.buttons {
+	background-color: #242c38;
+	border: 2px solid #2196f3;
+	box-shadow: 4px 5px 0px #355a79;
 }

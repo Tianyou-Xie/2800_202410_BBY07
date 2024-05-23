@@ -25,19 +25,37 @@ interface ProfileProp {
  */
 const Profile = (props: ProfileProp): JSX.Element => {
 	return (
-		<UIBox
-			content={
-				<>
-					<h3 className={styles.username}>@{props.username}</h3>
-					{props.description ? <p>{props.description}</p> : <></>}
-					<h6>{props.follower} followers</h6>
-					<h6>{props.following} following</h6>
-					<h6 className={styles.lastText}>{props.postCount} posts</h6>
-				</>
-			}
-			className={styles.profileBox}
-			curved
-		/>
+		<>
+			<div className={styles.profileBox}>
+				<UIBox
+					content={
+						<>
+							<h3 className={styles.username}>@{props.username}</h3>
+							{props.description ? <p>{props.description}</p> : <></>}
+							<h6>{props.follower} followers</h6>
+							<h6>{props.following} following</h6>
+							<h6 className={styles.lastText}>{props.postCount} posts</h6>
+						</>
+					}
+					className={styles.profileInfoBox}
+					curved
+				/>
+				<div className={styles.bottomButtons}>
+					<button>
+						<UIBox
+							className={styles.edit + ' ' + styles.buttons}
+							content={'Edit profile'}
+							curved
+							clickable
+							dark
+						/>
+					</button>
+					<button>
+						<UIBox className={styles.settings + ' ' + styles.buttons} content={'*'} curved clickable dark />
+					</button>
+				</div>
+			</div>
+		</>
 	);
 };
 
