@@ -1,9 +1,10 @@
+import isMobile from 'is-mobile';
 import Konva from 'konva';
 import { useEffect, useRef, useState } from 'react';
 import { Circle, Group, Text } from 'react-konva';
-import { withRef } from '../../lib/with-ref';
 import { useLocation } from 'wouter';
-import isMobile from 'is-mobile';
+
+import { withRef } from '../../lib/with-ref';
 
 interface Props {
 	planet: unknown;

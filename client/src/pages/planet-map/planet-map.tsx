@@ -1,16 +1,17 @@
 import Konva from 'konva';
-import { Layer, Stage } from 'react-konva';
-import { StarBackground } from './star-background';
-import { PiCrosshairBold } from 'react-icons/pi';
+import { Vector2d } from 'konva/lib/types';
 import React, { useEffect, useRef, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { withRef } from '../../lib/with-ref';
-import { Vector2d } from 'konva/lib/types';
-import { VisualCenter } from './visual-center';
-import { api } from '../../lib/axios';
-import { PlanetVisual } from './planet-visual';
+import { PiCrosshairBold } from 'react-icons/pi';
+import { Layer, Stage } from 'react-konva';
 
-export const FeedVisual = () => {
+import { api } from '../../lib/axios';
+import { withRef } from '../../lib/with-ref';
+import { CenterVisual } from './center-visual';
+import { PlanetVisual } from './planet-visual';
+import { StarBackground } from './star-background';
+
+export const PlanetMap = () => {
 	const stageRef = useRef<Konva.Stage>(null);
 
 	const [currPos, setCurrPos] = useState<Vector2d>({ x: 0, y: 0 });
@@ -105,7 +106,7 @@ export const FeedVisual = () => {
 					})
 				}>
 				<Layer width={innerWidth} height={innerHeight}>
-					<VisualCenter />
+					<CenterVisual />
 				</Layer>
 
 				<Layer>{planets}</Layer>

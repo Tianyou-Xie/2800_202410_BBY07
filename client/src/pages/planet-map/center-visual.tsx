@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { Group, Image, Text } from 'react-konva';
-import logoUrl from '../../assets/images/SkynetLogo.png';
 import Konva from 'konva';
-import { withRef } from '../../lib/with-ref';
+import { useEffect, useRef, useState } from 'react';
+import { Group, Image } from 'react-konva';
 import { useLocation } from 'wouter';
 
-export const VisualCenter = () => {
+import logoUrl from '../../assets/images/SkynetLogo.png';
+import { withRef } from '../../lib/with-ref';
+
+export const CenterVisual = () => {
 	const [_, navigate] = useLocation();
 
 	const imgRef = useRef<Konva.Image>(null);
@@ -46,7 +47,7 @@ export const VisualCenter = () => {
 					onTap={() => setActive(true)}
 					onClick={() => {
 						setActive(true);
-						navigate('/home');
+						navigate('/feed');
 					}}
 					offset={{ x: imageSize / 2, y: imageSize / 2 }}
 				/>

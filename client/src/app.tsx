@@ -19,6 +19,7 @@ import Cursors from './components/cursor/cursor';
 import './index.css';
 import { Else, If, Then } from 'react-if';
 import { Loader } from './components/loader/loader';
+import { PlanetMap } from './pages/planet-map/planet-map';
 
 export const App = () => {
 	const [authorized, setAuthorized] = useState<boolean | undefined>(undefined);
@@ -56,7 +57,7 @@ export const App = () => {
 				<Then>
 					<Switch>
 						<Route path='/' component={Home} />
-						<Route path='/home' component={Home} />
+						<Route path='/home' component={PlanetMap} />
 						<Route path='/changepassword' component={Changepassword} />
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />

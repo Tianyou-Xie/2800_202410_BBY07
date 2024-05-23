@@ -1,8 +1,9 @@
+import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { Layer } from 'react-konva';
+
 import { DecorativeStar } from './decorative-star';
-import Konva from 'konva';
 
 interface Props {
 	starAmount?: number;
