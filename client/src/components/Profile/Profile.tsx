@@ -51,10 +51,19 @@ const Profile = (props: ProfileProp): JSX.Element => {
 						/>
 					</button>
 					<button>
-						<UIBox className={styles.settings + ' ' + styles.buttons} content={'*'} curved clickable dark />
+						<Link href='/settings'>
+							<UIBox
+								className={styles.settings + ' ' + styles.buttons}
+								content={'*'}
+								curved
+								clickable
+								dark
+							/>
+						</Link>
 					</button>
 				</div>
 			</div>
+			<div className={styles.line}></div>
 		</>
 	);
 };

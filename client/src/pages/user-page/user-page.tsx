@@ -31,7 +31,6 @@ const UserPage = () => {
 						following={0}
 						postCount={0}
 					/>
-					<div className={styles.line}></div>
 					{displayedPosts}
 				</>
 			}
