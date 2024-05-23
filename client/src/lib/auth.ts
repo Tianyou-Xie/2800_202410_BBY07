@@ -2,7 +2,7 @@ import { HttpStatusCode } from 'axios';
 import { api } from './axios';
 import { createContext } from 'react';
 
-export const UserAuthContext = createContext(undefined);
+export const UserAuthContext = createContext<any>(undefined);
 
 /**
  * Utility namespace for JWT token authorization.

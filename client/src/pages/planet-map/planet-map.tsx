@@ -1,6 +1,6 @@
 import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { PiCrosshairBold } from 'react-icons/pi';
 import { Layer, Stage } from 'react-konva';
@@ -10,13 +10,17 @@ import { withRef } from '../../lib/with-ref';
 import { CenterVisual } from './center-visual';
 import { PlanetVisual } from './planet-visual';
 import { StarBackground } from './star-background';
+import { UserAuthContext } from '../../lib/auth';
 
 export const PlanetMap = () => {
 	const stageRef = useRef<Konva.Stage>(null);
 
-	const [currPos, setCurrPos] = useState<Vector2d>({ x: 0, y: 0 });
-	const [homePlanet, setHomePlanet] = useState<string>();
-	const [planets, setPlanets] = useState<React.ReactNode[]>([]);
+	const [currentPan, setCurrentPan] = useState<Vector2d>({ x: 0, y: 0 });
+
+	const [planetData, setPlanetData] = useState<any[]>([]);
+	const [homePlanetId, setHomePlanetId] = useState<string>();
+
+	const user = useContext(UserAuthContext);
 
 	const resetPan = () =>
 		withRef(stageRef, (stage) => {
@@ -27,7 +31,7 @@ export const PlanetMap = () => {
 		withRef(stageRef, (ref) => {
 			const x = Math.round(ref.x());
 			const y = Math.round(ref.y());
-			setCurrPos({ x, y });
+			setCurrentPan({ x, y });
 		});
 	};
 
@@ -46,41 +50,30 @@ export const PlanetMap = () => {
 	);
 
 	useEffect(() => {
-		api.get('/user')
-			.then(({ data: res }) => {
-				const location = res.value?.location;
-				if (!location || typeof location !== 'object' || !('planetId' in location)) return;
-
-				const planetId = location.planetId;
-				console.log(planetId);
-				if (typeof planetId === 'string') setHomePlanet(location.planetId);
-			})
-			.catch();
-
 		api.get('/planet')
 			.then(({ data: res }) => {
 				const planets = res.value;
 				if (!Array.isArray(planets)) return;
-
-				const elements = [];
-				for (const planet of planets) {
-					elements.push(<PlanetVisual key={planet._id} planet={planet} home={homePlanet === planet._id} />);
-				}
-				setPlanets(elements);
+				setPlanetData(planets);
 			})
 			.catch();
 	}, []);
+
+	useEffect(() => {
+		if (!user) return;
+		setHomePlanetId(user.location.planetId);
+	}, [user]);
 
 	return (
 		<>
 			<div className='position-absolute end-0 bottom-0 z-3 p-3 d-flex'>
 				<div className='mt-auto ms-auto d-flex gap-3'>
 					<p className='mb-0'>
-						X: {currPos.x}, Y: {currPos.y}
+						X: {currentPan.x}, Y: {currentPan.y}
 					</p>
 					<button
 						className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
-						disabled={currPos.x === 0 && currPos.y === 0}
+						disabled={currentPan.x === 0 && currentPan.y === 0}
 						onClick={() => resetPan()}>
 						<PiCrosshairBold />
 					</button>
@@ -109,7 +102,11 @@ export const PlanetMap = () => {
 					<CenterVisual />
 				</Layer>
 
-				<Layer>{planets}</Layer>
+				<Layer>
+					{planetData.map((v) => {
+						return <PlanetVisual key={v._id} planet={v} home={homePlanetId === v._id} />;
+					})}
+				</Layer>
 			</Stage>
 
 			<Stage width={innerWidth} height={innerHeight} style={{ position: 'absolute', background: 'black' }}>

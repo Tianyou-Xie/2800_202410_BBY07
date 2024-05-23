@@ -14,10 +14,11 @@ import { useEffect, useState } from 'react';
 import { Auth, UserAuthContext } from './lib/auth';
 import Cursors from './components/cursor/cursor';
 
-import './index.css';
 import { Else, If, Then } from 'react-if';
 import { Loader } from './components/loader/loader';
 import { PlanetMap } from './pages/planet-map/planet-map';
+
+import './index.css';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
