@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { Handler } from 'express';
 // import { assertRequestBody, Resolve } from '../../utils/express';
-import { requireLogin } from '../../middlewares/require-login';
+import { authProtected } from '../../middlewares/auth-protected';
 import { MessageModel } from '../../models/message';
 import { ConversationModel } from '../../models/conversation';
 
@@ -11,7 +11,7 @@ interface PostBody {
 }
 
 export const post: Handler[] = [
-    requireLogin,
+    authProtected,
     async (req, res) => {
         const user = req.user!;
 
