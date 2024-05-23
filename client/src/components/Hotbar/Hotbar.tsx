@@ -9,7 +9,8 @@ import { IoMenuSharp } from 'react-icons/io5';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { IoIosAddCircle } from 'react-icons/io';
 import { MdFeed } from 'react-icons/md';
-import { AiFillMessage } from 'react-icons/ai';
+// import { AiFillMessage } from 'react-icons/ai';
+import { PiGearFill } from "react-icons/pi";
 import { MdPeople } from 'react-icons/md';
 
 const Hotbar = () => {
@@ -42,7 +43,13 @@ const Hotbar = () => {
 						<div className={styles.backDropDiv}></div>
 						<ul className={styles.submenu}>
 							<li>
-								<a href='/myfeed'>
+								<a className='mt-1' href='#FOLLOWERS'>
+									<MdPeople className={`${styles.menuSubIcons}`} />
+									<p className='text-center'>FOLLOWERS</p>
+								</a>
+							</li>
+							<li>
+								<a className='ms-1' href='/myfeed'>
 									<MdFeed className={`${styles.menuSubIcons}`} />
 									<p className='text-center'>FEED</p>
 								</a>
@@ -54,15 +61,9 @@ const Hotbar = () => {
 								</a>
 							</li>
 							<li>
-								<a href='#MESSAGE'>
-									<AiFillMessage className={`${styles.menuSubIcons}`} />
-									<p className='text-center'>MESSAGE</p>
-								</a>
-							</li>
-							<li>
-								<a href='#FOLLOWERS'>
-									<MdPeople className={`${styles.menuSubIcons}`} />
-									<p className='text-center'>FOLLOWERS</p>
+								<a href='/settings'>
+									<PiGearFill className={`${styles.menuSubIcons}`} />
+									<p className='text-center'>SETTINGS</p>
 								</a>
 							</li>
 						</ul>
