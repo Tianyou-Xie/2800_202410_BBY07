@@ -11,6 +11,9 @@ const MyFeed = () => {
 			text='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
 			postURL='./about'
 			userURL='#USER_URL'
+			repost={10}
+			like={20}
+			comment={30}
 		/>
 	);
 
@@ -18,9 +21,7 @@ const MyFeed = () => {
 		displayedPosts.push(dummyPost);
 	}
 
-	return (
-		<Page pageName="My Feed" content={displayedPosts} />
-	);
+	return <Page pageName='My Feed' content={displayedPosts} />;
 };
 
 export default MyFeed;

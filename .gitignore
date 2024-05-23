@@ -1,9 +1,0 @@
-# Dependencies and Outputs
-**/node_modules
-**/dist
-
-# Logs
-**/*.log
-
-# Secret files
-**/*.env

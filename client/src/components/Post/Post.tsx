@@ -20,6 +20,9 @@ interface PostProp {
 	text: string;
 	postURL: string;
 	createdAt?: Date;
+	repost: number;
+	like: number;
+	comment: number;
 }
 
 interface UserProp {
@@ -59,6 +62,9 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.text string - Text of the post
  * @param props.postURL string - URL of the complete version of the post with comments and more information
  * @param props.createdAt Date - (optional) Date in which the post was created
+ * @param props.repost number - Number of reposts of the post
+ * @param props.like 	number - Number of likes of the post
+ * @param props.comment number - Number of comments of the post
  */
 const Post = (props: PostProp): JSX.Element => {
 	const [bookmarked, setBookmarked] = useState(false);
@@ -91,6 +97,7 @@ const Post = (props: PostProp): JSX.Element => {
 							) : undefined}
 						</Link>
 						<div className={styles.iconsContainer}>
+							<p>{props.repost}</p>
 							<button className={styles.share}>
 								<RiShareBoxLine />
 							</button>
@@ -104,9 +111,11 @@ const Post = (props: PostProp): JSX.Element => {
 							<button className={styles.comment}>
 								<FaRocketchat />
 							</button>
+							<p>{props.comment}</p>
 							<button onClick={onLike} className={styles.like}>
 								{liked ? <FaHeart /> : <FaRegHeart />}
 							</button>
+							<p>{props.like}</p>
 						</div>
 					</>
 				}
