@@ -6,6 +6,7 @@ const Terms = () => {
 	return (
 		<>
 			<Page
+				logoHeader={false}
 				pageName='Terms of Use'
 				content={
 					<div className={styles.officalPagesBody}>

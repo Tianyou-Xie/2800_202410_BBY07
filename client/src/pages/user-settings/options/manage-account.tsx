@@ -102,6 +102,7 @@ const ManageAccount = () => {
 	return (
 		<>
 			<Page
+				logoHeader={false}
 				pageName='Manage Account'
 				content={
 					<ListGroup variant='flush' className={`${styles.settingBody} mt-3`}>

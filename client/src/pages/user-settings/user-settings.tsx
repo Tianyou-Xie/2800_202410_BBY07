@@ -35,6 +35,7 @@ const UserSettings = () => {
 	return (
 		<>
 			<Page
+				logoHeader={false}
 				pageName='Settings'
 				content={
 					<ListGroup variant='flush' className={`${styles.settingBody} mt-3`}>

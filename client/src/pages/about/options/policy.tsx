@@ -6,6 +6,7 @@ const Policy = () => {
 	return (
 		<>
 			<Page
+				logoHeader={false}
 				pageName='Privacy Policy'
 				content={
 					<div className={styles.officalPagesBody}>

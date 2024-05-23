@@ -19,7 +19,7 @@ const MyFeed = () => {
 	}
 
 	return (
-		<Page pageName="My Feed" content={displayedPosts} />
+		<Page logoHeader={false} pageName="My Feed" content={displayedPosts} />
 	);
 };
 

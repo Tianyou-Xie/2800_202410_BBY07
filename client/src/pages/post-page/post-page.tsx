@@ -10,7 +10,7 @@ const PostPage = function (props: PostProps) {
 
 	return (
 		<>
-			<Page pageName='Post' content={content} />
+			<Page logoHeader={false} pageName='Post' content={content} />
 		</>
 	);
 };

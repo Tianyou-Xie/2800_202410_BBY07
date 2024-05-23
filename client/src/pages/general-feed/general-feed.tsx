@@ -45,6 +45,7 @@ const GeneralFeed = () => {
 
 	return (
 		<Page
+			logoHeader={false}
 			pageName='General Feed'
 			content={displayedPosts}
 		/>

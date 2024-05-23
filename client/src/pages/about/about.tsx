@@ -10,6 +10,7 @@ const About = () => {
 	return (
 		<>
 			<Page
+				logoHeader={false}
 				pageName='About'
 				content={
 					<div className={`${styles.aboutBody} card rounded-0 p-4 mt-3`}>
