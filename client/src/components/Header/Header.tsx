@@ -16,10 +16,10 @@ interface Props {
  * Returns the customized header for the page with the provided properties.
  *
  * @param props the props for this header, as seen outlined in the interface.
- * @param pageName (Optional) The name of the page. Needed only if enableLogoHeader is false
- * @param enableLogoHeader If true, a header with just the website name will be given. 
- * @requires pageName if enableLogoHeader is false unless empty title is needed.
- * @returns Returns the customized header for the page.
+ * @param props.pageName (Optional) The name of the page as a string. Needed only if enableLogoHeader is false
+ * @param props.enableLogoHeader If true, a header with just the website name will be given. 
+ * @requires props.pageName if enableLogoHeader is false unless empty title is needed.
+ * @returns Returns the customized header for the page as a JSX.Element.
  */
 const Header = (props: Props) => {
 	return (

@@ -5,21 +5,21 @@ import Button from 'react-bootstrap/Button';
 
 /**
  * The props types for the Confirmation Modal.
- * 
+ *
  * header?: Header of the modal. A default header that contians the title is provided if none is given.
  * title: Title of the modal.
  * body: Body of the modal.
  * disableFooter: True if the footer needs to be disabled, false otherwise.
  * footer?: Footer of the modal. A default footer will be provided if none is given.
  * show: The variable which dictates if the modal should appear. Changing this variable state must be handled.
- * 
+ *
  * Needs to be defined if using the default footer:
  * onHide?: The function that hides the modal.
  * onContinue?: The function that initiates when the continue btn is pressed.
  */
 interface Props {
 	header?: JSX.Element;
-	title: string;
+	title?: string;
 	body: JSX.Element;
 	disableFooter: boolean;
 	footer?: JSX.Element;
@@ -29,10 +29,19 @@ interface Props {
 }
 
 /**
- * Creates a customized confirmation modal based upon given the properties. 
+ * Creates a customized confirmation modal based upon given the properties.
  *
  * @param props the props for this modal as seen outlined in the interface.
- * @returns The customized modal
+ * @param props.header (Optional) Header of the modal as a JSX.Element. A default header that contians the title is provided if none is given.
+ * @param props.title (Optional) Title of the modal as a string. Recommended to define if no header is provided.
+ * @param props.body Body of the modal as a JSX.Element.
+ * @param props.disableFooter Hides the default footer if true. A footer should be provided in the next prop.
+ * @param props.footer Footer of the modal as a JSX.Element. A default footer will be provided if none is given.
+ * @param show Boolean variable which dictates if the modal should appear. Changing this variable state must be handled externally.
+ * @param props.onHide The function of type () => void that hides the modal.
+ * @param props.onContinue (Optional) The function that initiates when the continue btn is pressed in the default footer.
+ * @example See user-settings/options/change-password-modal.tsx
+ * @returns The customized modal as a JSX.Element
  */
 const ModalConfirmation = (props: Props) => {
 	return (
@@ -40,7 +49,7 @@ const ModalConfirmation = (props: Props) => {
 			<Modal dialogClassName={`${styles.modal} p-2`} show={props.show} onHide={props.onHide} centered>
 				{!props.header ? (
 					<Modal.Header>
-						<Modal.Title className={`${styles.headerFont} w-100 text-center`}>{props.title}</Modal.Title>
+						<Modal.Title className={`${styles.headerFont} w-100 text-center`}>{props.title ? props.title : 'define title prop'}</Modal.Title>
 					</Modal.Header>
 				) : (
 					<div className={`${styles.headerFont} w-100 text-center`}>{props.header}</div>
