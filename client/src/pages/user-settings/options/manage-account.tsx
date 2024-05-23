@@ -10,18 +10,23 @@ import Nav from 'react-bootstrap/Nav';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ChangePasswordModal from '../options/change-password-modal';
 import DeleteAccountModal from '../options/delete-account-modal';
+import ChangeNameModal from './change-username';
 import Page from '../../../components/Page/Page';
 
 const ManageAccount = () => {
 	const [_, setLocation] = useLocation();
 
-	// variables responsible for showing change password modal
+	// variables responsible for showing change password modals
 	const [showPassBody1, setShowPass1] = useState(false);
 	const [showPassBody2, setShowPass2] = useState(false);
 
-	// variables responsible for showing delete account modal
+	// variables responsible for showing delete account modals
 	const [showDeleteBody1, setShowDelete1] = useState(false);
 	const [showDeleteBody2, setShowDelete2] = useState(false);
+
+	// variables responsible for showing change username modals
+	const [showNameBody1, setNameBody1] = useState(false);
+	const [showNameBody2, setNameBody2] = useState(false);
 
 	//variables resposible for grabbing the form fields present in the change password modal
 	const [password, setPassword] = useState('');
@@ -30,6 +35,9 @@ const ManageAccount = () => {
 
 	// varriables responsible for grabbing form fields in the delete account modal
 	const [confInput, setConfInput] = useState('');
+
+	// varriables responsible for grabbing form fields in the change password modal
+	const [nameInput, setNameInput] = useState('');
 
 	const changePassword = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -60,11 +68,25 @@ const ManageAccount = () => {
 		clearFields();
 	};
 
+	const changeUsername = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		try {
+			const response = await api.patch('/user/changeUsername', {
+				newUsername: nameInput,
+			});
+			toast.success(response.data.message);
+		} catch (error: any) {
+			toast.error(error.response.data.error);
+		}
+		clearFields();
+	};
+
 	const clearFields = () => {
 		setPassword('');
 		setNewPassword('');
 		setConfirmPassword('');
 		setConfInput('');
+		setNameInput('');
 	};
 
 	const logout = () => [Auth.loseToken(), setLocation('/login')];
@@ -99,6 +121,19 @@ const ManageAccount = () => {
 		setConfInput: setConfInput,
 	};
 
+	// defining values for the change username Modal
+	const usernameBody1 = {
+		showNameBody1: showNameBody1,
+		setNameBody1: setNameBody1,
+	};
+	const usernameBody2 = {
+		showNameBody2: showNameBody2,
+		setNameBody2: setNameBody2,
+		changeUsername: changeUsername,
+		nameInput: nameInput,
+		setNameInput: setNameInput,
+	};
+
 	return (
 		<>
 			<Page
@@ -109,8 +144,10 @@ const ManageAccount = () => {
 						<ListGroup.Item className={`${styles.dangerZone}`}>
 							<h1 className={`${styles.settingTitle} ms-3`}>Danger Zone</h1>
 							<ListGroup variant='flush'>
-								<ListGroup.Item className={`${styles.clickable} ms-5`}>
-									<Nav.Link href=''>Change Username</Nav.Link>
+								<ListGroup.Item
+									className={`${styles.clickable} ms-5`}
+									onClick={() => setNameBody1(true)}>
+									Change Username
 								</ListGroup.Item>
 								<ListGroup.Item
 									className={`${styles.clickable} ms-5`}
@@ -133,6 +170,7 @@ const ManageAccount = () => {
 
 			<ChangePasswordModal passBody1={passBody1} passBody2={passBody2} />
 			<DeleteAccountModal deleteBody1={deleteBody1} deleteBody2={deleteBody2} />
+			<ChangeNameModal usernameBody1={usernameBody1} usernameBody2={usernameBody2} />
 		</>
 	);
 };
