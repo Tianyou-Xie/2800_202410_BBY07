@@ -7,11 +7,13 @@ import UIBox from '../UIBox/UIBox';
 import { Link } from 'wouter';
 
 interface ProfileProp {
+	userId: string;
 	username: string;
 	description?: string;
 	follower: number;
 	following: number;
 	postCount: number;
+	outsideUser?: boolean;
 	className?: string;
 }
 
@@ -42,19 +44,21 @@ const Profile = (props: ProfileProp): JSX.Element => {
 				/>
 				<div className={styles.bottomButtons}>
 					<button>
-						<UIBox
-							className={styles.edit + ' ' + styles.buttons}
-							content={'Edit profile'}
-							curved
-							clickable
-							dark
-						/>
+						<Link href={props.outsideUser ? '/#FOLLOW/' + props.userId : '/#EDIT_PROFILE'}>
+							<UIBox
+								className={styles.edit + ' ' + styles.buttons}
+								content={props.outsideUser ? 'Follow' : 'Edit profile'}
+								curved
+								clickable
+								dark
+							/>
+						</Link>
 					</button>
 					<button>
-						<Link href='/settings'>
+						<Link href={props.outsideUser ? '/#MESSAGE/' + props.userId : '/settings'}>
 							<UIBox
 								className={styles.settings + ' ' + styles.buttons}
-								content={'*'}
+								content={props.outsideUser ? 'Message' + props.userId : '*'}
 								curved
 								clickable
 								dark

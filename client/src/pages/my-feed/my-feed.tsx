@@ -7,7 +7,7 @@ const MyFeed = () => {
 
 	const dummyPost = (
 		<Post
-			username='@MarcusTheDumbs'
+			username='MarcusTheDumbs'
 			content='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
 			postId='./about'
 			authorId='#USER_URL'

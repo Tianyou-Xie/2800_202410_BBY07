@@ -3,7 +3,7 @@ import Page from '../../components/Page/Page';
 import Post from '../../components/Post/Post';
 import Profile from '../../components/Profile/Profile';
 import { api } from '../../lib/axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ProfilePage = () => {
 	interface Post {
@@ -30,23 +30,26 @@ const ProfilePage = () => {
 	const [following, setFollowing] = useState(0);
 	const [postCount, setPostCount] = useState(0);
 	const [displayedPosts, setDisplayedPosts] = useState(Array<JSX.Element>());
+	const [userID, setUserID] = useState('');
 
-	let userID: string;
+	useEffect(() => {
+		const getUserData = async function () {
+			try {
+				const res = await api.get('/user/');
+				const data = res.data.value;
+				setUserID(data._id);
+				setUsername(data.userName);
+				setFollower(data.followerCount);
+				setFollowing(data.followingCount);
+				setPostCount(data.postCount);
+				setDisplayedPosts(await getPosts());
+			} catch (err) {
+				console.log(err);
+			}
+		};
 
-	(async function getUserDate() {
-		try {
-			const res = await api.get('/user/');
-			const data = res.data.value;
-			userID = data._id;
-			setUsername(data.userName);
-			setFollower(data.followerCount);
-			setFollowing(data.followingCount);
-			setPostCount(data.postCount);
-			setDisplayedPosts(await getPosts());
-		} catch (err) {
-			console.log(err);
-		}
-	})();
+		getUserData();
+	}, []);
 
 	async function getPosts() {
 		try {
@@ -75,6 +78,7 @@ const ProfilePage = () => {
 			content={
 				<>
 					<Profile
+						userId={userID}
 						username={username}
 						// description='I like eating lettuce and broccoli'
 						follower={follower}

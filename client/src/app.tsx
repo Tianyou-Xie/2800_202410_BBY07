@@ -64,6 +64,8 @@ export const App = () => {
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
 						<Route path='/post' component={PostPage} />
+						<Route path='/user/:id' component={ProfilePage} />
+						<Route path='/profile' component={ProfilePage} />
 						<Route path='/settings' component={UserSettings} />
 						{commonRoutes}
 					</Switch>

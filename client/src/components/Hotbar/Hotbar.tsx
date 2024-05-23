@@ -76,7 +76,7 @@ const Hotbar = () => {
 					<div className={`${styles.circle} ${styles.circleLeft}`}></div>
 					<div className={styles.bar}></div>
 					<div className={`${styles.circle} ${styles.circleRight}`}></div>
-					<a href='/settings'>
+					<a href='/profile'>
 						<IoMdPerson className={`${styles.navIcon} ${styles.iconRight} me-2 mt-5`} />
 					</a>
 				</div>
