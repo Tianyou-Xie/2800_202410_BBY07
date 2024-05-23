@@ -8,7 +8,7 @@ import { Else, If, Then } from 'react-if';
 
 import styles from './messages.module.css';
 
-const MessagesHtml = ({ message, messages, setMessage, submitForm, id }: any) => {
+const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat }: any) => {
 	return (
 		<>
 			<div className='container'>
@@ -32,28 +32,34 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id }: any) =>
 
 				<main className='container'>
 					<div className='row'>
-						{messages.map((message: any, index: number) => {
-							return (
-								<>
-									<If condition={id === message.senderId}>
-										<Then>
-											<div className='d-flex text-body-secondary'>
-												<RxAvatar size={20} />
-												<p key={index}>{message.content}</p>
-												<br />
-											</div>
-										</Then>
-										<Else>
-											<div className='d-flex justify-content-end '>
-												<RxAvatar size={20} />
-												<p key={index}>{message.content}</p>
-												<br />
-											</div>
-										</Else>
-									</If>
-								</>
-							);
-						})}
+						{isChat ? (
+							messages.map((message: any, index: number) => {
+								return (
+									<>
+										<If condition={id === message.senderId}>
+											<Then>
+												<div className='d-flex text-body-secondary'>
+													<RxAvatar size={20} />
+													<p key={index}>{message.content}</p>
+													<br />
+												</div>
+											</Then>
+											<Else>
+												<div className='d-flex justify-content-end '>
+													<RxAvatar size={20} />
+													<p key={index}>{message.content}</p>
+													<br />
+												</div>
+											</Else>
+										</If>
+									</>
+								);
+							})
+						) : (
+							<div className='d-flex text-body-secondary'>
+								<p>No Messages to Show</p>
+							</div>
+						)}
 					</div>
 				</main>
 
