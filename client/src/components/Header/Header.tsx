@@ -6,10 +6,6 @@ import Navbar from 'react-bootstrap/Navbar';
 
 /**
  * The props types for the Header.
- *
- * pageName: The name of the page. Needed only if enableLogoHeader is false.
- * enableLogoHeader: If true, then the "sky.net" logo will be visible on the top left in the header.
- * 					 If false then default header will be visible.
  */
 interface Props {
 	pageName?: string;
@@ -20,6 +16,9 @@ interface Props {
  * Returns the customized header for the page with the provided properties.
  *
  * @param props the props for this header, as seen outlined in the interface.
+ * @param pageName (Optional) The name of the page. Needed only if enableLogoHeader is false
+ * @param enableLogoHeader If true, a header with just the website name will be given. 
+ * @requires pageName if enableLogoHeader is false unless empty title is needed.
  * @returns Returns the customized header for the page.
  */
 const Header = (props: Props) => {
