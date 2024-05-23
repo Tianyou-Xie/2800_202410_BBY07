@@ -1,10 +1,14 @@
 import MessagesHtml from './messages-html';
 import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
+import { useParams } from 'wouter';
 
 const Messages = () => {
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useState([]);
+	const [receiverID, setreceiverID] = useState('');
+	let { id } = useParams();
+	// setreceiverID(id);
 
 	useEffect(() => {
 		const fetchMessages = async () => {
@@ -13,7 +17,7 @@ const Messages = () => {
 					Authorization: 'Bearer ' + localStorage.getItem('jwt'),
 				},
 			};
-			const { data: res } = await api.post('/user/getchats', { receiverId: '664399aff4853409512e9032' }, headers);
+			const { data: res } = await api.post('/user/getchats', { receiverId: id }, headers);
 			try {
 				console.log(res);
 				setMessages(res.message);
@@ -29,7 +33,7 @@ const Messages = () => {
 		console.log(message);
 		const newMessage = {
 			content: message,
-			receiverId: '664399aff4853409512e9032',
+			receiverId: id,
 		};
 		try {
 			const { data: res } = await api.post('/user/chat', newMessage);
@@ -38,7 +42,9 @@ const Messages = () => {
 			console.log(error);
 		}
 	};
-	return <MessagesHtml message={message} messages={messages} setMessage={setMessage} submitForm={submitForm} />;
+	return (
+		<MessagesHtml message={message} messages={messages} setMessage={setMessage} submitForm={submitForm} id={id} />
+	);
 };
 
 export default Messages;
