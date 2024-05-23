@@ -15,3 +15,10 @@
     justify-content: end;
     color: #2196F3 !important;
 }
+
+.logo-header {
+    width: 100%;
+    font-family: Bitsumishi;
+    padding-top: 10px;
+    padding-left: 10px;
+}

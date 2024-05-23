@@ -35,7 +35,7 @@ const Home = () => {
 		</div>
 	);
 
-	return <Page content={mainContainer} noHeader />;
+	return <Page content={mainContainer} logoHeader={true} />;
 };
 
 export default Home;

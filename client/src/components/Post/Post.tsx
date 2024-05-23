@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './Post.module.css';
 
 import { Container } from 'react-bootstrap';
+import UIBox from '../UIBox/UIBox';
 
 // Icons
 import { FaRegHeart } from 'react-icons/fa'; //<FaRegHeart />	//Empty heart
@@ -37,11 +38,16 @@ interface UserProp {
 const User = (props: UserProp): JSX.Element => {
 	return (
 		<>
-			<Container className={styles.userContainer}>
-				<Link href={props.userURL ?? '/'} className={styles.link}>
-					{props.username}
-				</Link>
-			</Container>
+			<UIBox
+				className={styles.userContainer}
+				curved
+				dark
+				content={
+					<Link href={props.userURL ?? '/'} className={styles.link}>
+						{props.username}
+					</Link>
+				}
+			/>
 		</>
 	);
 };
@@ -73,28 +79,38 @@ const Post = (props: PostProp): JSX.Element => {
 	return (
 		<div className={styles.postContainer}>
 			<User username={props.username} userURL={props.userURL} />
-			<div className={styles.paraContainer}>
-				<Link href={props.postURL} className={styles.link}>
-					<p>{props.text}</p>
-					{props.createdAt ? (
-						<p className={styles.postDate}>{props.createdAt.toLocaleDateString()}</p>
-					) : undefined}
-				</Link>
-				<div className={styles.iconsContainer}>
-					<button className={styles.share}>
-						<RiShareBoxLine />
-					</button>
-					<button className={styles.book}>
-						{bookmarked ? <FaBookmark onClick={onBookmark} /> : <FaRegBookmark onClick={onBookmark} />}
-					</button>
-					<button className={styles.comment}>
-						<FaRocketchat />
-					</button>
-					<button onClick={onLike} className={styles.like}>
-						{liked ? <FaHeart /> : <FaRegHeart />}
-					</button>
-				</div>
-			</div>
+			<UIBox
+				className={styles.paraContainer}
+				curved
+				content={
+					<>
+						<Link href={props.postURL} className={styles.link}>
+							<p>{props.text}</p>
+							{props.createdAt ? (
+								<p className={styles.postDate}>{props.createdAt.toLocaleDateString()}</p>
+							) : undefined}
+						</Link>
+						<div className={styles.iconsContainer}>
+							<button className={styles.share}>
+								<RiShareBoxLine />
+							</button>
+							<button className={styles.book}>
+								{bookmarked ? (
+									<FaBookmark onClick={onBookmark} />
+								) : (
+									<FaRegBookmark onClick={onBookmark} />
+								)}
+							</button>
+							<button className={styles.comment}>
+								<FaRocketchat />
+							</button>
+							<button onClick={onLike} className={styles.like}>
+								{liked ? <FaHeart /> : <FaRegHeart />}
+							</button>
+						</div>
+					</>
+				}
+			/>
 		</div>
 	);
 };

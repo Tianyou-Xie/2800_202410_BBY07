@@ -12,13 +12,17 @@ import Test from './pages/test-page/test-page';
 import UserSettings from './pages/user-settings/user-settings';
 import Resetpassword from './pages/resetpassword/resetpassword';
 import Planets from './pages/planets/planets-component';
+import ManageAccount from './pages/user-settings/options/manage-account';
 import Messages from './pages/messages/messages-component';
+import Policy from './pages/about/options/policy';
+import Terms from './pages/about/options/terms';
 import { useEffect, useState } from 'react';
 import { Auth } from './lib/auth';
 import Cursors from './components/cursor/cursor';
 
 import './index.css';
 import { Else, If, Then } from 'react-if';
+import { Loader } from './components/loader/loader';
 
 export const App = () => {
 	const [authorized, setAuthorized] = useState<boolean | undefined>(undefined);
@@ -29,7 +33,9 @@ export const App = () => {
 	}, []);
 
 	useEffect(() => {
-		Auth.isAuthorized().then((v) => setAuthorized(v === true));
+		Auth.isAuthorized().then((v) => {
+			setAuthorized(v === true);
+		});
 	}, [loc]);
 
 	const commonRoutes = (
@@ -37,12 +43,13 @@ export const App = () => {
 			<Route path='/signup' component={Signup} />
 			<Route path='/login' component={Login} />
 			<Route path='/about' component={About} />
+			<Route path='/about/policy' component={Policy} />
+			<Route path='/about/terms' component={Terms} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/test' component={Test} />
 			<Route path='/planets' component={Planets} />
 			<Route path='/messages' component={Messages} />
-
 			<Route>404 Not Found</Route>
 		</>
 	);
@@ -61,6 +68,8 @@ export const App = () => {
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
 						<Route path='/settings' component={UserSettings} />
+						<Route path='/settings/manageAccount' component={ManageAccount} />
+
 						{commonRoutes}
 					</Switch>
 				</Then>
@@ -77,9 +86,7 @@ export const App = () => {
 						</Then>
 
 						<Else>
-							<div className='w-100 h-100 d-flex flex-column align-items-center justify-content-center'>
-								<h1 className='display-2 '>Loading...</h1>
-							</div>
+							<Loader />
 						</Else>
 					</If>
 				</Else>
