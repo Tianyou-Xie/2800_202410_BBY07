@@ -49,7 +49,7 @@ export const App = () => {
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/test' component={Test} />
 			<Route path='/planets' component={Planets} />
-			<Route path='/messages' component={Messages} />
+			<Route path='/messages/:id' component={Messages} />
 			<Route>404 Not Found</Route>
 		</>
 	);
