@@ -8,6 +8,7 @@ import { ILocation, RawLocationSchema } from '../../../models/location';
 import { IMedia, RawMediaSchema } from '../../../models/media';
 import Joi from 'joi';
 import { CommentRelationship } from '../../../models/comment-relationship';
+import { UserModel } from '../../../models/user';
 
 interface PostBody {
 	content: string;
@@ -28,7 +29,17 @@ export const get: Handler = async (req, res) => {
 	const relationships = await CommentRelationship.find({ parentPost: parentPostId }).limit(limit);
 	const comments = await Promise.all(
 		relationships.map(async (v) => {
-			return await PostModel.findById(v.childPost).lean();
+			const comment = await PostModel.findById(v.childPost).lean();
+			if (comment) {
+				const user = await UserModel.findById(comment.authorId).lean(); // Add this line to fetch the user
+				if (user) {
+					return {
+						...comment,
+						userName: user.userName
+					};
+				}
+			}
+			return comment;
 		}),
 	);
 

@@ -1,10 +1,10 @@
 import styles from './post.module.css';
 
-import Nav from 'react-bootstrap/Nav';
 import React, { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import Post from '../../components/Post/Post';
 import Page from '../../components/Page/Page';
+import Comment from '../../components/Comment/Comment';
 
 interface Post {
 	_id: string;
@@ -78,7 +78,17 @@ const PostPage: React.FC<Props> = ({ id }) => {
 		/>
 	);
 
-	return <Page pageName='Post Detail' content={postDetail} />;
+	return (
+		<Page
+			pageName='Post Detail'
+			content={
+				<>
+					{postDetail}
+					<Comment postId={post._id} />
+				</>
+			}
+		/>
+	);
 };
 
 export default PostPage;
