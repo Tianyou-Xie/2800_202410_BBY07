@@ -4,10 +4,11 @@ import { IoChevronBackCircleSharp } from 'react-icons/io5';
 import { IoSend } from 'react-icons/io5';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { RxAvatar } from 'react-icons/rx';
+import { Else, If, Then } from 'react-if';
 
 import styles from './messages.module.css';
 
-const MessagesHtml = ({ message, setMessage, submitForm }: any) => {
+const MessagesHtml = ({ message, messages, setMessage, submitForm }: any) => {
 	return (
 		<>
 			<div className='container'>
@@ -28,6 +29,22 @@ const MessagesHtml = ({ message, setMessage, submitForm }: any) => {
 						</div>
 					</div>
 				</header>
+
+				<main className='container'>
+					<div className='row'>
+						{messages.map((planet: any, index: number) => {
+							return (
+								<>
+									<div className='d-flex justify-content-end'>
+										<RxAvatar size={20} />
+										<p key={index}>{planet.content}</p>
+										<br />
+									</div>
+								</>
+							);
+						})}
+					</div>
+				</main>
 
 				<div className={`container fixed-bottom mb-2 ${styles.lol}`}>
 					<div className='row'>
