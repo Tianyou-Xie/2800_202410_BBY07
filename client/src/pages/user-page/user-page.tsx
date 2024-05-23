@@ -9,9 +9,9 @@ const UserPage = () => {
 	const dummyPost = (
 		<Post
 			username='@MarcusTheDumbs'
-			text='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
-			postURL='./about'
-			userURL='#USER_URL'
+			content='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
+			postId='./about'
+			authorId='#USER_URL'
 		/>
 	);
 
