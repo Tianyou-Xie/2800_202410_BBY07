@@ -81,7 +81,7 @@ const ProfilePage = () => {
 
 	return (
 		<Page
-			pageName='My Feed'
+			pageName='Profile'
 			content={
 				<>
 					<Profile

@@ -21,7 +21,7 @@ const UserPage = () => {
 
 	return (
 		<Page
-			pageName='My Feed'
+			pageName='#USERNAME'
 			content={
 				<>
 					<Profile
