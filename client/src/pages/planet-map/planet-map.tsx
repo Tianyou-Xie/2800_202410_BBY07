@@ -1,6 +1,6 @@
 import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { PiCrosshairBold } from 'react-icons/pi';
 import { Layer, Stage } from 'react-konva';
@@ -11,6 +11,7 @@ import { CenterVisual } from './center-visual';
 import { PlanetVisual } from './planet-visual';
 import { StarBackground } from './star-background';
 import { UserAuthContext } from '../../lib/auth';
+import { SpaceTraveller } from './space-traveller';
 
 export const PlanetMap = () => {
 	const stageRef = useRef<Konva.Stage>(null);
@@ -64,6 +65,52 @@ export const PlanetMap = () => {
 		setHomePlanetId(user.location.planetId);
 	}, [user]);
 
+	const [secretActive, setSecretActive] = useState(false);
+	function displaySecret() {
+		if (secretActive) return;
+		setSecretActive(true);
+		setTimeout(() => setSecretActive(false), 15_000);
+	}
+
+	useEffect(() => {
+		const secretWord = 'emergency';
+
+		let charIndex = 0;
+		let clicks = 0;
+
+		const checkSecretProgress = () => {
+			if (secretActive) return;
+
+			if (clicks === 20) {
+				displaySecret();
+				clicks = 0;
+			} else if (charIndex === secretWord.length) {
+				displaySecret();
+				charIndex = 0;
+			}
+		};
+
+		const nextChar = (e: KeyboardEvent) => {
+			if (e.key.toLowerCase() === secretWord.charAt(charIndex)) {
+				charIndex++;
+			} else charIndex = 0;
+
+			checkSecretProgress();
+		};
+
+		const nextClick = () => {
+			clicks++;
+			checkSecretProgress();
+		};
+
+		document.addEventListener('keydown', nextChar);
+		document.addEventListener('click', nextClick);
+		return () => {
+			document.removeEventListener('keydown', nextChar);
+			document.removeEventListener('click', nextClick);
+		};
+	}, []);
+
 	return (
 		<>
 			<div className='position-absolute end-0 bottom-0 z-3 p-3 d-flex'>
@@ -106,6 +153,19 @@ export const PlanetMap = () => {
 					{planetData.map((v) => {
 						return <PlanetVisual key={v._id} planet={v} home={homePlanetId === v._id} />;
 					})}
+				</Layer>
+
+				<Layer>
+					<SpaceTraveller active={secretActive} />
+					<SpaceTraveller active={secretActive} />
+					<SpaceTraveller active={secretActive} />
+					<SpaceTraveller active={secretActive} />
+					<SpaceTraveller active={secretActive} />
+					<SpaceTraveller active={secretActive} />
+					<SpaceTraveller active={secretActive} />
+					<SpaceTraveller active={secretActive} />
+					<SpaceTraveller active={secretActive} />
+					<SpaceTraveller active={secretActive} />
 				</Layer>
 			</Stage>
 
