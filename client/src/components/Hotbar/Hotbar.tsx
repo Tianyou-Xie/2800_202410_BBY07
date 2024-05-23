@@ -10,7 +10,7 @@ import { IoCloseCircleOutline } from 'react-icons/io5';
 import { IoIosAddCircle } from 'react-icons/io';
 import { MdFeed } from 'react-icons/md';
 // import { AiFillMessage } from 'react-icons/ai';
-import { PiGearFill } from "react-icons/pi";
+import { PiGearFill } from 'react-icons/pi';
 import { MdPeople } from 'react-icons/md';
 
 const Hotbar = () => {
@@ -55,7 +55,7 @@ const Hotbar = () => {
 								</a>
 							</li>
 							<li>
-								<a href='#POST'>
+								<a href='/post'>
 									<IoIosAddCircle className={`${styles.menuSubIcons}`} />
 									<p className='text-center'>POST</p>
 								</a>
@@ -76,7 +76,7 @@ const Hotbar = () => {
 					<div className={`${styles.circle} ${styles.circleLeft}`}></div>
 					<div className={styles.bar}></div>
 					<div className={`${styles.circle} ${styles.circleRight}`}></div>
-					<a href='/settings'>
+					<a href='/profile'>
 						<IoMdPerson className={`${styles.navIcon} ${styles.iconRight} me-2 mt-5`} />
 					</a>
 				</div>

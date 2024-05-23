@@ -7,10 +7,10 @@ const MyFeed = () => {
 
 	const dummyPost = (
 		<Post
-			username='@MarcusTheDumbs'
-			text='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
-			postURL='./about'
-			userURL='#USER_URL'
+			username='MarcusTheDumbs'
+			content='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
+			postId='./about'
+			authorId='#USER_URL'
 		/>
 	);
 
@@ -18,9 +18,7 @@ const MyFeed = () => {
 		displayedPosts.push(dummyPost);
 	}
 
-	return (
-		<Page logoHeader={false} pageName="My Feed" content={displayedPosts} />
-	);
+	return <Page pageName='My Feed' content={displayedPosts} />;
 };
 
 export default MyFeed;

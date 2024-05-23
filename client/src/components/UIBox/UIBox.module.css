@@ -21,3 +21,8 @@
 	color: #fff;
 	box-shadow: 4px 5px 0px var(--soft-shadow);
 }
+
+.clickable:active {
+	box-shadow: 4px 4px var(--signup-button-active) 5;
+	transform: translateY(5px);
+}

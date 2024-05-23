@@ -5,9 +5,9 @@ import Hotbar from '..//Hotbar/Hotbar';
 
 interface PageProp {
 	content: JSX.Element | JSX.Element[];
-	logoHeader: boolean;
+	logoHeader?: boolean;
 	pageName?: string;
-	noHeader?: boolean;	
+	noHeader?: boolean;
 }
 
 /**

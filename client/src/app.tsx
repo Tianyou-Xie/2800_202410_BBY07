@@ -23,6 +23,9 @@ import Cursors from './components/cursor/cursor';
 import './index.css';
 import { Else, If, Then } from 'react-if';
 import { Loader } from './components/loader/loader';
+import PostPage from './pages/post-page/post-page';
+import UserPage from './pages/user-page/user-page';
+import ProfilePage from './pages/profile-page/profile-page';
 
 export const App = () => {
 	const [authorized, setAuthorized] = useState<boolean | undefined>(undefined);
@@ -47,7 +50,7 @@ export const App = () => {
 			<Route path='/about/terms' component={Terms} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
-			<Route path='/test' component={Test} />
+			<Route path='/test' component={ProfilePage} />
 			<Route path='/planets' component={Planets} />
 			<Route path='/messages/:id' component={Messages} />
 			<Route>404 Not Found</Route>
@@ -67,6 +70,9 @@ export const App = () => {
 						<Route path='/changepassword' component={Changepassword} />
 						<Route path='/feed' component={GeneralFeed} />
 						<Route path='/myfeed' component={MyFeed} />
+						<Route path='/post' component={PostPage} />
+						<Route path='/user/:id' component={ProfilePage} />
+						<Route path='/profile' component={ProfilePage} />
 						<Route path='/settings' component={UserSettings} />
 						<Route path='/settings/manageAccount' component={ManageAccount} />
 
