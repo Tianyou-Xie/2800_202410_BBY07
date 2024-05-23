@@ -51,6 +51,13 @@ const ProfilePage = () => {
 		getUserData();
 	}, []);
 
+	useEffect(() => {
+		const displayPosts = async function () {
+			setDisplayedPosts(await getPosts());
+		};
+		displayPosts();
+	}, [userID]);
+
 	async function getPosts() {
 		try {
 			const res = await api.get('/feed/' + userID);
