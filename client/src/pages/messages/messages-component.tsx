@@ -6,7 +6,7 @@ import { useParams } from 'wouter';
 const Messages = () => {
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useState([]);
-	const [receiverID, setreceiverID] = useState('');
+	const [isChat, setIsChat] = useState(false);
 	let { id } = useParams();
 	// setreceiverID(id);
 
@@ -20,7 +20,10 @@ const Messages = () => {
 			const { data: res } = await api.post('/user/getchats', { receiverId: id }, headers);
 			try {
 				console.log(res);
-				setMessages(res.message);
+				if (res.success) {
+					setIsChat(true);
+					setMessages(res.message);
+				}
 			} catch (error) {
 				console.log(error);
 			}
@@ -43,7 +46,14 @@ const Messages = () => {
 		}
 	};
 	return (
-		<MessagesHtml message={message} messages={messages} setMessage={setMessage} submitForm={submitForm} id={id} />
+		<MessagesHtml
+			message={message}
+			messages={messages}
+			setMessage={setMessage}
+			submitForm={submitForm}
+			id={id}
+			isChat={isChat}
+		/>
 	);
 };
 
