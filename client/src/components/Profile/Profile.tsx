@@ -58,7 +58,7 @@ const Profile = (props: ProfileProp): JSX.Element => {
 						<Link href={props.outsideUser ? '/#MESSAGE/' + props.userId : '/settings'}>
 							<UIBox
 								className={styles.settings + ' ' + styles.buttons}
-								content={props.outsideUser ? 'Message' + props.userId : '*'}
+								content={props.outsideUser ? 'Message' : '*'}
 								curved
 								clickable
 								dark
