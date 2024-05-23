@@ -20,7 +20,7 @@ interface Post {
 		_id: string;
 	};
 	media: any[];
-	createdAt: string;
+	createdAt: Date;
 	deleted: boolean;
 	userName: string;
 }
@@ -69,8 +69,9 @@ const PostPage: React.FC<Props> = ({ id }) => {
 		<Post
 			username={post.userName}
 			text={post.content}
-			userURL='.user/${post.authorId}'
-			postURL='.post/${post._id}'
+			userURL={`/user/${post.authorId}`}
+			postURL={`/post/${post._id}`}
+			createdAt={new Date(post.createdAt)}
 			repost={post.repostCount}
 			like={post.likeCount}
 			comment={post.commentCount}

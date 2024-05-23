@@ -93,7 +93,7 @@ const Post = (props: PostProp): JSX.Element => {
 						<Link href={props.postURL} className={styles.link}>
 							<p>{props.text}</p>
 							{props.createdAt ? (
-								<p className={styles.postDate}>{props.createdAt.toLocaleDateString()}</p>
+								<p className={styles.postDate}>{props.createdAt.toLocaleString()}</p>
 							) : undefined}
 						</Link>
 						<div className={styles.iconsContainer}>
