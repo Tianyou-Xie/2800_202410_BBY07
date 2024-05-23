@@ -4,6 +4,7 @@ import { api } from '../../lib/axios';
 
 const Messages = () => {
 	const [message, setMessage] = useState('');
+	const [messages, setMessages] = useState([]);
 
 	useEffect(() => {
 		const fetchMessages = async () => {
@@ -15,7 +16,7 @@ const Messages = () => {
 			const { data: res } = await api.post('/user/getchats', { receiverId: '664399aff4853409512e9032' }, headers);
 			try {
 				console.log(res);
-				// setMessage(res.value);
+				setMessages(res.message);
 			} catch (error) {
 				console.log(error);
 			}
@@ -26,8 +27,18 @@ const Messages = () => {
 
 	const submitForm = async (e: any) => {
 		console.log(message);
+		const newMessage = {
+			content: message,
+			receiverId: '664399aff4853409512e9032',
+		};
+		try {
+			const { data: res } = await api.post('/user/chat', newMessage);
+			console.log(res);
+		} catch (error) {
+			console.log(error);
+		}
 	};
-	return <MessagesHtml email={message} setMessage={setMessage} submitForm={submitForm} />;
+	return <MessagesHtml message={message} messages={messages} setMessage={setMessage} submitForm={submitForm} />;
 };
 
 export default Messages;
