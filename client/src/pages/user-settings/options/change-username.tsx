@@ -27,11 +27,7 @@ const ChangeNameModal = (props: Props) => {
 			<ModalConfirmation
 				title='Change Username'
 				show={props.usernameBody1.showNameBody1}
-				body={
-					<p>
-						Are you sure you want to change your username?
-					</p>
-				}
+				body={<p>Are you sure you want to change your username?</p>}
 				disableFooter={false}
 				footer={
 					<div className='w-100 d-flex justify-content-center'>
@@ -62,9 +58,7 @@ const ChangeNameModal = (props: Props) => {
 				onHide={() => props.usernameBody2.setNameBody2(false)}
 				body={
 					<>
-						<p>
-							What would you like your username to be?
-						</p>
+						<p>What would you like your new username to be?</p>
 						<form onSubmit={props.usernameBody2.changeUsername}>
 							<input
 								className={`${styles.confInput} mb-5 w-75`}
