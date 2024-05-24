@@ -11,7 +11,9 @@
     text-align: center;
     flex-basis: 100%;
     color: #2196F3;
-    font-family: TTOctosquares;
+    font-family: Fjalla One;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .nav-container {
@@ -155,26 +157,24 @@
 
 .back-drop-div {
     pointer-events: none;
-    background-color: rgba(255, 255, 255, 0.4);
-    /*rgba(36, 44, 56, 1)*/
     
     position: absolute;
     right: 50%;
     bottom: 0%;
-    width: 400px;
-    height: 300px;
-    border-radius: 50% 50% 0 0;
+    width: 100vw;
+    height: 100vh;
     transform: translateY(50%) translateX(50%);
-    backdrop-filter: blur(1px);
-    border: none;
-    box-shadow: 0px 0px 80px 80px rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.4);
+    
+    backdrop-filter: blur(10px);
+    mask: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 70%);
 
     opacity: 0;
-    transition: transform .7s, opacity .7s;
+    transition: transform .7s, opacity .3s;
 }
 
 .nav-container input:checked ~ .back-drop-div {
-    opacity: 0.4;
+    opacity: 1;    
 }
 
 .menu-label {
