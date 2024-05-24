@@ -1,9 +1,10 @@
 import MessagesHtml from './messages-html';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { api } from '../../lib/axios';
 import { useParams } from 'wouter';
 import io from 'socket.io-client';
 import { getServerHost } from '../../environment';
+import { UserAuthContext } from '../../lib/auth';
 
 const Messages = () => {
 	let { id } = useParams();
@@ -13,8 +14,10 @@ const Messages = () => {
 	// const [socket, setSocket] = useState<any>(null);
 	const [convoID, setConvoID] = useState('');
 	const socket = io(getServerHost());
+	const user = useContext(UserAuthContext);
 
 	useEffect((): any => {
+		console.log(user);
 		const fetchMessages = async () => {
 			let headers = {
 				headers: {
@@ -23,7 +26,6 @@ const Messages = () => {
 			};
 			const { data: res } = await api.post('/user/getchats', { receiverId: id }, headers);
 			try {
-				console.log(res);
 				if (res.success) {
 					setIsChat(true);
 					setMessages(res.message);
@@ -75,6 +77,7 @@ const Messages = () => {
 			submitForm={submitForm}
 			id={id}
 			isChat={isChat}
+			user={user}
 		/>
 	);
 };

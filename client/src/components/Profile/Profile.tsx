@@ -52,7 +52,7 @@ const Profile = (props: ProfileProp): JSX.Element => {
 						</Link>
 					</button>
 					<button>
-						<Link href={props.outsideUser ? '/#MESSAGE/' + props.userId : '/settings'}>
+						<Link href={props.outsideUser ? '/messages/' + props.userId : '/settings'}>
 							<UIBox
 								className={styles.settings + ' ' + styles.buttons}
 								content={props.outsideUser ? 'Message' : '*'}

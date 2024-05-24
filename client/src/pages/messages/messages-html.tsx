@@ -8,19 +8,22 @@ import { Else, If, Then } from 'react-if';
 
 import styles from './messages.module.css';
 
-const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat }: any) => {
+const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, user }: any) => {
+	function handlePageReturn() {
+		history.back();
+	}
 	return (
 		<>
-			<div className='container'>
+			<div className={`container ${styles.container}`}>
 				<header className='border-bottom lh-1 py-3'>
 					<div className='row flex-nowrap justify-content-between align-items-center'>
 						<div className='col-4 pt-1'>
-							<IoChevronBackCircleSharp size={30} />
+							<IoChevronBackCircleSharp size={30} onClick={handlePageReturn} />
 						</div>
 						<div className='col-4 text-center'>
 							<a className='blog-header-logo text-body-emphasis text-decoration-none' href='#'>
 								<RxAvatar size={50} />
-								<h3>Kamal D.</h3>
+								<h3 className={styles.h3}>{user.userName}</h3>
 							</a>
 						</div>
 						<div className='col-4 d-flex justify-content-end align-items-center'>
@@ -39,15 +42,19 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat }:
 										<If condition={id === message.senderId}>
 											<Then>
 												<div className='d-flex text-body-secondary'>
-													<RxAvatar size={20} />
-													<p key={index}>{message.content}</p>
+													<RxAvatar size={25} />
+													<p className={styles.p} key={index}>
+														{message.content}
+													</p>
 													<br />
 												</div>
 											</Then>
 											<Else>
 												<div className='d-flex justify-content-end '>
-													<RxAvatar size={20} />
-													<p key={index}>{message.content}</p>
+													<RxAvatar size={25} />
+													<p className={styles.p} key={index}>
+														{message.content}
+													</p>
 													<br />
 												</div>
 											</Else>
