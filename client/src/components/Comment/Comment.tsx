@@ -50,7 +50,6 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
 	const [loading, setLoading] = useState(false);
-	console.log(postId);
 	const fetchComments = async (page: number) => {
 		setLoading(true);
 		try {
@@ -64,7 +63,6 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 							api.get(`/post/${comment._id}/save`),
 							api.get(`/post/${comment._id}/like`),
 						]);
-						console.log(likedRes);
 						return {
 							...comment,
 							isSaved: savedRes.data.success ? savedRes.data.value : false,
