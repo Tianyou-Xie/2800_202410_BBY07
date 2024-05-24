@@ -65,7 +65,7 @@ export const PlanetInfoCard = (props: Props) => {
 				cornerRadius={8}
 				height={bgHeight}
 				perfectDrawEnabled={false}
-				listening={isMobile}
+				listening={props.active}
 				onTap={props.onTap}
 			/>
 
