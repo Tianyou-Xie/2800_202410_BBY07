@@ -1,16 +1,9 @@
-import { model, Schema, Types } from 'mongoose';
+import { model, ObjectId, Schema, Types } from 'mongoose';
 import { ILocation, LocationSchema } from './location';
+import { AuthProvider, SSOSchema } from './user';
 
-export enum AuthProvider {
-	GOOGLE = 'google',
-}
-
-interface ISSO {
-	provider: AuthProvider;
-	id: string;
-}
-
-export interface IUser {
+interface IDeletedUser {
+	originID: ObjectId;
 	email?: string;
 	password?: string;
 	sso?: { provider: AuthProvider; id: string };
@@ -27,13 +20,9 @@ export interface IUser {
 	createdAt: Date;
 }
 
-export const SSOSchema = new Schema<ISSO>({
-	provider: { type: 'string', required: true },
-	id: { type: 'string', required: true },
-});
-
-const schema = new Schema<IUser>(
+const schema = new Schema<IDeletedUser>(
 	{
+		originID: { type: Object, required: true },
 		email: { type: 'string' },
 		sso: { type: SSOSchema },
 		password: { type: 'string' },
@@ -51,4 +40,4 @@ const schema = new Schema<IUser>(
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
 
-export const UserModel = model('User', schema);
+export const DeletedUserModel = model('DeletedUser', schema);

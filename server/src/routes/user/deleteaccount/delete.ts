@@ -1,9 +1,10 @@
-import mongoose, { deleteModel } from 'mongoose';
+import mongoose from 'mongoose';
 import { Handler } from 'express';
 import { authProtected } from '../../../middlewares/auth-protected';
 import { Resolve } from '../../../utils/express';
 import { UserModel } from '../../../models/user';
 import Joi from 'joi';
+import { DeletedUserModel } from '../../../models/deletedUser';
 
 interface deleteBody {
 	confirmationInput: string;
@@ -29,9 +30,38 @@ export const post: Handler[] = [
 		const validationResult = deleteSchema.validate(req.body, { convert: false });
 		if (validationResult.error) return Resolve(res).badRequest(validationResult.error.message);
 
-		const result = await User.findByIdAndDelete(userID);
-		if (!result) return Resolve(res).notFound('User could not be found.');
+		const userRef = await User.findById(userID);
+		if (!userRef) return Resolve(res).notFound('User could not be found.');
 
-		Resolve(res).okWith(result, 'Account deleted successfully.');
+		const userCopy = userRef;
+
+		await userRef.updateOne({
+			email: null,
+			userName: 'deletedUser',
+			password: null,
+			location: null,
+			bio: null,
+		});
+
+		const deletedUser = new DeletedUserModel({
+			originID: userCopy._id,
+			email: userCopy.email,
+			sso: userCopy.sso,
+			password: userCopy.password,
+			userName: userCopy.userName,
+			bio: userCopy.bio,
+			location: userCopy.location,
+			birthDate: userCopy.birthDate,
+			avatarUrl: userCopy.avatarUrl,
+			followerCount: userCopy.followerCount,
+			followingCount: userCopy.followingCount,
+			postCount: userCopy.postCount,
+			savedPosts: userCopy.savedPosts,
+			admin: userCopy.admin,
+			createdAt: userCopy.createdAt,
+		});
+		await deletedUser.save();
+
+		Resolve(res).okWith(userCopy, 'Account deleted successfully.');
 	},
 ];

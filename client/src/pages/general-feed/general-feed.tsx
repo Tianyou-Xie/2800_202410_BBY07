@@ -43,7 +43,7 @@ const GeneralFeed = () => {
 		displayedPosts.push({ ...dummyPost, key: i.toString() });
 	}
 
-	return <Page logoHeader={false} pageName='General Feed' content={displayedPosts} />;
+	return <Page pageName='General Feed' content={displayedPosts} />;
 };
 
 export default GeneralFeed;

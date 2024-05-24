@@ -16,7 +16,7 @@ interface PageProp {
  * @param props.pageName string - (Optional) Name of the page
  * @param props.content JSX.Element | JSX.Element[] - Content that will be added in the middle
  * @param props.noHeader boolean - (Optional) Takes off the header
- * @param props.logoHeader boolean - Gives a header with only website name if true. If false give regular header
+ * @param props.logoHeader boolean - (Optional) Gives a header with only website name if true. If false give regular header
  * @returns JSX.Element
  */
 const Page = (props: PageProp) => {

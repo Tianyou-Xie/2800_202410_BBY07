@@ -9,7 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
  */
 interface Props {
 	pageName?: string;
-	enableLogoHeader: boolean;
+	enableLogoHeader?: boolean;
 }
 
 /**
@@ -17,7 +17,7 @@ interface Props {
  *
  * @param props the props for this header, as seen outlined in the interface.
  * @param props.pageName (Optional) The name of the page as a string. Needed only if enableLogoHeader is false
- * @param props.enableLogoHeader If true, a header with just the website name will be given. 
+ * @param props.enableLogoHeader (Optional) If true, a header with just the website name will be given.
  * @requires props.pageName if enableLogoHeader is false unless empty title is needed.
  * @returns Returns the customized header for the page as a JSX.Element.
  */

@@ -5,26 +5,26 @@ import Profile from '../../components/Profile/Profile';
 import { api } from '../../lib/axios';
 import { useEffect, useState } from 'react';
 
-const ProfilePage = () => {
-	interface Post {
-		authorId: string;
-		commentCount: number;
-		content: string;
-		createdAt: Date;
-		deleted: false;
-		likeCount: number;
-		location: {
-			planetId: string;
-			latitude: number;
-			longitude: number;
-			_id: string;
-		};
-		media: [];
-		repostCount: number;
-		__v: number;
+interface Post {
+	authorId: string;
+	commentCount: number;
+	content: string;
+	createdAt: Date;
+	deleted: false;
+	likeCount: number;
+	location: {
+		planetId: string;
+		latitude: number;
+		longitude: number;
 		_id: string;
-	}
+	};
+	media: [];
+	repostCount: number;
+	__v: number;
+	_id: string;
+}
 
+const ProfilePage = () => {
 	const [username, setUsername] = useState('');
 	const [follower, setFollower] = useState(0);
 	const [following, setFollowing] = useState(0);
@@ -42,7 +42,7 @@ const ProfilePage = () => {
 				setFollower(data.followerCount);
 				setFollowing(data.followingCount);
 				setPostCount(data.postCount);
-				setDisplayedPosts(await getPosts());
+				// setDisplayedPosts(await getPosts());
 			} catch (err) {
 				console.log(err);
 			}
@@ -51,11 +51,19 @@ const ProfilePage = () => {
 		getUserData();
 	}, []);
 
+	useEffect(() => {
+		const displayPosts = async function () {
+			setDisplayedPosts(await getPosts());
+		};
+		displayPosts();
+	}, [userID]);
+
 	async function getPosts() {
 		try {
+			if (userID == '') return;
 			const res = await api.get('/feed/' + userID);
 			const postArray = res.data.value;
-			const postElements = postArray.map((post: Post) => {
+			let postElements = postArray.map((post: Post) => {
 				return (
 					<Post
 						username={username}
@@ -66,6 +74,9 @@ const ProfilePage = () => {
 					/>
 				);
 			});
+			if (postArray.length == 0) {
+				postElements = [<>Nothing yet...</>];
+			}
 			return postElements;
 		} catch (err) {
 			console.log(err);
@@ -74,7 +85,7 @@ const ProfilePage = () => {
 
 	return (
 		<Page
-			pageName='My Feed'
+			pageName='Profile'
 			content={
 				<>
 					<Profile

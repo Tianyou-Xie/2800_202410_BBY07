@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './Post.module.css';
 
@@ -13,6 +13,8 @@ import { FaRegBookmark } from 'react-icons/fa'; //<FaRegBookmark />	//Empty book
 import { FaBookmark } from 'react-icons/fa'; //<FaBookmark />	//Filled bookmark
 import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
 import { Link } from 'wouter';
+import { api } from '../../lib/axios';
+import { toast } from 'react-toastify';
 
 interface PostProp {
 	username: string;
@@ -79,16 +81,60 @@ const Post = (props: PostProp): JSX.Element => {
 	const [bookmarked, setBookmarked] = useState(false);
 	const [liked, setLiked] = useState(false);
 
+	useEffect(() => {
+		async function isLiked() {
+			try {
+				const res = await api.get(`/post/${props.postId}/like`);
+				setLiked(true);
+			} catch (error: any) {
+				if (error.response.status == 404) setLiked(false);
+				else console.log(error.response);
+			}
+		}
+		isLiked();
+	}, []);
+
 	function onShare() {}
 
-	function onBookmark() {
-		setBookmarked(!bookmarked);
+	async function addBookMark() {
+		setBookmarked(true);
+		try {
+			await api.post(`/post/${props.postId}/save`);
+		} catch (error: any) {
+			toast.error('Could not save post, it may have been removed.');
+		}
+	}
+
+	async function removeBookMark() {
+		setBookmarked(false);
+		try {
+			await api.delete(`/post/${props.postId}/save`);
+		} catch (error: any) {
+			// need a better error message here
+			// backend does not handle the case of unsaving a post that was deleted. Backend needs to be adjusted.
+			toast.error(error.response.data.error);
+		}
 	}
 
 	function onComment() {}
 
-	function onLike() {
-		setLiked(!liked);
+	async function onLike() {
+		try {
+			const res = await api.post(`/post/${props.postId}/like`);
+			console.log(res.data);
+			setLiked(true);
+		} catch (likeError: any) {
+			if (likeError.response.status == 400) {
+				console.log(likeError);
+				try {
+					const response = await api.delete(`/post/${props.postId}/like`);
+					console.log(response.data);
+					setLiked(false);
+				} catch (dislikeError: any) {
+					toast.error(dislikeError.response.data.error);
+				}
+			} else toast.error(likeError.response.data.error);
+		}
 	}
 
 	return (
@@ -111,9 +157,9 @@ const Post = (props: PostProp): JSX.Element => {
 							</button>
 							<button className={styles.book}>
 								{bookmarked ? (
-									<FaBookmark onClick={onBookmark} />
+									<FaBookmark onClick={removeBookMark} />
 								) : (
-									<FaRegBookmark onClick={onBookmark} />
+									<FaRegBookmark onClick={addBookMark} />
 								)}
 							</button>
 							<button className={styles.comment}>
