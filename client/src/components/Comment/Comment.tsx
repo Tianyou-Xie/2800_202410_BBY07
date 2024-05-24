@@ -2,6 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import styles from './Comment.module.css';
 
+import UIBox from '../UIBox/UIBox';
+
+// Icons
+import { FaRegHeart } from 'react-icons/fa'; //<FaRegHeart /> //Empty heart
+import { FaHeart } from 'react-icons/fa'; //<FaHeart /> // Filled heart
+import { RiShareBoxLine } from 'react-icons/ri'; //<RiShareBoxLine />
+import { FaRegBookmark } from 'react-icons/fa'; //<FaRegBookmark /> //Empty bookmark
+import { FaBookmark } from 'react-icons/fa'; //<FaBookmark /> //Filled bookmark
+import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
+import { Link } from 'wouter';
+
 interface CommentProps {
 	postId: string;
 }
@@ -12,7 +23,31 @@ interface Comment {
 	content: string;
 	createdAt: string;
 	userName: string;
+	repost: number;
+	like: number;
+	comment: number;
 }
+
+interface UserProp {
+	username: string;
+	userURL: string;
+	imageURL?: string;
+}
+
+const User = (props: UserProp): JSX.Element => {
+	return (
+		<UIBox
+			className={styles.userContainer}
+			curved
+			dark
+			content={
+				<Link href={props.userURL ?? '/'} className={styles.link}>
+					{props.username}
+				</Link>
+			}
+		/>
+	);
+};
 
 const Comment: React.FC<CommentProps> = ({ postId }) => {
 	const [comment, setComment] = useState('');
@@ -23,7 +58,10 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 			try {
 				const response = await api.get(`/post/${postId}/comment`);
 				if (response.data.success) {
-					setComments(response.data.value);
+					const sortedComments = response.data.value.sort(
+						(a: Comment, b: Comment) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+					);
+					setComments(sortedComments);
 				} else {
 					console.error(response.data.statusMessage);
 				}
@@ -45,7 +83,11 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 			try {
 				const response = await api.post(`/post/${postId}/comment`, { content: comment });
 				if (response.data.success) {
-					setComments([...comments, response.data.value]);
+					const newComment = response.data.value;
+					const updatedComments = [newComment, ...comments].sort(
+						(a: Comment, b: Comment) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+					);
+					setComments(updatedComments);
 					setComment('');
 				} else {
 					console.error(response.data.statusMessage);
@@ -55,6 +97,30 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 			}
 		}
 	};
+
+	const [bookmarked, setBookmarked] = useState(false);
+	const [liked, setLiked] = useState(false);
+
+	function onBookmark() {
+		setBookmarked(!bookmarked);
+	}
+
+	function onComment() { }
+
+	function onLike() {
+		setLiked(!liked);
+	}
+
+	function formatDate(dateString: string): string {
+		const date = new Date(dateString);
+		const year = date.getFullYear();
+		const month = date.getMonth() + 1; // Months are zero-indexed
+		const day = date.getDate();
+		const hours = date.getHours();
+		const minutes = date.getMinutes();
+		const seconds = date.getSeconds();
+		return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+	}
 
 	return (
 		<div className={styles.commentContainer}>
@@ -71,12 +137,43 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 			</form>
 			<div className={styles.commentsList}>
 				{comments.map((comment) => (
-					<div key={comment._id} className={styles.comment}>
-						<p>
-							<strong>{comment.userName}</strong>
-						</p>
-						<p>{comment.content}</p>
-						<p className={styles.commentDate}>{new Date(comment.createdAt).toLocaleString()}</p>
+					<div key={comment._id} className={styles.postContainer}>
+						<User username={comment.userName} userURL={comment.authorId} />
+						<UIBox
+							className={styles.paraContainer}
+							curved
+							content={
+								<>
+									<Link href={comment._id} className={styles.link}>
+										<p>{comment.content}</p>
+										{comment.createdAt ? (
+											<p className={styles.postDate}>{formatDate(comment.createdAt)}</p>
+										) : undefined}
+									</Link>
+									<div className={styles.iconsContainer}>
+										<p>{comment.repost}</p>
+										<button className={styles.share}>
+											<RiShareBoxLine />
+										</button>
+										<button className={styles.book}>
+											{bookmarked ? (
+												<FaBookmark onClick={onBookmark} />
+											) : (
+												<FaRegBookmark onClick={onBookmark} />
+											)}
+										</button>
+										<button className={styles.comment}>
+											<FaRocketchat />
+										</button>
+										<p>{comment.comment}</p>
+										<button onClick={onLike} className={styles.like}>
+											{liked ? <FaHeart /> : <FaRegHeart />}
+										</button>
+										<p>{comment.like}</p>
+									</div>
+								</>
+							}
+						/>
 					</div>
 				))}
 			</div>

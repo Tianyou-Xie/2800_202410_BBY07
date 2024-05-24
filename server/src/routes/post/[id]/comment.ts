@@ -31,11 +31,15 @@ export const get: Handler = async (req, res) => {
 		relationships.map(async (v) => {
 			const comment = await PostModel.findById(v.childPost).lean();
 			if (comment) {
-				const user = await UserModel.findById(comment.authorId).lean(); // Add this line to fetch the user
-				if (user) {
+				const user = await UserModel.findById(comment.authorId).lean();
+				const post = await PostModel.findById(comment._id).lean();
+				if (user && post) {
 					return {
 						...comment,
-						userName: user.userName
+						userName: user.userName,
+						repost: post.repostCount,
+						like: post.likeCount,
+						comment: post.commentCount,
 					};
 				}
 			}
@@ -98,9 +102,23 @@ export const post: Handler[] = [
 				return relationship;
 			});
 
-			Resolve(res).created(commentRelationship, 'Comment created successfully.');
-		} catch {
-			Resolve(res).error('Error occured while trying to create this comment.');
+			// Fetch the newly created comment with user information
+			const newComment = await PostModel.findById(commentRelationship.childPost).lean();
+			if (!newComment) throw new Error('Failed to fetch the newly created comment.');
+			const user = await UserModel.findById(newComment.authorId).lean();
+			if (!user) throw new Error('Failed to fetch the user information of the comment author.');
+			const responseComment = {
+				...newComment,
+				userName: user.userName,
+				repost: newComment.repostCount,
+				like: newComment.likeCount,
+				comment: newComment.commentCount,
+			};
+
+			Resolve(res).created(responseComment, 'Comment created successfully.');
+		} catch (error) {
+			console.error('Error creating comment:', error);
+			Resolve(res).error('Error occurred while trying to create this comment.');
 		} finally {
 			await session.endSession();
 		}
