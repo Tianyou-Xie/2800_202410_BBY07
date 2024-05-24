@@ -8,7 +8,7 @@ import { Else, If, Then } from 'react-if';
 
 import styles from './messages.module.css';
 
-const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, user }: any) => {
+const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, username }: any) => {
 	function handlePageReturn() {
 		history.back();
 	}
@@ -23,7 +23,7 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 						<div className='col-4 text-center'>
 							<a className='blog-header-logo text-body-emphasis text-decoration-none' href='#'>
 								<RxAvatar size={50} />
-								<h3 className={styles.h3}>{user.userName}</h3>
+								<h3 className={styles.h3}>{username}</h3>
 							</a>
 						</div>
 						<div className='col-4 d-flex justify-content-end align-items-center'>
