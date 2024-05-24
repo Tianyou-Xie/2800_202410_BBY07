@@ -40,8 +40,8 @@ export namespace JWT {
 	 * @returns the signed token
 	 */
 	export function signAs(user: HydratedDocument<IUser>) {
-		return jwt.sign({ userId: user._id.toString() } satisfies JWTPayload, process.env.JWT_SECRET!, {
-			expiresIn: parseInt(process.env.JWT_TTL!),
+		return jwt.sign({ userId: user._id.toString() } satisfies JWTPayload, secret!, {
+			expiresIn: parseInt(ttlString!),
 		});
 	}
 }

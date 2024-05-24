@@ -1,4 +1,4 @@
-import './src/load-env';
+import './src/environment';
 import express from 'express';
 import createRouter from 'express-file-routing';
 import path from 'path';
@@ -8,15 +8,16 @@ import http from 'http';
 import { Server } from 'socket.io';
 
 import { requestLogger } from './src/middlewares/log.js';
-import { content } from 'googleapis/build/src/apis/content';
+import { getServerHost, SERVER_PORT } from './src/environment';
 
 const PROJECT_ROOT = path.join(__dirname, 'src');
-const PORT = process.env.PORT;
 
 (async () => {
 	const app = express();
 	const server = http.createServer(app);
-	const io = new Server(server, { cors: { origin: '*' }, /*cors: { origin: "http://localhost:8000", methods: ['GET', 'POST']}*/ });
+	const io = new Server(server, {
+		cors: { origin: '*' } /*cors: { origin: "http://localhost:8000", methods: ['GET', 'POST']}*/,
+	});
 
 	io.on('connection', (socket) => {
 		// console.log('New client connected');
@@ -25,13 +26,13 @@ const PORT = process.env.PORT;
 			// console.log('Client disconnected');
 		});
 
-        socket.on('sendID', (convoID: string) => {
-            socket.join(convoID)
-        });
+		socket.on('sendID', (convoID: string) => {
+			socket.join(convoID);
+		});
 
-        socket.on('sendMessage', (convoID: string) => {
-            socket.to(convoID).emit('displayMessage')
-        });
+		socket.on('sendMessage', (convoID: string) => {
+			socket.to(convoID).emit('displayMessage');
+		});
 	});
 
 	app.set('socketio', io);
@@ -47,7 +48,7 @@ const PORT = process.env.PORT;
 
 	await createRouter(app, { directory: path.join(PROJECT_ROOT, 'routes') });
 
-	server.listen(PORT, () => {
-		console.log(`Server is running with port "${PORT}". (http://localhost:${PORT})`);
+	server.listen(SERVER_PORT, () => {
+		console.log(`Server is now running. (${getServerHost()})`);
 	});
 })();

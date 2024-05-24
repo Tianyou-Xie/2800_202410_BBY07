@@ -5,7 +5,7 @@ import { Circle, Group, Image } from 'react-konva';
 import useImage from 'use-image';
 import { useLocation } from 'wouter';
 
-import { isMobile } from '../../lib/environment';
+import { isMobile } from '../../environment';
 import { withRef } from '../../lib/with-ref';
 import { PlanetInfoCard } from './planet-info-card';
 import { createSlug } from '../../lib/create-slug';

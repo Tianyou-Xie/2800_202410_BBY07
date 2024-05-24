@@ -4,7 +4,7 @@ import { UserModel } from '../../../models/user';
 import { Request } from 'express';
 import { AuthAdapter } from '../auth-adapter';
 import { PlanetModel } from '../../../models/planet';
-import { isDev } from '../../../load-env';
+import { getClientHost, isDev } from '../../../environment';
 
 export class GoogleOAuthAdapter implements AuthAdapter {
 	/**
@@ -48,12 +48,10 @@ export class GoogleOAuthAdapter implements AuthAdapter {
 		this.CLIENT_ID = id;
 
 		const secret = process.env.GOOGLE_OAUTH_SECRET;
-		if (typeof secret !== 'string') throw 'GOOGLE_OAUTH_ID is not present in environment variables.';
+		if (typeof secret !== 'string') throw 'GOOGLE_OAUTH_SECRET is not present in environment variables.';
 
 		this.SECRET = secret;
-		this.REDIRECT_URL = isDev()
-			? 'https://dev.skynetwork.app/login'
-			: 'https://skynetwork.app/login';
+		this.REDIRECT_URL = `${getClientHost()}/login`;
 	}
 
 	public parseToken(req: Request) {

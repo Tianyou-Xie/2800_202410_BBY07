@@ -7,3 +7,6 @@
 
 # Secret files
 **/*.env
+
+# Mac Files
+**/.DS_Store
