@@ -29,6 +29,7 @@ import './index.css';
 import Home from './pages/home/home';
 import PostDetailPage from './pages/post/post';
 import Planets from './pages/planets/planets-component';
+import PlanetFeed from './pages/planet-feed/planet-feed';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -91,6 +92,7 @@ export const App = () => {
 									<Route path='/myfeed' component={MyFeed} />
 									<Route path='/post' component={PostPage} />
 									<Route path='/user/:id' component={UserPage} />
+									<Route path='/feed/:planetName/:id' component={PlanetFeed} />
 									<Route path='/profile' component={ProfilePage} />
 									<Route path='/settings' component={UserSettings} />
 									<Route path='/settings/manageAccount' component={ManageAccount} />
