@@ -13,6 +13,8 @@ import { FaRegBookmark } from 'react-icons/fa'; //<FaRegBookmark />	//Empty book
 import { FaBookmark } from 'react-icons/fa'; //<FaBookmark />	//Filled bookmark
 import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
 import { Link } from 'wouter';
+import { api } from '../../lib/axios';
+import { useEffect } from 'react';
 
 interface PostProp {
 	username: string;
@@ -67,20 +69,79 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.comment number - Number of comments of the post
  */
 const Post = (props: PostProp): JSX.Element => {
-	const [bookmarked, setBookmarked] = useState(false);
+
+	function onShare() { }
+
+	function onComment() { }
+
+	const [saved, setSaved] = useState(false);
+
+	useEffect(() => {
+		const fetchSaveStatus = async () => {
+			try {
+				const response = await api.get(`${props.postURL}/save`);
+				if (response.data.success) {
+					setSaved(response.data.value);
+				}
+			} catch (error) {
+				console.error('Error fetching save status:', error);
+			}
+		};
+
+		fetchSaveStatus();
+	}, []);
+
+	const onBookmark = async () => {
+		try {
+			if (saved) {
+				await api.delete(`${props.postURL}/save`);
+				setSaved(false);
+			} else {
+				const response = await api.post(`${props.postURL}/save`);
+				if (response.data.success) {
+					setSaved(true);
+				}
+			}
+		} catch (error) {
+			console.error('Error updating save status:', error);
+		}
+	};
+
+
 	const [liked, setLiked] = useState(false);
+	const [likeCount, setLikeCount] = useState(props.like);
+	useEffect(() => {
+		const fetchLikeStatus = async () => {
+			try {
+				const response = await api.get(`${props.postURL}/like`);
+				if (response.data.success) {
+					setLiked(true);
+				}
+			} catch (error) {
+				console.error('Error fetching like status:', error);
+			}
+		};
 
-	function onShare() {}
+		fetchLikeStatus();
+	}, []);
 
-	function onBookmark() {
-		setBookmarked(!bookmarked);
-	}
-
-	function onComment() {}
-
-	function onLike() {
-		setLiked(!liked);
-	}
+	const onLike = async () => {
+		try {
+			if (liked) {
+				await api.delete(`${props.postURL}/like`);
+				setLikeCount(likeCount - 1);
+				setLiked(false);
+			} else {
+				const response = await api.post(`${props.postURL}/like`);
+				if (response.data.success) {
+					setLikeCount(likeCount + 1);
+					setLiked(true);
+				}
+			}
+		} catch (error) {
+			console.error('Error updating like status:', error);
+		}
+	};
 
 	return (
 		<div className={styles.postContainer}>
@@ -102,7 +163,7 @@ const Post = (props: PostProp): JSX.Element => {
 								<RiShareBoxLine />
 							</button>
 							<button className={styles.book}>
-								{bookmarked ? (
+								{saved ? (
 									<FaBookmark onClick={onBookmark} />
 								) : (
 									<FaRegBookmark onClick={onBookmark} />
@@ -115,7 +176,7 @@ const Post = (props: PostProp): JSX.Element => {
 							<button onClick={onLike} className={styles.like}>
 								{liked ? <FaHeart /> : <FaRegHeart />}
 							</button>
-							<p>{props.like}</p>
+							<p>{likeCount}</p>
 						</div>
 					</>
 				}

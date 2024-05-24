@@ -86,7 +86,7 @@ export const del: Handler[] = [
 
 			Resolve(res).okWith(interaction);
 		} catch {
-			Resolve(res).error('Error occured while trying to like this post.');
+			Resolve(res).error('Error occured while trying to unlike this post.');
 		} finally {
 			await session.endSession();
 		}
