@@ -1,8 +1,5 @@
-import { useState } from 'react';
-
 import styles from './Profile.module.css';
 
-import { Container } from 'react-bootstrap';
 import UIBox from '../UIBox/UIBox';
 import { Link } from 'wouter';
 

@@ -1,21 +1,23 @@
 import styles from './post-page.module.css';
 import Page from '../../components/Page/Page';
 import UIBox from '../../components/UIBox/UIBox';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import { toast } from 'react-toastify';
 import { useLocation } from 'wouter';
+import { UserAuthContext } from '../../lib/auth';
 
 interface PostProps {}
 
 const PostPage = function (props: PostProps) {
+	const user = useContext(UserAuthContext);
+
 	interface Planet {
 		_id: string;
 		name: string;
 	}
 
 	const [planets, setPlanets] = useState<Array<Planet>>([]);
-	const [username, setUsername] = useState('username');
 	const [_, setLocation] = useLocation();
 
 	useEffect(() => {
@@ -29,17 +31,6 @@ const PostPage = function (props: PostProps) {
 			}
 		})();
 	}, []);
-
-	(async function getUsername() {
-		try {
-			const response = await api.get('/user/');
-			const data = response.data.value;
-			setUsername('@' + response.data.value.userName);
-			console.log(username);
-		} catch (err) {
-			console.log(err);
-		}
-	})();
 
 	async function submitPost() {
 		const geoLoc = await new Promise<GeolocationPosition | undefined>((res) => {
@@ -89,7 +80,12 @@ const PostPage = function (props: PostProps) {
 				content={
 					<>
 						<div className={styles.general}>
-							<UIBox className={styles.username} content={username} curved dark />
+							<UIBox
+								className={styles.username}
+								content={user ? `@${user.userName}` : 'Unknown'}
+								curved
+								dark
+							/>
 							<UIBox
 								className={styles.post}
 								content={

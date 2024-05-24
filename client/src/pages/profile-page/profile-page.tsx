@@ -3,7 +3,8 @@ import Page from '../../components/Page/Page';
 import Post from '../../components/Post/Post';
 import Profile from '../../components/Profile/Profile';
 import { api } from '../../lib/axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserAuthContext } from '../../lib/auth';
 
 interface Post {
 	authorId: string;
@@ -25,49 +26,26 @@ interface Post {
 }
 
 const ProfilePage = () => {
-	const [username, setUsername] = useState('');
-	const [follower, setFollower] = useState(0);
-	const [following, setFollowing] = useState(0);
-	const [postCount, setPostCount] = useState(0);
+	const user = useContext(UserAuthContext);
 	const [displayedPosts, setDisplayedPosts] = useState(Array<JSX.Element>());
-	const [userID, setUserID] = useState('');
-
-	useEffect(() => {
-		const getUserData = async function () {
-			try {
-				const res = await api.get('/user/');
-				const data = res.data.value;
-				setUserID(data._id);
-				setUsername(data.userName);
-				setFollower(data.followerCount);
-				setFollowing(data.followingCount);
-				setPostCount(data.postCount);
-				// setDisplayedPosts(await getPosts());
-			} catch (err) {
-				console.log(err);
-			}
-		};
-
-		getUserData();
-	}, []);
 
 	useEffect(() => {
 		const displayPosts = async function () {
 			setDisplayedPosts(await getPosts());
 		};
 		displayPosts();
-	}, [userID]);
+	}, [user]);
 
 	async function getPosts() {
 		try {
-			if (userID == '') return;
-			const res = await api.get('/feed/' + userID);
+			if (!user) return;
+			const res = await api.get('/feed/' + user._id);
 			const postArray = res.data.value;
 			let postElements = postArray.map((post: Post) => {
 				return (
 					<Post
-						username={username}
-						authorId={userID}
+						username={user.userName}
+						authorId={user._id}
 						content={post.content}
 						postId={post._id}
 						key={post._id}
@@ -89,12 +67,12 @@ const ProfilePage = () => {
 			content={
 				<>
 					<Profile
-						userId={userID}
-						username={username}
+						userId={user._id}
+						username={user.userName}
 						// description='I like eating lettuce and broccoli'
-						follower={follower}
-						following={following}
-						postCount={postCount}
+						follower={user.followerCount}
+						following={user.followingCount}
+						postCount={user.postCount}
 					/>
 					{displayedPosts}
 				</>
