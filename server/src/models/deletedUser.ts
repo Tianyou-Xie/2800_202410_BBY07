@@ -36,7 +36,8 @@ const schema = new Schema<IDeletedUser>(
 		postCount: { type: 'number', required: true, default: 0 },
 		savedPosts: { type: ['ObjectId'], required: true, default: [] },
 		admin: { type: 'boolean', required: true, default: false },
-		createdAt: {type: Date, default: new Date(), expires: 2592000}
+		// createdAt: {type: Date, default: new Date(), expires: 2592000}
+		createdAt: {type: Date, default: new Date()}
 	}
 );
 
