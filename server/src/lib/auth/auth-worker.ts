@@ -3,7 +3,7 @@ import { BasicJWTAdapter } from './adapters/basic-jwt';
 import { GoogleOAuthAdapter } from './adapters/google-oauth';
 import { AuthAdapter } from './auth-adapter';
 
-const registeredAdapters = [new BasicJWTAdapter(), new GoogleOAuthAdapter()];
+const registeredAdapters = [new GoogleOAuthAdapter(), new BasicJWTAdapter()];
 
 /**
  * Request authentication worker to authenticate
