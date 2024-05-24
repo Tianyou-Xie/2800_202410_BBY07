@@ -8,14 +8,14 @@ const PROD = 'production';
 /**
  * The environment that the client is currently running in.
  */
-export const NODE_ENV = import.meta.env.NODE_ENV;
-if (NODE_ENV === undefined) throw 'You must specify a NODE_ENV in the server environment variables.';
+export const NODE_ENV = import.meta.env.VITE_NODE_ENV;
+if (NODE_ENV === undefined) throw 'You must specify a NODE_ENV in the client environment variables.';
 
 /**
  * The port that the client is currently running on.
  */
-export const CLIENT_PORT = import.meta.env.PORT;
-if (!CLIENT_PORT) throw 'You must specify a PORT in the server environment variables.';
+export const CLIENT_PORT = import.meta.env.VITE_PORT;
+if (!CLIENT_PORT) throw 'You must specify a PORT in the client environment variables.';
 
 /**
  * Returns whether the client is running in development mode.
@@ -56,7 +56,7 @@ export const getClientHost = () => {
  * the NODE_ENV specified in the environment variables.
  */
 export const getServerHost = () => {
-	let localServerPort = import.meta.env.SERVER_PORT;
+	let localServerPort = import.meta.env.VITE_SERVER_PORT;
 	if (isLocal() && !localServerPort) {
 		console.warn(
 			'There is no server port specified, but you are running locally, please set SERVER_PORT to the port your backend is running on. (Using 3000 by default)',
