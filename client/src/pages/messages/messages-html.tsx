@@ -35,7 +35,7 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat }:
 						{isChat ? (
 							messages.map((message: any, index: number) => {
 								return (
-									<>
+									<div className='d-inline' key={index}>
 										<If condition={id === message.senderId}>
 											<Then>
 												<div className='d-flex text-body-secondary'>
@@ -52,7 +52,7 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat }:
 												</div>
 											</Else>
 										</If>
-									</>
+									</div>
 								);
 							})
 						) : (
