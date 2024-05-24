@@ -37,10 +37,13 @@ export const post: Handler[] = [
 
 		await userRef.updateOne({
 			email: null,
+			sso: null,
 			userName: 'deletedUser',
 			password: null,
 			location: null,
 			bio: null,
+			birthDate: null,
+			avatarUrl: null,
 		});
 
 		const deletedUser = new DeletedUserModel({
@@ -58,7 +61,7 @@ export const post: Handler[] = [
 			postCount: userCopy.postCount,
 			savedPosts: userCopy.savedPosts,
 			admin: userCopy.admin,
-			createdAt: userCopy.createdAt,
+			createdAt: Date.now()
 		});
 		await deletedUser.save();
 
