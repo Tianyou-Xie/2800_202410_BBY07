@@ -1,6 +1,6 @@
 import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { PiCrosshairBold } from 'react-icons/pi';
 import { Layer, Stage } from 'react-konva';
@@ -16,35 +16,106 @@ import { SpaceTraveller } from './space-traveller';
 export const PlanetMap = () => {
 	const stageRef = useRef<Konva.Stage>(null);
 
-	const [currentPan, setCurrentPan] = useState<Vector2d>({ x: 0, y: 0 });
-
 	const [planetData, setPlanetData] = useState<any[]>([]);
 	const [homePlanetId, setHomePlanetId] = useState<string>();
 
+	const minZoom = 0.1;
+	const maxZoom = 10;
+	const [zoom, setZoom] = useState(1);
+
 	const user = useContext(UserAuthContext);
 
-	const resetPan = () =>
-		withRef(stageRef, (stage) => {
-			stage.to({ x: 0, y: 0, duration: 0.2 });
-		});
+	const getAbsolutePos = (relativePos: Vector2d): Vector2d => {
+		const stage = stageRef.current;
+		if (!stage) return { x: 0, y: 0 };
 
-	const updatePos = () => {
+		const offset = stage.offset();
+		const xOffset = offset.x * (1 - zoom);
+		const yOffset = offset.y * (1 - zoom);
+
+		return {
+			x: relativePos.x - xOffset,
+			y: relativePos.y - yOffset,
+		};
+	};
+
+	const getRelativePos = (absolutePos: Vector2d): Vector2d => {
+		const stage = stageRef.current;
+		if (!stage) return { x: 0, y: 0 };
+
+		const offset = stage.offset();
+		const xOffset = offset.x * (1 - zoom);
+		const yOffset = offset.y * (1 - zoom);
+
+		return {
+			x: absolutePos.x + xOffset,
+			y: absolutePos.y + yOffset,
+		};
+	};
+
+	const [absPanPosition, setAbsPanPosition] = useState<Vector2d>({ x: 0, y: 0 });
+	const relativePanPosition = useMemo<Vector2d>(() => {
+		const stage = stageRef.current;
+		if (!stage) return { x: 0, y: 0 };
+
+		return getRelativePos(absPanPosition);
+	}, [absPanPosition, zoom]);
+
+	const resetPan = () => {
+		withRef(stageRef, (stage) => {
+			stage.to({ ...getAbsolutePos({ x: 0, y: 0 }), duration: 0.2 });
+		});
+	};
+
+	const updatePositionLabel = () => {
 		withRef(stageRef, (ref) => {
 			const x = Math.round(ref.x());
 			const y = Math.round(ref.y());
-			setCurrentPan({ x, y });
+			setAbsPanPosition({ x, y });
 		});
 	};
+
+	const updateZoom = () => {
+		const stage = stageRef.current;
+		if (!stage) return;
+
+		const oldZoom = stage.scaleX();
+
+		const userPointer = stage.getPointerPosition();
+		const pointerPos = userPointer ? userPointer : { x: innerWidth / 2, y: innerHeight / 2 };
+
+		const zoomPoint: Vector2d = {
+			x: (pointerPos.x - stage.x()) / oldZoom,
+			y: (pointerPos.y - stage.y()) / oldZoom,
+		};
+
+		stage.to({
+			scaleX: zoom,
+			scaleY: zoom,
+			x: pointerPos.x - zoomPoint.x * zoom,
+			y: pointerPos.y - zoomPoint.y * zoom,
+			duration: 0.1,
+		});
+	};
+
+	const updateZoomFromScroll = (kev: Konva.KonvaEventObject<WheelEvent>) => {
+		kev.evt.preventDefault();
+		const change = kev.evt.deltaY / 1000;
+		const newZoom = zoom + -change;
+		setZoom(Math.max(minZoom, Math.min(maxZoom, newZoom)));
+	};
+
+	useEffect(() => updateZoom(), [zoom]);
 
 	useEffect(
 		() =>
 			withRef(stageRef, (ref) => {
-				ref.on('xChange', updatePos);
-				ref.on('yChange', updatePos);
+				ref.on('xChange', updatePositionLabel);
+				ref.on('yChange', updatePositionLabel);
 
 				return () => {
-					ref.off('xChange', updatePos);
-					ref.off('yChange', updatePos);
+					ref.off('xChange', updatePositionLabel);
+					ref.off('yChange', updatePositionLabel);
 				};
 			}),
 		[],
@@ -115,12 +186,13 @@ export const PlanetMap = () => {
 		<>
 			<div className='position-absolute end-0 bottom-0 z-3 p-3 d-flex'>
 				<div className='mt-auto ms-auto d-flex gap-3'>
-					<p className='mb-0'>
-						X: {currentPan.x}, Y: {currentPan.y}
+					<p className='mb-0 text-dark-emphasis '>
+						X: {-relativePanPosition.x.toFixed(0)}, Y: {relativePanPosition.y.toFixed(0)}, x
+						{zoom.toLocaleString()}
 					</p>
 					<button
 						className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
-						disabled={currentPan.x === 0 && currentPan.y === 0}
+						disabled={relativePanPosition.x === 0 && relativePanPosition.y === 0}
 						onClick={() => resetPan()}>
 						<PiCrosshairBold />
 					</button>
@@ -133,19 +205,13 @@ export const PlanetMap = () => {
 
 			<Stage
 				ref={stageRef}
+				onWheel={updateZoomFromScroll}
 				width={innerWidth}
 				height={innerHeight}
+				offset={{ x: -innerWidth / 2, y: -innerHeight / 2 }}
 				style={{ position: 'absolute', background: 'transparent', zIndex: 1 }}
-				draggable
-				onDragMove={() =>
-					withRef(stageRef, (stage) => {
-						const x = stage.x();
-						const y = stage.y();
-						stage.x(Math.max(-innerWidth * 2, Math.min(x, innerWidth * 2)));
-						stage.y(Math.max(-innerHeight * 2, Math.min(y, innerHeight * 2)));
-					})
-				}>
-				<Layer width={innerWidth} height={innerHeight}>
+				draggable>
+				<Layer>
 					<CenterVisual />
 				</Layer>
 
@@ -155,7 +221,7 @@ export const PlanetMap = () => {
 					})}
 				</Layer>
 
-				<Layer>
+				<Layer offset={{ x: innerWidth / 2, y: innerHeight / 2 }}>
 					<SpaceTraveller active={secretActive} />
 					<SpaceTraveller active={secretActive} />
 					<SpaceTraveller active={secretActive} />
