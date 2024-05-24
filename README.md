@@ -28,6 +28,10 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [CSS Modules](https://github.com/css-modules/css-modules) (implemented by Vite)
 -   [Bootstrap](https://getbootstrap.com/)
 -   [axios](https://axios-http.com/)
+-   [dotenv](https://www.dotenv.org/)
+-   [React If](https://https://www.npmjs.com/package/react-if/)
+-   [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
+-   [Socket IO](https://socket.io/) (Client)
 
 **Server (built with [esno](https://www.npmjs.com/package/esno)):**
 
@@ -40,6 +44,12 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [http-status-codes](https://www.npmjs.com/package/http-status-codes)
 -   [nodemailer](https://www.nodemailer.com/)
 -   [JWT](https://jwt.io/)
+-   [CORS](https://www.npmjs.com/package/cors)
+-   [dotenv](https://www.dotenv.org/)
+-   [Google Auth Library](https://cloud.google.com/nodejs/docs/reference/google-auth-library/latest)
+-   [Google APIs](https://www.npmjs.com/package/googleapis)
+-   [Http Status Codes](https://www.npmjs.com/package/http-status-codes)
+-   [Socket IO](https://socket.io/) (Server)
 
 **Development Utilities:**
 
@@ -69,6 +79,7 @@ Both the server and client utilize a `.env` file.
 | Key  | Usage                          |
 | ---- | ------------------------------ |
 | PORT | Port used for the frontend app |
+| VITE_LOCALHOST | Host used for listening to Server Socket Events |
 
 **Server Variables:**
 

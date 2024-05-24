@@ -1,0 +1,102 @@
+.link {
+	color: inherit;
+	text-decoration: none;
+}
+
+.commentContainer {
+	font-family: TTOctosquares;
+	max-width: 750px;
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.commentsList {
+	flex-grow: 1;
+}
+
+.commentForm {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+}
+
+.commentTextArea {
+	width: 100%;
+	min-height: 50px;
+	padding: 10px;
+	font-size: 0.9rem;
+	/* Slightly smaller than the post text */
+	resize: vertical;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	font-family: TTOctosquares;
+}
+
+.commentButton {
+	width: fit-content;
+	align-self: flex-end;
+	padding: 5px 10px;
+	font-size: 1rem;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: TTOctosquares;
+}
+
+.postContainer {
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 10px;
+	font-size: 0.8rem;
+	/* Slightly smaller than the post text */
+	font-family: TTOctosquares;
+}
+
+.userContainer {
+	padding: 2px 8px;
+	margin: 2px 0px;
+	width: max-content;
+	text-align: left;
+	font-size: 0.8rem;
+	/* Slightly smaller than the post text */
+}
+
+.paraContainer {
+	padding: 10px;
+	padding-bottom: 5px;
+	margin: 2px 0px;
+	width: 100%;
+	text-align: left;
+	word-break: break-word;
+	font-size: 0.9rem;
+	/* Slightly smaller than the post text */
+}
+
+.postDate {
+	font-size: 0.6em;
+	color: var(--soft-shadow);
+}
+
+.iconsContainer {
+	display: flex;
+	font-size: 1.2rem;
+	/* Slightly smaller than the post icons */
+	gap: 0.75rem;
+}
+
+.iconsContainer button {
+	background-color: transparent;
+	padding: 5px;
+	width: auto;
+	box-shadow: none;
+	border: none;
+}
+
+.share {
+	margin-right: auto;
+}

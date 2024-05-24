@@ -15,3 +15,22 @@
     justify-content: end;
     color: #2196F3 !important;
 }
+
+.logo-header {
+    width: 100%;
+    font-family: Bitsumishi;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 420px) {
+    .page-title {
+        font-size: 2em;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .page-title {
+        font-size: 1.6em;
+    }
+}

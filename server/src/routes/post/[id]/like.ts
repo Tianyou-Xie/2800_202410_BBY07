@@ -1,25 +1,24 @@
 import { Handler } from 'express';
-import { requireLogin } from '../../../middlewares/require-login';
+import { authProtected } from '../../../middlewares/auth-protected';
 import { PostModel } from '../../../models/post';
 import mongoose from 'mongoose';
 import { Resolve } from '../../../utils/express';
 import { LikeInteraction } from '../../../models/like-interaction';
 
 export const get: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
 
 		const currentUserId = req.user!.id;
-		const existingInteraction = await LikeInteraction.findOne({ postId: id, userId: currentUserId });
-		if (existingInteraction) Resolve(res).okWith(existingInteraction);
-		else Resolve(res).notFound('Post is not liked.');
+		const existingInteraction = await LikeInteraction.exists({ postId: id, userId: currentUserId });
+		Resolve(res).okWith(!!existingInteraction);
 	},
 ];
 
 export const post: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
@@ -60,7 +59,7 @@ export const post: Handler[] = [
 ];
 
 export const del: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
@@ -86,7 +85,7 @@ export const del: Handler[] = [
 
 			Resolve(res).okWith(interaction);
 		} catch {
-			Resolve(res).error('Error occured while trying to like this post.');
+			Resolve(res).error('Error occured while trying to unlike this post.');
 		} finally {
 			await session.endSession();
 		}

@@ -5,6 +5,7 @@ import Hotbar from '..//Hotbar/Hotbar';
 
 interface PageProp {
 	content: JSX.Element | JSX.Element[];
+	logoHeader?: boolean;
 	pageName?: string;
 	noHeader?: boolean;
 }
@@ -15,6 +16,7 @@ interface PageProp {
  * @param props.pageName string - (Optional) Name of the page
  * @param props.content JSX.Element | JSX.Element[] - Content that will be added in the middle
  * @param props.noHeader boolean - (Optional) Takes off the header
+ * @param props.logoHeader boolean - (Optional) Gives a header with only website name if true. If false give regular header
  * @returns JSX.Element
  */
 const Page = (props: PageProp) => {
@@ -27,7 +29,7 @@ const Page = (props: PageProp) => {
 				<></>
 			) : (
 				<div className={styles.header}>
-					<Header pageName={props.pageName ? props.pageName : ''} />
+					<Header pageName={props.pageName ? props.pageName : ''} enableLogoHeader={props.logoHeader} />
 				</div>
 			)}
 			<div className={styles.content}>

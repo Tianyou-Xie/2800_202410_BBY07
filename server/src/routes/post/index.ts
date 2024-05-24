@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { Handler } from 'express';
-import { requireLogin } from '../../middlewares/require-login';
+import { authProtected } from '../../middlewares/auth-protected';
 import { assertRequestBody, Resolve } from '../../utils/express';
 import { IMedia, RawMediaSchema } from '../../models/media';
 import { ILocation, RawLocationSchema } from '../../models/location';
@@ -15,7 +15,7 @@ interface PostBody {
 }
 
 export const post: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const body = assertRequestBody(
 			req,

@@ -7,20 +7,17 @@ const MyFeed = () => {
 
 	const dummyPost = (
 		<Post
-			username='@MarcusTheDumbs'
-			text='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
-			postURL='./about'
-			userURL='#USER_URL'
-		/>
+			username='MarcusTheDumbs'
+			content='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
+			postId='66450ab930f716df67e47a02'
+			authorId='#USER_URL' repost={0} like={0} comment={0} />
 	);
 
 	for (let i = 1; i < 10; i++) {
 		displayedPosts.push(dummyPost);
 	}
 
-	return (
-		<Page pageName="My Feed" content={displayedPosts} />
-	);
+	return <Page pageName='My Feed' content={displayedPosts} />;
 };
 
 export default MyFeed;

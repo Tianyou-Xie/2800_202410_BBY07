@@ -1,35 +1,19 @@
-import { api } from '../../../lib/axios';
-import { useState } from 'react';
+import { useContext } from 'react';
 
 import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
 import Button from 'react-bootstrap/Button';
+import { UserAuthContext } from '../../../lib/auth';
+import { Else, If, Then } from 'react-if';
 
 interface Props {
-    infoBody: {
-        showInfoBody: boolean,
-        setInfoBody: any
-    }
+	infoBody: {
+		showInfoBody: boolean;
+		setInfoBody: any;
+	};
 }
 
 const YourInfoModal = (props: Props) => {
-	const userInfo = async () => {
-		try {			
-			const response = await api.get('/user/');
-			const data = response.data.value;
-			document.getElementById('username')!.innerHTML = data.userName;
-			document.getElementById('email')!.innerHTML = data.email;
-
-			if (data.bio) {
-				document.getElementById('bio')!.innerHTML = "Bio: " + data.bio;
-			} else {
-				document.getElementById('bio')!.innerHTML = "Follower Count: " + data.followerCount;
-			}		
-
-		} catch (error: any) {
-			console.log('could not get information');
-		}
-	};
-	userInfo();
+	const user = useContext(UserAuthContext);
 
 	return (
 		<>
@@ -38,13 +22,16 @@ const YourInfoModal = (props: Props) => {
 				show={props.infoBody.showInfoBody}
 				onHide={() => props.infoBody.setInfoBody(false)}
 				body={
-					<>
-                        <p>
-							Username: <span id='username'></span><br/>
-							Email: <span id='email'></span><br/>
-							<span id='bio'></span><br/>
-						</p>
-                    </>
+					<If condition={user}>
+						<Then>
+							<p>Username: {user.userName}</p>
+							<p>Email: {user.email ?? 'Authenticated with Provider'}</p>
+							<p>Bio: {user.bio ?? 'No Bio Provided'}</p>
+						</Then>
+						<Else>
+							<p className='text-danger'>An error occured.</p>
+						</Else>
+					</If>
 				}
 				disableFooter={false}
 				footer={

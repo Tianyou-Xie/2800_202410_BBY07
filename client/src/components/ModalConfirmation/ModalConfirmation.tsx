@@ -4,39 +4,49 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 /**
- *
+ * The props types for the Confirmation Modal.
  */
 interface Props {
-	title: string;
 	header?: JSX.Element;
+	title?: string;
 	body: JSX.Element;
-	footer?: JSX.Element;
 	disableFooter: boolean;
+	footer?: JSX.Element;
 	show: boolean;
-	onHide: () => void;
+	onHide?: () => void;
 	onContinue?: any;
 }
 
 /**
+ * Creates a customized confirmation modal based upon given the properties.
  *
- * @param props
- * @returns
+ * @param props the props for this modal as seen outlined in the interface.
+ * @param props.header (Optional) Header of the modal as a JSX.Element. A default header that contians the title is provided if none is given.
+ * @param props.title (Optional) Title of the modal as a string. Recommended to define if no header is provided.
+ * @param props.body Body of the modal as a JSX.Element.
+ * @param props.disableFooter Hides the default footer if true. A footer should be provided in the next prop.
+ * @param props.footer Footer of the modal as a JSX.Element. A default footer will be provided if none is given.
+ * @param show Boolean variable which dictates if the modal should appear. Changing this variable state must be handled externally.
+ * @param props.onHide The function of type () => void that hides the modal.
+ * @param props.onContinue (Optional) The function that initiates when the continue btn is pressed in the default footer.
+ * @example See user-settings/options/change-password-modal.tsx
+ * @returns The customized modal as a JSX.Element
  */
 const ModalConfirmation = (props: Props) => {
 	return (
 		<>
-			<Modal className={`${styles.modal} p-2`} show={props.show} onHide={props.onHide} centered>
+			<Modal dialogClassName={`${styles.modal} p-2`} show={props.show} onHide={props.onHide} centered>
 				{!props.header ? (
 					<Modal.Header>
-						<Modal.Title className={`${styles.headerFont} w-100 text-center`}>{props.title}</Modal.Title>
+						<Modal.Title className={`${styles.headerFont} w-100 text-center`}>{props.title ? props.title : 'define title prop'}</Modal.Title>
 					</Modal.Header>
 				) : (
 					<div className={`${styles.headerFont} w-100 text-center`}>{props.header}</div>
 				)}
-				<Modal.Body className={`${styles.bodyFont} w-100 text-center`}>{props.body}</Modal.Body>
+				<Modal.Body className={`${styles.modalBody} w-100 text-center`}>{props.body}</Modal.Body>
 				{!props.disableFooter ? (
 					!props.footer ? (
-						<Modal.Footer className={styles.footerFont}>
+						<Modal.Footer className={styles.modalFooter}>
 							<div className='w-100 d-flex justify-content-center'>
 								<Button className='me-3' variant='secondary' onClick={props.onHide}>
 									Close
@@ -47,7 +57,7 @@ const ModalConfirmation = (props: Props) => {
 							</div>
 						</Modal.Footer>
 					) : (
-						<div className={`${styles.footerFont} p-4`}>{props.footer}</div>
+						<div className={`${styles.modalFooter} p-4`}>{props.footer}</div>
 					)
 				) : (
 					<></>
