@@ -47,39 +47,45 @@ const User = (props: UserProp): JSX.Element => {
 const Comment: React.FC<CommentProps> = ({ postId }) => {
 	const [comment, setComment] = useState('');
 	const [comments, setComments] = useState<Comment[]>([]);
+	const [page, setPage] = useState(1);
+	const [hasMore, setHasMore] = useState(true);
+	const [loading, setLoading] = useState(false);
+
+	const fetchComments = async (page: number) => {
+		setLoading(true);
+		try {
+			const response = await api.get(`/post/${postId}/comment`, {
+				params: { limit: 10, page },
+			});
+			if (response.data.success) {
+				const commentsWithStatus = await Promise.all(
+					response.data.value.map(async (comment: Comment) => {
+						const [savedRes, likedRes] = await Promise.all([
+							api.get(`/post/${comment._id}/save`),
+							api.get(`/post/${comment._id}/like`),
+						]);
+						return {
+							...comment,
+							isSaved: savedRes.data.success ? savedRes.data.value : false,
+							isLiked: likedRes.data.value === null ? true : false,
+						};
+					})
+				);
+				setComments((prevComments) => [...prevComments, ...commentsWithStatus]);
+				setHasMore(commentsWithStatus.length === 10); // Assuming 10 is the limit
+			} else {
+				console.error(response.data.statusMessage);
+			}
+		} catch (error) {
+			console.error('Error fetching comments:', error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	useEffect(() => {
-		const fetchComments = async () => {
-			try {
-				const response = await api.get(`/post/${postId}/comment`);
-				if (response.data.success) {
-					const commentsWithStatus = await Promise.all(
-						response.data.value.map(async (comment: Comment) => {
-							const [savedRes] = await Promise.all([
-								api.get(`/post/${comment._id}/save`),
-								// api.get(`/post/${comment._id}/like`),
-							]);
-							return {
-								...comment,
-								isSaved: savedRes.data.success ? savedRes.data.value : false,
-								// isLiked: likedRes.data.success ? likedRes.data.value : false,
-							};
-						})
-					);
-					const sortedComments = commentsWithStatus.sort(
-						(a: Comment, b: Comment) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-					);
-					setComments(sortedComments);
-				} else {
-					console.error(response.data.statusMessage);
-				}
-			} catch (error) {
-				console.error('Error fetching comments:', error);
-			}
-		};
-
-		fetchComments();
-	}, [postId]);
+		fetchComments(page);
+	}, [page, postId]);
 
 	const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setComment(event.target.value);
@@ -97,7 +103,7 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 						api.get(`/post/${newComment._id}/like`),
 					]);
 					newComment.isSaved = savedRes.data.success ? savedRes.data.value : false;
-					newComment.isLiked = likedRes.data.success ? likedRes.data.value : false;
+					newComment.isLiked = likedRes.data.value === null ? true : false;
 					const updatedComments = [newComment, ...comments].sort(
 						(a: Comment, b: Comment) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
 					);
@@ -119,8 +125,8 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 			} else {
 				await api.post(`/post/${commentId}/save`);
 			}
-			setComments(prevComments =>
-				prevComments.map(comment =>
+			setComments((prevComments) =>
+				prevComments.map((comment) =>
 					comment._id === commentId ? { ...comment, isSaved: !isSaved } : comment
 				)
 			);
@@ -133,15 +139,15 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 		try {
 			if (isLiked) {
 				await api.delete(`/post/${commentId}/like`);
-				setComments(prevComments =>
-					prevComments.map(comment =>
+				setComments((prevComments) =>
+					prevComments.map((comment) =>
 						comment._id === commentId ? { ...comment, like: comment.like - 1, isLiked: false } : comment
 					)
 				);
 			} else {
 				await api.post(`/post/${commentId}/like`);
-				setComments(prevComments =>
-					prevComments.map(comment =>
+				setComments((prevComments) =>
+					prevComments.map((comment) =>
 						comment._id === commentId ? { ...comment, like: comment.like + 1, isLiked: true } : comment
 					)
 				);
@@ -161,6 +167,12 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 		const seconds = date.getSeconds();
 		return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
 	}
+
+	const loadMoreComments = () => {
+		if (hasMore && !loading) {
+			setPage((prevPage) => prevPage + 1);
+		}
+	};
 
 	return (
 		<div className={styles.commentContainer}>
@@ -193,9 +205,14 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 									<div className={styles.iconsContainer}>
 										<p>{comment.repost}</p>
 										<button className={styles.share}>
+
+
 											<RiShareBoxLine />
 										</button>
-										<button className={styles.book} onClick={() => handleBookmark(comment._id, comment.isSaved ?? false)}>
+										<button
+											className={styles.book}
+											onClick={() => handleBookmark(comment._id, comment.isSaved ?? false)}
+										>
 											{comment.isSaved ? <FaBookmark /> : <FaRegBookmark />}
 										</button>
 										<button className={styles.comment}>
@@ -212,6 +229,11 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 						/>
 					</div>
 				))}
+				{hasMore && (
+					<button onClick={loadMoreComments} className={styles.loadMoreButton}>
+						Load More Comments
+					</button>
+				)}
 			</div>
 		</div>
 	);

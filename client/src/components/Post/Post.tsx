@@ -115,7 +115,7 @@ const Post = (props: PostProp): JSX.Element => {
 		const fetchLikeStatus = async () => {
 			try {
 				const response = await api.get(`${props.postURL}/like`);
-				if (response.data.success) {
+				if (response.data.value === null) {
 					setLiked(true);
 				}
 			} catch (error) {

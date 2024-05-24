@@ -14,7 +14,8 @@ export const get: Handler[] = [
 		const currentUserId = req.user!.id;
 		const existingInteraction = await LikeInteraction.findOne({ postId: id, userId: currentUserId });
 		if (existingInteraction) Resolve(res).okWith(existingInteraction);
-		else Resolve(res).notFound('Post is not liked.');
+		// else Resolve(res).notFound('Post is not liked.');
+		else Resolve(res).okWith('Not liked.');
 	},
 ];
 

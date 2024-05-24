@@ -24,9 +24,19 @@ export const get: Handler = async (req, res) => {
 	if (isNaN(limit)) limit = 10;
 	limit = Math.max(0, Math.min(limit, 100));
 
+
+	const rawPage = req.query.page;
+	let page = typeof rawPage === 'string' ? parseInt(rawPage) : NaN;
+	if (isNaN(page)) page = 1;
+	page = Math.max(1, page);
+
 	if (!mongoose.isValidObjectId(parentPostId)) return Resolve(res).badRequest('Invalid post ID provided.');
 
-	const relationships = await CommentRelationship.find({ parentPost: parentPostId }).limit(limit);
+	const relationships = await CommentRelationship.find({ parentPost: parentPostId })
+		.sort({ createdAt: -1 })
+		.skip((page - 1) * limit)
+		.limit(limit);
+
 	const comments = await Promise.all(
 		relationships.map(async (v) => {
 			const comment = await PostModel.findById(v.childPost).lean();
