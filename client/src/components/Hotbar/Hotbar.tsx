@@ -43,7 +43,7 @@ const Hotbar = () => {
 						<div className={styles.backDropDiv}></div>
 						<ul className={styles.submenu}>
 							<li>
-								<a className='mt-1 d-flex justify-content-center align-items-center' href='#FOLLOWERS'>
+								<a className='d-flex justify-content-center align-items-center' href='#FOLLOWERS'>
 									<div>
 										<MdPeople className={`${styles.menuSubIcons}`} />
 										<p className='text-center'>FOLLOWERS</p>
@@ -51,7 +51,7 @@ const Hotbar = () => {
 								</a>
 							</li>
 							<li>
-								<a className='ms-1 d-flex justify-content-center align-items-center' href='/myfeed'>
+								<a className='d-flex justify-content-center align-items-center' href='/myfeed'>
 									<div>
 										<MdFeed className={`${styles.menuSubIcons}`} />
 										<p className='text-center'>FEED</p>

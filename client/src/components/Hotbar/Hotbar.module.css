@@ -84,7 +84,6 @@
 
 .menu-backdrop {
     position: absolute;
-    /*temporary fix for clear background*/
     background-color: transparent;
     z-index: 3;
     width: 110px;
@@ -95,8 +94,12 @@
     transform: translate(50%);
 }
 
+.nav-container li a p {
+    font-size: 11pt;
+}
+
 .menu-icon, .close-icon, .menu-sub-icons {
-    font-size: 4em;
+    font-size: 3em;
 }
 
 .nav-container ul.submenu {
