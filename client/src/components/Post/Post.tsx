@@ -32,9 +32,6 @@ interface PostProp {
 		_id: string;
 	};
 	// media?: Array<Object>;
-	repost: number;
-	like: number;
-	comment: number;
 }
 
 interface UserProp {
@@ -81,25 +78,20 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
  * @param props.username string - Username of the author of the post
  * @param props.text string - Text of the post
- * @param props.postURL string - URL of the complete version of the post with comments and more information
+ * @param props.postId string - URL of the complete version of the post with comments and more information
  * @param props.createdAt Date - (optional) Date in which the post was created
- * @param props.repost number - Number of reposts of the post
- * @param props.like 	number - Number of likes of the post
- * @param props.comment number - Number of comments of the post
  */
 const Post = (props: PostProp): JSX.Element => {
+	function onShare() {}
 
-	function onShare() { }
-
-	function onComment() { }
-
+	function onComment() {}
 
 	const [saved, setSaved] = useState(false);
 
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
 			try {
-				const response = await api.get(`${props.postId}/save`);
+				const response = await api.get(`/post/${props.postId}/save`);
 				if (response.data.success) {
 					setSaved(response.data.value);
 				}
@@ -114,10 +106,10 @@ const Post = (props: PostProp): JSX.Element => {
 	const onBookmark = async () => {
 		try {
 			if (saved) {
-				await api.delete(`${props.postId}/save`);
+				await api.delete(`/post/${props.postId}/save`);
 				setSaved(false);
 			} else {
-				const response = await api.post(`${props.postId}/save`);
+				const response = await api.post(`/post/${props.postId}/save`);
 				if (response.data.success) {
 					setSaved(true);
 				}
@@ -127,16 +119,14 @@ const Post = (props: PostProp): JSX.Element => {
 		}
 	};
 
-
 	const [liked, setLiked] = useState(false);
-	const [likeCount, setLikeCount] = useState(props.like);
+	const [likeCount, setLikeCount] = useState(props.likeCount ?? 0);
 	useEffect(() => {
 		const fetchLikeStatus = async () => {
 			try {
-				const response = await api.get(`${props.postId}/like`);
-				if (response.data.value === null) {
-					setLiked(true);
-				}
+				const response = await api.get(`/post/${props.postId}/like`);
+				setLiked(response.data.value);
+				console.log(response.data);
 			} catch (error) {
 				console.error('Error fetching like status:', error);
 			}
@@ -148,11 +138,11 @@ const Post = (props: PostProp): JSX.Element => {
 	const onLike = async () => {
 		try {
 			if (liked) {
-				await api.delete(`${props.postId}/like`);
+				await api.delete(`/post/${props.postId}/like`);
 				setLikeCount(likeCount - 1);
 				setLiked(false);
 			} else {
-				const response = await api.post(`${props.postId}/like`);
+				const response = await api.post(`/post/${props.postId}/like`);
 				if (response.data.success) {
 					setLikeCount(likeCount + 1);
 					setLiked(true);
@@ -178,21 +168,17 @@ const Post = (props: PostProp): JSX.Element => {
 							) : undefined}
 						</Link>
 						<div className={styles.iconsContainer}>
-							<p>{props.repost}</p>
+							<p>{props.repostCount}</p>
 							<button className={styles.share}>
 								<RiShareBoxLine />
 							</button>
 							<button className={styles.book}>
-								{saved ? (
-									<FaBookmark onClick={onBookmark} />
-								) : (
-									<FaRegBookmark onClick={onBookmark} />
-								)}
+								{saved ? <FaBookmark onClick={onBookmark} /> : <FaRegBookmark onClick={onBookmark} />}
 							</button>
 							<button className={styles.comment}>
 								<FaRocketchat />
 							</button>
-							<p>{props.comment}</p>
+							<p>{props.commentCount}</p>
 
 							<button onClick={onLike} className={styles.like}>
 								{liked ? <FaHeart /> : <FaRegHeart />}

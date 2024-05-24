@@ -12,10 +12,8 @@ export const get: Handler[] = [
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
 
 		const currentUserId = req.user!.id;
-		const existingInteraction = await LikeInteraction.findOne({ postId: id, userId: currentUserId });
-		if (existingInteraction) Resolve(res).okWith(existingInteraction);
-		// else Resolve(res).notFound('Post is not liked.');
-		else Resolve(res).okWith('Not liked.');
+		const existingInteraction = await LikeInteraction.exists({ postId: id, userId: currentUserId });
+		Resolve(res).okWith(!!existingInteraction);
 	},
 ];
 

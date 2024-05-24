@@ -59,7 +59,7 @@ const Hotbar = () => {
 								</a>
 							</li>
 							<li>
-								<a className='d-flex justify-content-center align-items-center' href='#POST'>
+								<a className='d-flex justify-content-center align-items-center' href='/post'>
 									<div>
 										<IoIosAddCircle className={`${styles.menuSubIcons}`} />
 										<p className='text-center'>POST</p>

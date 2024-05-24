@@ -36,7 +36,7 @@ const User = (props: UserProp): JSX.Element => {
 			curved
 			dark
 			content={
-				<Link href={props.userURL ?? '/'} className={styles.link}>
+				<Link href={'/user/' +props.userURL ?? '/'} className={styles.link}>
 					{props.username}
 				</Link>
 			}
@@ -50,7 +50,6 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
 	const [loading, setLoading] = useState(false);
-
 	const fetchComments = async (page: number) => {
 		setLoading(true);
 		try {
@@ -67,7 +66,7 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 						return {
 							...comment,
 							isSaved: savedRes.data.success ? savedRes.data.value : false,
-							isLiked: likedRes.data.value === null ? true : false,
+							isLiked: likedRes.data.value,
 						};
 					})
 				);
@@ -103,7 +102,7 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 						api.get(`/post/${newComment._id}/like`),
 					]);
 					newComment.isSaved = savedRes.data.success ? savedRes.data.value : false;
-					newComment.isLiked = likedRes.data.value === null ? true : false;
+					newComment.isLiked = likedRes.data.value;
 					const updatedComments = [newComment, ...comments].sort(
 						(a: Comment, b: Comment) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
 					);
@@ -190,7 +189,7 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 			<div className={styles.commentsList}>
 				{comments.map((comment) => (
 					<div key={comment._id} className={styles.postContainer}>
-						<User username={comment.userName} userURL={comment.authorId} />
+						<User username={'@' + comment.userName} userURL={comment.authorId} />
 						<UIBox
 							className={styles.paraContainer}
 							curved
@@ -205,8 +204,6 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 									<div className={styles.iconsContainer}>
 										<p>{comment.repost}</p>
 										<button className={styles.share}>
-
-
 											<RiShareBoxLine />
 										</button>
 										<button
@@ -240,3 +237,4 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 };
 
 export default Comment;
+// Test git ingnore file

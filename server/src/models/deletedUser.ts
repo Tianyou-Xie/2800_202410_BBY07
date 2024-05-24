@@ -36,8 +36,9 @@ const schema = new Schema<IDeletedUser>(
 		postCount: { type: 'number', required: true, default: 0 },
 		savedPosts: { type: ['ObjectId'], required: true, default: [] },
 		admin: { type: 'boolean', required: true, default: false },
-	},
-	{ timestamps: { createdAt: true, updatedAt: false } },
+		// createdAt: {type: Date, default: new Date(), expires: 2592000}
+		createdAt: {type: Date, default: new Date()}
+	}
 );
 
 export const DeletedUserModel = model('DeletedUser', schema);

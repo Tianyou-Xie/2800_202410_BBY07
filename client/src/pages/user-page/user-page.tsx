@@ -81,6 +81,9 @@ const UserPage = () => {
 						authorId={userID}
 						content={post.content}
 						postId={post._id}
+						likeCount={post.likeCount}
+						commentCount={post.commentCount}
+						repostCount={post.repostCount}
 						key={post._id}
 					/>
 				);

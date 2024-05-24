@@ -12,10 +12,11 @@ import { createSlug } from '../../lib/create-slug';
 
 interface Props {
 	planet: unknown;
+	planetId: string;
 	home: boolean;
 }
 
-export const PlanetVisual = ({ planet, home }: Props) => {
+export const PlanetVisual = ({ planet, home, planetId }: Props) => {
 	if (!planet || typeof planet !== 'object' || !('visual' in planet)) return;
 	const name = 'name' in planet && typeof planet.name === 'string' ? planet.name : 'Unknown Planet';
 
@@ -92,7 +93,7 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 		setImageRatio(ratio);
 	}, [planetImg]);
 
-	const goToFeed = () => navigate(`/feed/${createSlug(name)}`);
+	const goToFeed = () => navigate(`/feed/${createSlug(name)}/${planetId}`);
 
 	return (
 		<>
