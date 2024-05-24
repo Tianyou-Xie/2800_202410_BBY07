@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './Post.module.css';
 
@@ -80,6 +80,19 @@ const User = (props: UserProp): JSX.Element => {
 const Post = (props: PostProp): JSX.Element => {
 	const [bookmarked, setBookmarked] = useState(false);
 	const [liked, setLiked] = useState(false);
+
+	useEffect(() => {
+		async function isLiked() {
+			try {
+				const res = await api.get(`/post/${props.postId}/like`);
+				setLiked(true);
+			} catch (error: any) {
+				if (error.response.status == 404) setLiked(false);
+				else console.log(error.response);
+			}
+		}
+		isLiked();
+	}, []);
 
 	function onShare() {}
 
