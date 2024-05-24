@@ -5,22 +5,16 @@ import { useLocation } from 'wouter';
 
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import { withRef } from '../../lib/with-ref';
+import useImage from 'use-image';
 
 export const CenterVisual = () => {
 	const [_, navigate] = useLocation();
 
 	const imgRef = useRef<Konva.Image>(null);
-
-	const [img, setImg] = useState<HTMLImageElement>();
-
+	const [img] = useImage(logoUrl);
 	const imageSize = 100;
-	const [active, setActive] = useState(false);
 
-	useEffect(() => {
-		const el = document.createElement('img');
-		el.src = logoUrl;
-		setImg(el);
-	}, []);
+	const [active, setActive] = useState(false);
 
 	useEffect(() => {
 		withRef(imgRef, (img) => {
