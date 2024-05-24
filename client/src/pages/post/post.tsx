@@ -69,7 +69,7 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 		<Post
 			username={post.userName}
 			content={post.content}
-			authorId={`/user/${post.authorId}`}
+			authorId={`${post.authorId}`}
 			postId={`${post._id}`}
 			createdAt={new Date(post.createdAt)}
 			repost={post.repostCount}
