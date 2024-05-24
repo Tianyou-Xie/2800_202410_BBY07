@@ -74,6 +74,7 @@ const Post = (props: PostProp): JSX.Element => {
 
 	function onComment() { }
 
+
 	const [saved, setSaved] = useState(false);
 
 	useEffect(() => {
@@ -173,6 +174,7 @@ const Post = (props: PostProp): JSX.Element => {
 								<FaRocketchat />
 							</button>
 							<p>{props.comment}</p>
+
 							<button onClick={onLike} className={styles.like}>
 								{liked ? <FaHeart /> : <FaRegHeart />}
 							</button>

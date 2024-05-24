@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import styles from './Comment.module.css';
-
 import UIBox from '../UIBox/UIBox';
-
-// Icons
-import { FaRegHeart } from 'react-icons/fa'; //<FaRegHeart /> //Empty heart
-import { FaHeart } from 'react-icons/fa'; //<FaHeart /> // Filled heart
-import { RiShareBoxLine } from 'react-icons/ri'; //<RiShareBoxLine />
-import { FaRegBookmark } from 'react-icons/fa'; //<FaRegBookmark /> //Empty bookmark
-import { FaBookmark } from 'react-icons/fa'; //<FaBookmark /> //Filled bookmark
-import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
+import { FaRegHeart, FaHeart, FaRegBookmark, FaBookmark, FaRocketchat } from 'react-icons/fa';
+import { RiShareBoxLine } from 'react-icons/ri';
 import { Link } from 'wouter';
 
 interface CommentProps {
@@ -26,6 +19,8 @@ interface Comment {
 	repost: number;
 	like: number;
 	comment: number;
+	isSaved?: boolean;
+	isLiked?: boolean;
 }
 
 interface UserProp {
@@ -58,7 +53,20 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 			try {
 				const response = await api.get(`/post/${postId}/comment`);
 				if (response.data.success) {
-					const sortedComments = response.data.value.sort(
+					const commentsWithStatus = await Promise.all(
+						response.data.value.map(async (comment: Comment) => {
+							const [savedRes] = await Promise.all([
+								api.get(`/post/${comment._id}/save`),
+								// api.get(`/post/${comment._id}/like`),
+							]);
+							return {
+								...comment,
+								isSaved: savedRes.data.success ? savedRes.data.value : false,
+								// isLiked: likedRes.data.success ? likedRes.data.value : false,
+							};
+						})
+					);
+					const sortedComments = commentsWithStatus.sort(
 						(a: Comment, b: Comment) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
 					);
 					setComments(sortedComments);
@@ -84,6 +92,12 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 				const response = await api.post(`/post/${postId}/comment`, { content: comment });
 				if (response.data.success) {
 					const newComment = response.data.value;
+					const [savedRes, likedRes] = await Promise.all([
+						api.get(`/post/${newComment._id}/save`),
+						api.get(`/post/${newComment._id}/like`),
+					]);
+					newComment.isSaved = savedRes.data.success ? savedRes.data.value : false;
+					newComment.isLiked = likedRes.data.success ? likedRes.data.value : false;
 					const updatedComments = [newComment, ...comments].sort(
 						(a: Comment, b: Comment) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
 					);
@@ -98,18 +112,44 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 		}
 	};
 
-	const [bookmarked, setBookmarked] = useState(false);
-	const [liked, setLiked] = useState(false);
+	const handleBookmark = async (commentId: string, isSaved: boolean) => {
+		try {
+			if (isSaved) {
+				await api.delete(`/post/${commentId}/save`);
+			} else {
+				await api.post(`/post/${commentId}/save`);
+			}
+			setComments(prevComments =>
+				prevComments.map(comment =>
+					comment._id === commentId ? { ...comment, isSaved: !isSaved } : comment
+				)
+			);
+		} catch (error) {
+			console.error('Error updating save status:', error);
+		}
+	};
 
-	function onBookmark() {
-		setBookmarked(!bookmarked);
-	}
-
-	function onComment() { }
-
-	function onLike() {
-		setLiked(!liked);
-	}
+	const handleLike = async (commentId: string, isLiked: boolean) => {
+		try {
+			if (isLiked) {
+				await api.delete(`/post/${commentId}/like`);
+				setComments(prevComments =>
+					prevComments.map(comment =>
+						comment._id === commentId ? { ...comment, like: comment.like - 1, isLiked: false } : comment
+					)
+				);
+			} else {
+				await api.post(`/post/${commentId}/like`);
+				setComments(prevComments =>
+					prevComments.map(comment =>
+						comment._id === commentId ? { ...comment, like: comment.like + 1, isLiked: true } : comment
+					)
+				);
+			}
+		} catch (error) {
+			console.error('Error updating like status:', error);
+		}
+	};
 
 	function formatDate(dateString: string): string {
 		const date = new Date(dateString);
@@ -155,19 +195,15 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 										<button className={styles.share}>
 											<RiShareBoxLine />
 										</button>
-										<button className={styles.book}>
-											{bookmarked ? (
-												<FaBookmark onClick={onBookmark} />
-											) : (
-												<FaRegBookmark onClick={onBookmark} />
-											)}
+										<button className={styles.book} onClick={() => handleBookmark(comment._id, comment.isSaved ?? false)}>
+											{comment.isSaved ? <FaBookmark /> : <FaRegBookmark />}
 										</button>
 										<button className={styles.comment}>
 											<FaRocketchat />
 										</button>
 										<p>{comment.comment}</p>
-										<button onClick={onLike} className={styles.like}>
-											{liked ? <FaHeart /> : <FaRegHeart />}
+										<button onClick={() => handleLike(comment._id, comment.isLiked ?? false)} className={styles.like}>
+											{comment.isLiked ? <FaHeart /> : <FaRegHeart />}
 										</button>
 										<p>{comment.like}</p>
 									</div>
