@@ -88,11 +88,9 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.comment number - Number of comments of the post
  */
 const Post = (props: PostProp): JSX.Element => {
+	function onShare() {}
 
-	function onShare() { }
-
-	function onComment() { }
-
+	function onComment() {}
 
 	const [saved, setSaved] = useState(false);
 
@@ -126,7 +124,6 @@ const Post = (props: PostProp): JSX.Element => {
 			console.error('Error updating save status:', error);
 		}
 	};
-
 
 	const [liked, setLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(props.like);
@@ -182,11 +179,7 @@ const Post = (props: PostProp): JSX.Element => {
 								<RiShareBoxLine />
 							</button>
 							<button className={styles.book}>
-								{saved ? (
-									<FaBookmark onClick={onBookmark} />
-								) : (
-									<FaRegBookmark onClick={onBookmark} />
-								)}
+								{saved ? <FaBookmark onClick={onBookmark} /> : <FaRegBookmark onClick={onBookmark} />}
 							</button>
 							<button className={styles.comment}>
 								<FaRocketchat />

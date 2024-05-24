@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import { useParams } from 'wouter';
 import io from 'socket.io-client';
+import { getServerHost } from '../../environment';
 
 const Messages = () => {
 	let { id } = useParams();
@@ -11,7 +12,7 @@ const Messages = () => {
 	const [isChat, setIsChat] = useState(false);
 	// const [socket, setSocket] = useState<any>(null);
 	const [convoID, setConvoID] = useState('');
-	const socket = io(import.meta.env.VITE_LOCALHOST);
+	const socket = io(getServerHost());
 
 	useEffect((): any => {
 		const fetchMessages = async () => {
