@@ -10,7 +10,9 @@ interface PlanetProps {
 
 const Planets = (props: PlanetProps) => {
 	return (
-		<Link href={`/planet/${props.planet}/${props.planetId}`} className={styles.planetsLink}>
+		<Link
+			href={props.planet != 'GENERAL FEED' ? `/planet/${props.planet}/${props.planetId}` : `/feed`}
+			className={styles.planetsLink}>
 			<div className={styles.planets}>{props.planet}</div>
 		</Link>
 	);
