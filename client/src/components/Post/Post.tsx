@@ -13,6 +13,8 @@ import { FaRegBookmark } from 'react-icons/fa'; //<FaRegBookmark />	//Empty book
 import { FaBookmark } from 'react-icons/fa'; //<FaBookmark />	//Filled bookmark
 import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
 import { Link } from 'wouter';
+import { api } from '../../lib/axios';
+import { toast } from 'react-toastify';
 
 interface PostProp {
 	username: string;
@@ -81,8 +83,24 @@ const Post = (props: PostProp): JSX.Element => {
 
 	function onShare() {}
 
-	function onBookmark() {
-		setBookmarked(!bookmarked);
+	async function addBookMark() {
+		setBookmarked(true);
+		try {
+			await api.post(`/post/${props.postId}/save`);
+		} catch (error: any) {
+			toast.error('Could not save post, it may have been removed.');
+		}
+	}
+
+	async function removeBookMark() {
+		setBookmarked(false);
+		try {
+			await api.delete(`/post/${props.postId}/save`);
+		} catch (error: any) {
+			// need a better error message here
+			// backend does not handle the case of unsaving a post that was deleted. Backend needs to be adjusted.
+			toast.error(error.response.data.error);
+		}
 	}
 
 	function onComment() {}
@@ -111,9 +129,9 @@ const Post = (props: PostProp): JSX.Element => {
 							</button>
 							<button className={styles.book}>
 								{bookmarked ? (
-									<FaBookmark onClick={onBookmark} />
+									<FaBookmark onClick={removeBookMark} />
 								) : (
-									<FaRegBookmark onClick={onBookmark} />
+									<FaRegBookmark onClick={addBookMark} />
 								)}
 							</button>
 							<button className={styles.comment}>
