@@ -48,7 +48,7 @@ const PlanetFeed = () => {
 		}
 	}
 
-	return <Page pageName={`${planetName} feed`} content={displayedPosts} />;
+	return <Page pageName={`${planetName}`} content={displayedPosts} />;
 };
 
 export default PlanetFeed;
