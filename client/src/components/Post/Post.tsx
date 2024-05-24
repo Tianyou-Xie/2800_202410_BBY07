@@ -88,18 +88,16 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.comment number - Number of comments of the post
  */
 const Post = (props: PostProp): JSX.Element => {
+	function onShare() {}
 
-	function onShare() { }
-
-	function onComment() { }
-
+	function onComment() {}
 
 	const [saved, setSaved] = useState(false);
 
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
 			try {
-				const response = await api.get(`${props.postId}/save`);
+				const response = await api.get(`/post/${props.postId}/save`);
 				if (response.data.success) {
 					setSaved(response.data.value);
 				}
@@ -114,10 +112,10 @@ const Post = (props: PostProp): JSX.Element => {
 	const onBookmark = async () => {
 		try {
 			if (saved) {
-				await api.delete(`${props.postId}/save`);
+				await api.delete(`/post/${props.postId}/save`);
 				setSaved(false);
 			} else {
-				const response = await api.post(`${props.postId}/save`);
+				const response = await api.post(`/post/${props.postId}/save`);
 				if (response.data.success) {
 					setSaved(true);
 				}
@@ -127,16 +125,14 @@ const Post = (props: PostProp): JSX.Element => {
 		}
 	};
 
-
 	const [liked, setLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(props.like);
 	useEffect(() => {
 		const fetchLikeStatus = async () => {
 			try {
-				const response = await api.get(`${props.postId}/like`);
-				if (response.data.value === null) {
-					setLiked(true);
-				}
+				const response = await api.get(`/post/${props.postId}/like`);
+				console.log(response.data);
+				setLiked(response.data.success === true);
 			} catch (error) {
 				console.error('Error fetching like status:', error);
 			}
@@ -148,11 +144,12 @@ const Post = (props: PostProp): JSX.Element => {
 	const onLike = async () => {
 		try {
 			if (liked) {
-				await api.delete(`${props.postId}/like`);
+				const res = await api.delete(`/post/${props.postId}/like`);
+				console.log(res.data);
 				setLikeCount(likeCount - 1);
 				setLiked(false);
 			} else {
-				const response = await api.post(`${props.postId}/like`);
+				const response = await api.post(`/post/${props.postId}/like`);
 				if (response.data.success) {
 					setLikeCount(likeCount + 1);
 					setLiked(true);
@@ -183,11 +180,7 @@ const Post = (props: PostProp): JSX.Element => {
 								<RiShareBoxLine />
 							</button>
 							<button className={styles.book}>
-								{saved ? (
-									<FaBookmark onClick={onBookmark} />
-								) : (
-									<FaRegBookmark onClick={onBookmark} />
-								)}
+								{saved ? <FaBookmark onClick={onBookmark} /> : <FaRegBookmark onClick={onBookmark} />}
 							</button>
 							<button className={styles.comment}>
 								<FaRocketchat />
