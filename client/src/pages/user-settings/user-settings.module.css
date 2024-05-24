@@ -1,7 +1,11 @@
 .setting-body {
+    width: 100%;
     font-size: x-large;
     font-family: BabaPro;
-    background-color: aliceblue;
+}
+
+.setting-body p {
+    margin: 0;
 }
 
 .setting-title {
@@ -9,19 +13,63 @@
     font-family: Bitsumishi;
 }
 
-.danger-zone, .danger-zone * {
-    background-color: #242C38;
-    color: red;
+.warning-color {
+    color: red !important;
 }
 
-.group-item, .group-item * {
-    background-color: aliceblue;
+.danger-zone {
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
+
+.danger-zone, .danger-zone * {
+    background-color: #242C38;
+    color: red !important;
+}
+
+.group-item-holder {
+    margin-bottom: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 16pt;
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
+
+.group-item-holder, .group-item-holder * {
+    color: black;
+    background-color: var(--signup-background);
+}
+
+.group-item {    
+    border-color: gray;
+}
+
+.group-item-body {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .clickable {
     cursor: pointer;
 }
 
-.delete-btn {
-    background-color: red;
+.logout-btn {
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
+
+.logout-btn h1 {
+    margin: 0;
+}
+
+.logout-btn, .logout-btn > * {
+    background-color: #242C38;
+    color: red;
+}
+
+.conf-input {
+    font-family: Fjalla One;
 }

@@ -12,14 +12,20 @@ export const patch: Handler[] = [
 	async (req, res) => {
 		const user = req.user!;
 
+		const currUsername = user.userName;
+
 		const emailSchema = Joi.object<UsernameBody>({
-			newUsername: Joi.string().trim().required(),
+			newUsername: Joi.string().trim().required().invalid(currUsername).messages({
+				'string.base': 'New username must be a string.',
+				'any.required': 'A username is required in order to change your username.',
+				'any.invalid': 'Username entered is already the current username.',
+			}),
 		});
 
-		const bodyValidationResult = emailSchema.validate(req.body);
-		if (bodyValidationResult.error) return res.status(400).json({ error: bodyValidationResult.error.message });
+		const validationResult = emailSchema.validate(req.body);
+		if (validationResult.error) return Resolve(res).badRequest(validationResult.error.message);
 
-		const value = bodyValidationResult.value;
+		const value = validationResult.value;
 
 		const result = await user.updateOne({ userName: value.newUsername });
 		return Resolve(res).okWith(result, 'Username changed successfully.');

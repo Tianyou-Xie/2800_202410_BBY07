@@ -4,9 +4,8 @@
 }
 
 .nav-container li a {
-    margin-right: 80px;
-    margin-top: -14px;
-    min-width: 80px;
+    margin-right: 100px;
+    min-width: 90px;
     padding: 1px;
     text-decoration: none;
     text-align: center;
@@ -90,7 +89,7 @@
     border-radius: 50%;
     padding: 50px;
     right: 50%;
-    top: 0px;
+    top: 0;
     transform: translate(50%);
 }
 
@@ -102,7 +101,7 @@
     position: absolute;
     right: 50%;
     top: 0%;
-    width: 140px;
+    width: 150px;
     transform: translateX(-50%);
 }
 
@@ -157,23 +156,25 @@
 .back-drop-div {
     pointer-events: none;
     background-color: rgba(255, 255, 255, 0.4);
+    /*rgba(36, 44, 56, 1)*/
+    
     position: absolute;
     right: 50%;
     bottom: 0%;
     width: 400px;
-    height: 250px;
+    height: 300px;
     border-radius: 50% 50% 0 0;
-    transform: translateY(50%) translateX(52%);
+    transform: translateY(50%) translateX(50%);
     backdrop-filter: blur(1px);
     border: none;
-    box-shadow: 0px 0px 40px 40px rgba(255, 255, 255, 0.4);
+    box-shadow: 0px 0px 80px 80px rgba(255, 255, 255, 0.4);
 
     opacity: 0;
     transition: transform .7s, opacity .7s;
 }
 
 .nav-container input:checked ~ .back-drop-div {
-    opacity: 1;
+    opacity: 0.4;
 }
 
 .menu-label {
