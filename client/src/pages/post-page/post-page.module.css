@@ -31,6 +31,7 @@
 .side-buttons {
 	display: flex;
 	padding: 6px;
+	padding-right: 0px;
 	justify-content: right;
 }
 
@@ -47,9 +48,5 @@
 .submit {
 	border: none;
 	background-color: transparent;
-}
-
-.submit:active div {
-	box-shadow: 4px 4px var(--signup-button-active) 5;
-	transform: translateY(5px);
+	padding: 0px;
 }

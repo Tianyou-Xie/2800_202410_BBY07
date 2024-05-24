@@ -32,10 +32,10 @@ const GeneralFeed = () => {
 
 	const dummyPost = (
 		<Post
-			username='@MarcusTheDumbs'
-			text='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
-			postURL='./about'
-			userURL='#USER_URL'
+			username='MarcusTheDumbs'
+			content='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
+			postId='./about'
+			authorId='#USER_URL'
 		/>
 	);
 
@@ -43,13 +43,7 @@ const GeneralFeed = () => {
 		displayedPosts.push({ ...dummyPost, key: i.toString() });
 	}
 
-	return (
-		<Page
-			logoHeader={false}
-			pageName='General Feed'
-			content={displayedPosts}
-		/>
-	);
+	return <Page pageName='General Feed' content={displayedPosts} />;
 };
 
 export default GeneralFeed;
