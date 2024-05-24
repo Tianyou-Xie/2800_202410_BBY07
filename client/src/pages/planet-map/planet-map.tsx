@@ -5,13 +5,13 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { PiCrosshairBold } from 'react-icons/pi';
 import { Layer, Stage } from 'react-konva';
 
+import { UserAuthContext } from '../../lib/auth';
 import { api } from '../../lib/axios';
 import { withRef } from '../../lib/with-ref';
 import { CenterVisual } from './center-visual';
 import { PlanetVisual } from './planet-visual';
-import { StarBackground } from './star-background';
-import { UserAuthContext } from '../../lib/auth';
 import { SpaceTraveller } from './space-traveller';
+import { StarBackground } from './star-background';
 
 export const PlanetMap = () => {
 	const stageRef = useRef<Konva.Stage>(null);

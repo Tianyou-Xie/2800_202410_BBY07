@@ -1,13 +1,13 @@
 import Konva from 'konva';
 import { useEffect, useRef, useState } from 'react';
+import { Else, If, Then } from 'react-if';
 import { Circle, Group, Image } from 'react-konva';
+import useImage from 'use-image';
 import { useLocation } from 'wouter';
 
+import { isMobile } from '../../lib/environment';
 import { withRef } from '../../lib/with-ref';
 import { PlanetInfoCard } from './planet-info-card';
-import { isMobile } from '../../lib/environment';
-import { Else, If, Then } from 'react-if';
-import useImage from 'use-image';
 
 interface Props {
 	planet: unknown;

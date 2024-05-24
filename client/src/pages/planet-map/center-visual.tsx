@@ -1,11 +1,11 @@
 import Konva from 'konva';
 import { useEffect, useRef, useState } from 'react';
 import { Image } from 'react-konva';
+import useImage from 'use-image';
 import { useLocation } from 'wouter';
 
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import { withRef } from '../../lib/with-ref';
-import useImage from 'use-image';
 
 export const CenterVisual = () => {
 	const [_, navigate] = useLocation();

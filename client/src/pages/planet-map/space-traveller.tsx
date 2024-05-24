@@ -1,5 +1,4 @@
 import Konva from 'konva';
-
 import { useEffect, useRef, useState } from 'react';
 import { Image } from 'react-konva';
 

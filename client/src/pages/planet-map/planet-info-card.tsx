@@ -1,10 +1,10 @@
 import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
 import { useEffect, useRef, useState } from 'react';
-import { Group, Rect, Text } from 'react-konva';
-import { withRef } from '../../lib/with-ref';
 import { Else, If, Then } from 'react-if';
-import { isMobile } from '../../lib/environment';
+import { Group, Rect, Text } from 'react-konva';
+
+import { withRef } from '../../lib/with-ref';
 
 interface Props {
 	planet: unknown;
