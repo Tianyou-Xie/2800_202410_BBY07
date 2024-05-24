@@ -9,7 +9,8 @@ import { IoMenuSharp } from 'react-icons/io5';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { IoIosAddCircle } from 'react-icons/io';
 import { MdFeed } from 'react-icons/md';
-import { AiFillMessage } from 'react-icons/ai';
+// import { AiFillMessage } from 'react-icons/ai';
+import { PiGearFill } from 'react-icons/pi';
 import { MdPeople } from 'react-icons/md';
 
 const Hotbar = () => {
@@ -32,7 +33,6 @@ const Hotbar = () => {
 			<div className={styles.navContainer}>
 				<div className={styles.nav}>
 					<div>
-						{/* <p className={`${styles.menuLabel}`}>menu - menu - menu</p> */}
 						<div className={`${styles.menuContainer}`}>
 							<label htmlFor='label'>
 								<IoMenuSharp id='menu-icon' className={`${styles.menuIcon} active`} />
@@ -41,29 +41,37 @@ const Hotbar = () => {
 						</div>
 						<input type='checkbox' id='label' defaultChecked={isChecked} onClick={toggleMenu} hidden />
 						<div className={styles.backDropDiv}></div>
-							<ul className={styles.submenu}>
+						<ul className={styles.submenu}>
 							<li>
-								<a href='/myfeed'>
-									<MdFeed className={`${styles.menuSubIcons}`} />
-									<p className='text-center'>FEED</p>
+								<a className='d-flex justify-content-center align-items-center' href='#FOLLOWERS'>
+									<div>
+										<MdPeople className={`${styles.menuSubIcons}`} />
+										<p className='text-center'>FOLLOWERS</p>
+									</div>
 								</a>
 							</li>
 							<li>
-								<a href='#POST'>
-									<IoIosAddCircle className={`${styles.menuSubIcons}`} />
-									<p className='text-center'>POST</p>
+								<a className='d-flex justify-content-center align-items-center' href='/myfeed'>
+									<div>
+										<MdFeed className={`${styles.menuSubIcons}`} />
+										<p className='text-center'>FEED</p>
+									</div>
 								</a>
 							</li>
 							<li>
-								<a href='#MESSAGE'>
-									<AiFillMessage className={`${styles.menuSubIcons}`} />
-									<p className='text-center'>MESSAGE</p>
+								<a className='d-flex justify-content-center align-items-center' href='/post'>
+									<div>
+										<IoIosAddCircle className={`${styles.menuSubIcons}`} />
+										<p className='text-center'>POST</p>
+									</div>
 								</a>
 							</li>
 							<li>
-								<a href='#FOLLOWERS'>
-									<MdPeople className={`${styles.menuSubIcons}`} />
-									<p className='text-center'>FOLLOWERS</p>
+								<a className='d-flex justify-content-center align-items-center' href='/settings'>
+									<div>
+										<PiGearFill className={`${styles.menuSubIcons}`} />
+										<p className='text-center'>SETTINGS</p>
+									</div>
 								</a>
 							</li>
 						</ul>
@@ -76,7 +84,7 @@ const Hotbar = () => {
 					<div className={`${styles.circle} ${styles.circleLeft}`}></div>
 					<div className={styles.bar}></div>
 					<div className={`${styles.circle} ${styles.circleRight}`}></div>
-					<a href="/settings">
+					<a href='/profile'>
 						<IoMdPerson className={`${styles.navIcon} ${styles.iconRight} me-2 mt-5`} />
 					</a>
 				</div>

@@ -4,15 +4,16 @@
 }
 
 .nav-container li a {
-    margin-right: 80px;
-    margin-top: -14px;
-    min-width: 80px;
+    margin-right: 100px;
+    min-width: 90px;
     padding: 1px;
     text-decoration: none;
     text-align: center;
     flex-basis: 100%;
     color: #2196F3;
-    font-family: TTOctosquares;
+    font-family: Fjalla One;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .nav-container {
@@ -83,18 +84,25 @@
 
 .menu-backdrop {
     position: absolute;
-    /*temporary fix for clear background*/
     background-color: transparent;
     z-index: 3;
     width: 110px;
     border-radius: 50%;
     padding: 50px;
     right: 50%;
-    top: 0px;
+    top: 0;
     transform: translate(50%);
 }
 
-.menu-icon, .close-icon, .menu-sub-icons {
+.nav-container li a p {
+    font-size: 11pt;
+}
+
+.menu-sub-icons {
+    font-size: 3em;
+}
+
+.menu-icon, .close-icon{
     font-size: 4em;
 }
 
@@ -102,7 +110,7 @@
     position: absolute;
     right: 50%;
     top: 0%;
-    width: 140px;
+    width: 150px;
     transform: translateX(-50%);
 }
 
@@ -156,24 +164,24 @@
 
 .back-drop-div {
     pointer-events: none;
-    background-color: rgba(255, 255, 255, 0.4);
+    
     position: absolute;
     right: 50%;
     bottom: 0%;
-    width: 400px;
-    height: 250px;
-    border-radius: 50% 50% 0 0;
-    transform: translateY(50%) translateX(52%);
-    backdrop-filter: blur(1px);
-    border: none;
-    box-shadow: 0px 0px 40px 40px rgba(255, 255, 255, 0.4);
+    width: 100vw;
+    height: 100vh;
+    transform: translateY(50%) translateX(50%);
+    background-color: rgba(255, 255, 255, 0.4);
+    
+    backdrop-filter: blur(10px);
+    mask: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 70%);
 
     opacity: 0;
-    transition: transform .7s, opacity .7s;
+    transition: transform .7s, opacity .3s;
 }
 
 .nav-container input:checked ~ .back-drop-div {
-    opacity: 1;
+    opacity: 1;    
 }
 
 .menu-label {

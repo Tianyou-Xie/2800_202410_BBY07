@@ -12,9 +12,9 @@ const Test = () => {
 		<html>
 			<body>
 				<Container className={styles.pageContainer}>
-					<Header pageName='General feed'/>
-					<Post username='@MarcusTheDumbs' text='Testing' postURL='./about'/>
-                    <Hotbar />
+					<Header pageName='General feed' />
+					<Post username='@MarcusTheDumbs' text='Testing' postURL='./about' />
+					<Hotbar />
 				</Container>
 			</body>
 		</html>

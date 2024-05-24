@@ -1,10 +1,11 @@
 import { Handler } from 'express';
 import mongoose from 'mongoose';
-import { requireLogin } from '../../../middlewares/require-login';
+import { authProtected } from '../../../middlewares/auth-protected';
 import { PostModel } from '../../../models/post';
 import { Resolve } from '../../../utils/express';
 import { CommentRelationship } from '../../../models/comment-relationship';
 import { LikeInteraction } from '../../../models/like-interaction';
+import { UserModel } from '../../../models/user';
 
 export const get: Handler = async (req, res) => {
 	const id = req.params.id;
@@ -14,11 +15,20 @@ export const get: Handler = async (req, res) => {
 	if (!post) return Resolve(res).notFound('Invalid post ID provided.');
 
 	if (post.deleted) return Resolve(res).gone('Post has been deleted.');
-	return Resolve(res).okWith(post);
+
+	const user = await UserModel.findById(post.authorId).select('userName');
+	if (!user) return Resolve(res).notFound('User not found.');
+
+	const postWithUser = {
+		...post.toObject(),
+		userName: user.userName
+	};
+
+	return Resolve(res).okWith(postWithUser);
 };
 
 export const del: Handler[] = [
-	requireLogin,
+	authProtected,
 	async (req, res) => {
 		const id = req.params.id;
 		if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');

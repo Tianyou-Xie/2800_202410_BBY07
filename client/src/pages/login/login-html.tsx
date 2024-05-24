@@ -1,9 +1,11 @@
-import { useLocation } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import styles from './login.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
+import { GoogleAuthButton } from '../../components/google-auth-btn/google-auth-btn';
 
-const LoginHtml = ({ email, password, setEmail, setPassword, submitForm }: any) => {
+const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading }: any) => {
 	const [_, navigate] = useLocation();
+
 	return (
 		<div className={styles.loginContainer}>
 			<div className='px-4 text-center'>
@@ -31,19 +33,35 @@ const LoginHtml = ({ email, password, setEmail, setPassword, submitForm }: any) 
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
-						<div className='mb-3'>
-							<a href='/forgetpassword' className={styles.span}>Forget your password?</a>
-							<button className={`${styles.button}`}>Login</button>
-						</div>
+
+						<button disabled={loading} className={`${styles.button} mb-3`}>
+							Login
+						</button>
 					</form>
-					<div className=''>
-						<span className={styles.span}>New User? Signup Below</span>
+
+					<hr />
+
+					<div className='d-flex flex-column'>
+						<GoogleAuthButton disabled={loading} text='Login with Google' className={styles.button} />
+					</div>
+
+					<hr />
+
+					<div className='mb-4'>
+						<span className={styles.span}>New User? Sign Up Instead</span>
 						<button
+							disabled={loading}
 							onClick={() => navigate('/signup')}
 							className={`${styles.loginButtonLogin} ${styles.button}`}>
 							Sign Up
 						</button>
 					</div>
+
+					<hr />
+
+					<Link href='/forgetpassword' className={`${styles.span} small mb-0`}>
+						Forgot your password?
+					</Link>
 				</div>
 				<div className={`${styles.loginBottomdiv} mt-2`}></div>
 			</div>

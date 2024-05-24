@@ -3,15 +3,24 @@ import { Handler } from 'express';
 import { UserModel } from '../../models/user';
 import { compareToHashed } from '../../utils/bcrypt';
 import { assertRequestBody, Resolve } from '../../utils/express';
-import { AuthToken } from '../../utils/auth-token';
-import { requireLogin } from '../../middlewares/require-login';
+import { authProtected } from '../../middlewares/auth-protected';
+import { JWT } from '../../utils/jwt';
 
 interface PostBody {
 	email: string;
 	password: string;
 }
 
-export const get: Handler[] = [requireLogin, async (_, res) => Resolve(res).ok()];
+export const get: Handler[] = [
+	authProtected,
+	async (req, res) => {
+		if (!req.user) return Resolve(res).forbidden('Invalid credentials provided.');
+
+		const refreshToken = req.query.token === 'refresh';
+		if (refreshToken) Resolve(res).okWith(JWT.signAs(req.user));
+		else Resolve(res).ok();
+	},
+];
 
 export const post: Handler = async (req, res) => {
 	const body = assertRequestBody(
@@ -26,10 +35,13 @@ export const post: Handler = async (req, res) => {
 	if (!body) return;
 
 	const existingUser = await UserModel.findOne({ email: body.email });
-	if (!existingUser) return Resolve(res).notFound('No user with that email exists.');
+	if (!existingUser) return Resolve(res).forbidden('Invalid credentials provided.');
 
-	const passwordsMatch = await compareToHashed(body.password, existingUser.password);
-	if (!passwordsMatch) return Resolve(res).unauthorized('Password is incorrect.');
+	const userPassword = existingUser.password;
+	if (!userPassword) return Resolve(res).forbidden('Invalid credentials provided.');
 
-	Resolve(res).okWith(AuthToken.signAs(existingUser));
+	const passwordsMatch = await compareToHashed(body.password, userPassword);
+	if (!passwordsMatch) return Resolve(res).forbidden('Invalid credentials provided.');
+
+	Resolve(res).okWith(JWT.signAs(existingUser));
 };

@@ -1,10 +1,10 @@
-import { Schema, Types } from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 import { IMedia, MediaSchema } from './media';
 import { ILocation, LocationSchema } from './location';
 
 export interface IMessage {
+    conversationId: Types.ObjectId,
 	senderId: Types.ObjectId;
-	receiverId: Types.ObjectId;
 	createdAt: Date;
 	media: Array<IMedia>;
 	content: string;
@@ -13,10 +13,10 @@ export interface IMessage {
 
 const schema = new Schema<IMessage>(
 	{
+        conversationId: { type: 'ObjectId', ref: 'Conversation', required: true },
 		senderId: { type: 'ObjectId', ref: 'User', required: true },
-		receiverId: { type: 'ObjectId', ref: 'User', required: true },
 		content: { type: 'string', required: true },
-		location: { type: LocationSchema, required: true },
+		// location: { type: LocationSchema, required: true },
 		media: {
 			required: true,
 			default: [],
@@ -25,3 +25,5 @@ const schema = new Schema<IMessage>(
 	},
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
+
+export const MessageModel = model('Message', schema);

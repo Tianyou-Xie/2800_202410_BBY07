@@ -1,9 +1,19 @@
 import { model, Schema, Types } from 'mongoose';
 import { ILocation, LocationSchema } from './location';
 
+export enum AuthProvider {
+	GOOGLE = 'google',
+}
+
+interface ISSO {
+	provider: AuthProvider;
+	id: string;
+}
+
 export interface IUser {
-	email: string;
-	password: string;
+	email?: string;
+	password?: string;
+	sso?: { provider: AuthProvider; id: string };
 	userName: string;
 	bio?: string;
 	location: ILocation;
@@ -17,10 +27,16 @@ export interface IUser {
 	createdAt: Date;
 }
 
+export const SSOSchema = new Schema<ISSO>({
+	provider: { type: 'string', required: true },
+	id: { type: 'string', required: true },
+});
+
 const schema = new Schema<IUser>(
 	{
-		email: { type: 'string', required: true },
-		password: { type: 'string', required: true },
+		email: { type: 'string' },
+		sso: { type: SSOSchema },
+		password: { type: 'string' },
 		userName: { type: 'string', required: true },
 		bio: { type: 'string' },
 		location: { type: LocationSchema, required: true },

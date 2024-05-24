@@ -1,0 +1,233 @@
+.planets-container {
+    background: var(--planets-background);
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.sun, .planet, .orbit {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.sun {
+    top: 44%;
+    left: 47%;
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    animation: rotate 10s infinite linear;
+}
+
+.orbit {
+    top: 50%;
+    left: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.mercury-orbit {
+    width: 180px;
+    height: 180px;
+    animation: orbit-mercury 10s infinite linear;
+}
+
+.mercury {
+    top:53px;
+    background-color: gray;
+    width: 10px;
+    height: 10px;
+}
+
+.venus-orbit {
+    width: 280px;
+    height: 280px;
+    animation: orbit-venus 20s infinite linear;
+}
+
+.venus {
+    top:85px;
+    background-color: orange;
+    width: 15px;
+    height: 15px;
+}
+
+.earth-orbit {
+    width: 380px;
+    height: 380px;
+    animation: orbit-earth 30s infinite linear;
+}
+
+.earth {
+    top:117px;
+    background-color: blue;
+    width: 20px;
+    height: 20px;
+}
+
+.mars-orbit {
+    width: 480px;
+    height: 480px;
+    animation: orbit-mars 40s infinite linear;
+}
+
+.mars {
+    top:177px;
+    background-color: red;
+    width: 12px;
+    height: 12px;
+}
+
+.jupiter-orbit {
+    width: 580px;
+    height: 580px;
+    animation: orbit-jupiter 50s infinite linear;
+}
+
+.jupiter {
+    top:152px;
+    background-color: brown;
+    width: 50px;
+    height: 50px;
+}
+
+.saturn-orbit {
+    width: 680px;
+    height: 680px;
+    animation: orbit-saturn 60s infinite linear;
+}
+
+.saturn {
+    top:194px;
+    background-color: gold;
+    width: 45px;
+    height: 45px;
+}
+
+.uranus-orbit {
+    width: 780px;
+    height: 780px;
+    animation: orbit-uranus 70s infinite linear;
+}
+
+.uranus {
+    top:257px;
+    background-color: lightblue;
+    width: 35px;
+    height: 35px;
+}
+
+.neptune-orbit {
+    width: 880px;
+    height: 880px;
+    animation: orbit-neptune 80s infinite linear;
+}
+
+.neptune {
+    top:309px;
+    background-color: darkblue;
+    width: 30px;
+    height: 30px;
+}
+
+.pluto-orbit {
+    width: 980px;
+    height: 980px;
+    animation: orbit-pluto 90s infinite linear;
+}
+
+.pluto {
+    top:420px;
+    background-color: lightgray;
+    width: 8px;
+    height: 8px;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes orbit-mercury {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-venus {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-earth {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-mars {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-jupiter {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-saturn {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-uranus {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-neptune {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-pluto {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

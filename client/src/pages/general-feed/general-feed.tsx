@@ -1,54 +1,54 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 
 import Page from '../../components/Page/Page';
 import Post from '../../components/Post/Post';
 
+// PLEASE, CHECK THE PROMISE USE
+// I HAD A PROBLEM WITH USING AWAIT/ASYNC INSIDE ARRAYS
 const GeneralFeed = () => {
-	const displayedPosts: JSX.Element[] = [];
+	const [displayedPosts, setDisplayedPosts] = useState(Array<JSX.Element>());
 
-	// interface Reference {
-	// 	authorId: { username: string; userURL: string };
-	// 	content: string;
-	// 	likeCount: number;
-	// 	commentCount: number;
-	// 	repostCount: number;
-	// 	createdAt: Date;
-	// }
-
-	// const [planets, setPlanets] = useState<Array<Planet>>([]);
 	useEffect(() => {
-		async function fetchPost() {
-			try {
-				const res = await api.post('/post/6646a3b24b2d7d6a935eeea3');
-				console.log(res);
-			} catch (err) {
-				console.log(err);
+		const displayPosts = async function () {
+			let postArray = await fetchPost();
+			if (postArray == undefined) {
+				postArray = [<>Nothing yet...</>];
 			}
-		}
-
-		fetchPost();
+			setDisplayedPosts(postArray);
+		};
+		displayPosts();
 	}, []);
 
-	const dummyPost = (
-		<Post
-			username='@MarcusTheDumbs'
-			text='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
-			postURL='./about'
-			userURL='#USER_URL'
-		/>
-	);
-
-	for (let i = 1; i < 10; i++) {
-		displayedPosts.push({ ...dummyPost, key: i.toString() });
+	async function fetchPost() {
+		try {
+			const postRes = await api.get('/feed');
+			const postArray = postRes.data.value;
+			let postElements: Promise<JSX.Element[]> = Promise.all(
+				postArray.map(async (post: any) => {
+					const authorRes = await api.get('/user/' + post.authorId);
+					const authorData = authorRes.data.value;
+					return (
+						<Post
+							username={authorData.userName}
+							authorId={authorData._id}
+							content={post.content}
+							postId={post._id}
+							likeCount={post.likeCount}
+							commentCount={post.commentCount}
+							repostCount={post.repostCount}
+							key={post._id}
+						/>
+					);
+				}),
+			);
+			return postElements;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
-	return (
-		<Page
-			pageName='General Feed'
-			content={displayedPosts}
-		/>
-	);
+	return <Page pageName='General Feed' content={displayedPosts} />;
 };
 
 export default GeneralFeed;
