@@ -98,8 +98,12 @@
     font-size: 11pt;
 }
 
-.menu-icon, .close-icon, .menu-sub-icons {
+.menu-sub-icons {
     font-size: 3em;
+}
+
+.menu-icon, .close-icon{
+    font-size: 4em;
 }
 
 .nav-container ul.submenu {
