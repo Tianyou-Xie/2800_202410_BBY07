@@ -1,11 +1,13 @@
 import Konva from 'konva';
 import { useEffect, useRef, useState } from 'react';
-import { Circle, Group } from 'react-konva';
+import { Circle, Group, Image } from 'react-konva';
 import { useLocation } from 'wouter';
 
 import { withRef } from '../../lib/with-ref';
 import { PlanetInfoCard } from './planet-info-card';
 import { isMobile } from '../../lib/environment';
+import { Else, If, Then } from 'react-if';
+import useImage from 'use-image';
 
 interface Props {
 	planet: unknown;
@@ -22,14 +24,17 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 	const radius = 'radius' in conf && typeof conf.radius === 'number' ? conf.radius : 0;
 	const orbitRadius = 'orbitRadius' in conf && typeof conf.orbitRadius === 'number' ? conf.orbitRadius : 0;
 	const orbitDuration = 'orbitDuration' in conf && typeof conf.orbitDuration === 'number' ? conf.orbitDuration : 300;
-
-	const slug = name.toLowerCase().replace(/\s+/g, '-');
+	const imageUrl = 'imageUrl' in conf && typeof conf.imageUrl === 'string' ? conf.imageUrl : '';
 
 	const [_, navigate] = useLocation();
 
+	const planetGroupRef = useRef<Konva.Group>(null);
+	const [planetRef, setPlanetRef] = useState<Konva.Image | Konva.Circle | null>(null);
 	const labelRef = useRef<Konva.Text>(null);
-	const planetRef = useRef<Konva.Circle>(null);
 	const outlineRef = useRef<Konva.Circle>(null);
+
+	const slug = name.toLowerCase().replace(/\s+/g, '-');
+	const [planetImg, planetImgStatus] = useImage(imageUrl);
 
 	const [active, setActive] = useState(isMobile);
 	const [cardType, setCardType] = useState<'preview' | 'expanded'>(isMobile ? 'preview' : 'expanded');
@@ -42,20 +47,20 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 			label.to({ opacity: active ? 1 : 0, duration: 0.2 });
 		});
 
-		withRef(planetRef, (planet) => {
-			planet.to({ opacity: active ? 1 : 0.5, duration: 0.2 });
-		});
+		if (planetRef && planetRef.getLayer()) {
+			planetRef.to({ opacity: active ? 1 : 0.8, duration: 0.2 });
+		}
 
 		withRef(outlineRef, (outline) => {
-			outline.to({ radius: active ? radius + 10 : radius + 5, duration: 0.2 });
+			outline.to({ radius: active ? (radius + 5) * 1.2 : radius + 5, duration: 0.2 });
 		});
 
 		document.body.style.cursor = active ? 'pointer' : 'unset';
-	}, [active]);
+	}, [active, planetRef]);
 
 	useEffect(() => {
-		const planet = planetRef.current;
-		if (!planet) return;
+		const planetGroup = planetGroupRef.current;
+		if (!planetGroup) return;
 
 		// CREDIT:
 		// Orbit was drafted by Colin Cheung (https://jsfiddle.net/ColinCee/a2yu0af6/)
@@ -73,27 +78,55 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 
 			setX(x);
 			setY(y);
-		}, planet.getLayer());
+		}, planetGroup.getLayer());
 
 		anim.start();
 		return () => void anim.stop();
 	}, []);
+
+	const [imageRatio, setImageRatio] = useState(1);
+
+	useEffect(() => {
+		if (!planetImg) return;
+		const ratio = planetImg.naturalWidth / planetImg.naturalHeight;
+		setImageRatio(ratio);
+	}, [planetImg]);
 
 	const goToFeed = () => navigate(`/feed/${slug}`);
 
 	return (
 		<>
 			<Circle
-				offset={{ x: -innerWidth / 2, y: -innerHeight / 2 }}
-				stroke='grey'
+				stroke={home ? 'green' : 'grey'}
 				strokeWidth={0.1}
 				radius={orbitRadius}
 				listening={false}
 				perfectDrawEnabled={false}
 			/>
 
-			<Group offset={{ x: -innerWidth / 2, y: -innerHeight / 2 }} x={x} y={y}>
-				<Circle ref={planetRef} fill='white' radius={radius} listening={false} perfectDrawEnabled={false} />
+			<Group ref={planetGroupRef} x={x} y={y}>
+				<If condition={planetImgStatus === 'loaded'}>
+					<Then>
+						<Image
+							ref={(ref) => setPlanetRef(ref)}
+							offset={{ x: radius * imageRatio, y: radius }}
+							image={planetImg}
+							width={radius * 2 * imageRatio}
+							height={radius * 2}
+							listening={false}
+							perfectDrawEnabled={false}
+						/>
+					</Then>
+					<Else>
+						<Circle
+							ref={(ref) => setPlanetRef(ref)}
+							fill='white'
+							radius={radius}
+							listening={false}
+							perfectDrawEnabled={false}
+						/>
+					</Else>
+				</If>
 
 				<Circle
 					ref={outlineRef}
@@ -117,7 +150,7 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 				<PlanetInfoCard
 					planet={planet}
 					home={home}
-					offset={{ x: -radius - 15, y: 16 / 2 }}
+					offset={{ x: -(radius + 5) * 1.2 - 5, y: 0 }}
 					active={active}
 					type={cardType}
 					onTap={goToFeed}
