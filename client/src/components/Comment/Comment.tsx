@@ -50,7 +50,7 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
 	const [loading, setLoading] = useState(false);
-
+	console.log(postId);
 	const fetchComments = async (page: number) => {
 		setLoading(true);
 		try {
@@ -64,10 +64,11 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 							api.get(`/post/${comment._id}/save`),
 							api.get(`/post/${comment._id}/like`),
 						]);
+						console.log(likedRes);
 						return {
 							...comment,
 							isSaved: savedRes.data.success ? savedRes.data.value : false,
-							isLiked: likedRes.data.value === null ? true : false,
+							isLiked: likedRes.data.value,
 						};
 					})
 				);
@@ -103,7 +104,7 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 						api.get(`/post/${newComment._id}/like`),
 					]);
 					newComment.isSaved = savedRes.data.success ? savedRes.data.value : false;
-					newComment.isLiked = likedRes.data.value === null ? true : false;
+					newComment.isLiked = likedRes.data.value;
 					const updatedComments = [newComment, ...comments].sort(
 						(a: Comment, b: Comment) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
 					);

@@ -99,7 +99,7 @@ const Post = (props: PostProp): JSX.Element => {
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
 			try {
-				const response = await api.get(`${props.postId}/save`);
+				const response = await api.get(`/post/${props.postId}/save`);
 				if (response.data.success) {
 					setSaved(response.data.value);
 				}
@@ -114,10 +114,10 @@ const Post = (props: PostProp): JSX.Element => {
 	const onBookmark = async () => {
 		try {
 			if (saved) {
-				await api.delete(`${props.postId}/save`);
+				await api.delete(`/post/${props.postId}/save`);
 				setSaved(false);
 			} else {
-				const response = await api.post(`${props.postId}/save`);
+				const response = await api.post(`/post/${props.postId}/save`);
 				if (response.data.success) {
 					setSaved(true);
 				}
@@ -133,10 +133,9 @@ const Post = (props: PostProp): JSX.Element => {
 	useEffect(() => {
 		const fetchLikeStatus = async () => {
 			try {
-				const response = await api.get(`${props.postId}/like`);
-				if (response.data.value === null) {
-					setLiked(true);
-				}
+				const response = await api.get(`/post/${props.postId}/like`);
+					setLiked(response.data.value);
+				
 			} catch (error) {
 				console.error('Error fetching like status:', error);
 			}
@@ -148,11 +147,11 @@ const Post = (props: PostProp): JSX.Element => {
 	const onLike = async () => {
 		try {
 			if (liked) {
-				await api.delete(`${props.postId}/like`);
+				await api.delete(`/post/${props.postId}/like`);
 				setLikeCount(likeCount - 1);
 				setLiked(false);
 			} else {
-				const response = await api.post(`${props.postId}/like`);
+				const response = await api.post(`/post/${props.postId}/like`);
 				if (response.data.success) {
 					setLikeCount(likeCount + 1);
 					setLiked(true);
