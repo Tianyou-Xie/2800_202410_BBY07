@@ -27,6 +27,8 @@ import { PlanetMap } from './pages/planet-map/planet-map';
 
 import './index.css';
 import Home from './pages/home/home';
+import PostDetailPage from './pages/post/post';
+import Planets from './pages/planets/planets-component';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -53,6 +55,8 @@ export const App = () => {
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/test' component={Test} />
+			<Route path='/planets' component={Planets} />
+			<Route path='/post/:id'>{(params) => <PostDetailPage id={params.id} />}</Route>
 			<Route>404 Not Found</Route>
 		</>
 	);

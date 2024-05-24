@@ -9,9 +9,8 @@ const MyFeed = () => {
 		<Post
 			username='MarcusTheDumbs'
 			content='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
-			postId='./about'
-			authorId='#USER_URL'
-		/>
+			postId='66450ab930f716df67e47a02'
+			authorId='#USER_URL' repost={0} like={0} comment={0} />
 	);
 
 	for (let i = 1; i < 10; i++) {

@@ -32,6 +32,9 @@ interface PostProp {
 		_id: string;
 	};
 	// media?: Array<Object>;
+	repost: number;
+	like: number;
+	comment: number;
 }
 
 interface UserProp {
@@ -76,66 +79,89 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.repostCount number - Number of reposts of the post.
  * @param props.createdAt Date - (optional) Date in which the post was created.
  * @param props.Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
+ * @param props.username string - Username of the author of the post
+ * @param props.text string - Text of the post
+ * @param props.postURL string - URL of the complete version of the post with comments and more information
+ * @param props.createdAt Date - (optional) Date in which the post was created
+ * @param props.repost number - Number of reposts of the post
+ * @param props.like 	number - Number of likes of the post
+ * @param props.comment number - Number of comments of the post
  */
 const Post = (props: PostProp): JSX.Element => {
-	const [bookmarked, setBookmarked] = useState(false);
-	const [liked, setLiked] = useState(false);
+
+	function onShare() { }
+
+	function onComment() { }
+
+
+	const [saved, setSaved] = useState(false);
 
 	useEffect(() => {
-		async function isLiked() {
+		const fetchSaveStatus = async () => {
 			try {
-				const res = await api.get(`/post/${props.postId}/like`);
-				setLiked(true);
-			} catch (error: any) {
-				if (error.response.status == 404) setLiked(false);
-				else console.log(error.response);
+				const response = await api.get(`${props.postId}/save`);
+				if (response.data.success) {
+					setSaved(response.data.value);
+				}
+			} catch (error) {
+				console.error('Error fetching save status:', error);
 			}
-		}
-		isLiked();
+		};
+
+		fetchSaveStatus();
 	}, []);
 
-	function onShare() {}
-
-	async function addBookMark() {
-		setBookmarked(true);
+	const onBookmark = async () => {
 		try {
-			await api.post(`/post/${props.postId}/save`);
-		} catch (error: any) {
-			toast.error('Could not save post, it may have been removed.');
-		}
-	}
-
-	async function removeBookMark() {
-		setBookmarked(false);
-		try {
-			await api.delete(`/post/${props.postId}/save`);
-		} catch (error: any) {
-			// need a better error message here
-			// backend does not handle the case of unsaving a post that was deleted. Backend needs to be adjusted.
-			toast.error(error.response.data.error);
-		}
-	}
-
-	function onComment() {}
-
-	async function onLike() {
-		try {
-			const res = await api.post(`/post/${props.postId}/like`);
-			console.log(res.data);
-			setLiked(true);
-		} catch (likeError: any) {
-			if (likeError.response.status == 400) {
-				console.log(likeError);
-				try {
-					const response = await api.delete(`/post/${props.postId}/like`);
-					console.log(response.data);
-					setLiked(false);
-				} catch (dislikeError: any) {
-					toast.error(dislikeError.response.data.error);
+			if (saved) {
+				await api.delete(`${props.postId}/save`);
+				setSaved(false);
+			} else {
+				const response = await api.post(`${props.postId}/save`);
+				if (response.data.success) {
+					setSaved(true);
 				}
-			} else toast.error(likeError.response.data.error);
+			}
+		} catch (error) {
+			console.error('Error updating save status:', error);
 		}
-	}
+	};
+
+
+	const [liked, setLiked] = useState(false);
+	const [likeCount, setLikeCount] = useState(props.like);
+	useEffect(() => {
+		const fetchLikeStatus = async () => {
+			try {
+				const response = await api.get(`${props.postId}/like`);
+				if (response.data.value === null) {
+					setLiked(true);
+				}
+			} catch (error) {
+				console.error('Error fetching like status:', error);
+			}
+		};
+
+		fetchLikeStatus();
+	}, []);
+
+	const onLike = async () => {
+		try {
+			if (liked) {
+				await api.delete(`${props.postId}/like`);
+				setLikeCount(likeCount - 1);
+				setLiked(false);
+			} else {
+				const response = await api.post(`${props.postId}/like`);
+				if (response.data.success) {
+					setLikeCount(likeCount + 1);
+					setLiked(true);
+				}
+			}
+		} catch (error) {
+			console.error('Error updating like status:', error);
+		}
+	};
 
 	return (
 		<div className={styles.postContainer}>
@@ -148,26 +174,30 @@ const Post = (props: PostProp): JSX.Element => {
 						<Link href={'/post/' + props.postId} className={styles.link}>
 							<p>{props.content}</p>
 							{props.createdAt ? (
-								<p className={styles.postDate}>{props.createdAt.toLocaleDateString()}</p>
+								<p className={styles.postDate}>{props.createdAt.toLocaleString()}</p>
 							) : undefined}
 						</Link>
 						<div className={styles.iconsContainer}>
+							<p>{props.repost}</p>
 							<button className={styles.share}>
 								<RiShareBoxLine />
 							</button>
 							<button className={styles.book}>
-								{bookmarked ? (
-									<FaBookmark onClick={removeBookMark} />
+								{saved ? (
+									<FaBookmark onClick={onBookmark} />
 								) : (
-									<FaRegBookmark onClick={addBookMark} />
+									<FaRegBookmark onClick={onBookmark} />
 								)}
 							</button>
 							<button className={styles.comment}>
 								<FaRocketchat />
 							</button>
+							<p>{props.comment}</p>
+
 							<button onClick={onLike} className={styles.like}>
 								{liked ? <FaHeart /> : <FaRegHeart />}
 							</button>
+							<p>{likeCount}</p>
 						</div>
 					</>
 				}

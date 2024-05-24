@@ -20,7 +20,7 @@ const GeneralFeed = () => {
 	useEffect(() => {
 		async function fetchPost() {
 			try {
-				const res = await api.post('/post/6646a3b24b2d7d6a935eeea3');
+				const res = await api.post('/post/66450ab930f716df67e47a02');
 				console.log(res);
 			} catch (err) {
 				console.log(err);
@@ -32,11 +32,10 @@ const GeneralFeed = () => {
 
 	const dummyPost = (
 		<Post
-			username='MarcusTheDumbs'
-			content='"It was never bad luck... It was always incompetence"- DARWIN, Charles'
-			postId='./about'
-			authorId='#USER_URL'
-		/>
+			username='Zyrakia'
+			content='"Hello World! This is the first ever post to Skynet!!!'
+			postId='66450ab930f716df67e47a02'
+			authorId='66450ab930f716df67e47a02' repost={21} like={22} comment={12} />
 	);
 
 	for (let i = 1; i < 10; i++) {
