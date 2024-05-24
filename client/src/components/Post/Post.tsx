@@ -105,8 +105,23 @@ const Post = (props: PostProp): JSX.Element => {
 
 	function onComment() {}
 
-	function onLike() {
-		setLiked(!liked);
+	async function onLike() {
+		try {
+			const res = await api.post(`/post/${props.postId}/like`);
+			console.log(res.data);
+			setLiked(true);
+		} catch (likeError: any) {
+			if (likeError.response.status == 400) {
+				console.log(likeError);
+				try {
+					const response = await api.delete(`/post/${props.postId}/like`);
+					console.log(response.data);
+					setLiked(false);
+				} catch (dislikeError: any) {
+					toast.error(dislikeError.response.data.error);
+				}
+			} else toast.error(likeError.response.data.error);
+		}
 	}
 
 	return (
