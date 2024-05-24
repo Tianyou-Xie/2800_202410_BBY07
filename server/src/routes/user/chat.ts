@@ -47,7 +47,8 @@ export const post: Handler[] = [
                 content: value.content
             });
 
-            await message.save();
+            const data = await message.save();
+            io.emit('receiveMessage', data);
             return Resolve(res).ok('Message saved successfully.');
         }
 
