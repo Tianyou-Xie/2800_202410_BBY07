@@ -240,3 +240,4 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 };
 
 export default Comment;
+// Test git ingnore file
