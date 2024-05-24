@@ -22,3 +22,15 @@
     padding-top: 10px;
     padding-left: 10px;
 }
+
+@media screen and (max-width: 420px) {
+    .page-title {
+        font-size: 2em;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .page-title {
+        font-size: 1.6em;
+    }
+}
