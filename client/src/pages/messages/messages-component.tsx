@@ -2,15 +2,18 @@ import MessagesHtml from './messages-html';
 import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import { useParams } from 'wouter';
+import io from 'socket.io-client';
 
 const Messages = () => {
-	const [message, setMessage] = useState('');
-	const [messages, setMessages] = useState([]);
-	const [isChat, setIsChat] = useState(false);
 	let { id } = useParams();
-	// setreceiverID(id);
+	const [message, setMessage] = useState('');
+	const [messages, setMessages] = useState<string[]>([]);
+	const [isChat, setIsChat] = useState(false);
+	// const [socket, setSocket] = useState<any>(null);
+	const [convoID, setConvoID] = useState('');
+	const socket = io(import.meta.env.VITE_LOCALHOST);
 
-	useEffect(() => {
+	useEffect((): any => {
 		const fetchMessages = async () => {
 			let headers = {
 				headers: {
@@ -23,6 +26,9 @@ const Messages = () => {
 				if (res.success) {
 					setIsChat(true);
 					setMessages(res.message);
+					setConvoID(res.message[0].conversationId);
+					// setSocket(newSocket);
+					socket.emit('sendID', res.message[0].conversationId);
 				}
 			} catch (error) {
 				console.log(error);
@@ -30,17 +36,32 @@ const Messages = () => {
 		};
 
 		fetchMessages();
+		return () => socket.close();
 	}, []);
 
+	useEffect(() => {
+		let arr: any;
+		if (socket) {
+			socket.on('receiveMessage', (data: any) => {
+				arr = data;
+			});
+			socket.on('displayMessage', () => {
+				setMessages((prevMessages) => [...prevMessages, arr]);
+			});
+		}
+	}, [socket]);
+
 	const submitForm = async (e: any) => {
-		console.log(message);
+		e.preventDefault();
 		const newMessage = {
 			content: message,
 			receiverId: id,
 		};
+
 		try {
 			const { data: res } = await api.post('/user/chat', newMessage);
-			console.log(res);
+			socket.emit('sendMessage', convoID);
+			setMessage('');
 		} catch (error) {
 			console.log(error);
 		}
