@@ -36,7 +36,7 @@ const User = (props: UserProp): JSX.Element => {
 			curved
 			dark
 			content={
-				<Link href={props.userURL ?? '/'} className={styles.link}>
+				<Link href={'/user/' +props.userURL ?? '/'} className={styles.link}>
 					{props.username}
 				</Link>
 			}
@@ -189,7 +189,7 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 			<div className={styles.commentsList}>
 				{comments.map((comment) => (
 					<div key={comment._id} className={styles.postContainer}>
-						<User username={comment.userName} userURL={comment.authorId} />
+						<User username={'@' + comment.userName} userURL={comment.authorId} />
 						<UIBox
 							className={styles.paraContainer}
 							curved
@@ -204,8 +204,6 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 									<div className={styles.iconsContainer}>
 										<p>{comment.repost}</p>
 										<button className={styles.share}>
-
-
 											<RiShareBoxLine />
 										</button>
 										<button
