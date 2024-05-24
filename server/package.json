@@ -19,7 +19,8 @@
 		"jsonwebtoken": "^9.0.2",
 		"mongoose": "^8.3.3",
 		"nodemailer": "^6.9.13",
-		"picocolors": "^1.0.1"
+		"picocolors": "^1.0.1",
+		"socket.io": "^4.7.5"
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.2",
