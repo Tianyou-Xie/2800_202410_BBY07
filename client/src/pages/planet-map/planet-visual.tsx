@@ -8,6 +8,7 @@ import { useLocation } from 'wouter';
 import { isMobile } from '../../lib/environment';
 import { withRef } from '../../lib/with-ref';
 import { PlanetInfoCard } from './planet-info-card';
+import { createSlug } from '../../lib/create-slug';
 
 interface Props {
 	planet: unknown;
@@ -33,7 +34,6 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 	const labelRef = useRef<Konva.Text>(null);
 	const outlineRef = useRef<Konva.Circle>(null);
 
-	const slug = name.toLowerCase().replace(/\s+/g, '-');
 	const [planetImg, planetImgStatus] = useImage(imageUrl);
 
 	const [active, setActive] = useState(isMobile);
@@ -92,7 +92,7 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 		setImageRatio(ratio);
 	}, [planetImg]);
 
-	const goToFeed = () => navigate(`/feed/${slug}`);
+	const goToFeed = () => navigate(`/feed/${createSlug(name)}`);
 
 	return (
 		<>

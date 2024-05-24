@@ -12,9 +12,12 @@ import { CenterVisual } from './center-visual';
 import { PlanetVisual } from './planet-visual';
 import { SpaceTraveller } from './space-traveller';
 import { StarBackground } from './star-background';
+import { useLocation } from 'wouter';
 
 export const PlanetMap = () => {
 	const stageRef = useRef<Konva.Stage>(null);
+
+	const [_, navigate] = useLocation();
 
 	const [planetData, setPlanetData] = useState<any[]>([]);
 	const [homePlanetId, setHomePlanetId] = useState<string>();
@@ -197,7 +200,9 @@ export const PlanetMap = () => {
 						<PiCrosshairBold />
 					</button>
 
-					<button className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'>
+					<button
+						className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
+						onClick={() => navigate('/home-list')}>
 						<GiHamburgerMenu />
 					</button>
 				</div>

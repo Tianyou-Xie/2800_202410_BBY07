@@ -26,6 +26,7 @@ import ProfilePage from './pages/profile-page/profile-page';
 import { PlanetMap } from './pages/planet-map/planet-map';
 
 import './index.css';
+import Home from './pages/home/home';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -80,6 +81,7 @@ export const App = () => {
 								<Switch>
 									<Route path='/' component={PlanetMap} />
 									<Route path='/home' component={PlanetMap} />
+									<Route path='/home-list' component={Home} />
 									<Route path='/changepassword' component={Changepassword} />
 									<Route path='/feed' component={GeneralFeed} />
 									<Route path='/myfeed' component={MyFeed} />
