@@ -58,7 +58,7 @@ const PostPage = function (props: PostProps) {
 
 		try {
 			const res = await api.post('/post', postRequest);
-			setLocation('/myfeed');
+			setLocation('/profile');
 			toast.success(res.data.message);
 		} catch (err: any) {
 			toast.error(`${err.response.data.error}`, {

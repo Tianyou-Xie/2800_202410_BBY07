@@ -32,9 +32,6 @@ interface PostProp {
 		_id: string;
 	};
 	// media?: Array<Object>;
-	repost: number;
-	like: number;
-	comment: number;
 }
 
 interface UserProp {
@@ -81,11 +78,8 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
  * @param props.username string - Username of the author of the post
  * @param props.text string - Text of the post
- * @param props.postURL string - URL of the complete version of the post with comments and more information
+ * @param props.postId string - URL of the complete version of the post with comments and more information
  * @param props.createdAt Date - (optional) Date in which the post was created
- * @param props.repost number - Number of reposts of the post
- * @param props.like 	number - Number of likes of the post
- * @param props.comment number - Number of comments of the post
  */
 const Post = (props: PostProp): JSX.Element => {
 	function onShare() {}
@@ -126,13 +120,13 @@ const Post = (props: PostProp): JSX.Element => {
 	};
 
 	const [liked, setLiked] = useState(false);
-	const [likeCount, setLikeCount] = useState(props.like);
+	const [likeCount, setLikeCount] = useState(props.likeCount ?? 0);
 	useEffect(() => {
 		const fetchLikeStatus = async () => {
 			try {
 				const response = await api.get(`/post/${props.postId}/like`);
-					setLiked(response.data.value);
-				
+				setLiked(response.data.value);
+				console.log(response.data);
 			} catch (error) {
 				console.error('Error fetching like status:', error);
 			}
@@ -174,7 +168,7 @@ const Post = (props: PostProp): JSX.Element => {
 							) : undefined}
 						</Link>
 						<div className={styles.iconsContainer}>
-							<p>{props.repost}</p>
+							<p>{props.repostCount}</p>
 							<button className={styles.share}>
 								<RiShareBoxLine />
 							</button>
@@ -184,7 +178,7 @@ const Post = (props: PostProp): JSX.Element => {
 							<button className={styles.comment}>
 								<FaRocketchat />
 							</button>
-							<p>{props.comment}</p>
+							<p>{props.commentCount}</p>
 
 							<button onClick={onLike} className={styles.like}>
 								{liked ? <FaHeart /> : <FaRegHeart />}

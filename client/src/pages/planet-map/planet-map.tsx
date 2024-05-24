@@ -222,7 +222,7 @@ export const PlanetMap = () => {
 
 				<Layer>
 					{planetData.map((v) => {
-						return <PlanetVisual key={v._id} planet={v} home={homePlanetId === v._id} />;
+						return <PlanetVisual key={v._id} planet={v} home={homePlanetId === v._id} planetId={v._id} />;
 					})}
 				</Layer>
 

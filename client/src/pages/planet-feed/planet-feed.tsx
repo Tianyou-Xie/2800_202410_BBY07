@@ -3,11 +3,14 @@ import { api } from '../../lib/axios';
 
 import Page from '../../components/Page/Page';
 import Post from '../../components/Post/Post';
+import { useParams } from 'wouter';
 
 // PLEASE, CHECK THE PROMISE USE
 // I HAD A PROBLEM WITH USING AWAIT/ASYNC INSIDE ARRAYS
-const GeneralFeed = () => {
+const PlanetFeed = () => {
 	const [displayedPosts, setDisplayedPosts] = useState(Array<JSX.Element>());
+	let { id } = useParams() ?? '';
+	let { planetName } = useParams() ?? '';
 
 	useEffect(() => {
 		const displayPosts = async function () {
@@ -22,7 +25,7 @@ const GeneralFeed = () => {
 
 	async function fetchPost() {
 		try {
-			const postRes = await api.get('/feed');
+			const postRes = await api.get(`/feed/${id}`);
 			const postArray = postRes.data.value;
 			let postElements: Promise<JSX.Element[]> = Promise.all(
 				postArray.map(async (post: any) => {
@@ -48,7 +51,7 @@ const GeneralFeed = () => {
 		}
 	}
 
-	return <Page pageName='General Feed' content={displayedPosts} />;
+	return <Page pageName={`${planetName}`} content={displayedPosts} />;
 };
 
-export default GeneralFeed;
+export default PlanetFeed;

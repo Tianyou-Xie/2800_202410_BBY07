@@ -56,10 +56,12 @@ const Home = () => {
 							const slug = createSlug(name);
 							if (typeof slug !== 'string') return <></>;
 
+							console.log(planet);
+
 							return (
 								<Planets
 									planet={homePlanet === planet._id ? `🏠 ${name}` : name}
-									url={`/feed/${slug}`}
+									url={`/feed/${slug}/${planet._id}`}
 								/>
 							);
 						})}

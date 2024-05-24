@@ -36,7 +36,7 @@ const User = (props: UserProp): JSX.Element => {
 			curved
 			dark
 			content={
-				<Link href={props.userURL ?? '/'} className={styles.link}>
+				<Link href={'/user/' +props.userURL ?? '/'} className={styles.link}>
 					{props.username}
 				</Link>
 			}
@@ -50,7 +50,6 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
 	const [loading, setLoading] = useState(false);
-	console.log(postId);
 	const fetchComments = async (page: number) => {
 		setLoading(true);
 		try {
@@ -64,7 +63,6 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 							api.get(`/post/${comment._id}/save`),
 							api.get(`/post/${comment._id}/like`),
 						]);
-						console.log(likedRes);
 						return {
 							...comment,
 							isSaved: savedRes.data.success ? savedRes.data.value : false,
@@ -191,7 +189,7 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 			<div className={styles.commentsList}>
 				{comments.map((comment) => (
 					<div key={comment._id} className={styles.postContainer}>
-						<User username={comment.userName} userURL={comment.authorId} />
+						<User username={'@' + comment.userName} userURL={comment.authorId} />
 						<UIBox
 							className={styles.paraContainer}
 							curved
@@ -206,8 +204,6 @@ const Comment: React.FC<CommentProps> = ({ postId }) => {
 									<div className={styles.iconsContainer}>
 										<p>{comment.repost}</p>
 										<button className={styles.share}>
-
-
 											<RiShareBoxLine />
 										</button>
 										<button
