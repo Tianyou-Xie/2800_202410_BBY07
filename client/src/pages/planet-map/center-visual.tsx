@@ -24,6 +24,8 @@ export const CenterVisual = () => {
 		document.body.style.cursor = active ? 'pointer' : 'unset';
 	}, [active]);
 
+	const goToFeed = () => navigate('/feed');
+
 	return (
 		<>
 			<Group offset={{ x: -innerWidth / 2, y: -innerHeight / 2 }}>
@@ -38,11 +40,8 @@ export const CenterVisual = () => {
 					perfectDrawEnabled={false}
 					onMouseEnter={() => setActive(true)}
 					onMouseLeave={() => setActive(false)}
-					onTap={() => setActive(true)}
-					onClick={() => {
-						setActive(true);
-						navigate('/feed');
-					}}
+					onTap={goToFeed}
+					onClick={goToFeed}
 					offset={{ x: imageSize / 2, y: imageSize / 2 }}
 				/>
 			</Group>

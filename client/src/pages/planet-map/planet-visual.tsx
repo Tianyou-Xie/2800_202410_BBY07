@@ -1,10 +1,11 @@
-import isMobile from 'is-mobile';
 import Konva from 'konva';
 import { useEffect, useRef, useState } from 'react';
-import { Circle, Group, Text } from 'react-konva';
+import { Circle, Group } from 'react-konva';
 import { useLocation } from 'wouter';
 
 import { withRef } from '../../lib/with-ref';
+import { PlanetInfoCard } from './planet-info-card';
+import { isMobile } from '../../lib/environment';
 
 interface Props {
 	planet: unknown;
@@ -22,13 +23,16 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 	const orbitRadius = 'orbitRadius' in conf && typeof conf.orbitRadius === 'number' ? conf.orbitRadius : 0;
 	const orbitDuration = 'orbitDuration' in conf && typeof conf.orbitDuration === 'number' ? conf.orbitDuration : 300;
 
+	const slug = name.toLowerCase().replace(/\s+/g, '-');
+
 	const [_, navigate] = useLocation();
 
 	const labelRef = useRef<Konva.Text>(null);
 	const planetRef = useRef<Konva.Circle>(null);
 	const outlineRef = useRef<Konva.Circle>(null);
 
-	const [active, setActive] = useState(isMobile({ tablet: true }));
+	const [active, setActive] = useState(isMobile);
+	const [cardType, setCardType] = useState<'preview' | 'expanded'>(isMobile ? 'preview' : 'expanded');
 
 	const [x, setX] = useState(orbitRadius);
 	const [y, setY] = useState(orbitRadius);
@@ -75,6 +79,8 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 		return () => void anim.stop();
 	}, []);
 
+	const goToFeed = () => navigate(`/feed/${slug}`);
+
 	return (
 		<>
 			<Circle
@@ -95,21 +101,26 @@ export const PlanetVisual = ({ planet, home }: Props) => {
 					perfectDrawEnabled={false}
 					strokeWidth={1}
 					radius={radius + 10}
-					onTap={() => setActive(!active)}
-					onClick={() => navigate(`/feed/${name.toLowerCase()}`)}
+					onTap={() => {
+						if (!active) {
+							setActive(true);
+							setCardType('preview');
+						} else if (cardType === 'preview') {
+							setCardType('expanded');
+						} else setActive(!active);
+					}}
+					onClick={goToFeed}
 					onMouseEnter={() => setActive(true)}
-					onMouseLeave={() => setActive(false)}></Circle>
+					onMouseLeave={() => setActive(false)}
+				/>
 
-				<Text
-					ref={labelRef}
-					text={`${home ? "💖 " : ""}${name}`}
+				<PlanetInfoCard
+					planet={planet}
+					home={home}
 					offset={{ x: -radius - 15, y: 16 / 2 }}
-					fontFamily='Bitsumishi'
-					opacity={0}
-					fontSize={16}
-					perfectDrawEnabled={false}
-					listening={false}
-					fill='white'
+					active={active}
+					type={cardType}
+					onTap={goToFeed}
 				/>
 			</Group>
 		</>
