@@ -28,6 +28,6 @@ export const post: Handler[] = [
         
         const message = await MessageModel.find({conversationId: converationID._id});
         
-        res.json({message})
+        res.json({success: true, message})
     }
 ];
