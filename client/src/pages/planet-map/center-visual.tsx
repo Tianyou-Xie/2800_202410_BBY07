@@ -1,6 +1,6 @@
 import Konva from 'konva';
 import { useEffect, useRef, useState } from 'react';
-import { Group, Image } from 'react-konva';
+import { Image } from 'react-konva';
 import { useLocation } from 'wouter';
 
 import logoUrl from '../../assets/images/SkynetLogo.png';
@@ -27,24 +27,20 @@ export const CenterVisual = () => {
 	const goToFeed = () => navigate('/feed');
 
 	return (
-		<>
-			<Group offset={{ x: -innerWidth / 2, y: -innerHeight / 2 }}>
-				<Image
-					ref={imgRef}
-					image={img}
-					width={imageSize}
-					height={imageSize}
-					shadowEnabled
-					strokeEnabled={false}
-					shadowColor='grey'
-					perfectDrawEnabled={false}
-					onMouseEnter={() => setActive(true)}
-					onMouseLeave={() => setActive(false)}
-					onTap={goToFeed}
-					onClick={goToFeed}
-					offset={{ x: imageSize / 2, y: imageSize / 2 }}
-				/>
-			</Group>
-		</>
+		<Image
+			ref={imgRef}
+			image={img}
+			width={imageSize}
+			height={imageSize}
+			shadowEnabled
+			strokeEnabled={false}
+			shadowColor='grey'
+			perfectDrawEnabled={false}
+			onMouseEnter={() => setActive(true)}
+			onMouseLeave={() => setActive(false)}
+			onTap={goToFeed}
+			onClick={goToFeed}
+			offset={{ x: imageSize / 2, y: imageSize / 2 }}
+		/>
 	);
 };
