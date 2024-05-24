@@ -86,7 +86,7 @@ const UserPage = () => {
 				);
 			});
 			if (postArray.length == 0) {
-				postElements = [<>You should post something...</>];
+				postElements = [<>Nothing yet...</>];
 			}
 			return postElements;
 		} catch (err) {

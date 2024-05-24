@@ -63,7 +63,7 @@ const ProfilePage = () => {
 			if (userID == '') return;
 			const res = await api.get('/feed/' + userID);
 			const postArray = res.data.value;
-			const postElements = postArray.map((post: Post) => {
+			let postElements = postArray.map((post: Post) => {
 				return (
 					<Post
 						username={username}
@@ -74,6 +74,9 @@ const ProfilePage = () => {
 					/>
 				);
 			});
+			if (postArray.length == 0) {
+				postElements = [<>Nothing yet...</>];
+			}
 			return postElements;
 		} catch (err) {
 			console.log(err);
