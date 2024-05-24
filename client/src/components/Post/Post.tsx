@@ -78,7 +78,7 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
  * @param props.username string - Username of the author of the post
  * @param props.text string - Text of the post
- * @param props.postURL string - URL of the complete version of the post with comments and more information
+ * @param props.postId string - URL of the complete version of the post with comments and more information
  * @param props.createdAt Date - (optional) Date in which the post was created
  */
 const Post = (props: PostProp): JSX.Element => {
@@ -126,6 +126,7 @@ const Post = (props: PostProp): JSX.Element => {
 			try {
 				const response = await api.get(`/post/${props.postId}/like`);
 				setLiked(response.data.value);
+				console.log(response.data);
 			} catch (error) {
 				console.error('Error fetching like status:', error);
 			}

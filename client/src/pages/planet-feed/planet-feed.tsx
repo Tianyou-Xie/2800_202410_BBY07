@@ -37,6 +37,9 @@ const PlanetFeed = () => {
 							authorId={authorData._id}
 							content={post.content}
 							postId={post._id}
+							likeCount={post.likeCount}
+							commentCount={post.commentCount}
+							repostCount={post.repostCount}
 							key={post._id}
 						/>
 					);
