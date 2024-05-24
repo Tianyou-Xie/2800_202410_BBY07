@@ -25,6 +25,7 @@ import { Loader } from './components/loader/loader';
 import PostPage from './pages/post-page/post-page';
 import UserPage from './pages/user-page/user-page';
 import ProfilePage from './pages/profile-page/profile-page';
+import PlanetFeed from './pages/planet-feed/planet-feed';
 
 export const App = () => {
 	const [authorized, setAuthorized] = useState<boolean | undefined>(undefined);
@@ -70,6 +71,7 @@ export const App = () => {
 						<Route path='/myfeed' component={MyFeed} />
 						<Route path='/post' component={PostPage} />
 						<Route path='/user/:id' component={UserPage} />
+						<Route path='/planet/:planetName/:id' component={PlanetFeed} />
 						<Route path='/profile' component={ProfilePage} />
 						<Route path='/settings' component={UserSettings} />
 						<Route path='/settings/manageAccount' component={ManageAccount} />
