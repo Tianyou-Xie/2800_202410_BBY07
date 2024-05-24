@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './Post.module.css';
 
@@ -81,6 +81,19 @@ const Post = (props: PostProp): JSX.Element => {
 	const [bookmarked, setBookmarked] = useState(false);
 	const [liked, setLiked] = useState(false);
 
+	useEffect(() => {
+		async function isLiked() {
+			try {
+				const res = await api.get(`/post/${props.postId}/like`);
+				setLiked(true);
+			} catch (error: any) {
+				if (error.response.status == 404) setLiked(false);
+				else console.log(error.response);
+			}
+		}
+		isLiked();
+	}, []);
+
 	function onShare() {}
 
 	async function addBookMark() {
@@ -105,8 +118,23 @@ const Post = (props: PostProp): JSX.Element => {
 
 	function onComment() {}
 
-	function onLike() {
-		setLiked(!liked);
+	async function onLike() {
+		try {
+			const res = await api.post(`/post/${props.postId}/like`);
+			console.log(res.data);
+			setLiked(true);
+		} catch (likeError: any) {
+			if (likeError.response.status == 400) {
+				console.log(likeError);
+				try {
+					const response = await api.delete(`/post/${props.postId}/like`);
+					console.log(response.data);
+					setLiked(false);
+				} catch (dislikeError: any) {
+					toast.error(dislikeError.response.data.error);
+				}
+			} else toast.error(likeError.response.data.error);
+		}
 	}
 
 	return (
