@@ -1,9 +1,10 @@
-import mongoose, { deleteModel } from 'mongoose';
+import mongoose from 'mongoose';
 import { Handler } from 'express';
 import { authProtected } from '../../../middlewares/auth-protected';
 import { Resolve } from '../../../utils/express';
 import { UserModel } from '../../../models/user';
 import Joi from 'joi';
+import { DeletedUserModel } from '../../../models/deletedUser';
 
 interface deleteBody {
 	confirmationInput: string;
@@ -31,6 +32,25 @@ export const post: Handler[] = [
 
 		const result = await User.findByIdAndDelete(userID);
 		if (!result) return Resolve(res).notFound('User could not be found.');
+
+		const deletedUser = new DeletedUserModel({
+			originID: result._id,
+			email: result.email,
+			sso: result.sso,
+			password: result.password,
+			userName: result.userName,
+			bio: result.bio,
+			location: result.location,
+			birthDate: result.birthDate,
+			avatarUrl: result.avatarUrl,
+			followerCount: result.followerCount,
+			followingCount: result.followingCount,
+			postCount: result.postCount,
+			savedPosts: result.savedPosts,
+			admin: result.admin,
+			createdAt: result.createdAt
+		});
+		await deletedUser.save();
 
 		Resolve(res).okWith(result, 'Account deleted successfully.');
 	},
