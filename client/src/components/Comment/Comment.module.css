@@ -1,38 +1,43 @@
 .commentContainer {
 	width: 100%;
 	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.commentsList {
+	flex-grow: 1;
 }
 
 .commentForm {
 	display: flex;
 	flex-direction: column;
+	margin-top: 20px;
 }
 
 .commentTextArea {
 	width: 100%;
-	min-height: 50px; /* Adjust as needed */
+	min-height: 50px;
 	padding: 10px;
-	font-size: 1rem; /* Adjust as needed */
+	font-size: 0.9rem; /* Slightly smaller than the post text */
 	resize: vertical;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	margin-bottom: 10px;
+	font-family: TTOctosquares;
 }
 
 .commentButton {
 	width: fit-content;
 	align-self: flex-end;
 	padding: 5px 10px;
-	font-size: 1rem; /* Adjust as needed */
+	font-size: 1rem;
 	background-color: #007bff;
 	color: #fff;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-}
-
-.commentsList {
-	margin-top: 20px;
+	font-family: TTOctosquares;
 }
 
 .comment {
@@ -41,6 +46,8 @@
 	border-radius: 5px;
 	padding: 10px;
 	margin-bottom: 10px;
+	font-size: 0.9rem; /* Slightly smaller than the post text */
+	font-family: TTOctosquares;
 }
 
 .comment p {
@@ -52,6 +59,6 @@
 }
 
 .commentDate {
-	font-size: 0.8rem; /* Adjust as needed */
-	color: #888;
+	font-size: 0.75rem; /* Slightly smaller than the post date */
+	color: var(--soft-shadow);
 }
