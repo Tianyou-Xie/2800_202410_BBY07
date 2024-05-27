@@ -14,7 +14,7 @@ import ManageAccount from './pages/user-settings/options/manage-account';
 import Messages from './pages/messages/messages-component';
 import Policy from './pages/about/options/policy';
 import Terms from './pages/about/options/terms';
-import FAQs from './pages/faqs/faqs';
+import FAQs from './pages/faqs/faqs-page';
 import { useEffect, useState } from 'react';
 import { Auth, UserAuthContext } from './lib/auth';
 import Cursors from './components/cursor/cursor';

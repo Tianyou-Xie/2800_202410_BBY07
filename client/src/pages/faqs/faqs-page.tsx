@@ -1,21 +1,45 @@
 import styles from './faqs.module.css';
 
 import Page from '../../components/Page/Page';
+import QuestionAccordion from '../../components/ques-accordion/ques-accordion';
 import Accordion from 'react-bootstrap/Accordion';
 import { useEffect, useState } from 'react';
+import { api } from '../../lib/axios';
 
 const FAQs = () => {
 	const [searchQuery, setSearch] = useState('');
 	const [quesToDisplay, setQuestions] = useState(Array<JSX.Element>());
 
 	useEffect(() => {
-        const displayQuestions = () => {
-            
-        }
-    }, []);
+		const displayInitialQues = async () => {
+			const response = await api.get('/faqs');
+			const ques = response.data.value;
+
+			let num = 0;
+			let newQues: Array<JSX.Element> = [];
+			ques.map((ques: any) => {
+				newQues.push(
+					<QuestionAccordion
+						key={ques._id}
+						question={ques.question}
+						answer={ques.answer}
+						eventKey={num.toString()}
+					/>,
+				);
+				num++;
+			});
+			setQuestions(newQues);
+			console.log(searchQuery);
+		};
+
+		displayInitialQues();
+	}, []);
 
 	const findQuestions = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		setQuestions([]);
+
+		
 	};
 
 	return (
@@ -40,7 +64,9 @@ const FAQs = () => {
 								</button>
 							</div>
 						</form>
-						<Accordion>{quesToDisplay}</Accordion>
+						<Accordion className='mt-3' defaultActiveKey='0' flush>
+							{quesToDisplay}
+						</Accordion>
 					</div>
 				}
 			/>
