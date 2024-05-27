@@ -85,19 +85,14 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 
 	if (!postDetails) return <Loader />;
 
+	console.log(postDetails);
+
 	return (
 		<Page
 			pageName='Post Detail'
 			content={
 				<>
-					<Post
-						content={postDetails!.content}
-						authorId={`${postDetails!.authorId}`}
-						postId={`${postDetails!._id}`}
-						createdAt={new Date(postDetails!.createdAt)}
-						likeCount={postDetails!.likeCount}
-						commentCount={postDetails!.commentCount + postedComments.length}
-					/>
+					<Post {...postDetails} />
 
 					<hr className='w-100 m-0' />
 
@@ -119,17 +114,7 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 					<div className='w-100 px-3 d-flex flex-column align-items-center justify-content-center'>
 						<div className='w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
 							{postedComments.map((v) => {
-								return (
-									<Post
-										authorId={v.authorId}
-										content={v.content}
-										postId={v._id}
-										commentCount={v.commentCount}
-										createdAt={v.createdAt}
-										likeCount={v.likeCount}
-										location={v.location}
-									/>
-								);
+								return <Post {...v} />;
 							})}
 						</div>
 

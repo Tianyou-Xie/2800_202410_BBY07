@@ -61,7 +61,7 @@ export const post: Handler[] = [
 			postCount: userCopy.postCount,
 			savedPosts: userCopy.savedPosts,
 			admin: userCopy.admin,
-			createdAt: Date.now()
+			createdAt: Date.now(),
 		});
 		await deletedUser.save();
 

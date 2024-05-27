@@ -11,17 +11,15 @@ export const get: Handler = async (req, res) => {
 	const id = req.params.id;
 	if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
 
-	const post = await PostModel.findById(id);
+	const post = await PostModel.findById(id).lean();
 	if (!post) return Resolve(res).notFound('Invalid post ID provided.');
 
-	if (post.deleted) return Resolve(res).gone('Post has been deleted.');
-
-	const user = await UserModel.findById(post.authorId).select('userName');
+	const user = await UserModel.findById(post.authorId).select('userName').lean();
 	if (!user) return Resolve(res).notFound('User not found.');
 
 	const postWithUser = {
-		...post.toObject(),
-		userName: user.userName
+		...post,
+		userName: user.userName,
 	};
 
 	return Resolve(res).okWith(postWithUser);

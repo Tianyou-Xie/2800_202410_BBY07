@@ -16,9 +16,10 @@ import { api } from '../../lib/axios';
 import { Else, If, Then } from 'react-if';
 
 interface PostProp {
+	_id: string;
 	authorId: string;
 	content: string;
-	postId: string;
+	userName: string;
 	likeCount?: number;
 	commentCount?: number;
 	createdAt?: Date;
@@ -88,7 +89,7 @@ const Post = (props: PostProp): JSX.Element => {
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
 			try {
-				const response = await api.get(`/post/${props.postId}/save`);
+				const response = await api.get(`/post/${props._id}/save`);
 				if (response.data.success) {
 					setSaved(response.data.value);
 				}
@@ -103,10 +104,10 @@ const Post = (props: PostProp): JSX.Element => {
 	const onBookmark = async () => {
 		try {
 			if (saved) {
-				await api.delete(`/post/${props.postId}/save`);
+				await api.delete(`/post/${props._id}/save`);
 				setSaved(false);
 			} else {
-				const response = await api.post(`/post/${props.postId}/save`);
+				const response = await api.post(`/post/${props._id}/save`);
 				if (response.data.success) {
 					setSaved(true);
 				}
@@ -121,7 +122,7 @@ const Post = (props: PostProp): JSX.Element => {
 	useEffect(() => {
 		const fetchLikeStatus = async () => {
 			try {
-				const response = await api.get(`/post/${props.postId}/like`);
+				const response = await api.get(`/post/${props._id}/like`);
 				setLiked(response.data.value);
 			} catch (error) {
 				console.error('Error fetching like status:', error);
@@ -134,11 +135,11 @@ const Post = (props: PostProp): JSX.Element => {
 	const onLike = async () => {
 		try {
 			if (liked) {
-				await api.delete(`/post/${props.postId}/like`);
+				await api.delete(`/post/${props._id}/like`);
 				setLikeCount(likeCount - 1);
 				setLiked(false);
 			} else {
-				const response = await api.post(`/post/${props.postId}/like`);
+				const response = await api.post(`/post/${props._id}/like`);
 				if (response.data.success) {
 					setLikeCount(likeCount + 1);
 					setLiked(true);
@@ -149,22 +150,15 @@ const Post = (props: PostProp): JSX.Element => {
 		}
 	};
 
-	const [authorInfo, setAuthorInfo] = useState<any>({});
-	useEffect(() => {
-		api.get(`/user/${props.authorId}`).then((v) => {
-			setAuthorInfo(v.data.value);
-		});
-	}, [props.authorId]);
-
 	return (
 		<div className={styles.postContainer}>
-			<User username={authorInfo.userName} userId={props.authorId} />
+			<User username={props.userName} userId={props.authorId} />
 			<UIBox
 				className={styles.paraContainer}
 				curved
 				content={
 					<>
-						<Link href={'/post/' + props.postId} className={styles.link}>
+						<Link href={'/post/' + props._id} className={styles.link}>
 							<p>{props.content}</p>
 							{props.createdAt ? (
 								<p className={styles.postDate}>{new Date(props.createdAt).toLocaleString()}</p>

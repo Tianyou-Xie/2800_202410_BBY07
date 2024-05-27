@@ -39,6 +39,7 @@ export const post: Handler[] = [
 					content: body.content,
 					media: body.media,
 					location: body.location ?? currentUser.location,
+					isRoot: true,
 				});
 
 				currentUser.postCount++;

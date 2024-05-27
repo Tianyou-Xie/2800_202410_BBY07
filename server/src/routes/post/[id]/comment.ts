@@ -41,9 +41,6 @@ export const get: Handler = async (req, res) => {
 					return {
 						...comment,
 						userName: user.userName,
-						repost: post.repostCount,
-						like: post.likeCount,
-						comment: post.commentCount,
 					};
 				}
 			}
@@ -87,6 +84,7 @@ export const post: Handler[] = [
 					content: body.content,
 					media: body.media,
 					location: body.location ?? currentUser.location,
+					isRoot: false,
 				});
 
 				const relationship = new CommentRelationship({

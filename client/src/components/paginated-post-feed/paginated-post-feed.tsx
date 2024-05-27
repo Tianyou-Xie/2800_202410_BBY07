@@ -71,18 +71,7 @@ export const PaginatedPostFeed = (props: Props) => {
 				{posts
 					.filter((v) => !!v)
 					.map((v, i) => {
-						return (
-							<Post
-								key={i}
-								postId={v._id}
-								authorId={v.authorId}
-								content={v.content}
-								commentCount={v.commentCount}
-								createdAt={v.createdAt}
-								likeCount={v.likeCount}
-								location={v.location}
-							/>
-						);
+						return <Post key={i} {...v} />;
 					})}
 
 				<If condition={endReached}>
