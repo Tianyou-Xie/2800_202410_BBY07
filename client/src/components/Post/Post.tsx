@@ -67,7 +67,6 @@ const User = (props: UserProp): JSX.Element => {
 /**
  * Post component representing the thumbnail post of an user.
  *
- * @param props.username string - Username of the author of the post.
  * @param props.authorId string - ID of the author of the post.
  * @param props.content string - Text of the post.
  * @param props.postId string - Id of the post in the database.
@@ -75,7 +74,6 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.commentCount number - Number of comments of the post.
  * @param props.createdAt Date - (optional) Date in which the post was created.
  * @param props.Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
- * @param props.username string - Username of the author of the post
  * @param props.text string - Text of the post
  * @param props.postId string - URL of the complete version of the post with comments and more information
  * @param props.createdAt Date - (optional) Date in which the post was created

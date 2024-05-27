@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import Post from '../../components/Post/Post';
 import Page from '../../components/Page/Page';
-import Comment from '../../components/Comment/Comment';
+import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
+import { Loader } from '../../components/loader/loader';
 
 interface Post {
 	_id: string;
@@ -37,54 +38,108 @@ interface Props {
 }
 
 const PostDetailPage: React.FC<Props> = ({ id }) => {
-	const [post, setPost] = useState<Post | null>(null);
-	const [error, setError] = useState<string | null>(null);
+	const [postDetails, setPostDetails] = useState<Post>();
+	const [comment, setComment] = useState('');
+	const [isCommenting, setIsCommenting] = useState(false);
+	const [postedComments, setPostedComments] = useState<any[]>([]);
 
 	useEffect(() => {
 		const fetchPost = async () => {
 			try {
 				const response = await api.get<PostResponse>(`/post/${id}`);
-				if (response.data.success) {
-					setPost(response.data.value);
-				} else {
-					setError(response.data.statusMessage);
-				}
-			} catch (err) {
-				setError('Error fetching the post.');
-			}
+				if (response.data.success) setPostDetails(response.data.value);
+			} catch {}
 		};
 
 		fetchPost();
 	}, [id]);
 
-	if (error) {
-		return <div>Error: {error}</div>;
-	}
+	const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+		setComment(event.target.value);
+	};
 
-	if (!post) {
-		return <div>Loading...</div>;
-	}
+	const handleCommentSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		if (!postDetails) return;
 
-	const postDetail = (
-		<Post
-			username={post.userName}
-			content={post.content}
-			authorId={`${post.authorId}`}
-			postId={`${post._id}`}
-			createdAt={new Date(post.createdAt)}
-			repostCount={post.repostCount}
-			likeCount={post.likeCount}
-			commentCount={post.commentCount}
-		/>
-	);
+		event.preventDefault();
+		const content = comment.trim();
+		if (!content) return;
+
+		if (isCommenting) return;
+		setIsCommenting(true);
+
+		try {
+			const response = await api.post(`/post/${postDetails._id}/comment`, { content });
+			if (!response.data.success) return;
+
+			const newComment = response.data.value;
+			setPostedComments([newComment, ...postedComments]);
+
+			setComment('');
+		} catch (error) {
+			console.error('Error posting comment:', error);
+		} finally {
+			setIsCommenting(false);
+		}
+	};
+
+	if (!postDetails) return <Loader />;
 
 	return (
 		<Page
 			pageName='Post Detail'
 			content={
 				<>
-					{postDetail}
-					<Comment postId={post._id} />
+					<Post
+						content={postDetails!.content}
+						authorId={`${postDetails!.authorId}`}
+						postId={`${postDetails!._id}`}
+						createdAt={new Date(postDetails!.createdAt)}
+						likeCount={postDetails!.likeCount}
+						commentCount={postDetails!.commentCount + postedComments.length}
+					/>
+
+					<hr className='w-100 m-0' />
+
+					<form
+						onSubmit={handleCommentSubmit}
+						style={{ maxWidth: '750px' }}
+						className='w-100 m-3 d-flex flex-column align-items-center justify-content-center gap-3'>
+						<textarea
+							value={comment}
+							onChange={handleCommentChange}
+							className={styles.commentTextArea}
+							placeholder='Write a comment...'
+						/>
+						<button type='submit' className={`ms-auto ${styles.commentButton}`} disabled={isCommenting}>
+							Comment
+						</button>
+					</form>
+
+					<div className='w-100 px-3 d-flex flex-column align-items-center justify-content-center'>
+						<div className='w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
+							{postedComments.map((v) => {
+								return (
+									<Post
+										authorId={v.authorId}
+										content={v.content}
+										postId={v._id}
+										commentCount={v.commentCount}
+										createdAt={v.createdAt}
+										likeCount={v.likeCount}
+										location={v.location}
+									/>
+								);
+							})}
+						</div>
+
+						<PaginatedPostFeed
+							feedKey={postDetails!._id}
+							fetchPage={(page) =>
+								api.get(`/post/${postDetails!._id}/comment?page=${page}`).then((v) => v.data.value)
+							}
+						/>
+					</div>
 				</>
 			}
 		/>

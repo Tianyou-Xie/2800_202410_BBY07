@@ -43,7 +43,7 @@ export const PaginatedPostFeed = (props: Props) => {
 	};
 
 	const checkScroll = () => {
-		if (loading) return;
+		if (loading || endReached) return;
 
 		const postsList = postsListRef.current;
 		if (!postsList) return;
@@ -68,18 +68,22 @@ export const PaginatedPostFeed = (props: Props) => {
 	return (
 		<div className='w-100 my-3 d-flex justify-content-center'>
 			<div ref={postsListRef} className='w-100 py-2 d-flex flex-column align-items-center gap-3'>
-				{posts.map((v, i) => (
-					<Post
-						key={i}
-						postId={v._id}
-						authorId={v.authorId}
-						content={v.content}
-						commentCount={v.commentCount}
-						createdAt={v.createdAt}
-						likeCount={v.likeCount}
-						location={v.location}
-					/>
-				))}
+				{posts
+					.filter((v) => !!v)
+					.map((v, i) => {
+						return (
+							<Post
+								key={i}
+								postId={v._id}
+								authorId={v.authorId}
+								content={v.content}
+								commentCount={v.commentCount}
+								createdAt={v.createdAt}
+								likeCount={v.likeCount}
+								location={v.location}
+							/>
+						);
+					})}
 
 				<If condition={endReached}>
 					<Then>

@@ -19,21 +19,16 @@ interface PostBody {
 export const get: Handler = async (req, res) => {
 	const parentPostId = req.params.id;
 
-	const rawLimit = req.query.limit;
-	let limit = typeof rawLimit === 'string' ? parseInt(rawLimit) : NaN;
-	if (isNaN(limit)) limit = 10;
-	limit = Math.max(0, Math.min(limit, 100));
-
-	const rawPage = req.query.page;
-	let page = typeof rawPage === 'string' ? parseInt(rawPage) : NaN;
-	if (isNaN(page)) page = 1;
-	page = Math.max(1, page);
+	const rawPage = parseInt(typeof req.query.page === 'string' ? req.query.page : '');
+	const page = Math.max(1, typeof rawPage !== 'number' || isNaN(rawPage) ? 1 : rawPage);
+	const limit = 20;
+	const skip = (page - 1) * limit;
 
 	if (!mongoose.isValidObjectId(parentPostId)) return Resolve(res).badRequest('Invalid post ID provided.');
 
 	const relationships = await CommentRelationship.find({ parentPost: parentPostId })
 		.sort({ createdAt: 'descending' })
-		.skip((page - 1) * limit)
+		.skip(skip)
 		.limit(limit);
 
 	const comments = await Promise.all(
