@@ -8,6 +8,11 @@ export const get: Handler = async (req, res) => {
 	const limit = 20;
 	const skip = (page - 1) * limit;
 
-	const latestPosts = await PostModel.find().sort({ likes: -1, createdAt: -1 }).skip(skip).limit(limit).lean();
+	const latestPosts = await PostModel.find()
+		.sort({ likeCount: 'descending', createdAt: 'ascending' })
+		.skip(skip)
+		.limit(limit)
+		.lean();
+
 	Resolve(res).okWith(latestPosts);
 };

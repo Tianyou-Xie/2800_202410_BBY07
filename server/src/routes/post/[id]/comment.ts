@@ -24,7 +24,6 @@ export const get: Handler = async (req, res) => {
 	if (isNaN(limit)) limit = 10;
 	limit = Math.max(0, Math.min(limit, 100));
 
-
 	const rawPage = req.query.page;
 	let page = typeof rawPage === 'string' ? parseInt(rawPage) : NaN;
 	if (isNaN(page)) page = 1;
@@ -33,7 +32,7 @@ export const get: Handler = async (req, res) => {
 	if (!mongoose.isValidObjectId(parentPostId)) return Resolve(res).badRequest('Invalid post ID provided.');
 
 	const relationships = await CommentRelationship.find({ parentPost: parentPostId })
-		.sort({ createdAt: -1 })
+		.sort({ createdAt: 'descending' })
 		.skip((page - 1) * limit)
 		.limit(limit);
 

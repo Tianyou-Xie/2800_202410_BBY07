@@ -23,6 +23,6 @@ export const get: Handler = async (req, res) => {
 	const limit = 20;
 	const skip = (page - 1) * limit;
 
-	const latestPosts = await PostModel.find(search).sort({ createdAt: -1 }).skip(skip).limit(limit).lean();
+	const latestPosts = await PostModel.find(search).sort({ createdAt: 'descending' }).skip(skip).limit(limit).lean();
 	Resolve(res).okWith(latestPosts);
 };
