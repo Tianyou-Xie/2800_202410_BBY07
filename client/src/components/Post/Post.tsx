@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import styles from './Post.module.css';
 
-import { Container } from 'react-bootstrap';
 import UIBox from '../UIBox/UIBox';
 
 // Icons
@@ -14,16 +13,14 @@ import { FaBookmark } from 'react-icons/fa'; //<FaBookmark />	//Filled bookmark
 import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
 import { Link } from 'wouter';
 import { api } from '../../lib/axios';
-import { toast } from 'react-toastify';
+import { Else, If, Then } from 'react-if';
 
 interface PostProp {
-	username: string;
 	authorId: string;
 	content: string;
 	postId: string;
 	likeCount?: number;
 	commentCount?: number;
-	repostCount?: number;
 	createdAt?: Date;
 	location?: {
 		planetId: string;
@@ -35,7 +32,7 @@ interface PostProp {
 }
 
 interface UserProp {
-	username: string;
+	username?: string;
 	userId: string;
 	imageURL?: string;
 }
@@ -56,7 +53,10 @@ const User = (props: UserProp): JSX.Element => {
 				dark
 				content={
 					<Link href={'/user/' + props.userId ?? '/'} className={styles.link}>
-						{props.username}
+						<If condition={props.username}>
+							<Then>@{props.username}</Then>
+							<Else>Loading...</Else>
+						</If>
 					</Link>
 				}
 			/>
@@ -73,7 +73,6 @@ const User = (props: UserProp): JSX.Element => {
  * @param props.postId string - Id of the post in the database.
  * @param props.likeCount number - Number of likes of the post.
  * @param props.commentCount number - Number of comments of the post.
- * @param props.repostCount number - Number of reposts of the post.
  * @param props.createdAt Date - (optional) Date in which the post was created.
  * @param props.Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
  * @param props.username string - Username of the author of the post
@@ -126,7 +125,6 @@ const Post = (props: PostProp): JSX.Element => {
 			try {
 				const response = await api.get(`/post/${props.postId}/like`);
 				setLiked(response.data.value);
-				console.log(response.data);
 			} catch (error) {
 				console.error('Error fetching like status:', error);
 			}
@@ -153,9 +151,16 @@ const Post = (props: PostProp): JSX.Element => {
 		}
 	};
 
+	const [authorInfo, setAuthorInfo] = useState<any>({});
+	useEffect(() => {
+		api.get(`/user/${props.authorId}`).then((v) => {
+			setAuthorInfo(v.data.value);
+		});
+	}, [props.authorId]);
+
 	return (
 		<div className={styles.postContainer}>
-			<User username={'@' + props.username} userId={props.authorId} />
+			<User username={authorInfo.userName} userId={props.authorId} />
 			<UIBox
 				className={styles.paraContainer}
 				curved
@@ -164,11 +169,10 @@ const Post = (props: PostProp): JSX.Element => {
 						<Link href={'/post/' + props.postId} className={styles.link}>
 							<p>{props.content}</p>
 							{props.createdAt ? (
-								<p className={styles.postDate}>{props.createdAt.toLocaleString()}</p>
+								<p className={styles.postDate}>{new Date(props.createdAt).toLocaleString()}</p>
 							) : undefined}
 						</Link>
 						<div className={styles.iconsContainer}>
-							<p>{props.repostCount}</p>
 							<button className={styles.share}>
 								<RiShareBoxLine />
 							</button>
