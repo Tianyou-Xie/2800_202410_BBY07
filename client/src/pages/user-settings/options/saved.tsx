@@ -42,7 +42,9 @@ const SavedPage = () => {
     const fetchSavedPosts = async (page: number) => {
         setLoading(true);
         try {
-            const response = await api.get<{ savedPosts: PostType[] }>('/user/saved', { params: { page, limit: 20 } });
+            const response = await api.get<{
+                value: any; savedPosts: PostType[]
+            }>('/user/saved', { params: { page, limit: 20 } });
             const savedPostsData = response.data.value.savedPosts;
             setSavedPosts(savedPostsData);
         } catch (error) {

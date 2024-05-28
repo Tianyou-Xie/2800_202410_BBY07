@@ -41,8 +41,10 @@ const LikedPage = () => {
     const fetchLikedPosts = async (page: number) => {
         setLoading(true);
         try {
-            const response = await api.get<{ likedPosts: PostType[] }>('/user/liked', { params: { page, limit: 20 } });
-            setLikedPosts(response.data.likedPosts);
+            const response = await api.get<{
+                value: any; likedPosts: PostType[]
+            }>('/user/liked', { params: { page, limit: 20 } });
+            setLikedPosts(response.data.value.likedPosts);
         } catch (error) {
             console.error('Error fetching liked posts:', error);
         } finally {

@@ -1,6 +1,7 @@
 import { Handler } from 'express';
 import { authProtected } from '../../middlewares/auth-protected';
 import { LikeInteraction } from '../../models/like-interaction';
+import { Resolve } from '../../utils/express';
 
 /**
  * GET @ /user/liked
@@ -35,6 +36,6 @@ export const get: Handler[] = [
             return null;
         }).filter(post => post !== null);
 
-        res.json({ success: true, likedPosts: formattedLikedPosts });
+        return Resolve(res).okWith({ likedPosts: formattedLikedPosts });
     }
 ];
