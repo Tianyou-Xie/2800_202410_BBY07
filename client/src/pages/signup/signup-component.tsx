@@ -10,6 +10,8 @@ const Signup = () => {
 		_id: string;
 		name: string;
 	}
+
+	const [loading, setLoading] = useState(false);
 	const [planets, setPlanets] = useState<Array<Planet>>([]);
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
@@ -21,7 +23,6 @@ const Signup = () => {
 		const fetchPlanets = async () => {
 			const { data: res } = await api.get('/planet');
 			try {
-				// console.log(res);
 				setPlanets(res.value);
 				setLocation(res.value[0]._id);
 			} catch (error) {
