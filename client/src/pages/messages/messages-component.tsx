@@ -1,37 +1,31 @@
+import io from 'socket.io-client';
+import { useParams } from 'wouter';
 import MessagesHtml from './messages-html';
 import { useEffect, useState, useContext } from 'react';
 import { api } from '../../lib/axios';
-import { useParams } from 'wouter';
-import io from 'socket.io-client';
 import { getServerHost } from '../../environment';
-// import { UserAuthContext } from '../../lib/auth';
+import { UserAuthContext } from '../../lib/auth';
 
 const Messages = () => {
 	let { id } = useParams();
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useState<string[]>([]);
 	const [isChat, setIsChat] = useState(false);
-	// const [socket, setSocket] = useState<any>(null);
 	const [convoID, setConvoID] = useState('');
 	const socket = io(getServerHost());
-	// const user = useContext(UserAuthContext);
 	const [username, setUsername] = useState('');
+	const [avatar, setAvatar] = useState('');
+    const user = useContext(UserAuthContext);
 
 	useEffect((): any => {
 		const fetchMessages = async () => {
-			let headers = {
-				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-				},
-			};
-			const { data: res } = await api.post('/user/getchats', { receiverId: id }, headers);
+			const { data: res } = await api.post('/user/getchats', { receiverId: id });
 
 			try {
 				if (res.success) {
 					setIsChat(true);
 					setMessages(res.message);
 					setConvoID(res.message[0].conversationId);
-					// setSocket(newSocket);
 					socket.emit('sendID', res.message[0].conversationId);
 				}
 			} catch (error) {
@@ -39,10 +33,10 @@ const Messages = () => {
 			}
 
 			const friend = await api.get(`/user/${id}`);
-			console.log(friend.data);
 			try {
 				if (friend.data.success) {
 					setUsername(friend.data.value.userName);
+					setAvatar(friend.data.value.avatarUrl);
 				}
 			} catch (error) {
 				console.log(error);
@@ -89,6 +83,8 @@ const Messages = () => {
 			id={id}
 			isChat={isChat}
 			username={username}
+            avatar={avatar}
+            userImage={user.avatarUrl}
 		/>
 	);
 };
