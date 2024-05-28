@@ -48,7 +48,7 @@ export const get: Handler[] = [
 				},
 			},
 			{ $unwind: { path: '$author' } },
-			{ $addFields: { userName: '$author.userName' } },
+			{ $addFields: { userName: '$author.userName', avatarUrl: '$author.avatarUrl' } },
 			{ $project: { author: 0 } },
 		]);
 

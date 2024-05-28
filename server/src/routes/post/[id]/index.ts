@@ -20,12 +20,13 @@ export const get: Handler = async (req, res) => {
 	const post = await PostModel.findById(id).lean();
 	if (!post) return Resolve(res).notFound('Invalid post ID provided.');
 
-	const user = await UserModel.findById(post.authorId).select('userName').lean();
+	const user = await UserModel.findById(post.authorId).select('userName avatarUrl').lean();
 	if (!user) return Resolve(res).notFound('User not found.');
 
 	const postWithUser = {
 		...post,
 		userName: user.userName,
+		avatarUrl: user.avatarUrl,
 	};
 
 	return Resolve(res).okWith(postWithUser);

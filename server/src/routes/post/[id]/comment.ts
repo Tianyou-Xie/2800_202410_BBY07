@@ -47,6 +47,7 @@ export const get: Handler = async (req, res) => {
 					return {
 						...comment,
 						userName: user.userName,
+						avatarUrl: user.avatarUrl,
 					};
 				}
 			}
