@@ -49,7 +49,6 @@ An interplanetary town square that maintains connections between cultures and id
 -   View Terms of Use
 -   View FAQs
 
-
 ## Technologies
 
 The project is built using [Typescript](https://www.typescriptlang.org/), and split into two modules, the client and server.
@@ -122,19 +121,32 @@ Both the server and client utilize a `.env` file.
 
 **Client Variables:**
 
-| Key            | Usage                                           |
-| -------------- | ----------------------------------------------- |
-| PORT           | Port used for the frontend app                  |
-| VITE_LOCALHOST | Host used for listening to Server Socket Events |
+| Key              | Usage                                                                                   |
+| ---------------- | --------------------------------------------------------------------------------------- |
+| VITE_PORT        | The port that Vite serves the client on, when running locally                           |
+| VITE_SERVER_PORT | The port that the server is running on, when running locally                            |
+| VITE_NODE_ENV    | The environment the client is running in (development_local / development / production) |
 
 **Server Variables:**
 
-| Key        | Usage                                         |
-| ---------- | --------------------------------------------- |
-| PORT       | Port used for the express server              |
-| MONGO_URL  | The MongoDB connection string                 |
-| JWT_TTL    | The JWT token expiry time, in seconds         |
-| JWT_SECRET | The secret used to sign and verify JWT tokens |
+| Key                     | Usage                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| PORT                    | The port that Express starts the server on, when running locally                        |
+| CLIENT_PORT             | The port that the client is being served on, when running locally                       |
+| NODE_ENV                | The environment the server is running in (development_local / development / production) |
+| MONGO_URL               | The MongoDB connection string used to connect to the database                           |
+| JWT_SECRET              | The secret used to sign and verify JWT tokens                                           |
+| JWT_TTL                 | The JWT token expiry time, in seconds                                                   |
+| GOOGLE_OAUTH_ID         | The Google OAuth API Client ID used to authenticate with Google                         |
+| GOOGLE_OAUTH_SECRET     | The Google OAuth API Client Secret used to authenticate with Google                     |
+| EMAIL_HOST              | The hostname of the email transporter used to send emails from the server               |
+| EMAIL_PORT              | The port of the email transporter used to send emails from the server                   |
+| EMAIL_USER              | The username of the email transporter used to send emails from the server               |
+| EMAIL_PASS              | The password of the email transporter used to send emails from the server               |
+| CLOUDINARY_CLOUD_NAME   | The Cloudinary cloud name used to upload images                                         |
+| CLOUDINARY_CLOUD_KEY    | The Cloudinary cloud API key used to upload images                                      |
+| CLOUDINARY_CLOUD_SECRET | The Cloudinary cloud API secret used to upload images                                   |
+| OPENAI_API_KEY          | The OpenAI API key used to generate images                                              |
 
 ## Running Locally & Deployment
 
