@@ -6,6 +6,12 @@ import mongoose from 'mongoose';
 import { UserModel } from '../../models/user';
 import { authProtected } from '../../middlewares/auth-protected';
 
+/**
+ * GET @ /feed/:planetOrUserId
+ *
+ * This retrieves the feed posts for a given user
+ * or planet.
+ */
 export const get: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -27,8 +33,6 @@ export const get: Handler[] = [
 		const page = Math.max(1, typeof rawPage !== 'number' || isNaN(rawPage) ? 1 : rawPage);
 		const limit = 20;
 		const skip = (page - 1) * limit;
-
-		// TODO aggregate liked and saved variables
 
 		const latestPosts = await PostModel.aggregate([
 			{ $match: { ...search, deleted: false } },

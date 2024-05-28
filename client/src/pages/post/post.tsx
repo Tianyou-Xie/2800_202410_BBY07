@@ -13,7 +13,6 @@ interface Post {
 	content: string;
 	likeCount: number;
 	commentCount: number;
-	repostCount: number;
 	location: {
 		planetId: string;
 		latitude: number;

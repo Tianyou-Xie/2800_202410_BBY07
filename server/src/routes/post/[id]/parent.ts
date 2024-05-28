@@ -6,6 +6,12 @@ import { PostModel } from '../../../models/post';
 import mongoose from 'mongoose';
 import { UserModel } from '../../../models/user';
 
+/**
+ * GET @ /post/:id/parent
+ *
+ * This returns the parent of a post if the
+ * post is a comment.
+ */
 export const get: Handler[] = [
 	authProtected,
 	async (req, res) => {

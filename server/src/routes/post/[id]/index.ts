@@ -7,6 +7,12 @@ import { CommentRelationship } from '../../../models/comment-relationship';
 import { LikeInteraction } from '../../../models/like-interaction';
 import { UserModel } from '../../../models/user';
 
+/**
+ * GET @ /post/:id
+ *
+ * This returns the post associated with the
+ * given ID.
+ */
 export const get: Handler = async (req, res) => {
 	const id = req.params.id;
 	if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid post ID provided.');
@@ -25,6 +31,16 @@ export const get: Handler = async (req, res) => {
 	return Resolve(res).okWith(postWithUser);
 };
 
+/**
+ * DELETE @ /post/:id
+ *
+ * This deletes the post associated with the given ID.
+ * This does not fully delete the post, but it does
+ * remove all like interactions and clears the content.
+ *
+ * We cannot simply drop the document from the database because
+ * it could still be accessed by relationship from a comment.
+ */
 export const del: Handler[] = [
 	authProtected,
 	async (req, res) => {

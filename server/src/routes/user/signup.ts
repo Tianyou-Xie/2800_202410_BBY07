@@ -18,6 +18,13 @@ interface PostBody {
 
 const inflightEmails = new Set<string>();
 
+/**
+ * POST @ /user/signup
+ * 
+ * This creates a new user with the specified parameters.
+ * This also issues a JWT token so the user will not have to
+ * log in right after signing up.
+ */
 export const post: Handler = async (req, res) => {
 	const body = assertRequestBody(
 		req,

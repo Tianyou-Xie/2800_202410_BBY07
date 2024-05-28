@@ -3,6 +3,13 @@ import { PostModel } from '../../models/post';
 import { Resolve } from '../../utils/express';
 import { authProtected } from '../../middlewares/auth-protected';
 
+/**
+ * GET @ /feed
+ *
+ * This retrieves the feed posts for all combined
+ * planets. This utilizes different sorting than the
+ * other feeds, because it prioritizes popularity.
+ */
 export const get: Handler[] = [
 	authProtected,
 	async (req, res) => {

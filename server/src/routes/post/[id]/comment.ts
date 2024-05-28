@@ -16,6 +16,12 @@ interface PostBody {
 	media?: RawDocument<IMedia>;
 }
 
+/**
+ * GET @ /post/:id/comment
+ *
+ * This retrieves the comments for the given
+ * post ID.
+ */
 export const get: Handler = async (req, res) => {
 	const parentPostId = req.params.id;
 
@@ -51,6 +57,11 @@ export const get: Handler = async (req, res) => {
 	Resolve(res).okWith(comments);
 };
 
+/**
+ * POST @ /post/:id/comment
+ *
+ * This creates a new comment for the given post ID.
+ */
 export const post: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -112,7 +123,6 @@ export const post: Handler[] = [
 			const responseComment = {
 				...newComment,
 				userName: user.userName,
-				repost: newComment.repostCount,
 				like: newComment.likeCount,
 				comment: newComment.commentCount,
 			};

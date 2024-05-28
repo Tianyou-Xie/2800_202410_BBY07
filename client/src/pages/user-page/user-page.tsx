@@ -22,7 +22,6 @@ interface Post {
 		_id: string;
 	};
 	media: [];
-	repostCount: number;
 	__v: number;
 	_id: string;
 }

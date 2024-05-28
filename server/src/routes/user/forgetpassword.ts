@@ -10,6 +10,12 @@ interface PostBody {
 	email: string;
 }
 
+/**
+ * POST @ /user/forgetpassword
+ *
+ * This initiates a new password reset token for
+ * the specified email address.
+ */
 export const post: Handler = async (req, res) => {
 	const bodySchema = Joi.object<PostBody>({
 		email: Joi.string().trim().email().required().messages({

@@ -7,7 +7,6 @@ export interface IPost {
 	content: string;
 	likeCount: number;
 	commentCount: number;
-	repostCount: number;
 	createdAt: Date;
 	location: ILocation;
 	media: Array<IMedia>;
@@ -21,7 +20,6 @@ const schema = new Schema<IPost>(
 		content: { type: 'string', required: true },
 		likeCount: { type: 'number', required: true, default: 0 },
 		commentCount: { type: 'number', required: true, default: 0 },
-		repostCount: { type: 'number', required: true, default: 0 },
 		location: { type: LocationSchema, required: true },
 		deleted: { type: 'boolean', required: true, default: false },
 		isRoot: { type: 'boolean', required: true, default: true },
@@ -34,4 +32,9 @@ const schema = new Schema<IPost>(
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
 
+/**
+ * The model representing the "posts" collection in MongoDB.
+ *
+ * This stores all comments and posts.
+ */
 export const PostModel = model('Post', schema);

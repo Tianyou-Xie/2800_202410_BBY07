@@ -14,6 +14,12 @@ interface PostBody {
 	media?: RawDocument<IMedia>;
 }
 
+/**
+ * POST @ /post
+ *
+ * This creates a new post as the user
+ * making the request.
+ */
 export const post: Handler[] = [
 	authProtected,
 	async (req, res) => {
