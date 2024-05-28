@@ -28,6 +28,7 @@ import Home from './pages/home/home';
 import PostDetailPage from './pages/post/post';
 import Planets from './pages/planets/planets-component';
 import PlanetFeed from './pages/planet-feed/planet-feed';
+import SearchPage from './pages/search-page/search-page';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -86,6 +87,7 @@ export const App = () => {
 									<Route path='/changepassword' component={Changepassword} />
 									<Route path='/feed' component={GeneralFeed} />
 									<Route path='/post' component={PostPage} />
+									<Route path='/search' component={SearchPage}/>
 									<Route path='/user/:id' component={UserPage} />
 									<Route path='/feed/:planetName/:id' component={PlanetFeed} />
 									<Route path='/profile' component={ProfilePage} />
