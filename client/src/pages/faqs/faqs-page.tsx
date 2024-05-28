@@ -6,9 +6,10 @@ import Accordion from 'react-bootstrap/Accordion';
 import { useEffect, useRef, useState } from 'react';
 import { api } from '../../lib/axios';
 import { toast } from 'react-toastify';
-import { DiVim } from 'react-icons/di';
 
-const emptyMessage = "We don't have an answer to that question yet.";
+const emptyMessage =
+	"Your search didn't match to any result. Try rewording your search." +
+	" It may also be possible that we don't have what you are looking for yet";
 
 const FAQs = () => {
 	const [searchQuery, setSearch] = useState('');
@@ -83,11 +84,12 @@ const FAQs = () => {
 				pageName='FAQs'
 				content={
 					<div className='w-100'>
+						<h3 className='w-100'>What can we help you with?</h3>
 						<form className='w-100' onSubmit={findQuestions}>
 							<input
 								className='mb-2 w-100'
 								name='password'
-								placeholder='What can we help you with?'
+								placeholder='Search...'
 								value={searchQuery}
 								onChange={(event) => setSearch(event.target.value)}
 								type='text'
@@ -100,16 +102,16 @@ const FAQs = () => {
 									className={`${styles.clearBtn} btn btn-danger`}
 									type='button'
 									ref={clearBtn}
-									onClick={() => 
-										resetPage()
-									}
+									onClick={() => resetPage()}
 									hidden>
 									Clear
 								</button>
 							</div>
 						</form>
 						{emptyMsg ? (
-							<div>{emptyMessage}</div>
+							<div className={`${styles.emptyMsgCard} w-100 card mt-5 p-3`}>
+								<h4 className='w-100 text-center'>{emptyMessage}</h4>
+							</div>
 						) : (
 							<>
 								<Accordion className='mt-3' defaultActiveKey='0' flush>

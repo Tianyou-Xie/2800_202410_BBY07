@@ -4,6 +4,10 @@
 	box-shadow: 4px 5px 0px #000;
 }
 
+.accordion-item button {
+    z-index: -1;
+}
+
 .accordion-item button[aria-expanded = true] {
     background-color: var(--signup-background);
     color: #000;
@@ -13,7 +17,7 @@
     box-shadow: none;
 }
 
-.accordion-item h2 {
+.accordion-item h2, h3, h4 {
     font-family: BabaPro;
 }
 
@@ -22,6 +26,7 @@
 }
 
 .clear-btn {
+    font-family: BabaPro;
     border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
     border-radius: 0;
@@ -29,9 +34,17 @@
 }
 
 .search-btn {
+    font-family: BabaPro;
     border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
     border-radius: 0;
     background-color: #2196F3;
     color: aliceblue;
+}
+
+.empty-msg-card {
+    background-color: var(--signup-background);
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+    border-radius: 0;
 }
