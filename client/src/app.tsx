@@ -33,6 +33,9 @@ import Home from './pages/home/home';
 import PostDetailPage from './pages/post/post';
 import Planets from './pages/planets/planets-component';
 import PlanetFeed from './pages/planet-feed/planet-feed';
+import SEO from './components/seo/seo';
+
+import logoUrl from './assets/images/SkynetLogo.png';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -66,6 +69,12 @@ export const App = () => {
 
 	return (
 		<>
+			<SEO
+				title='Skynet'
+				description='The interplanetary communication platform of the future.'
+				og={{ image: logoUrl, type: 'website', imageAlt: 'Skynet Logo' }}
+			/>
+
 			<ToastContainer />
 			<Cursors />
 
