@@ -83,7 +83,7 @@ const FAQs = () => {
 				logoHeader={false}
 				pageName='FAQs'
 				content={
-					<div className='w-100'>
+					<div className='w-75'>
 						<h3 className='w-100'>What can we help you with?</h3>
 						<form className='w-100' onSubmit={findQuestions}>
 							<input

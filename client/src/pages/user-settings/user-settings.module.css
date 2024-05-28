@@ -73,3 +73,9 @@
 .conf-input {
     font-family: Fjalla One;
 }
+
+@media screen and (min-width: 800px) {
+    .setting-body {
+        width: 50%;
+    }
+}
