@@ -13,8 +13,14 @@ import { PlanetVisual } from './planet-visual';
 import { SpaceTraveller } from './space-traveller';
 import { StarBackground } from './star-background';
 import { useLocation } from 'wouter';
+import { If } from 'react-if';
 
-export const PlanetMap = () => {
+interface Props {
+	interactable?: boolean;
+}
+
+export const PlanetMap = (props: Props) => {
+	const stageInteractable = props.interactable ?? true;
 	const stageRef = useRef<Konva.Stage>(null);
 
 	const [_, navigate] = useLocation();
@@ -187,26 +193,28 @@ export const PlanetMap = () => {
 
 	return (
 		<>
-			<div className='position-absolute end-0 bottom-0 z-3 p-3 d-flex'>
-				<div className='mt-auto ms-auto d-flex gap-3'>
-					<p className='mb-0 text-dark-emphasis '>
-						X: {-relativePanPosition.x.toFixed(0)}, Y: {relativePanPosition.y.toFixed(0)}, x
-						{zoom.toLocaleString()}
-					</p>
-					<button
-						className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
-						disabled={relativePanPosition.x === 0 && relativePanPosition.y === 0}
-						onClick={() => resetPan()}>
-						<PiCrosshairBold />
-					</button>
+			<If condition={stageInteractable}>
+				<div className='position-absolute end-0 bottom-0 z-3 p-3 d-flex'>
+					<div className='mt-auto ms-auto d-flex gap-3'>
+						<p className='mb-0 text-dark-emphasis '>
+							X: {-relativePanPosition.x.toFixed(0)}, Y: {relativePanPosition.y.toFixed(0)}, x
+							{zoom.toLocaleString()}
+						</p>
+						<button
+							className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
+							disabled={relativePanPosition.x === 0 && relativePanPosition.y === 0}
+							onClick={() => resetPan()}>
+							<PiCrosshairBold />
+						</button>
 
-					<button
-						className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
-						onClick={() => navigate('/home-list')}>
-						<GiHamburgerMenu />
-					</button>
+						<button
+							className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
+							onClick={() => navigate('/home-list')}>
+							<GiHamburgerMenu />
+						</button>
+					</div>
 				</div>
-			</div>
+			</If>
 
 			<Stage
 				ref={stageRef}
@@ -214,8 +222,14 @@ export const PlanetMap = () => {
 				width={innerWidth}
 				height={innerHeight}
 				offset={{ x: -innerWidth / 2, y: -innerHeight / 2 }}
-				style={{ position: 'absolute', background: 'transparent', zIndex: 1 }}
-				draggable>
+				style={{
+					position: 'absolute',
+					background: 'transparent',
+					zIndex: 1,
+					pointerEvents: stageInteractable ? 'unset' : 'none',
+				}}
+				draggable={stageInteractable}
+				listening={stageInteractable}>
 				<Layer>
 					<CenterVisual />
 				</Layer>
@@ -240,7 +254,11 @@ export const PlanetMap = () => {
 				</Layer>
 			</Stage>
 
-			<Stage width={innerWidth} height={innerHeight} style={{ position: 'absolute', background: 'black' }}>
+			<Stage
+				listening={false}
+				width={innerWidth}
+				height={innerHeight}
+				style={{ position: 'absolute', background: 'black' }}>
 				<StarBackground />
 			</Stage>
 		</>

@@ -20,10 +20,6 @@
     background-color: var(--bright-blue);
 }
 
-.planet-map {
-    pointer-events: none;
-}
-
 @media screen and (max-width: 330px) {
     
 }
