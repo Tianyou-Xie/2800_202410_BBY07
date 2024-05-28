@@ -34,8 +34,7 @@ import Planets from './pages/planets/planets-component';
 import PlanetFeed from './pages/planet-feed/planet-feed';
 import MessagesAll from './pages/messages-all/messages';
 import SEO from './components/seo/seo';
-
-import logoUrl from './assets/images/SkynetLogo.png';
+import { getClientHost } from './environment';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -72,7 +71,7 @@ export const App = () => {
 			<SEO
 				title='Skynet'
 				description='The interplanetary communication platform of the future.'
-				og={{ image: logoUrl, type: 'website', imageAlt: 'Skynet Logo' }}
+				og={{ image: getClientHost() + '/logo.webp', type: 'website', imageAlt: 'Skynet Logo' }}
 			/>
 
 			<ToastContainer />
