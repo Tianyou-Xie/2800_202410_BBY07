@@ -33,7 +33,6 @@ button {
 .bottomButtons {
 	display: flex;
 	width: 100%;
-	justify-content: right;
     gap: 20px;
 }
 
