@@ -1,8 +1,13 @@
-import styles from './Profile.module.css';
-import UIBox from '../UIBox/UIBox';
-import { Link } from 'wouter';
 import { useEffect, useState } from 'react';
+import { FaCog, FaEdit } from 'react-icons/fa';
+import { FaRegMessage } from 'react-icons/fa6';
+import { SlUserFollow, SlUserUnfollow } from 'react-icons/sl';
+import { Else, If, Then } from 'react-if';
+import { Link } from 'wouter';
+
 import { api } from '../../lib/axios';
+import UIBox from '../UIBox/UIBox';
+import styles from './Profile.module.css';
 
 interface ProfileProp {
 	userId: string;
@@ -17,6 +22,7 @@ interface ProfileProp {
 }
 
 const Profile = (props: ProfileProp): JSX.Element => {
+	const [isActionActive, setIsActionActive] = useState(false);
 	const [followed, setFollowed] = useState(false);
 	const [followerCount, setFollowerCount] = useState<number>(props.follower);
 
@@ -41,20 +47,25 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	}, [props.userId]);
 
 	const onFollow = async () => {
+		if (isActionActive) return;
+		setIsActionActive(true);
+
 		try {
 			if (followed) {
 				await api.delete(`/user/${props.userId}/follow`);
 				setFollowed(false);
-				setFollowerCount(prevCount => Math.max(0, prevCount - 1));
+				setFollowerCount((prevCount) => Math.max(0, prevCount - 1));
 			} else {
 				const response = await api.post(`/user/${props.userId}/follow`);
 				if (response.data.success) {
 					setFollowed(true);
-					setFollowerCount(prevCount => prevCount + 1);
+					setFollowerCount((prevCount) => prevCount + 1);
 				}
 			}
 		} catch (error) {
 			console.error('Error updating follow status:', error);
+		} finally {
+			setIsActionActive(false);
 		}
 	};
 
@@ -69,11 +80,7 @@ const Profile = (props: ProfileProp): JSX.Element => {
 									<>
 										<div className={`col-md-7 ${styles.borderRight} no-gutters`}>
 											<div className='py-3'>
-												<img
-													src={props.avatar}
-													width='210'
-													className='rounded-circle'
-												/>
+												<img src={props.avatar} width='210' className='rounded-circle' />
 												<div className='stats'></div>
 												<div className='mt-4'>
 													<h4 className={styles.username}>@{props.username}</h4>
@@ -100,14 +107,30 @@ const Profile = (props: ProfileProp): JSX.Element => {
 							/>
 						</div>
 
-						<div className={styles.bottomButtons}>
+						<div className={`${styles.bottomButtons} justify-content-center justify-content-lg-end`}>
 							{props.outsideUser ? (
-								<button onClick={onFollow}>
+								<button disabled={isActionActive} onClick={onFollow}>
 									<UIBox
-										className={styles.edit + ' ' + styles.buttons}
-										content={followed ? 'Following' : 'Follow'}
+										className={`${styles.buttons} p-1 h-100 d-flex align-items-center`}
+										content={
+											<If condition={!followed}>
+												<Then>
+													<div className='d-flex gap-1 align-items-center'>
+														<SlUserFollow />
+														<span>Follow</span>
+													</div>
+												</Then>
+
+												<Else>
+													<div className='d-flex gap-1 align-items-center'>
+														<SlUserUnfollow />
+														<span>Unfollow</span>
+													</div>
+												</Else>
+											</If>
+										}
 										curved
-										clickable
+										clickable={!isActionActive}
 										dark
 									/>
 								</button>
@@ -115,8 +138,13 @@ const Profile = (props: ProfileProp): JSX.Element => {
 								<button>
 									<Link href='/#EDIT_PROFILE'>
 										<UIBox
-											className={styles.edit + ' ' + styles.buttons}
-											content='Edit profile'
+											className={`${styles.buttons} p-1 h-100 d-flex align-items-center`}
+											content={
+												<div className='d-flex gap-1 align-items-center'>
+													<FaEdit />
+													<span>Edit Profile</span>
+												</div>
+											}
 											curved
 											clickable
 											dark
@@ -127,8 +155,22 @@ const Profile = (props: ProfileProp): JSX.Element => {
 							<button>
 								<Link href={props.outsideUser ? '/messages/' + props.userId : '/settings'}>
 									<UIBox
-										className={styles.settings + ' ' + styles.buttons}
-										content={props.outsideUser ? 'Message' : '*'}
+										className={`${styles.buttons} p-1 h-100 d-flex align-items-center`}
+										content={
+											<div className='d-flex gap-1 align-items-center'>
+												<If condition={props.outsideUser}>
+													<Then>
+														<FaRegMessage />
+														<span>Message</span>
+													</Then>
+
+													<Else>
+														<FaCog />
+														<span>Settings</span>
+													</Else>
+												</If>
+											</div>
+										}
 										curved
 										clickable
 										dark
