@@ -13,4 +13,9 @@ const schema = new Schema<ICommentRelationship>(
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
 
+/**
+ * The model representing the "commentrelationships" collection in MongoDB.
+ *
+ * This holds the relationship between comments and the original posts.
+ */
 export const CommentRelationship = model('CommentRelationship', schema);

@@ -19,4 +19,10 @@ const schema = new Schema<IConversation>(
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
 
+/**
+ * The model representing the "conversations" collection in MongoDB.
+ *
+ * This holds all initiated chat conversations between users, but not
+ * the messages themselves.
+ */
 export const ConversationModel = model('Conversation', schema);

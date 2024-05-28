@@ -4,6 +4,12 @@ import { escapeRegex } from '../../utils/regex';
 import mongoose from 'mongoose';
 import { Resolve } from '../../utils/express';
 
+/**
+ * GET @ /planet/:nameOrId
+ *
+ * This retrieves information for the given planet name
+ * or ID.
+ */
 export const get: Handler = async (req, res) => {
 	const nameOrId = req.params.nameOrId;
 

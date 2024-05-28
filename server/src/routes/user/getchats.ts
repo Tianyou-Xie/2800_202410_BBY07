@@ -9,6 +9,13 @@ interface PostBody {
 	content: string;
 }
 
+/**
+ * POST @ /user/getchat
+ * 
+ * This returns the messages in the conversation
+ * between the user making the request and
+ * the specified receiver.
+ */
 export const post: Handler[] = [
     authProtected,
     async (req, res) => {

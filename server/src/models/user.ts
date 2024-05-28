@@ -51,4 +51,7 @@ const schema = new Schema<IUser>(
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
 
+/**
+ * The model representing the "users" collection in MongoDB.
+ */
 export const UserModel = model('User', schema);

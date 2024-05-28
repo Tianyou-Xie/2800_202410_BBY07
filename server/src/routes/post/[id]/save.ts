@@ -4,6 +4,13 @@ import mongoose from 'mongoose';
 import { Resolve } from '../../../utils/express';
 import { PostModel } from '../../../models/post';
 
+/**
+ * GET @ /post/:id/save
+ *
+ * This returns whether the user making the
+ * request has the post associated with the given ID
+ * saved.
+ */
 export const get: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -15,6 +22,13 @@ export const get: Handler[] = [
 	},
 ];
 
+/**
+ * POST @ /post/:id/save
+ *
+ * This saves the post associated with the
+ * given ID to the saved posts of the user making the
+ * request.
+ */
 export const post: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -36,6 +50,13 @@ export const post: Handler[] = [
 	},
 ];
 
+/**
+ * DELETE @ /post/:id/save
+ *
+ * This unsaves the post associated with the
+ * given ID for the user making the
+ * request.
+ */
 export const del: Handler[] = [
 	authProtected,
 	async (req, res) => {
