@@ -7,7 +7,13 @@ import { Scrambler } from '../../components/scrambler/scrambler';
 import { IoMdArrowDown } from 'react-icons/io';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 
+import Form from 'react-bootstrap/Form';
+
 const LandingPage = () => {
+	const moveDisplay = () => {
+		document.getElementById('section2')?.scrollIntoView();
+	}
+
 	return (
 		<>
 			<div className={styles.landingDisplay}>
@@ -39,13 +45,64 @@ const LandingPage = () => {
 							</h1>
 							<h3>Welcome to sky.net</h3>
 						</div>
-						<div className={styles.arrowIcon}>
+						<div className={styles.arrowIcon} onClick={() => moveDisplay()}>
 							<IoMdArrowDown />
 						</div>
 					</div>
 				</div>
 
-				<div>New section</div>
+				<div id='section2'>
+					<Form>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+							<Form.Label>Email address</Form.Label>
+							<Form.Control type='email' placeholder='name@example.com' />
+						</Form.Group>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
+							<Form.Label>Example textarea</Form.Label>
+							<Form.Control as='textarea' rows={3} />
+						</Form.Group>
+					</Form>
+					<Form>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+							<Form.Label>Email address</Form.Label>
+							<Form.Control type='email' placeholder='name@example.com' />
+						</Form.Group>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
+							<Form.Label>Example textarea</Form.Label>
+							<Form.Control as='textarea' rows={3} />
+						</Form.Group>
+					</Form>
+					<Form>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+							<Form.Label>Email address</Form.Label>
+							<Form.Control type='email' placeholder='name@example.com' />
+						</Form.Group>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
+							<Form.Label>Example textarea</Form.Label>
+							<Form.Control as='textarea' rows={3} />
+						</Form.Group>
+					</Form>
+					<Form>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+							<Form.Label>Email address</Form.Label>
+							<Form.Control type='email' placeholder='name@example.com' />
+						</Form.Group>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
+							<Form.Label>Example textarea</Form.Label>
+							<Form.Control as='textarea' rows={3} />
+						</Form.Group>
+					</Form>
+					<Form>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+							<Form.Label>Email address</Form.Label>
+							<Form.Control type='email' placeholder='name@example.com' />
+						</Form.Group>
+						<Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
+							<Form.Label>Example textarea</Form.Label>
+							<Form.Control as='textarea' rows={3} />
+						</Form.Group>
+					</Form>
+				</div>
 			</div>
 		</>
 	);

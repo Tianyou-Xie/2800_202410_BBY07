@@ -89,6 +89,16 @@
     z-index: 0;
 }
 
+.arrow-icon {
+    position: absolute;
+    z-index: 5;
+    color: aliceblue;
+    font-size: 4em;
+    right: 50%;
+    transform: translate(50%);
+    margin-top: 500px;
+}
+
 @media screen and (max-width: 410px) {
     .logo {
         width: 40px;
