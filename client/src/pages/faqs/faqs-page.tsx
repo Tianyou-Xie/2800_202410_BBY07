@@ -5,6 +5,8 @@ import QuestionAccordion from '../../components/ques-accordion/ques-accordion';
 import Accordion from 'react-bootstrap/Accordion';
 import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
+import { toast } from 'react-toastify';
+import { AxiosResponse } from 'axios';
 
 const FAQs = () => {
 	const [searchQuery, setSearch] = useState('');
@@ -15,34 +17,43 @@ const FAQs = () => {
 			const response = await api.get('/faqs');
 			const ques = response.data.value;
 
-			let num = 0;
-			let newQues: Array<JSX.Element> = [];
-			ques.map((ques: any) => {
-				newQues.push(
-					<QuestionAccordion
-						key={ques._id}
-						question={ques.question}
-						answer={ques.answer}
-						eventKey={num.toString()}
-					/>,
-				);
-				num++;
-			});
-			setQuestions(newQues);
-			console.log(searchQuery);
+			let questions: Array<JSX.Element> = renderQuestions(ques);
+			setQuestions(questions);
 		};
 
 		displayInitialQues();
 	}, []);
 
 	const findQuestions = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();		
+		event.preventDefault();
 
-		const response = await api.post(`/faqs`, {
-			query: searchQuery,
+		try {
+			const response = await api.post(`/faqs`, {
+				query: searchQuery,
+			});
+			if (response) setQuestions([]);
+			let questions: Array<JSX.Element> = renderQuestions(response.data.value);
+			setQuestions(questions);
+		} catch (error: any) {
+			toast.error(error.response.data.error);
+		}
+	};
+
+	const renderQuestions = (ques: any): Array<JSX.Element> => {
+		let num = 0;
+		let newQues: Array<JSX.Element> = [];
+		ques.map((ques: any) => {
+			newQues.push(
+				<QuestionAccordion
+					key={ques._id}
+					question={ques.question}
+					answer={ques.answer}
+					eventKey={num.toString()}
+				/>,
+			);
+			num++;
 		});
-		if (response) setQuestions([]);
-		console.log(response);
+		return newQues;
 	};
 
 	return (
