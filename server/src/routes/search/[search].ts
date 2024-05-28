@@ -18,7 +18,7 @@ export const get: Handler = async (req, res) => {
 	const posts = await PostModel.find({ content: { $regex: search, $options: 'si' } })
 		.lean()
 		.select('authorId content likeCount commentCount location deleted isRoot media createdAt');
-	if (!users && !posts) {
+	if ((!users || users.length == 0) && (!posts || posts.length == 0)) {
 		Resolve(res).notFound('No user or posts found by the given username.');
 	} else
 		Resolve(res).okWith({
