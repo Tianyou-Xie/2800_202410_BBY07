@@ -6,10 +6,14 @@ import Accordion from 'react-bootstrap/Accordion';
 import { useEffect, useRef, useState } from 'react';
 import { api } from '../../lib/axios';
 import { toast } from 'react-toastify';
+import { DiVim } from 'react-icons/di';
+
+const emptyMessage = "We don't have an answer to that question yet.";
 
 const FAQs = () => {
 	const [searchQuery, setSearch] = useState('');
 	const [quesToDisplay, setQuestions] = useState(Array<JSX.Element>());
+	const [emptyMsg, setEmptyMsg] = useState(false);
 
 	const clearBtn = useRef<HTMLButtonElement>(null);
 
@@ -31,10 +35,19 @@ const FAQs = () => {
 			const response = await api.post(`/faqs`, {
 				query: searchQuery,
 			});
+			checkEmptyResult(response.data.value);
 			let questions: Array<JSX.Element> = renderQuestions(response.data.value);
 			setQuestions(questions);
 		} catch (error: any) {
 			toast.error(error.response.data.error);
+		}
+	};
+
+	const checkEmptyResult = (result: any) => {
+		if (result.length == 0) {
+			setEmptyMsg(true);
+		} else {
+			setEmptyMsg(false);
 		}
 	};
 
@@ -54,6 +67,13 @@ const FAQs = () => {
 			num++;
 		});
 		return newQues;
+	};
+
+	const resetPage = () => {
+		setSearch('');
+		clearBtn.current!.toggleAttribute('hidden');
+		setEmptyMsg(false);
+		displayInitialQues();
 	};
 
 	return (
@@ -80,19 +100,23 @@ const FAQs = () => {
 									className={`${styles.clearBtn} btn btn-danger`}
 									type='button'
 									ref={clearBtn}
-									onClick={() => {
-										setSearch('');
-										clearBtn.current!.toggleAttribute('hidden');
-										displayInitialQues();
-									}}
+									onClick={() => 
+										resetPage()
+									}
 									hidden>
 									Clear
 								</button>
 							</div>
 						</form>
-						<Accordion className='mt-3' defaultActiveKey='0' flush>
-							{quesToDisplay}
-						</Accordion>
+						{emptyMsg ? (
+							<div>{emptyMessage}</div>
+						) : (
+							<>
+								<Accordion className='mt-3' defaultActiveKey='0' flush>
+									{quesToDisplay}
+								</Accordion>
+							</>
+						)}
 					</div>
 				}
 			/>

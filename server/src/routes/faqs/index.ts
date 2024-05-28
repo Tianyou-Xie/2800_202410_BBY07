@@ -47,9 +47,7 @@ export const post: Handler[] = [
 			});
 		}
 
-		if (quesToSend.length === 0) return Resolve(res).notFound('No questions could be found.');
-
-		console.log(quesToSend);
+		if (quesToSend.length === 0) return Resolve(res).okWith(quesToSend);
 
 		return Resolve(res).okWith(quesToSend, 'Questions were found.');
 	},
