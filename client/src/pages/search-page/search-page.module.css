@@ -1,7 +1,10 @@
 .general {
     font-family: TTOctosquares;
+    padding: 0px;
+    margin: 0px;
     width: 100%;
     height: fit-content;
+    align-items: center;
 }
 
 .search {
@@ -16,21 +19,25 @@
     border: none;
     font-family: TTOctosquares;
     width: 100%;
-    /* height: 250px; */
     background-color: inherit;
     resize: none;
 }
 
-.side-buttons {
-    display: flex;
-    padding: 6px;
-    padding-right: 0px;
-    justify-content: right;
+.buttons {
+    padding-top: 6px;
 }
 
 .submit {
     border: none;
+    border-bottom: 2px solid gray;
+    padding: 5px;
     background-color: transparent;
+    width: 50%;
+}
+
+.selected {
+    color: white;
+    background-color: gray;
 }
 
 .submit-box {
