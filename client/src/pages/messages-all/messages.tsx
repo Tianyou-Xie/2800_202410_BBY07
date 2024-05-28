@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from "wouter";
 import { api } from '../../lib/axios';
 import Page from '../../components/Page/Page';
 import styles from './messages.module.css';
@@ -26,18 +27,23 @@ const MessagesAll = () => {
 			content={
 				<div className='container mt-5'>
 					<ul className='list-group'>
-						{users.map((user, index) => (
+						{users.map((user: any, index) => (
+                            <Link key={index} href={`/messages/${user.userId}`} className={styles.userLink}>
 							<li key={index} className='list-group-item d-flex justify-content-between align-items-center'>
 								<div className='d-flex align-items-center'>
-									<div className={`${styles.messageIcon} mr-3`}>
-										<span>A</span>
-									</div>
+                                    <img
+                                        src={user.avatar}
+                                        width='50'
+                                        height='50'
+                                        className={`rounded-circle me-2`}
+                                    />
 									<div>
-										<h5 className='mb-0'>Kamal Dolikay</h5>
+										<h5 className='mb-0' style={{ textTransform: 'capitalize' }}>{user.name}</h5>
 									</div>
 								</div>
 								<small className='text-muted'>2024-05-21</small>
 							</li>
+                            </Link>
 						))}
 					</ul>
 				</div>
