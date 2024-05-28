@@ -13,7 +13,7 @@ import { PlanetVisual } from './planet-visual';
 import { SpaceTraveller } from './space-traveller';
 import { StarBackground } from './star-background';
 import { useLocation } from 'wouter';
-import { If } from 'react-if';
+import { If, Then } from 'react-if';
 
 interface Props {
 	interactable?: boolean;
@@ -194,26 +194,28 @@ export const PlanetMap = (props: Props) => {
 	return (
 		<>
 			<If condition={stageInteractable}>
-				<div className='position-absolute end-0 bottom-0 z-3 p-3 d-flex'>
-					<div className='mt-auto ms-auto d-flex gap-3'>
-						<p className='mb-0 text-dark-emphasis '>
-							X: {-relativePanPosition.x.toFixed(0)}, Y: {relativePanPosition.y.toFixed(0)}, x
-							{zoom.toLocaleString()}
-						</p>
-						<button
-							className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
-							disabled={relativePanPosition.x === 0 && relativePanPosition.y === 0}
-							onClick={() => resetPan()}>
-							<PiCrosshairBold />
-						</button>
+				<Then>
+					<div className='position-absolute end-0 bottom-0 z-3 p-3 d-flex'>
+						<div className='mt-auto ms-auto d-flex gap-3'>
+							<p className='mb-0 text-dark-emphasis '>
+								X: {-relativePanPosition.x.toFixed(0)}, Y: {relativePanPosition.y.toFixed(0)}, x
+								{zoom.toLocaleString()}
+							</p>
+							<button
+								className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
+								disabled={relativePanPosition.x === 0 && relativePanPosition.y === 0}
+								onClick={() => resetPan()}>
+								<PiCrosshairBold />
+							</button>
 
-						<button
-							className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
-							onClick={() => navigate('/home-list')}>
-							<GiHamburgerMenu />
-						</button>
+							<button
+								className='btn btn-outline-dark d-flex align-items-center justify-content-center fs-3'
+								onClick={() => navigate('/home-list')}>
+								<GiHamburgerMenu />
+							</button>
+						</div>
 					</div>
-				</div>
+				</Then>
 			</If>
 
 			<Stage
