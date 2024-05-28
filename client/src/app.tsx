@@ -1,5 +1,10 @@
 import { ToastContainer } from 'react-toastify';
 import { Switch, Route, useLocation } from 'wouter';
+import { useEffect, useState } from 'react';
+import { Auth, UserAuthContext } from './lib/auth';
+import { Else, If, Then } from 'react-if';
+
+import './index.css';
 import About from './pages/about/about';
 import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
@@ -17,22 +22,17 @@ import LikedPage from './pages/user-settings/options/liked';
 import SavedPage from './pages/user-settings/options/saved';
 import FollowingPage from './pages/following/following';
 import FollowerPage from './pages/follower/follower';
-import { useEffect, useState } from 'react';
-import { Auth, UserAuthContext } from './lib/auth';
 import Cursors from './components/cursor/cursor';
-
-import { Else, If, Then } from 'react-if';
 import { Loader } from './components/loader/loader';
 import PostPage from './pages/post-page/post-page';
 import UserPage from './pages/user-page/user-page';
 import ProfilePage from './pages/profile-page/profile-page';
 import { PlanetMap } from './pages/planet-map/planet-map';
-
-import './index.css';
 import Home from './pages/home/home';
 import PostDetailPage from './pages/post/post';
 import Planets from './pages/planets/planets-component';
 import PlanetFeed from './pages/planet-feed/planet-feed';
+import MessagesAll from './pages/messages-all/messages';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -102,6 +102,7 @@ export const App = () => {
 									<Route path='/saved' component={SavedPage} />
 									<Route path='/following' component={FollowingPage} />
 									<Route path='/followers' component={FollowerPage} />
+									<Route path='/messages' component={MessagesAll} />
 
 									{commonRoutes}
 
