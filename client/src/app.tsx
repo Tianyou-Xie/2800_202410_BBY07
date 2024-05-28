@@ -35,6 +35,7 @@ import PlanetFeed from './pages/planet-feed/planet-feed';
 import MessagesAll from './pages/messages-all/messages';
 import SEO from './components/seo/seo';
 import { getClientHost } from './environment';
+import SearchPage from './pages/search-page/search-page';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -100,6 +101,7 @@ export const App = () => {
 									<Route path='/changepassword' component={Changepassword} />
 									<Route path='/feed' component={GeneralFeed} />
 									<Route path='/post' component={PostPage} />
+									<Route path='/search' component={SearchPage} />
 									<Route path='/user/:id' component={UserPage} />
 									<Route path='/feed/:planetName/:id' component={PlanetFeed} />
 									<Route path='/profile' component={ProfilePage} />
