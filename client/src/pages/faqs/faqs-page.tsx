@@ -36,10 +36,13 @@ const FAQs = () => {
 	}, []);
 
 	const findQuestions = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		setQuestions([]);
+		event.preventDefault();		
 
-		
+		const response = await api.post(`/faqs`, {
+			query: searchQuery,
+		});
+		if (response) setQuestions([]);
+		console.log(response);
 	};
 
 	return (
