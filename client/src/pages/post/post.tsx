@@ -85,14 +85,12 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 
 	if (!postDetails) return <Loader />;
 
-	console.log(postDetails);
-
 	return (
 		<Page
 			pageName='Post Detail'
 			content={
 				<>
-					<Post {...postDetails} />
+					<Post {...postDetails} commentCount={postDetails.commentCount + postedComments.length} />
 
 					<hr className='w-100 m-0' />
 
@@ -114,14 +112,16 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 					<div className='w-100 px-3 d-flex flex-column align-items-center justify-content-center'>
 						<div className='w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
 							{postedComments.map((v) => {
-								return <Post {...v} />;
+								return <Post {...v} isRoot={true} />;
 							})}
 						</div>
 
 						<PaginatedPostFeed
 							feedKey={postDetails!._id}
 							fetchPage={(page) =>
-								api.get(`/post/${postDetails!._id}/comment?page=${page}`).then((v) => v.data.value)
+								api
+									.get(`/post/${postDetails!._id}/comment?page=${page}`)
+									.then((v) => v.data.value.map((v: any) => ({ ...v, isRoot: true })))
 							}
 						/>
 					</div>

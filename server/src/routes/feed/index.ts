@@ -15,7 +15,7 @@ export const get: Handler[] = [
 
 		const latestPosts = await PostModel.aggregate([
 			{ $match: { isRoot: { $not: { $eq: false } }, deleted: false } },
-			{ $sort: { createdAt: 1 } },
+			{ $sort: { likeCount: -1, commentCount: -1, createdAt: -1 } },
 			{ $skip: skip },
 			{ $limit: limit },
 			{

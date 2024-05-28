@@ -14,13 +14,13 @@ export const get: Handler[] = [
 
 		let search: mongoose.FilterQuery<IPost>;
 		const existingPlanet = await PlanetModel.exists({ _id: planetOrUserId }).lean();
-		if (existingPlanet) search = { 'location.planetId': existingPlanet._id };
+		if (existingPlanet) search = { 'location.planetId': existingPlanet._id, 'isRoot': { $not: { $eq: false } } };
 		else {
 			const existingUser = await UserModel.exists({ _id: planetOrUserId }).lean();
 			if (existingUser) search = { authorId: existingUser._id };
 			else return Resolve(res).notFound('No planet or user by the given ID exists.');
 		}
-		
+
 		const userId = req.user!._id;
 
 		const rawPage = parseInt(typeof req.query.page === 'string' ? req.query.page : '');
@@ -31,7 +31,7 @@ export const get: Handler[] = [
 		// TODO aggregate liked and saved variables
 
 		const latestPosts = await PostModel.aggregate([
-			{ $match: { ...search, isRoot: { $not: { $eq: false } }, deleted: false } },
+			{ $match: { ...search, deleted: false } },
 			{ $sort: { createdAt: -1 } },
 			{ $skip: skip },
 			{ $limit: limit },
