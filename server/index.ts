@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
+// import multipart from 'connect-multiparty'
 
 import { requestLogger } from './src/middlewares/log.js';
 import { getServerHost, SERVER_PORT } from './src/environment';
@@ -20,8 +21,6 @@ const PROJECT_ROOT = path.join(__dirname, 'src');
 	});
 
 	io.on('connection', (socket) => {
-		// console.log('New client connected');
-
 		socket.on('disconnect', () => {
 			// console.log('Client disconnected');
 		});
@@ -36,12 +35,12 @@ const PROJECT_ROOT = path.join(__dirname, 'src');
 	});
 
 	app.set('socketio', io);
-
 	app.use(cors());
 
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());
 	app.use(requestLogger);
+    // app.use(multipart());
 
 	const mongoUrl = process.env.MONGO_URL!;
 	await mongoose.connect(mongoUrl);
