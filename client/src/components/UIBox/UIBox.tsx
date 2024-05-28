@@ -30,7 +30,7 @@ const UIBox = (props: UIBoxProp): JSX.Element => {
 
 	return (
 		<>
-			<div className={classes}>{props.content}</div>
+			<div className={`${classes} row`}>{props.content}</div>
 		</>
 	);
 };
