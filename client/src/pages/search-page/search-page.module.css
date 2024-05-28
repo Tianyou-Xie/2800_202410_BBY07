@@ -1,0 +1,45 @@
+.general {
+    font-family: TTOctosquares;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+}
+
+.search {
+    padding: 10px;
+    margin: 2px 0px;
+    text-align: left;
+    word-break: break-word;
+    font-size: 1.1rem;
+}
+
+.search-box {
+    border: none;
+    font-family: TTOctosquares;
+    width: 100%;
+    background-color: inherit;
+    resize: none;
+}
+
+.buttons {
+    padding-top: 6px;
+}
+
+.submit {
+    border: none;
+    border-bottom: 2px solid gray;
+    padding: 5px;
+    background-color: transparent;
+    width: 50%;
+}
+
+.selected {
+    color: white;
+    background-color: gray;
+}
+
+.submit-box {
+    padding: 2px 7px;
+}

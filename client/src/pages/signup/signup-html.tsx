@@ -1,4 +1,4 @@
-import { useLocation } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import styles from './signup.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import { GoogleAuthButton } from '../../components/google-auth-btn/google-auth-btn';
@@ -8,23 +8,21 @@ const SignupHtml = ({
 	username,
 	email,
 	password,
-	location,
-	setPlanets,
 	setUsername,
 	setEmail,
 	setPassword,
 	setLocation,
 	submitForm,
+	loading,
 }: any) => {
-	const [_, navigate] = useLocation();
 	return (
 		<div className={styles.signupContainer}>
-			<div className='px-4 text-center'>
+			<div className='px-3 text-center'>
 				<img className={`${styles.img} img-fluid`} src={logoUrl} alt='Skynet Logo' />
 				<h1 className={styles.h1}>SKY.NET</h1>
 				<h5 className={styles.h5}>STAY CONNECTED ACROSS THE GALAXY</h5>
 				<div className={`${styles.signupUpperdiv} mb-1`}></div>
-				<div className={styles.signupForm}>
+				<div className={`${styles.signupForm} p-3`}>
 					<form onSubmit={submitForm}>
 						<input
 							name='username'
@@ -67,28 +65,27 @@ const SignupHtml = ({
 									</option>
 								);
 							})}
-							{/* <option value='xenos-prime'>Xenos Prime</option> */}
 						</select>
 						<div className='mb-3'>
-							<button className={`${styles.button}`}>SIGN UP</button>
+							<button disabled={loading} className={`${styles.button} w-100`}>
+								SIGN UP
+							</button>
 						</div>
 					</form>
 
 					<hr />
 
-					<GoogleAuthButton className={styles.button} text='Sign Up with Google' />
+					<GoogleAuthButton disabled={loading} className={styles.button} />
 
 					<hr />
 
-					<div>
-						<span className={styles.span}>Already a User. Login Below</span>
-						<button
-							onClick={() => navigate('/login')}
-							className={`${styles.signupButtonLogin} ${styles.button}`}>
-							LOG IN
-						</button>
+					<div className='d-flex flex-column gap-2'>
+						<Link href='/login' className={`${styles.span} small mb-0`}>
+							Already Registered? Login Instead
+						</Link>
 					</div>
 				</div>
+
 				<div className={`${styles.signupBottomdiv} mt-2`}></div>
 			</div>
 		</div>

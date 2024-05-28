@@ -53,7 +53,7 @@
 }
 
 .clickable {
-    cursor: pointer;
+    cursor: var(--hand-cursor-url);
 }
 
 .logout-btn {

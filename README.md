@@ -15,6 +15,40 @@ An interplanetary town square that maintains connections between cultures and id
 -   Samarjit Bhogal ([@SamarjitBhogal](https://github.com/SamarjitBhogal))
 -   Marcus Lages ([@MarcusLages](https://github.com/MarcusLages))
 
+## Features
+
+-   Create Account and Login (Email/Password or Google)
+-   Delete Account and Logout
+-   Edit Account
+-   Edit Profile
+-   View Available Planets
+    -   Map Mode
+    -   List Mode
+-   Create Posts on Various Planets
+-   View Posts
+    -   Galactic Feed
+    -   Planetary Feed
+    -   User Feed
+-   Interact with Posts
+    -   Comment
+    -   Like / Unlike
+    -   Save / Unsave
+    -   Share
+-   Change Avatar
+-   Search for Posts
+-   Search for Users
+-   Interact with Users
+    -   Follow / Unfollow
+    -   Message (real-time)
+-   View Interactions
+    -   Saved Posts
+    -   Liked Posts
+    -   Following
+    -   Followers
+-   View Privacy Policy
+-   View Terms of Use
+-   View FAQs
+
 ## Technologies
 
 The project is built using [Typescript](https://www.typescriptlang.org/), and split into two modules, the client and server.
@@ -32,6 +66,13 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [React If](https://https://www.npmjs.com/package/react-if/)
 -   [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
 -   [Socket IO](https://socket.io/) (Client)
+-   [Popper](https://popper.js.org/docs/v2/)
+-   [Axios](https://axios-http.com/docs/intro)
+-   [Axios Cache](https://axios-cache-interceptor.js.org/)
+-   [Is Mobile](https://www.npmjs.com/package/is-mobile)
+-   [Konva](https://konvajs.org/index.html)
+-   [React Helmet](https://www.npmjs.com/package/react-helmet)
+-   [Use Image](https://www.npmjs.com/package/use-image)
 
 **Server (built with [esno](https://www.npmjs.com/package/esno)):**
 
@@ -41,15 +82,17 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [Express File Routing](https://www.npmjs.com/package/express-file-routing)
 -   [Joi](https://joi.dev/)
 -   [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
--   [http-status-codes](https://www.npmjs.com/package/http-status-codes)
--   [nodemailer](https://www.nodemailer.com/)
+-   [HTTP Status Codes](https://www.npmjs.com/package/http-status-codes)
+-   [Nodemailer](https://www.nodemailer.com/)
 -   [JWT](https://jwt.io/)
 -   [CORS](https://www.npmjs.com/package/cors)
 -   [dotenv](https://www.dotenv.org/)
 -   [Google Auth Library](https://cloud.google.com/nodejs/docs/reference/google-auth-library/latest)
 -   [Google APIs](https://www.npmjs.com/package/googleapis)
--   [Http Status Codes](https://www.npmjs.com/package/http-status-codes)
 -   [Socket IO](https://socket.io/) (Server)
+-   [Cloudinary](https://cloudinary.com/)
+-   [OpenAI](https://openai.com/)
+-   [UUID](https://www.npmjs.com/package/uuid)
 
 **Development Utilities:**
 
@@ -59,8 +102,10 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 
 ## Code Attributions
 
--   Regex escape utility: [(`./server/utils/regex.ts:10`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/server/src/utils/regex.ts#L10)
+-   Regex Escape Utility: [(`./server/utils/regex.ts:10`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/server/src/utils/regex.ts#L10)
     > https://github.com/component/escape-regexp/blob/master/index.js
+-   Helmet SEO Component Structure: [(`./client/components/seo/seo.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/seo/seo.tsx#L23-L37)
+    > https://www.freecodecamp.org/news/react-helmet-examples
 
 ## Environment Variables
 
@@ -76,27 +121,58 @@ Both the server and client utilize a `.env` file.
 
 **Client Variables:**
 
-| Key  | Usage                          |
-| ---- | ------------------------------ |
-| PORT | Port used for the frontend app |
-| VITE_LOCALHOST | Host used for listening to Server Socket Events |
+| Key              | Usage                                                                                   |
+| ---------------- | --------------------------------------------------------------------------------------- |
+| VITE_PORT        | The port that Vite serves the client on, when running locally                           |
+| VITE_SERVER_PORT | The port that the server is running on, when running locally                            |
+| VITE_NODE_ENV    | The environment the client is running in (development_local / development / production) |
 
 **Server Variables:**
 
-| Key        | Usage                                         |
-| ---------- | --------------------------------------------- |
-| PORT       | Port used for the express server              |
-| MONGO_URL  | The MongoDB connection string                 |
-| JWT_TTL    | The JWT token expiry time, in seconds         |
-| JWT_SECRET | The secret used to sign and verify JWT tokens |
+| Key                     | Usage                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| PORT                    | The port that Express starts the server on, when running locally                        |
+| CLIENT_PORT             | The port that the client is being served on, when running locally                       |
+| NODE_ENV                | The environment the server is running in (development_local / development / production) |
+| MONGO_URL               | The MongoDB connection string used to connect to the database                           |
+| JWT_SECRET              | The secret used to sign and verify JWT tokens                                           |
+| JWT_TTL                 | The JWT token expiry time, in seconds                                                   |
+| GOOGLE_OAUTH_ID         | The Google OAuth API Client ID used to authenticate with Google                         |
+| GOOGLE_OAUTH_SECRET     | The Google OAuth API Client Secret used to authenticate with Google                     |
+| EMAIL_HOST              | The hostname of the email transporter used to send emails from the server               |
+| EMAIL_PORT              | The port of the email transporter used to send emails from the server                   |
+| EMAIL_USER              | The username of the email transporter used to send emails from the server               |
+| EMAIL_PASS              | The password of the email transporter used to send emails from the server               |
+| CLOUDINARY_CLOUD_NAME   | The Cloudinary cloud name used to upload images                                         |
+| CLOUDINARY_CLOUD_KEY    | The Cloudinary cloud API key used to upload images                                      |
+| CLOUDINARY_CLOUD_SECRET | The Cloudinary cloud API secret used to upload images                                   |
+| OPENAI_API_KEY          | The OpenAI API key used to generate images                                              |
 
 ## Running Locally & Deployment
 
-During development, both the client and server use the command `npm run dev` to launch the development server with file watching.
+**Running the Server:**
 
-The client compiles to a `dist` folder with the command `npm run build`. This folder can be deployed as is. The command `npm start` will first build and then preview the build with vite.
+1. Ensure you have all server environment variables set
+2. Enter the server directory (`cd server`)
+3. Ensure all dependencies are installed (`npm i`)
+4. Launch the server in regular (`npm start`) or watch mode (`npm run dev`)
 
-The server does not compile, esno is used in watch mode during development (`npm run dev`), and in static mode during deployment. The whole project must be deployed and started with `npm start`.
+The server does not compile, it runs as a Node app. In order to deploy it, you must deploy the `server` folder and run the `npm start` command inside the deployed folder.
+
+**Running the Client:**
+
+1. Ensure you have all client environment variables set
+2. Enter the client directory (`cd client`)
+3. Ensure all dependencies are installed (`npm i`)
+4. Launch the client in preview (`npm start`) or watch mode (`npm run dev`)
+
+The client compiles to a `dist` folder (`npm run build`). This folder can be deployed as a static site. Because this project uses client side navigation, you must ensure the service you are using to deploy the client has a rewrite rule to rewrite all requests to the `/` route. If request URLs are not rewritten by the deployment service, the client side routing will not be able to display the correct page when loading the page from a URL that does not point to the `/` route.
+
+## AI Acknowledgement
+
+There are a few instances where AI was used in this project:
+
+-   Default Avatars - when a user signs up, an avatar is automatically generated for them using AI
 
 ## Project Links
 

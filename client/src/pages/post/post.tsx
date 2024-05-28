@@ -6,6 +6,7 @@ import Post from '../../components/Post/Post';
 import Page from '../../components/Page/Page';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 import { Loader } from '../../components/loader/loader';
+import SEO from '../../components/seo/seo';
 
 interface Post {
 	_id: string;
@@ -23,6 +24,7 @@ interface Post {
 	createdAt: Date;
 	deleted: boolean;
 	userName: string;
+	avatarUrl: string;
 }
 
 interface PostResponse {
@@ -53,6 +55,8 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 		fetchPost();
 	}, [id]);
 
+	if (!postDetails) return <Loader />;
+
 	const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setComment(event.target.value);
 	};
@@ -82,13 +86,17 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 		}
 	};
 
-	if (!postDetails) return <Loader />;
-
 	return (
 		<Page
 			pageName='Post Detail'
 			content={
 				<>
+					<SEO
+						title={`Skynet Post by ${postDetails.userName}`}
+						description={postDetails.content.slice(0, Math.min(15, postDetails.content.length)) + '...'}
+						og={{ image: postDetails.avatarUrl, imageAlt: postDetails.userName, type: 'website' }}
+					/>
+
 					<Post
 						{...postDetails}
 						commentCount={postDetails.commentCount + postedComments.length}

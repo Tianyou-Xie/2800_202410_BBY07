@@ -1,0 +1,16 @@
+.list-group-item {
+    margin-top: 10px;
+    border-radius: none;
+    background: #e3f2fd;
+    transition: all 0.3s ease-in-out;
+    font-family: Bitsumishi;
+}
+
+.list-group-item:hover {
+    transform: scaleX(1.1);
+    background: #e3f2fd;
+}
+
+.userLink {
+    text-decoration: none;
+}

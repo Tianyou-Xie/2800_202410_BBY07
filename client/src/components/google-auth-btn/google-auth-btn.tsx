@@ -35,9 +35,9 @@ export const GoogleAuthButton = (props: Props) => {
 		<button
 			onClick={() => onClick()}
 			disabled={disabled}
-			className={`${props.className} w-100 d-flex gap-2 align-items-center justify-content-center`}>
-			<FcGoogle />
-			{props.text ?? 'Authenticate with Google'}
+			className={`${props.className} w-100 d-flex gap-2 p-2 align-items-center justify-content-center`}>
+			<FcGoogle size={32} />
+			{props.text ?? 'Start With Google'}
 		</button>
 	);
 };

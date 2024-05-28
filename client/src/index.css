@@ -14,6 +14,9 @@
 
 	--metal-grey: #242C38;
 	--bright-blue: #2196F3;
+	
+    --cursor-url: url("./assets/images/icons8-cursor-38.png");
+    --hand-cursor-url: url("./assets/images/Infinity_Gauntlet_Pointer.png");
 }
 
 :root {
@@ -41,7 +44,11 @@ body {
 	/*If this margin bottom is doing something else bad please talk to sam. Thank you!*/
 	margin-bottom: 20px;
 	background-color: aliceblue;
-    cursor: url("./assets/images/icons8-cursor-38.png"), auto;
+    cursor: var(--cursor-url), auto !important;
+}
+
+a, button, svg {
+    cursor: var(--hand-cursor-url), auto !important;
 }
 
 @font-face {

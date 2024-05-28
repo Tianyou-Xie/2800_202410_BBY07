@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import { isUser } from '../../lib/isUser';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
+import SEO from '../../components/seo/seo';
 
 interface Post {
 	authorId: string;
@@ -15,7 +16,7 @@ interface Post {
 	createdAt: Date;
 	deleted: false;
 	likeCount: number;
-    avatar: string,
+	avatar: string;
 	location: {
 		planetId: string;
 		latitude: number;
@@ -68,6 +69,12 @@ const UserPage = () => {
 			pageName={username}
 			content={
 				<>
+					<SEO
+						title={`${username} on Skynet`}
+						description={`${username} is on Skynet, join them now!`}
+						og={{ image: avatar, imageAlt: `${username} Avatar`, type: 'website' }}
+					/>
+
 					<Profile
 						userId={userID}
 						username={username}
@@ -75,7 +82,7 @@ const UserPage = () => {
 						follower={follower}
 						following={following}
 						postCount={postCount}
-                        avatar={avatar}
+						avatar={avatar}
 						outsideUser
 					/>
 
