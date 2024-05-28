@@ -22,6 +22,7 @@ const inflightEmails = new Set<string>();
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
+const prompt = "generate a random centered avatar for a social networking app that displays post from each planets within galaxy"
 
 /**
  * POST @ /user/signup
@@ -59,9 +60,9 @@ export const post: Handler = async (req, res) => {
 
         const image = await openai.images.generate({
             model: "dall-e-3",
-            prompt: "generate a random avatar for a social networking app that displays post from each planets within galaxy",
+            prompt: prompt,
             size: "1024x1024",
-          });
+        });
 
         const avatar = await imageUpload(image.data[0].url);
 
