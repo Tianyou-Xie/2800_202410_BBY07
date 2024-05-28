@@ -1,0 +1,29 @@
+.nav, .nav *:not(.landing-btn) {
+    background-color: var(--signup-background) !important;
+}
+
+.nav a {
+    font-family: Bitsumishi;
+    font-size: 2em;
+}
+
+.landing-btn {
+    border-radius: 0;
+    border: none;
+}
+
+.login-btn {
+    background-color: var(--metal-grey);
+}
+
+.signup-btn {
+    background-color: var(--bright-blue);
+}
+
+.planet-map {
+    pointer-events: none;
+}
+
+@media screen and (max-width: 330px) {
+    
+}

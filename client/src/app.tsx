@@ -17,6 +17,7 @@ import LikedPage from './pages/user-settings/options/liked';
 import SavedPage from './pages/user-settings/options/saved';
 import FollowingPage from './pages/following/following';
 import FollowerPage from './pages/follower/follower';
+import LandingPage from './pages/landing-page/landing-page';
 import { useEffect, useState } from 'react';
 import { Auth, UserAuthContext } from './lib/auth';
 import Cursors from './components/cursor/cursor';
@@ -79,7 +80,7 @@ export const App = () => {
 						<Then>
 							<Switch>
 								{commonRoutes}
-								<Route component={Login} />
+								<Route component={LandingPage} />
 							</Switch>
 						</Then>
 
