@@ -1,15 +1,18 @@
 .loader {
+	color: black;
 	position: relative;
 	font-family: Bitsumishi;
 }
 
 .loader::before {
+	color: inherit;
 	content: '[';
 	transform: translateX(-0.75rem);
 	animation: back-and-forth-left 1s infinite;
 }
 
 .loader::after {
+	color: inherit;
 	content: ']';
 	transform: translateX(0.75rem);
 	animation: back-and-forth-right 1s infinite;
