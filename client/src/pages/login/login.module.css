@@ -6,7 +6,6 @@
 
 .login-form {
 	background: var(--login-background);
-	padding: 29px 59px;
 	border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
 }

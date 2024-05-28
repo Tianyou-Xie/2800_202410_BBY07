@@ -54,6 +54,8 @@ interface PostProp {
 const Post = (props: PostProp): JSX.Element => {
 	const [routerPath, navigate] = useLocation();
 
+	const [isActionActive, setIsActionActive] = useState(false);
+
 	const [saved, setSaved] = useState(false);
 	const [parentPost, setParentPost] = useState<PostProp>();
 
@@ -90,6 +92,9 @@ const Post = (props: PostProp): JSX.Element => {
 	}, [props.isRoot]);
 
 	const onBookmark = async () => {
+		if (isActionActive) return;
+		setIsActionActive(true);
+
 		const url = `/post/${props._id}/save`;
 
 		try {
@@ -97,11 +102,13 @@ const Post = (props: PostProp): JSX.Element => {
 				await api.delete(url, { cache: { update: { [savedCacheKey]: 'delete' } } });
 				setSaved(false);
 			} else {
-				const res = await api.post(url, undefined, { cache: { update: { [savedCacheKey]: 'delete' } } });
+				await api.post(url, undefined, { cache: { update: { [savedCacheKey]: 'delete' } } });
 				setSaved(true);
 			}
 		} catch (error) {
 			console.error('Error updating save status:', error);
+		} finally {
+			setIsActionActive(false);
 		}
 	};
 
@@ -121,6 +128,9 @@ const Post = (props: PostProp): JSX.Element => {
 	}, []);
 
 	const onLike = async () => {
+		if (isActionActive) return;
+		setIsActionActive(true);
+
 		const url = `/post/${props._id}/like`;
 
 		try {
@@ -135,6 +145,8 @@ const Post = (props: PostProp): JSX.Element => {
 			}
 		} catch (error) {
 			console.error('Error updating like status:', error);
+		} finally {
+			setIsActionActive(false);
 		}
 	};
 
@@ -188,7 +200,7 @@ const Post = (props: PostProp): JSX.Element => {
 								</button>
 
 								<div className='vr'></div>
-								<button className={styles.book}>
+								<button disabled={isActionActive} className={styles.book}>
 									{saved ? (
 										<FaBookmark onClick={onBookmark} />
 									) : (
@@ -206,7 +218,7 @@ const Post = (props: PostProp): JSX.Element => {
 
 								<div className='vr'></div>
 								<div>
-									<button onClick={onLike} className={styles.like}>
+									<button disabled={isActionActive} onClick={onLike} className={styles.like}>
 										{liked ? <FaHeart /> : <FaRegHeart />}
 									</button>
 									<small>{likeCount}</small>

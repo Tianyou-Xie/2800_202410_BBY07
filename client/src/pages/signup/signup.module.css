@@ -1,4 +1,5 @@
 .signup-container {
+	padding-bottom: 10px;
 	display: grid;
 	align-items: center;
 	justify-items: center;
@@ -6,7 +7,6 @@
 
 .signup-form {
 	background: var(--signup-background);
-	padding: 29px 59px;
 	border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
 }
