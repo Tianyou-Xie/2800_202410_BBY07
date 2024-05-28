@@ -59,8 +59,10 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 
 ## Code Attributions
 
--   Regex escape utility: [(`./server/utils/regex.ts:10`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/server/src/utils/regex.ts#L10)
+-   Regex Escape Utility: [(`./server/utils/regex.ts:10`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/server/src/utils/regex.ts#L10)
     > https://github.com/component/escape-regexp/blob/master/index.js
+-   Helmet SEO Component Structure: [(`./client/components/seo/seo.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/seo/seo.tsx#L23-L37)
+    > https://www.freecodecamp.org/news/react-helmet-examples
 
 ## Environment Variables
 
@@ -76,9 +78,9 @@ Both the server and client utilize a `.env` file.
 
 **Client Variables:**
 
-| Key  | Usage                          |
-| ---- | ------------------------------ |
-| PORT | Port used for the frontend app |
+| Key            | Usage                                           |
+| -------------- | ----------------------------------------------- |
+| PORT           | Port used for the frontend app                  |
 | VITE_LOCALHOST | Host used for listening to Server Socket Events |
 
 **Server Variables:**

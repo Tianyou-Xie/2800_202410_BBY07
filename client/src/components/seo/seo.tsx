@@ -17,6 +17,8 @@ interface Props {
 /**
  * An SEO component to render a Helmet instance and change the SEO
  * information when this component is rendered.
+ *
+ * Adapted from https://www.freecodecamp.org/news/react-helmet-examples/
  */
 export default function SEO(props: Props) {
 	return (
