@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
 import { Handler } from 'express';
+import OpenAI from "openai";
 import { UserModel } from '../../models/user';
 import { createHash } from '../../utils/bcrypt';
 import { PlanetModel } from '../../models/planet';
@@ -8,6 +9,7 @@ import { assertRequestBody, Resolve } from '../../utils/express';
 import { ILocation, RawLocationSchema } from '../../models/location';
 import { RawDocument } from '../../@types/model';
 import { JWT } from '../../utils/jwt';
+import { imageUpload } from '../../utils/image'
 
 interface PostBody {
 	email: string;
@@ -17,6 +19,10 @@ interface PostBody {
 }
 
 const inflightEmails = new Set<string>();
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
 export const post: Handler = async (req, res) => {
 	const body = assertRequestBody(
@@ -45,11 +51,20 @@ export const post: Handler = async (req, res) => {
 		const planet = await PlanetModel.findById(body.location.planetId).lean().exec();
 		if (!planet) return Resolve(res).badRequest('The given location does not exist.');
 
+        const image = await openai.images.generate({
+            model: "dall-e-3",
+            prompt: "generate a random avatar for a social networking app that displays post from each planets within galaxy",
+            size: "1024x1024",
+          });
+
+        const avatar = await imageUpload(image.data[0].url);
+
 		const user = new UserModel({
 			email: body.email,
 			userName: body.userName,
 			password: await createHash(body.password),
 			location: body.location,
+            avatarUrl: avatar.secure_url
 		});
 
 		await user.save();
