@@ -1,11 +1,31 @@
-.container {
-    /* background: #232c38; */
-}
-
 .h3 {
 	font-family: Bitsumishi;
 }
 
 .p {
     font-family: TTOctosquares;
+}
+
+.input {
+    font-family: TTOctosquares;
+}
+
+@media (min-width: 600px) {
+	.custom-col {
+        width: 4.333333%;
+    }
+    
+    .custom-col10 {
+        width: 90.333333%;
+    }
+}
+
+@media (max-width: 700px) {
+	.custom-col {
+        padding-left: 0;
+    }
+}
+
+.time {
+    font-size: 10px;
 }

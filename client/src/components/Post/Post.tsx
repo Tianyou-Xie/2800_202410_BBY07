@@ -15,6 +15,7 @@ import { Link, useLocation } from 'wouter';
 import { api } from '../../lib/axios';
 import { Else, If, Then } from 'react-if';
 import { GoCrossReference } from 'react-icons/go';
+import { PostHeader } from './post-header/post-header';
 
 interface PostProp {
 	_id: string;
@@ -24,7 +25,9 @@ interface PostProp {
 	likeCount?: number;
 	commentCount?: number;
 	createdAt?: Date;
+	displayTime?: boolean;
 	isRoot?: boolean;
+	avatarUrl?: string;
 	location?: {
 		planetId: string;
 		latitude: number;
@@ -33,52 +36,6 @@ interface PostProp {
 	};
 	// media?: Array<Object>;
 }
-
-interface UserProp {
-	username?: string;
-	userId: string;
-	imageURL?: string;
-	createdAt?: Date;
-}
-
-const dateFmt = Intl.DateTimeFormat(['en-us'], { month: 'long', day: 'numeric' });
-
-/**
- * Component representing the user part of the post (image and username).
- *
- * @param props.username - Username of the author of the post (got from the Post's props).
- * @param props.userId - Links to the user's profile page.
- * @param props.imageURL - (TODO) (Optional) Will represent the user's profile pictures as an URL or image file.
- */
-const User = (props: UserProp): JSX.Element => {
-	return (
-		<>
-			<div className='d-flex gap-2 align-items-center'>
-				<UIBox
-					className={styles.userContainer}
-					curved
-					dark
-					content={
-						<Link href={'/user/' + props.userId ?? '/'} className={styles.link}>
-							<If condition={props.username}>
-								<Then>@{props.username}</Then>
-								<Else>Loading...</Else>
-							</If>
-						</Link>
-					}
-				/>
-
-				<If condition={!!props.createdAt}>
-					<Then>
-						<small className='text-muted'>
-							{props.createdAt ? dateFmt.format(new Date(props.createdAt!)) : ''}
-						</small>
-					</Then>
-				</If>
-			</div>
-		</>
-	);
-};
 
 /**
  * Post component representing the thumbnail post of an user.
@@ -189,7 +146,8 @@ const Post = (props: PostProp): JSX.Element => {
 
 	return (
 		<div className={styles.postContainer}>
-			<User username={props.userName} userId={props.authorId} createdAt={props.createdAt} />
+			<PostHeader {...props} />
+
 			<UIBox
 				className='p-2'
 				curved

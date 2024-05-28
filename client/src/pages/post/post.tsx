@@ -89,7 +89,11 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 			pageName='Post Detail'
 			content={
 				<>
-					<Post {...postDetails} commentCount={postDetails.commentCount + postedComments.length} />
+					<Post
+						{...postDetails}
+						commentCount={postDetails.commentCount + postedComments.length}
+						displayTime={true}
+					/>
 
 					<hr className='w-100 m-0' />
 
