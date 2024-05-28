@@ -11,6 +11,12 @@ interface PostBody {
 	confirmpassword: string;
 }
 
+/**
+ * PATCH @ /user/changepassword
+ *
+ * This changes the password for the user making
+ * the request, given that they know their current password.
+ */
 export const patch: Handler[] = [
 	authProtected,
 	async (req, res) => {

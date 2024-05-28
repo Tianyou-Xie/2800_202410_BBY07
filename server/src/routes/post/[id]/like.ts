@@ -5,6 +5,12 @@ import mongoose from 'mongoose';
 import { Resolve } from '../../../utils/express';
 import { LikeInteraction } from '../../../models/like-interaction';
 
+/**
+ * GET @ /post/:id/like
+ *
+ * This returns whether the user making the request
+ * has the post associated with the given ID liked.
+ */
 export const get: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -17,6 +23,12 @@ export const get: Handler[] = [
 	},
 ];
 
+/**
+ * POST @ /post/:id/like
+ *
+ * This likes the post associated with the given ID as
+ * the user making the request.
+ */
 export const post: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -58,6 +70,12 @@ export const post: Handler[] = [
 	},
 ];
 
+/**
+ * DELETE @ /post/:id/like
+ *
+ * This unlikes the post associated with the given
+ * ID as the user making the request.
+ */
 export const del: Handler[] = [
 	authProtected,
 	async (req, res) => {

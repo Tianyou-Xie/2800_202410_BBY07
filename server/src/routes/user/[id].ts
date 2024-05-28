@@ -5,6 +5,12 @@ import { UserModel } from '../../models/user';
 import { authProtected } from '../../middlewares/auth-protected';
 import { assertRequestBody, Resolve } from '../../utils/express';
 
+/**
+ * GET @ /user/:id
+ *
+ * This returns public infromation for the user
+ * associated with the given ID>
+ */
 export const get: Handler = async (req, res) => {
 	const id = req.params.id;
 	if (!mongoose.isValidObjectId(id)) return Resolve(res).badRequest('Invalid user ID provided.');
@@ -22,6 +28,12 @@ interface PatchBody {
 	bio?: string;
 }
 
+/**
+ * PATCH @ /user/:id
+ *
+ * This updates basic user information for the user associated
+ * with the given ID, if they are authenticated as said user.
+ */
 export const patch: Handler[] = [
 	authProtected,
 	async (req, res) => {

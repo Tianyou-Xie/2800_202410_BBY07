@@ -5,9 +5,7 @@ import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
 import GeneralFeed from './pages/general-feed/general-feed';
 import Login from './pages/login/login-component';
-import MyFeed from './pages/my-feed/my-feed';
 import Signup from './pages/signup/signup-component';
-import Test from './pages/test-page/test-page';
 import UserSettings from './pages/user-settings/user-settings';
 import Resetpassword from './pages/resetpassword/resetpassword';
 import ManageAccount from './pages/user-settings/options/manage-account';
@@ -55,10 +53,8 @@ export const App = () => {
 			<Route path='/about/terms' component={Terms} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
-			<Route path='/test' component={Test} />
 			<Route path='/planets' component={Planets} />
 			<Route path='/post/:id'>{(params) => <PostDetailPage id={params.id} />}</Route>
-			<Route>404 Not Found</Route>
 		</>
 	);
 
@@ -76,8 +72,8 @@ export const App = () => {
 					<If condition={!authenticatedUser}>
 						<Then>
 							<Switch>
-								<Route path='/' component={Login} />
 								{commonRoutes}
+								<Route component={Login} />
 							</Switch>
 						</Then>
 
@@ -89,7 +85,6 @@ export const App = () => {
 									<Route path='/home-list' component={Home} />
 									<Route path='/changepassword' component={Changepassword} />
 									<Route path='/feed' component={GeneralFeed} />
-									<Route path='/myfeed' component={MyFeed} />
 									<Route path='/post' component={PostPage} />
 									<Route path='/user/:id' component={UserPage} />
 									<Route path='/feed/:planetName/:id' component={PlanetFeed} />
@@ -99,6 +94,8 @@ export const App = () => {
 									<Route path='/messages/:id' component={Messages} />
 
 									{commonRoutes}
+
+									<Route>404 Not Found</Route>
 								</Switch>
 							</UserAuthContext.Provider>
 						</Else>

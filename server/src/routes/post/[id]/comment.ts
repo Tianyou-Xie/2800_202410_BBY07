@@ -16,25 +16,25 @@ interface PostBody {
 	media?: RawDocument<IMedia>;
 }
 
+/**
+ * GET @ /post/:id/comment
+ *
+ * This retrieves the comments for the given
+ * post ID.
+ */
 export const get: Handler = async (req, res) => {
 	const parentPostId = req.params.id;
 
-	const rawLimit = req.query.limit;
-	let limit = typeof rawLimit === 'string' ? parseInt(rawLimit) : NaN;
-	if (isNaN(limit)) limit = 10;
-	limit = Math.max(0, Math.min(limit, 100));
-
-
-	const rawPage = req.query.page;
-	let page = typeof rawPage === 'string' ? parseInt(rawPage) : NaN;
-	if (isNaN(page)) page = 1;
-	page = Math.max(1, page);
+	const rawPage = parseInt(typeof req.query.page === 'string' ? req.query.page : '');
+	const page = Math.max(1, typeof rawPage !== 'number' || isNaN(rawPage) ? 1 : rawPage);
+	const limit = 20;
+	const skip = (page - 1) * limit;
 
 	if (!mongoose.isValidObjectId(parentPostId)) return Resolve(res).badRequest('Invalid post ID provided.');
 
 	const relationships = await CommentRelationship.find({ parentPost: parentPostId })
-		.sort({ createdAt: -1 })
-		.skip((page - 1) * limit)
+		.sort({ createdAt: 'descending' })
+		.skip(skip)
 		.limit(limit);
 
 	const comments = await Promise.all(
@@ -47,9 +47,6 @@ export const get: Handler = async (req, res) => {
 					return {
 						...comment,
 						userName: user.userName,
-						repost: post.repostCount,
-						like: post.likeCount,
-						comment: post.commentCount,
 					};
 				}
 			}
@@ -60,6 +57,11 @@ export const get: Handler = async (req, res) => {
 	Resolve(res).okWith(comments);
 };
 
+/**
+ * POST @ /post/:id/comment
+ *
+ * This creates a new comment for the given post ID.
+ */
 export const post: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -93,6 +95,7 @@ export const post: Handler[] = [
 					content: body.content,
 					media: body.media,
 					location: body.location ?? currentUser.location,
+					isRoot: false,
 				});
 
 				const relationship = new CommentRelationship({
@@ -120,7 +123,6 @@ export const post: Handler[] = [
 			const responseComment = {
 				...newComment,
 				userName: user.userName,
-				repost: newComment.repostCount,
 				like: newComment.likeCount,
 				comment: newComment.commentCount,
 			};

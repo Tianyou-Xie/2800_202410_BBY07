@@ -25,4 +25,9 @@ const schema = new Schema<IPlanet>({
 	visual: { type: visualSchema, required: true },
 });
 
+/**
+ * The model representing the "planets" collection in MongoDB.
+ *
+ * This stores all planets and their visualization information.
+ */
 export const PlanetModel = model('Planet', schema);
