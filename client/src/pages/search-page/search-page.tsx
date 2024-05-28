@@ -53,7 +53,7 @@ const SearchPage = function () {
 			pageName='Search'
 			content={
 				<>
-					<Container className={styles.general}>
+					<Container className={styles.general + ' w-75'}>
 						<UIBox
 							className={styles.search}
 							content={
