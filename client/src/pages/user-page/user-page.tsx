@@ -6,6 +6,7 @@ import { useLocation, useParams } from 'wouter';
 import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import { isUser } from '../../lib/isUser';
+import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 
 interface Post {
 	authorId: string;
@@ -14,6 +15,7 @@ interface Post {
 	createdAt: Date;
 	deleted: false;
 	likeCount: number;
+    avatar: string,
 	location: {
 		planetId: string;
 		latitude: number;
@@ -21,7 +23,6 @@ interface Post {
 		_id: string;
 	};
 	media: [];
-	repostCount: number;
 	__v: number;
 	_id: string;
 }
@@ -31,10 +32,10 @@ const UserPage = () => {
 	const [follower, setFollower] = useState(0);
 	const [following, setFollowing] = useState(0);
 	const [postCount, setPostCount] = useState(0);
-	const [displayedPosts, setDisplayedPosts] = useState(Array<JSX.Element>());
 	const [userID, setUserID] = useState('');
+	const [avatar, setAvatar] = useState('');
 	const [_, navigate] = useLocation();
-	let { id } = useParams() ?? '';
+	let { id = '' } = useParams();
 
 	useEffect(() => {
 		const getUserData = async function () {
@@ -51,6 +52,7 @@ const UserPage = () => {
 					setFollower(data.followerCount);
 					setFollowing(data.followingCount);
 					setPostCount(data.postCount);
+					setAvatar(data.avatarUrl);
 					// setDisplayedPosts(await getPosts());
 				} catch (err) {
 					console.log(err);
@@ -60,42 +62,6 @@ const UserPage = () => {
 
 		getUserData();
 	}, []);
-
-	useEffect(() => {
-		const displayPosts = async function () {
-			setDisplayedPosts(await getPosts());
-		};
-		displayPosts();
-	}, [userID]);
-
-	async function getPosts() {
-		try {
-			if (userID == '') return;
-			const res = await api.get('/feed/' + userID);
-			const postArray = res.data.value;
-			console.log(postArray);
-			let postElements = postArray.map((post: Post) => {
-				return (
-					<Post
-						username={username}
-						authorId={userID}
-						content={post.content}
-						postId={post._id}
-						likeCount={post.likeCount}
-						commentCount={post.commentCount}
-						repostCount={post.repostCount}
-						key={post._id}
-					/>
-				);
-			});
-			if (postArray.length == 0) {
-				postElements = [<>Nothing yet...</>];
-			}
-			return postElements;
-		} catch (err) {
-			console.log(err);
-		}
-	}
 
 	return (
 		<Page
@@ -109,9 +75,14 @@ const UserPage = () => {
 						follower={follower}
 						following={following}
 						postCount={postCount}
+                        avatar={avatar}
 						outsideUser
 					/>
-					{displayedPosts}
+
+					<PaginatedPostFeed
+						feedKey={id}
+						fetchPage={(page) => api.get(`/feed/${id}?page=${page}`).then((res) => res.data.value)}
+					/>
 				</>
 			}
 		/>

@@ -9,6 +9,12 @@ interface EmailBody {
 	confirmEmail: string;
 }
 
+/**
+ * PATCH @ /user/changeEmail
+ *
+ * This changes the email for the user that is
+ * making the request.
+ */
 export const patch: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -31,7 +37,7 @@ export const patch: Handler[] = [
 				'string.email': 'The confirmed email entered is not a valid email',
 				'any.required': 'Confirming the email is required.',
 				'any.only': 'The confirmed email does not match the new email.',
-			})
+			}),
 		});
 
 		const bodyValidationResult = emailSchema.validate(req.body);

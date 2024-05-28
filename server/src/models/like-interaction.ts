@@ -13,4 +13,9 @@ const schema = new Schema<ILikeInteraction>(
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
 
+/**
+ * The model representing the "likeinteractions" collection in MongoDB.
+ *
+ * This holds likes on posts made by users.
+ */
 export const LikeInteraction = model('LikeInteraction', schema);

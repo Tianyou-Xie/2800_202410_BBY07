@@ -13,4 +13,9 @@ const schema = new Schema<IFollowRelationship>(
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
 
+/**
+ * The model representing the "followrelationships" collection in MongoDB.
+ *
+ * This holds follows between users.
+ */
 export const FollowRelationship = model('FollowRelationship', schema);
