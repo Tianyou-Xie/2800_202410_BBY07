@@ -51,6 +51,24 @@ export const post: Handler[] = [
                   uniqueUserIds: { $addToSet: "$userId" }
                 }
               }*/
+              {
+                $lookup: {
+                  from: "users",
+                  localField: "userId",
+                  foreignField: "_id",
+                  as: "userDetails"
+                }
+              },
+              {
+                $unwind: "$userDetails"
+              },
+              {
+                $project: {
+                  userId: "$userDetails._id",
+                  name: "$userDetails.userName",
+                  avatar: "$userDetails.avatarUrl"
+                }
+              }
         ])
 
         if (converationID == null){
@@ -60,6 +78,6 @@ export const post: Handler[] = [
         
         // const message = await MessageModel.find({conversationId: converationID._id});
         
-        res.json({success: true, converationID, data: converation})
+        res.json({success: true, data: converation})
     }
 ];
