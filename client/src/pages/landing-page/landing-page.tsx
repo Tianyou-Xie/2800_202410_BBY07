@@ -3,8 +3,9 @@ import styles from './landing-page.module.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { PlanetMap } from '../planet-map/planet-map';
-import { Scrambler } from '../../components/scrambler/scrambler'
-import logoUrl from '../../assets/images/SkynetLogo.png';;
+import { Scrambler } from '../../components/scrambler/scrambler';
+import { IoMdArrowDown } from 'react-icons/io';
+import logoUrl from '../../assets/images/SkynetLogo.png';
 
 const LandingPage = () => {
 	return (
@@ -14,7 +15,7 @@ const LandingPage = () => {
 					<Navbar expand='lg' className='bg-body-tertiary'>
 						<Container className={`${styles.navContainer} w-100`}>
 							<Navbar.Brand href='/'>
-							<img className={styles.logo} src={logoUrl} alt='Skynet Logo' />
+								<img className={styles.logo} src={logoUrl} alt='Skynet Logo' />
 								<Scrambler text='sky.net' scrambleSpeed={80} scrambleDelay={6000} />
 							</Navbar.Brand>
 							<div>
@@ -29,14 +30,22 @@ const LandingPage = () => {
 					</Navbar>
 				</div>
 				<div className={`${styles.planetMap}`}>
-					<div className={styles.backdrop}></div>
-					<PlanetMap interactable={false} />
+					<div className={styles.mapContainer}>
+						<div className={styles.backdrop}></div>
+						<PlanetMap interactable={false} />
+						<div className={`${styles.landingHeader} w-100 text-center`}>
+							<h1>
+								<Scrambler text='Communication Revisioned' scrambleSpeed={80} scrambleDelay={6000} />
+							</h1>
+							<h3>Welcome to sky.net</h3>
+						</div>
+						<div className={styles.arrowIcon}>
+							<IoMdArrowDown />
+						</div>
+					</div>
 				</div>
-				<div className={`${styles.landingHeader} w-100 text-center`}>
-					<h1><Scrambler text='Communication Revisioned' scrambleSpeed={80} scrambleDelay={6000} /></h1>
-					<h3>Welcome to sky.net</h3>
-				</div>
-				<div>sadasd</div>
+
+				<div>New section</div>
 			</div>
 		</>
 	);
