@@ -1,0 +1,11 @@
+.message-icon {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: #6c757d;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 1.2rem;
+}
