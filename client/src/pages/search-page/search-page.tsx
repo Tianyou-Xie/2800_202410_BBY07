@@ -22,14 +22,14 @@ const SearchPage = function () {
 						<PaginatedPostFeed
 							feedKey={'search'}
 							fetchPage={(page) =>
-								api.get(`/search/${search}?page=${page}`).then((res) => res.data.value.posts)
+								api.get(`/post/search/${search}?page=${page}`).then((res) => res.data.value)
 							}
 						/>
 					) : (
 						<PaginatedUserList
 							feedKey={'search'}
 							fetchPage={(page) =>
-								api.get(`/search/${search}?page=${page}`).then((res) => res.data.value.users)
+								api.get(`/user/search/${search}?page=${page}`).then((res) => res.data.value)
 							}
 						/>
 					),
