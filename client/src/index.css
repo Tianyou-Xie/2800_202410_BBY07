@@ -15,7 +15,6 @@
 
 :root {
 	scrollbar-width: thin;
-	overflow: auto;
 }
 
 *,
@@ -34,7 +33,7 @@ html {
 body {
 	width: 100%;
 	height: 100%;
-	/* overflow-x: hidden;	 */
+	overflow-x: hidden;	
 	/*This margin bottom is needed to make hotbar not interfere with other componenet*/
 	/*If this margin bottom is doing something else bad please talk to sam. Thank you!*/
 	margin-bottom: 20px;
