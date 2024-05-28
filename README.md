@@ -32,6 +32,13 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [React If](https://https://www.npmjs.com/package/react-if/)
 -   [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
 -   [Socket IO](https://socket.io/) (Client)
+-   [Popper](https://popper.js.org/docs/v2/)
+-   [Axios](https://axios-http.com/docs/intro)
+-   [Axios Cache](https://axios-cache-interceptor.js.org/)
+-   [Is Mobile](https://www.npmjs.com/package/is-mobile)
+-   [Konva](https://konvajs.org/index.html)
+-   [React Helmet](https://www.npmjs.com/package/react-helmet)
+-   [Use Image](https://www.npmjs.com/package/use-image)
 
 **Server (built with [esno](https://www.npmjs.com/package/esno)):**
 
@@ -41,15 +48,17 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 -   [Express File Routing](https://www.npmjs.com/package/express-file-routing)
 -   [Joi](https://joi.dev/)
 -   [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
--   [http-status-codes](https://www.npmjs.com/package/http-status-codes)
--   [nodemailer](https://www.nodemailer.com/)
+-   [HTTP Status Codes](https://www.npmjs.com/package/http-status-codes)
+-   [Nodemailer](https://www.nodemailer.com/)
 -   [JWT](https://jwt.io/)
 -   [CORS](https://www.npmjs.com/package/cors)
 -   [dotenv](https://www.dotenv.org/)
 -   [Google Auth Library](https://cloud.google.com/nodejs/docs/reference/google-auth-library/latest)
 -   [Google APIs](https://www.npmjs.com/package/googleapis)
--   [Http Status Codes](https://www.npmjs.com/package/http-status-codes)
 -   [Socket IO](https://socket.io/) (Server)
+-   [Cloudinary](https://cloudinary.com/)
+-   [OpenAI](https://openai.com/)
+-   [UUID](https://www.npmjs.com/package/uuid)
 
 **Development Utilities:**
 
