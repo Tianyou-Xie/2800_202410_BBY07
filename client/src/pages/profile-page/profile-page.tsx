@@ -14,6 +14,7 @@ interface Post {
 	createdAt: Date;
 	deleted: false;
 	likeCount: number;
+    avatar: string,
 	location: {
 		planetId: string;
 		latitude: number;
@@ -40,6 +41,7 @@ const ProfilePage = () => {
 						follower={user.followerCount}
 						following={user.followingCount}
 						postCount={user.postCount}
+                        avatar={user.avatarUrl}
 					/>
 					<PaginatedPostFeed
 						feedKey={user._id}

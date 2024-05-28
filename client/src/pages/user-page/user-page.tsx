@@ -15,6 +15,7 @@ interface Post {
 	createdAt: Date;
 	deleted: false;
 	likeCount: number;
+    avatar: string,
 	location: {
 		planetId: string;
 		latitude: number;
@@ -32,6 +33,7 @@ const UserPage = () => {
 	const [following, setFollowing] = useState(0);
 	const [postCount, setPostCount] = useState(0);
 	const [userID, setUserID] = useState('');
+	const [avatar, setAvatar] = useState('');
 	const [_, navigate] = useLocation();
 	let { id = '' } = useParams();
 
@@ -50,6 +52,7 @@ const UserPage = () => {
 					setFollower(data.followerCount);
 					setFollowing(data.followingCount);
 					setPostCount(data.postCount);
+					setAvatar(data.avatarUrl);
 					// setDisplayedPosts(await getPosts());
 				} catch (err) {
 					console.log(err);
@@ -72,6 +75,7 @@ const UserPage = () => {
 						follower={follower}
 						following={following}
 						postCount={postCount}
+                        avatar={avatar}
 						outsideUser
 					/>
 
