@@ -26,6 +26,7 @@ export const post: Handler[] = [
 		const querySchema = Joi.object<QueryBody>({
 			query: Joi.string().trim().min(minSearchLen).max(maxSearchLen).messages({
 				'string.base': 'The given search must be a string.',
+                'string.empty': 'You must enter a search.',
 				'string.min': 'You must enter a search.',
 				'string.max': 'Search too long.',
 				'any.required': 'A search request is required to search.',
