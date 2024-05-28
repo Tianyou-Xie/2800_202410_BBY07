@@ -11,9 +11,9 @@ import { RiShareBoxLine } from 'react-icons/ri'; //<RiShareBoxLine />
 import { FaRegBookmark } from 'react-icons/fa'; //<FaRegBookmark />	//Empty bookmark
 import { FaBookmark } from 'react-icons/fa'; //<FaBookmark />	//Filled bookmark
 import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
-import { Link, useLocation } from 'wouter';
+import { useLocation } from 'wouter';
 import { api } from '../../lib/axios';
-import { Else, If, Then } from 'react-if';
+import { If, Then } from 'react-if';
 import { GoCrossReference } from 'react-icons/go';
 import { PostHeader } from './post-header/post-header';
 
@@ -54,14 +54,20 @@ interface PostProp {
 const Post = (props: PostProp): JSX.Element => {
 	const [routerPath, navigate] = useLocation();
 
+	const [isActionActive, setIsActionActive] = useState(false);
+
 	const [saved, setSaved] = useState(false);
 	const [parentPost, setParentPost] = useState<PostProp>();
+
+	const getCacheKey = (property: string) => `${props._id}:${property}`;
+	const savedCacheKey = getCacheKey('saved');
+	const likedCacheKey = getCacheKey('liked');
 
 	const detailsUrl = `/post/${props._id}`;
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
 			try {
-				const response = await api.get(`/post/${props._id}/save`);
+				const response = await api.get(`/post/${props._id}/save`, { id: savedCacheKey });
 				if (response.data.success) setSaved(response.data.value);
 			} catch (error) {
 				console.error('Error fetching save status:', error);
@@ -86,18 +92,23 @@ const Post = (props: PostProp): JSX.Element => {
 	}, [props.isRoot]);
 
 	const onBookmark = async () => {
+		if (isActionActive) return;
+		setIsActionActive(true);
+
+		const url = `/post/${props._id}/save`;
+
 		try {
 			if (saved) {
-				await api.delete(`/post/${props._id}/save`);
+				await api.delete(url, { cache: { update: { [savedCacheKey]: 'delete' } } });
 				setSaved(false);
 			} else {
-				const response = await api.post(`/post/${props._id}/save`);
-				if (response.data.success) {
-					setSaved(true);
-				}
+				await api.post(url, undefined, { cache: { update: { [savedCacheKey]: 'delete' } } });
+				setSaved(true);
 			}
 		} catch (error) {
 			console.error('Error updating save status:', error);
+		} finally {
+			setIsActionActive(false);
 		}
 	};
 
@@ -106,7 +117,7 @@ const Post = (props: PostProp): JSX.Element => {
 	useEffect(() => {
 		const fetchLikeStatus = async () => {
 			try {
-				const response = await api.get(`/post/${props._id}/like`);
+				const response = await api.get(`/post/${props._id}/like`, { id: likedCacheKey });
 				setLiked(response.data.value);
 			} catch (error) {
 				console.error('Error fetching like status:', error);
@@ -117,20 +128,25 @@ const Post = (props: PostProp): JSX.Element => {
 	}, []);
 
 	const onLike = async () => {
+		if (isActionActive) return;
+		setIsActionActive(true);
+
+		const url = `/post/${props._id}/like`;
+
 		try {
 			if (liked) {
-				await api.delete(`/post/${props._id}/like`);
+				await api.delete(url, { cache: { update: { [likedCacheKey]: 'delete' } } });
 				setLikeCount(likeCount - 1);
 				setLiked(false);
 			} else {
-				const response = await api.post(`/post/${props._id}/like`);
-				if (response.data.success) {
-					setLikeCount(likeCount + 1);
-					setLiked(true);
-				}
+				await api.post(url, undefined, { cache: { update: { [likedCacheKey]: 'delete' } } });
+				setLikeCount(likeCount + 1);
+				setLiked(true);
 			}
 		} catch (error) {
 			console.error('Error updating like status:', error);
+		} finally {
+			setIsActionActive(false);
 		}
 	};
 
@@ -184,7 +200,7 @@ const Post = (props: PostProp): JSX.Element => {
 								</button>
 
 								<div className='vr'></div>
-								<button className={styles.book}>
+								<button disabled={isActionActive} className={styles.book}>
 									{saved ? (
 										<FaBookmark onClick={onBookmark} />
 									) : (
@@ -202,7 +218,7 @@ const Post = (props: PostProp): JSX.Element => {
 
 								<div className='vr'></div>
 								<div>
-									<button onClick={onLike} className={styles.like}>
+									<button disabled={isActionActive} onClick={onLike} className={styles.like}>
 										{liked ? <FaHeart /> : <FaRegHeart />}
 									</button>
 									<small>{likeCount}</small>
