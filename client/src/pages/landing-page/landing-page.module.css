@@ -1,5 +1,16 @@
+.landing-display {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.logo {
+    width: 50px;
+}
+
 .nav, .nav *:not(.landing-btn) {
-    background-color: var(--signup-background) !important;
+    background-color: var(--metal-grey) !important;
+    color: aliceblue;
 }
 
 .nav a {
@@ -7,19 +18,98 @@
     font-size: 2em;
 }
 
-.landing-btn {
-    border-radius: 0;
-    border: none;
+.nav {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 10;
 }
 
+.landing-header {    
+    position: absolute;
+    z-index: 11;
+    right: 50%;
+    margin-top: 200px;
+    transform: translate(50%);
+
+    color: aliceblue;
+}
+
+.landing-header h1 {
+    font-family: Bitsumishi;
+    font-size: 30pt;
+}
+
+.landing-btn {
+    font-family: BabaPro;
+    border-radius: 0;
+    border: none;
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
+
+.landing-btn:active {
+    box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+	transform: translateY(5px) !important;
+}
+
+
 .login-btn {
-    background-color: var(--metal-grey);
+    background-color: var(--signup-background);
+    color: var(--metal-grey);
 }
 
 .signup-btn {
     background-color: var(--bright-blue);
+    color: var(--metal-grey);
 }
 
-@media screen and (max-width: 330px) {
+.backdrop {
+    position: absolute;
+    z-index: 5;
+    width: 100vw;
+    height: 100vh;
     
+    backdrop-filter: blur(1.2px);
+}
+
+.planet-map {
+    width: 100%;
+    height: min-content;
+    z-index: 0;
+}
+
+@media screen and (max-width: 410px) {
+    .logo {
+        width: 40px;
+    }
+
+    .nav a {
+        font-size: 17pt;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .landing-header h1 {
+        font-family: Bitsumishi;
+        font-size: 20pt;
+    }
+
+    .logo {
+        width: 30px;
+    }
+
+    .nav a {
+        font-size: 16pt;
+    }
+
+    .landing-btn {
+        font-size: 9pt;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
