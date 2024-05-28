@@ -1,7 +1,10 @@
+import styles from './paginated-user-list.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { SmallLoader } from '../loader/small-loader';
 import { Else, If, Then } from 'react-if';
-import Post from '../Post/Post';
+import UIBox from '../UIBox/UIBox';
+import { Link } from 'wouter';
+import { Container } from 'react-bootstrap';
 
 interface Props {
 	/**
@@ -11,23 +14,23 @@ interface Props {
 	feedKey: string;
 
 	/**
-	 * The function used to fetch new posts.
+	 * The function used to fetch new users.
 	 * If this returns an empty array, it means that the end has been reached.
 	 */
 	fetchPage: (page: number) => Promise<any[]>;
 }
 
 /**
- * A feed of posts that automatically fetches the next page while a
+ * A feed of users that automatically fetches the next page while a
  * user is scrolling.
  */
-export const PaginatedPostFeed = (props: Props) => {
+export const PaginatedUserList = (props: Props) => {
 	const [page, setPage] = useState(0);
 	const [endReached, setEndReached] = useState(false);
 
-	const postsListRef = useRef<HTMLDivElement>(null);
+	const usersListRef = useRef<HTMLDivElement>(null);
 	const [loading, setLoading] = useState(false);
-	const [posts, setPosts] = useState<any[]>([]);
+	const [users, setUsers] = useState<any[]>([]);
 
 	const fetchIncrement = async (increment: number) => {
 		if (loading || endReached) return;
@@ -36,11 +39,11 @@ export const PaginatedPostFeed = (props: Props) => {
 		if (nextPage < 1) return;
 
 		try {
-			const newPosts = await props.fetchPage(nextPage);
-			if (newPosts.length === 0) return setEndReached(true);
+			const newUsers = await props.fetchPage(nextPage);
+			if (newUsers.length === 0) return setEndReached(true);
 
 			setPage(nextPage);
-			setPosts(increment < 0 ? [...newPosts, ...posts] : [...posts, ...newPosts]);
+			setUsers(increment < 0 ? [...newUsers, ...users] : [...users, ...newUsers]);
 		} catch (err) {
 			return setEndReached(true);
 		}
@@ -49,13 +52,13 @@ export const PaginatedPostFeed = (props: Props) => {
 	const checkScroll = () => {
 		if (loading || endReached) return;
 
-		const postsList = postsListRef.current;
-		if (!postsList) return;
+		const usersList = usersListRef.current;
+		if (!usersList) return;
 
 		const scrollBottom = window.scrollY + window.innerHeight;
 
 		let increment;
-		if (scrollBottom > postsList.scrollHeight - window.innerHeight) increment = 1;
+		if (scrollBottom > usersList.scrollHeight - window.innerHeight) increment = 1;
 
 		if (!increment) return;
 
@@ -71,11 +74,25 @@ export const PaginatedPostFeed = (props: Props) => {
 
 	return (
 		<div className='w-100 my-3 d-flex justify-content-center'>
-			<div ref={postsListRef} className='w-100 py-2 d-flex flex-column align-items-center gap-3'>
-				{posts
+			<div ref={usersListRef} className='w-100 py-2 d-flex flex-column align-items-center gap-3'>
+				{users
 					.filter((v) => !!v)
 					.map((v, i) => {
-						return <Post key={i} {...v} />;
+						return (
+							<UIBox
+								className={styles.userBox}
+								key={i}
+								content={
+									<Link href={`/user/${v._id}`} className={styles.link}>
+										<div className={styles.username}>{'@' + v.userName}</div>
+										<div className={styles.followers}>{v.followerCount + ' followers'}</div>
+									</Link>
+								}
+								dark
+								curved
+								clickable
+							/>
+						);
 					})}
 
 				<If condition={endReached}>

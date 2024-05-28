@@ -1,0 +1,13 @@
+.user-box {
+    font-family: TTOctosquares;
+    padding: 10px 6px;
+    width: 100%;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+}
