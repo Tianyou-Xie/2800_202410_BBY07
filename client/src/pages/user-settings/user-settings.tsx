@@ -76,13 +76,13 @@ const UserSettings = () => {
 							<h1 className={`${styles.settingTitle} ms-1`}>History</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link className={styles.groupItemBody} href=''>
+									<Nav.Link className={styles.groupItemBody} href='/saved'>
 										<p>Saved</p>
 										<MdOutlineArrowForwardIos />
 									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link className={styles.groupItemBody} href=''>
+									<Nav.Link className={styles.groupItemBody} href='/liked'>
 										<p>Liked</p>
 										<MdOutlineArrowForwardIos />
 									</Nav.Link>
