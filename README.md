@@ -15,6 +15,41 @@ An interplanetary town square that maintains connections between cultures and id
 -   Samarjit Bhogal ([@SamarjitBhogal](https://github.com/SamarjitBhogal))
 -   Marcus Lages ([@MarcusLages](https://github.com/MarcusLages))
 
+## Features
+
+-   Create Account and Login (Email/Password or Google)
+-   Delete Account and Logout
+-   Edit Account
+-   Edit Profile
+-   View Available Planets
+    -   Map Mode
+    -   List Mode
+-   Create Posts on Various Planets
+-   View Posts
+    -   Galactic Feed
+    -   Planetary Feed
+    -   User Feed
+-   Interact with Posts
+    -   Comment
+    -   Like / Unlike
+    -   Save / Unsave
+    -   Share
+-   Change Avatar
+-   Search for Posts
+-   Search for Users
+-   Interact with Users
+    -   Follow / Unfollow
+    -   Message (real-time)
+-   View Interactions
+    -   Saved Posts
+    -   Liked Posts
+    -   Following
+    -   Followers
+-   View Privacy Policy
+-   View Terms of Use
+-   View FAQs
+
+
 ## Technologies
 
 The project is built using [Typescript](https://www.typescriptlang.org/), and split into two modules, the client and server.
@@ -103,11 +138,29 @@ Both the server and client utilize a `.env` file.
 
 ## Running Locally & Deployment
 
-During development, both the client and server use the command `npm run dev` to launch the development server with file watching.
+**Running the Server:**
 
-The client compiles to a `dist` folder with the command `npm run build`. This folder can be deployed as is. The command `npm start` will first build and then preview the build with vite.
+1. Ensure you have all server environment variables set
+2. Enter the server directory (`cd server`)
+3. Ensure all dependencies are installed (`npm i`)
+4. Launch the server in regular (`npm start`) or watch mode (`npm run dev`)
 
-The server does not compile, esno is used in watch mode during development (`npm run dev`), and in static mode during deployment. The whole project must be deployed and started with `npm start`.
+The server does not compile, it runs as a Node app. In order to deploy it, you must deploy the `server` folder and run the `npm start` command inside the deployed folder.
+
+**Running the Client:**
+
+1. Ensure you have all client environment variables set
+2. Enter the client directory (`cd client`)
+3. Ensure all dependencies are installed (`npm i`)
+4. Launch the client in preview (`npm start`) or watch mode (`npm run dev`)
+
+The client compiles to a `dist` folder (`npm run build`). This folder can be deployed as a static site. Because this project uses client side navigation, you must ensure the service you are using to deploy the client has a rewrite rule to rewrite all requests to the `/` route. If request URLs are not rewritten by the deployment service, the client side routing will not be able to display the correct page when loading the page from a URL that does not point to the `/` route.
+
+## AI Acknowledgement
+
+There are a few instances where AI was used in this project:
+
+-   Default Avatars - when a user signs up, an avatar is automatically generated for them using AI
 
 ## Project Links
 
