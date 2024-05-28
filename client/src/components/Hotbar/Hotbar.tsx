@@ -8,7 +8,7 @@ import { IoMdPerson } from 'react-icons/io';
 import { IoMenuSharp } from 'react-icons/io5';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { IoIosAddCircle } from 'react-icons/io';
-import { MdFeed } from 'react-icons/md';
+import { MdSearch } from 'react-icons/md';
 import { AiFillMessage } from 'react-icons/ai';
 import { PiGearFill } from 'react-icons/pi';
 import { MdPeople } from 'react-icons/md';
@@ -51,10 +51,10 @@ const Hotbar = () => {
 								</a>
 							</li>
 							<li>
-								<a className='d-flex justify-content-center align-items-center' href='/myfeed'>
+								<a className='d-flex justify-content-center align-items-center' href='/search'>
 									<div>
-										<MdFeed className={`${styles.menuSubIcons}`} />
-										<p className='text-center'>FEED</p>
+										<MdSearch className={`${styles.menuSubIcons}`} />
+										<p className='text-center'>SEARCH</p>
 									</div>
 								</a>
 							</li>
