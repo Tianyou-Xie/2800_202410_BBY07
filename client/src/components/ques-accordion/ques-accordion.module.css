@@ -1,0 +1,22 @@
+.accordion-item, .accordion-item button {
+    background-color: var(--signup-background);
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
+
+.accordion-item button[aria-expanded = true] {
+    background-color: var(--signup-background);
+    color: #000;
+}
+
+.accordion-item button:focus {
+    box-shadow: none;
+}
+
+.accordion-item h2 {
+    font-family: BabaPro;
+}
+
+.accordion-body {
+    font-family: TTOctosquares;
+}
