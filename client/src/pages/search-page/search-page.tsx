@@ -11,13 +11,17 @@ const SearchPage = function () {
 	const [feedComponent, setFeedComponent] = useState(<></>);
 
 	useEffect(() => {
-		// let feed = (
-		// 	<PaginatedPostFeed
-		// 		feedKey={'search'}
-		// 		fetchPage={(page) => api.get(`/feed/${searchKey}?page=${page}`).then((res) => res.data.value.posts)}
-		// 	/>
-		// );
-		setFeedComponent(<>{searchKey}</>);
+		setFeedComponent(<></>);
+		if (searchKey != '') {
+			setFeedComponent(
+				<PaginatedPostFeed
+					feedKey={'search'}
+					fetchPage={(page) =>
+						api.get(`/search/${searchKey}?page=${page}`).then((res) => res.data.value.posts)
+					}
+				/>,
+			);
+		}
 	}, [searchKey]);
 
 	function doSearch() {
@@ -41,7 +45,8 @@ const SearchPage = function () {
 									className={styles.searchBox}
 									placeholder='Search for anything in the universe...'
 									autoComplete='off'
-									onChange={doSearch}></input>
+									// onChange={doSearch}
+								></input>
 							}
 							curved
 						/>

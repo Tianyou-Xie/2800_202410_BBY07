@@ -35,11 +35,15 @@ export const PaginatedPostFeed = (props: Props) => {
 		const nextPage = (page ?? 0) + increment;
 		if (nextPage < 1) return;
 
-		const newPosts = await props.fetchPage(nextPage);
-		if (newPosts.length === 0) return setEndReached(true);
+		try {
+			const newPosts = await props.fetchPage(nextPage);
+			if (newPosts.length === 0) return setEndReached(true);
 
-		setPage(nextPage);
-		setPosts(increment < 0 ? [...newPosts, ...posts] : [...posts, ...newPosts]);
+			setPage(nextPage);
+			setPosts(increment < 0 ? [...newPosts, ...posts] : [...posts, ...newPosts]);
+		} catch (err) {
+			return setEndReached(true);
+		}
 	};
 
 	const checkScroll = () => {
