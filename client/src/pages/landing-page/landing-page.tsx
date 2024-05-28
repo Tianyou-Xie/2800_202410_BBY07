@@ -5,11 +5,19 @@ import Navbar from 'react-bootstrap/Navbar';
 import { PlanetMap } from '../planet-map/planet-map';
 import { Scrambler } from '../../components/scrambler/scrambler';
 import { IoMdArrowDown } from 'react-icons/io';
+import { useLocation } from 'wouter';
 import logoUrl from '../../assets/images/SkynetLogo.png';
+import homeURL from '../../assets/videos/home.gif';
 
 const LandingPage = () => {
+	const [_, setLocation] = useLocation();
+
 	const moveDisplay = (id: string) => {
 		document.getElementById(id)?.scrollIntoView();
+	};
+
+	const redirect = (path: string) => {
+		setLocation(path);
 	};
 
 	return (
@@ -23,10 +31,16 @@ const LandingPage = () => {
 								<Scrambler text='sky.net' scrambleSpeed={80} scrambleDelay={6000} />
 							</Navbar.Brand>
 							<div>
-								<button className={`${styles.landingBtn} ${styles.loginBtn} btn me-2`} type='submit'>
+								<button
+									className={`${styles.landingBtn} ${styles.loginBtn} btn me-2`}
+									type='button'
+									onClick={() => redirect('/login')}>
 									Login
 								</button>
-								<button className={`${styles.landingBtn} ${styles.signupBtn} btn ms-2`} type='button'>
+								<button
+									className={`${styles.landingBtn} ${styles.signupBtn} btn ms-2`}
+									type='button'
+									onClick={() => redirect('/signup')}>
 									Signup
 								</button>
 							</div>
@@ -53,33 +67,26 @@ const LandingPage = () => {
 				<div id='section2'>
 					<hr className='featurette-divider' />
 
-					<div className='row featurette'>
-						<div className={`${styles.featureDesc} col-md-7`}>
-							<h2 className={`${styles.featureHeader} text-center`}>Interactable Planets and Galaxies</h2>
-							<div className=''>
-								<p className='lead text-center'>
+					<div className='row featurette d-flex justify-content-between'>
+						<div
+							className={`${styles.featureDesc} col-md-7 mb-3 text-center d-flex justify-content-center align-items-center`}>
+							<div>
+								<h2 className={`${styles.featureHeader}`}>Interactable Planets and Galaxies</h2>
+								<p className='lead'>
 									Dive into SKY.NET and see social media redesigned for ou modern space age. With a
 									homepage structured around your galaxy, you can feel even closer to your friends and
 									family amongst the stars.
 								</p>
 							</div>
 						</div>
-						<div className='col-md-5'>
-							{/* <svg
-								className='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto'
-								width='500'
-								height='500'
-								xmlns='http://www.w3.org/2000/svg'
-								role='img'
-								aria-label='Placeholder: 500x500'
-								preserveAspectRatio='xMidYMid slice'
-								focusable='false'>
-								<title>Placeholder</title>
-								<rect width='100%' height='100%' fill='var(--bs-secondary-bg)' />
-								<text x='50%' y='50%' fill='var(--bs-secondary-color)' dy='.3em'>
-									500x500
-								</text>
-							</svg> */}
+						<div className='col-md-5 d-flex justify-content-center align-items-center'>
+							<img
+								className='bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto'
+								width={500}
+								height={500}
+								src={homeURL}
+								alt='Home gif'
+							/>
 						</div>
 					</div>
 

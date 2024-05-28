@@ -1,7 +1,12 @@
+body:has(.landing-display) {
+    background-color: var(--metal-grey);
+}
+
 .landing-display {
     width: 100vw;
     height: 100vh;
     position: relative;
+    background-color: var(--metal-grey) !important;
 }
 
 .logo {
@@ -87,10 +92,14 @@
     position: relative;
 }
 
-.map-container p {
+.map-container p, .feature-desc p, .feature-desc-flip p {
     font-family: TTOctosquares;
     margin: 0;
     padding: 0;
+}
+
+.feature-desc p, .feature-desc-flip p {
+    font-size: 14pt;
 }
 
 .planet-map {
