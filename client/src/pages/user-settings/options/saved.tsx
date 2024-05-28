@@ -5,6 +5,7 @@ import { PaginatedPostFeed } from '../../../components/paginated-post-feed/pagin
 import Post from '../../../components/Post/Post';
 import { api } from '../../../lib/axios';
 
+
 // Define the Post interface
 interface PostType {
     _id: string;
