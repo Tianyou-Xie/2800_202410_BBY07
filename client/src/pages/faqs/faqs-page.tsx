@@ -3,35 +3,34 @@ import styles from './faqs.module.css';
 import Page from '../../components/Page/Page';
 import QuestionAccordion from '../../components/ques-accordion/ques-accordion';
 import Accordion from 'react-bootstrap/Accordion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { api } from '../../lib/axios';
 import { toast } from 'react-toastify';
-import { AxiosResponse } from 'axios';
 
 const FAQs = () => {
 	const [searchQuery, setSearch] = useState('');
 	const [quesToDisplay, setQuestions] = useState(Array<JSX.Element>());
 
+	const clearBtn = useRef<HTMLButtonElement>(null);
+
 	useEffect(() => {
-		const displayInitialQues = async () => {
-			const response = await api.get('/faqs');
-			const ques = response.data.value;
-
-			let questions: Array<JSX.Element> = renderQuestions(ques);
-			setQuestions(questions);
-		};
-
 		displayInitialQues();
 	}, []);
 
+	const displayInitialQues = async () => {
+		const response = await api.get('/faqs');
+		const ques = response.data.value;
+		let questions: Array<JSX.Element> = renderQuestions(ques);
+		setQuestions(questions);
+	};
+
 	const findQuestions = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-
+		if (searchQuery) clearBtn.current!.toggleAttribute('hidden');
 		try {
 			const response = await api.post(`/faqs`, {
 				query: searchQuery,
 			});
-			if (response) setQuestions([]);
 			let questions: Array<JSX.Element> = renderQuestions(response.data.value);
 			setQuestions(questions);
 		} catch (error: any) {
@@ -40,6 +39,7 @@ const FAQs = () => {
 	};
 
 	const renderQuestions = (ques: any): Array<JSX.Element> => {
+		setQuestions([]);
 		let num = 0;
 		let newQues: Array<JSX.Element> = [];
 		ques.map((ques: any) => {
@@ -72,9 +72,21 @@ const FAQs = () => {
 								onChange={(event) => setSearch(event.target.value)}
 								type='text'
 							/>
-							<div className='text-center'>
-								<button className='btn btn-primary' type='submit'>
+							<div className='d-flex justify-content-evenly align-items-center'>
+								<button className={`${styles.searchBtn} btn btn-primary`} type='submit'>
 									Search
+								</button>
+								<button
+									className={`${styles.clearBtn} btn btn-danger`}
+									type='button'
+									ref={clearBtn}
+									onClick={() => {
+										setSearch('');
+										clearBtn.current!.toggleAttribute('hidden');
+										displayInitialQues();
+									}}
+									hidden>
+									Clear
 								</button>
 							</div>
 						</form>

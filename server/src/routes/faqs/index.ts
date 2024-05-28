@@ -43,11 +43,13 @@ export const post: Handler[] = [
 
 		for (let i = 0; i < questions.length; i++) {
 			queryArr.forEach((q) => {
-				if (questions[i].keywords.includes(q)) quesToSend.push(questions[i]);
+				if (questions[i].keywords.includes(q) && !quesToSend.includes(questions[i])) quesToSend.push(questions[i]);
 			});
 		}
 
 		if (quesToSend.length === 0) return Resolve(res).notFound('No questions could be found.');
+
+		console.log(quesToSend);
 
 		return Resolve(res).okWith(quesToSend, 'Questions were found.');
 	},

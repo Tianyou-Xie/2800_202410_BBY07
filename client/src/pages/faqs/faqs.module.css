@@ -20,3 +20,18 @@
 .accordion-body {
     font-family: TTOctosquares;
 }
+
+.clear-btn {
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+    border-radius: 0;
+    color: aliceblue;
+}
+
+.search-btn {
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+    border-radius: 0;
+    background-color: #2196F3;
+    color: aliceblue;
+}
