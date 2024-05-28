@@ -16,7 +16,7 @@ export const get: Handler[] = [
         const user = req.user!;
 
         const followingId = await FollowRelationship.find({ initiateUserId: user._id })
-            .populate('targetUserId', 'userName avatarUrl')
+            .populate('targetUserId', 'userName followerCount followingCount postCount avatarUrl')
             .lean();
 
         return Resolve(res).okWith(followingId.map(follow => follow.targetUserId));
