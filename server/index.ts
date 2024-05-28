@@ -37,10 +37,10 @@ const PROJECT_ROOT = path.join(__dirname, 'src');
 	app.set('socketio', io);
 	app.use(cors());
 
-	app.use(express.urlencoded({ extended: true }));
-	app.use(express.json());
+	app.use(express.urlencoded({ extended: true, limit: '5mb', parameterLimit: 100 }));
+	app.use(express.json({ limit: '5mb' }));
 	app.use(requestLogger);
-    // app.use(multipart());
+	// app.use(multipart());
 
 	const mongoUrl = process.env.MONGO_URL!;
 	await mongoose.connect(mongoUrl);
