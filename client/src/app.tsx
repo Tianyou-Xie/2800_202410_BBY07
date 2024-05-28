@@ -16,6 +16,7 @@ import FAQs from './pages/faqs/faqs-page';
 import LikedPage from './pages/user-settings/options/liked';
 import SavedPage from './pages/user-settings/options/saved';
 import FollowingPage from './pages/following/following';
+import FollowerPage from './pages/follower/follower';
 import { useEffect, useState } from 'react';
 import { Auth, UserAuthContext } from './lib/auth';
 import Cursors from './components/cursor/cursor';
@@ -100,6 +101,7 @@ export const App = () => {
 									<Route path='/liked' component={LikedPage} />
 									<Route path='/saved' component={SavedPage} />
 									<Route path='/following' component={FollowingPage} />
+									<Route path='/followers' component={FollowerPage} />
 
 									{commonRoutes}
 
