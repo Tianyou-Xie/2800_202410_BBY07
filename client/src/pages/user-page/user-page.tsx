@@ -35,6 +35,7 @@ const UserPage = () => {
 	const [postCount, setPostCount] = useState(0);
 	const [userID, setUserID] = useState('');
 	const [avatar, setAvatar] = useState('');
+	const [bio, setBio] = useState('');
 	const [_, navigate] = useLocation();
 	let { id = '' } = useParams();
 
@@ -54,6 +55,7 @@ const UserPage = () => {
 					setFollowing(data.followingCount);
 					setPostCount(data.postCount);
 					setAvatar(data.avatarUrl);
+					setBio(data.bio);
 					// setDisplayedPosts(await getPosts());
 				} catch (err) {
 					console.log(err);
@@ -78,7 +80,7 @@ const UserPage = () => {
 					<Profile
 						userId={userID}
 						username={username}
-						// description={'I like eating lettuce and broccoli'}
+						description={bio}
 						follower={follower}
 						following={following}
 						postCount={postCount}

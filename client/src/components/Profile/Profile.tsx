@@ -177,6 +177,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 												<div className='mt-2'>
 													<h4 className={styles.username}>@{props.username}</h4>
 												</div>
+												<div className='mt-4'>
+													<If condition={props.description}>
+														<Then>{props.description}</Then>
+													</If>
+												</div>
 											</div>
 										</div>
 										<div className='col-md-5'>
