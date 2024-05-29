@@ -46,6 +46,7 @@ import PlanetFeed from './pages/planet-feed/planet-feed';
 import MessagesAll from './pages/messages-all/messages';
 import SearchPage from './pages/search-page/search-page';
 import Page404 from './pages/page404/page404';
+import EditProfilePage from './pages/edit-profile-page/edit-profile-page';
 
 /* Imports for custom componets made */
 import SEO from './components/seo/seo';
@@ -128,6 +129,7 @@ export const App = () => {
 									<Route path='/user/:id' component={UserPage} />
 									<Route path='/feed/:planetName/:id' component={PlanetFeed} />
 									<Route path='/profile' component={ProfilePage} />
+									<Route path='/profile/edit' component={EditProfilePage}/>
 									<Route path='/settings' component={UserSettings} />
 									<Route path='/settings/manageAccount' component={ManageAccount} />
 									<Route path='/messages/:id' component={Messages} />

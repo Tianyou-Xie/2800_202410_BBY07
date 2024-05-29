@@ -233,7 +233,7 @@ const Profile = (props: ProfileProp): JSX.Element => {
 								</button>
 							) : (
 								<button>
-									<Link href='/#EDIT_PROFILE'>
+									<Link href='/profile/edit'>
 										<UIBox
 											className={`${styles.buttons} p-1 h-100 d-flex align-items-center`}
 											content={
