@@ -31,7 +31,7 @@ body:has(.landing-display) {
 }
 
 .nav:first-child {
-    position: sticky;
+    position: fixed;
 }
 
 .landing-header {    
