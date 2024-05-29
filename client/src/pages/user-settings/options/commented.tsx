@@ -32,7 +32,7 @@ const CommentedPostPage = () => {
 
     return (
         <Page
-            pageName='Commented Posts'
+            pageName='Commented Post'
             content={
                 <>
                     <PaginatedPostFeed
