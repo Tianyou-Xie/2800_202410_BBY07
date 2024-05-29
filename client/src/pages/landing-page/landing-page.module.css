@@ -2,6 +2,10 @@ body:has(.landing-display) {
     background-color: var(--metal-grey);
 }
 
+.section2 {
+    margin-top: 60px;
+}
+
 .landing-display {
     width: 100vw;
     height: 100vh;

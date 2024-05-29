@@ -1,12 +1,21 @@
 /* Stylesheet imports */
 import styles from './Header.module.css';
 
+/* Imports from wouter */
+import { useRoute } from 'wouter';
+
+/* Imports from React */
+import { useContext } from 'react';
+
 /* Icon imports from react-icons */
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
 
 /* Imports from react-bootstrap */
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+
+/* Import for the authorized user context */
+import { UserAuthContext } from '../../lib/auth';
 
 /**
  * The properties and types for the Header.
@@ -26,12 +35,24 @@ interface Props {
  * @returns Returns the customized header for the page as a JSX.Element.
  */
 const Header = (props: Props) => {
+	const [isHomeActive] = useRoute('/home');
+	const [isRootActive] = useRoute('/');
+	const user = useContext(UserAuthContext);
+
 	return (
 		<>
-			{props.enableLogoHeader ? (
-				<div className={styles.logoHeader}>
-					<h1>sky.net</h1>
-				</div>
+			{props.enableLogoHeader && user ? (
+				isHomeActive || isRootActive ? (
+					<div
+						className={styles.logoHeader}
+						style={{ backgroundColor: 'transparent', pointerEvents: 'none' }}>
+						<h1>sky.net</h1>
+					</div>
+				) : (
+					<div className={styles.logoHeader}>
+						<h1>sky.net</h1>
+					</div>
+				)
 			) : (
 				<Navbar expand='lg' className={`${styles.headerContainer}`}>
 					<Container>

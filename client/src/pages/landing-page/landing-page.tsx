@@ -114,7 +114,7 @@ const LandingPage = () => {
 					</div>
 				</div>
 
-				<div id='section2'>
+				<div className={styles.section2} id='section2'>
 					<hr />
 
 					<div className='row featurette'>

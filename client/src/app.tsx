@@ -44,6 +44,7 @@ import Planets from './pages/planets/planets-component';
 import PlanetFeed from './pages/planet-feed/planet-feed';
 import MessagesAll from './pages/messages-all/messages';
 import SearchPage from './pages/search-page/search-page';
+import Page404 from './pages/page404/page404';
 
 /* Imports for custom componets made */
 import SEO from './components/seo/seo';
@@ -137,7 +138,7 @@ export const App = () => {
 
 									{commonRoutes}
 
-									<Route>404 Not Found</Route>
+									<Route component={Page404}>404 Not Found</Route>
 								</Switch>
 							</UserAuthContext.Provider>
 						</Else>
