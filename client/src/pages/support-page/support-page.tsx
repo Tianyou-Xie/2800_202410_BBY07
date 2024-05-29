@@ -39,7 +39,7 @@ const SupportPage = () => {
 						<ul>
 							<li>
 								Email:
-								<a href='mailto:support@sky.net'> support@sky.net</a>
+								<a href='mailto:support@skynetwork.app'> support@skynetwork.app</a>
 							</li>
 							<li>Phone number: +1 (236)555-5555*</li>
 						</ul>
