@@ -106,6 +106,8 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
     > https://github.com/component/escape-regexp/blob/master/index.js
 -   Helmet SEO Component Structure: [(`./client/components/seo/seo.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/seo/seo.tsx#L23-L37)
     > https://www.freecodecamp.org/news/react-helmet-examples
+-   Hotbar Structure and Animation Inspiration: [(`./client/components/hotbar/hotbar.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/hotbar/hotbar.tsx)
+    > https://youtu.be/sgV111KxbwI?si=HnOS5OnfLswXk_8E
 
 ## Environment Variables
 
@@ -173,6 +175,9 @@ The client compiles to a `dist` folder (`npm run build`). This folder can be dep
 There are a few instances where AI was used in this project:
 
 -   Default Avatars - when a user signs up, an avatar is automatically generated for them using AI
+- Policy Page - an inital draft was creted with the help of ChatGPT
+- Terms of Use Page - an inital draft was creted with the help of ChatGPT
+- FAQs Page - ChatGPT was use to get an idea of common questions that people have about social media platforms
 
 ## Project Links
 
