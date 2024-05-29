@@ -6,7 +6,7 @@ import Page from '../../../components/Page/Page';
 
 /**
  * Constructs and returns the policy page.
- * 
+ *
  * @returns the polic page as a JSX.Element.
  */
 const Policy = () => {
@@ -17,16 +17,16 @@ const Policy = () => {
 				pageName='Privacy Policy'
 				content={
 					<div className={styles.officalPagesBody}>
-						<h1>Privacy Policy for Sky.Net</h1>
+						<h1 className={styles.headingStyle}>Privacy Policy for Sky.Net</h1>
 						<p>
 							At Sky.Net (“the App”), we value your privacy and are committed to protecting your personal
 							information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your
 							information when you use our App. By using Sky.Net, you agree to the collection and use of
 							information in accordance with this policy.
 						</p>
-						<h2>1. Information We Collect</h2>
+						<h2 className={styles.headingStyle}>1. Information We Collect</h2>
 						<p>We collect several types of information to provide and improve our service to you:</p>
-						<h3>1.1 Personal Information</h3>
+						<h3 className={styles.secondHeading}>1.1 Personal Information</h3>
 						<p>
 							When you create an account or use Sky.Net, we may collect personally identifiable
 							information, such as:
@@ -38,7 +38,7 @@ const Policy = () => {
 							<li>Date of birth</li>
 							<li>Location</li>
 						</ul>
-						<h3>1.2 Usage Data</h3>
+						<h3 className={styles.secondHeading}>1.2 Usage Data</h3>
 						<p>We collect information on how the App is accessed and used, including:</p>
 						<ul>
 							<li>Your device’s Internet Protocol (IP) address</li>
@@ -49,13 +49,13 @@ const Policy = () => {
 							<li>Unique device identifiers</li>
 							<li>Other diagnostic data</li>
 						</ul>
-						<h3>1.3 Cookies and Tracking Technologies</h3>
+						<h3 className={styles.secondHeading}>1.3 Cookies and Tracking Technologies</h3>
 						<p>
 							We use cookies and similar tracking technologies to track activity on our App and hold
 							certain information. Cookies are files with a small amount of data which may include an
 							anonymous unique identifier.
 						</p>
-						<h2>2. How We Use Your Information</h2>
+						<h2 className={styles.headingStyle}>2. How We Use Your Information</h2>
 						<p>Sky.Net uses the collected data for various purposes:</p>
 						<ul>
 							<li>To provide and maintain the App</li>
@@ -68,7 +68,7 @@ const Policy = () => {
 							<li>To monitor the usage of our App</li>
 							<li>To detect, prevent, and address technical issues</li>
 						</ul>
-						<h2>3. Sharing Your Information</h2>
+						<h2 className={styles.headingStyle}>3. Sharing Your Information</h2>
 						<p>
 							We do not sell, trade, or otherwise transfer to outside parties your personally identifiable
 							information, except in the following situations:
@@ -93,21 +93,21 @@ const Policy = () => {
 								asset sale, your information may be transferred.
 							</li>
 						</ul>
-						<h2>4. Security of Your Information</h2>
+						<h2 className={styles.headingStyle}>4. Security of Your Information</h2>
 						<p>
 							The security of your information is important to us. We implement a variety of security
 							measures to maintain the safety of your personal information. However, no method of
 							transmission over the Internet or method of electronic storage is 100% secure, so we cannot
 							guarantee its absolute security.
 						</p>
-						<h2>5. Data Retention</h2>
+						<h2 className={styles.headingStyle}>5. Data Retention</h2>
 						<p>
 							We will retain your personal information only for as long as is necessary for the purposes
 							set out in this Privacy Policy. We will retain and use your information to the extent
 							necessary to comply with our legal obligations, resolve disputes, and enforce our
 							agreements.
 						</p>
-						<h2>6. Your Data Protection Rights</h2>
+						<h2 className={styles.headingStyle}>6. Your Data Protection Rights</h2>
 						<p>
 							Depending on your jurisdiction, you may have the following rights regarding your personal
 							information:
@@ -144,7 +144,7 @@ const Policy = () => {
 							If you make a request, we have one month to respond to you. If you would like to exercise
 							any of these rights, please contact us at our provided contact information.
 						</p>
-						<h2>7. Changes to This Privacy Policy</h2>
+						<h2 className={styles.headingStyle}>7. Changes to This Privacy Policy</h2>
 						<p>
 							We may update our Privacy Policy from time to time. We will notify you of any changes by
 							posting the new Privacy Policy on this page. You are advised to review this Privacy Policy

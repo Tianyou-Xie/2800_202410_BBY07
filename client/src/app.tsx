@@ -52,6 +52,7 @@ import SEO from './components/seo/seo';
 import { Loader } from './components/loader/loader';
 import Cursors from './components/cursor/cursor';
 import SupportPage from './pages/support-page/support-page';
+import AboutSkynetPage from './pages/about/options/about-skynet-page';
 
 /**
  * Contructs, manages, and returns the entire client side.
@@ -83,6 +84,7 @@ export const App = () => {
 			<Route path='/about' component={About} />
 			<Route path='/about/policy' component={Policy} />
 			<Route path='/about/terms' component={Terms} />
+			<Route path='/about/about-skynet' component={AboutSkynetPage} />
 			<Route path='/faqs' component={FAQs} />
 			<Route path='/support' component={SupportPage} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
