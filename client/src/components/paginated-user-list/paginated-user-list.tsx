@@ -73,7 +73,7 @@ export const PaginatedUserList = (props: Props) => {
 	});
 
 	return (
-		<div className='w-75 my-3 d-flex justify-content-center'>
+		<div className='w-100 my-3 d-flex justify-content-center'>
 			<div ref={usersListRef} className='w-100 py-2 d-flex flex-column align-items-center gap-3'>
 				{users
 					.filter((v) => !!v)
