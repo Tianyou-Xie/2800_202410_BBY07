@@ -34,6 +34,7 @@ import Terms from './pages/about/options/terms-page';
 import FAQs from './pages/faqs/faqs-page';
 import LikedPage from './pages/user-settings/options/liked';
 import SavedPage from './pages/user-settings/options/saved';
+import CommentedPostPage from './pages/user-settings/options/commented';
 import FollowingPage from './pages/following/following';
 import FollowerPage from './pages/follower/follower';
 import PostPage from './pages/post-page/post-page';
@@ -131,6 +132,7 @@ export const App = () => {
 									<Route path='/messages/:id' component={Messages} />
 									<Route path='/liked' component={LikedPage} />
 									<Route path='/saved' component={SavedPage} />
+									<Route path='/commented' component={CommentedPostPage} />
 									<Route path='/following' component={FollowingPage} />
 									<Route path='/followers' component={FollowerPage} />
 									<Route path='/messages' component={MessagesAll} />
