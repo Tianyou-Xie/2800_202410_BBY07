@@ -102,12 +102,15 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
 
 ## Code Attributions
 
--   Regex Escape Utility: [(`./server/utils/regex.ts:10`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/server/src/utils/regex.ts#L10)
+-   Regex Escape Utility: [(`./server/src/utils/regex.ts:10`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/server/src/utils/regex.ts#L10)
     > https://github.com/component/escape-regexp/blob/master/index.js
--   Helmet SEO Component Structure: [(`./client/components/seo/seo.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/seo/seo.tsx#L23-L37)
+-   Helmet SEO Component Structure: [(`./client/src/components/seo/seo.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/seo/seo.tsx#L23-L37)
     > https://www.freecodecamp.org/news/react-helmet-examples
--   Hotbar Structure and Animation Inspiration: [(`./client/components/Hotbar/Hotbar.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/Hotbar/Hotbar.tsx)
+-   Hotbar Structure and Animation Inspiration: [(`./client/src/components/Hotbar/Hotbar.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/Hotbar/Hotbar.tsx)
     > https://youtu.be/sgV111KxbwI?si=HnOS5OnfLswXk_8E
+-   Customized React Toast: [(`./client/src/index.css`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/index.css)
+    > - https://stackoverflow.com/questions/60849448/how-can-i-change-the-styles-of-the-react-toastify-popup-message
+    > - https://fkhadra.github.io/react-toastify/introduction/
 
 ## Environment Variables
 
