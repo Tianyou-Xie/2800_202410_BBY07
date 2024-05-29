@@ -128,14 +128,12 @@ body:has(.landing-display) {
     background-color: var(--signup-background);
     border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
-    max-width: 700px;
 }
 
 .feature-desc-flip {
     background-color: var(--signup-background);
     border: 2px solid black;
 	box-shadow: -4px 5px 0px #000;
-    max-width: 700px;
 }
 
 .feature-img {

@@ -68,7 +68,7 @@ const LandingPage = () => {
 				<div id='section2'>
 					<hr className='featurette-divider' />
 
-					<div className='row featurette d-flex justify-content-between'>
+					<div className='row featurette'>
 						<div
 							className={`${styles.featureDesc} col-md-7 mb-3 text-center d-flex justify-content-center align-items-center`}>
 							<div>
@@ -83,8 +83,6 @@ const LandingPage = () => {
 						<div className='col-md-5 d-flex justify-content-center align-items-center'>
 							<img
 								className={`${styles.featureImg} bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto`}
-								width={500}
-								height={500}
 								src={homeURL}
 								alt='Home gif'
 							/>
@@ -93,23 +91,24 @@ const LandingPage = () => {
 
 					<hr className='featurette-divider' />
 
-					<div className='row featurette'>
-						<div className={`${styles.featureDescFlip} col-md-7 order-md-2`}>
-							<h2 className={`${styles.featureHeader} text-center`}>
-								Need to talk to someone planets or even light years away?
-							</h2>
-							<div className=''>
-								<p className='lead text-center'>
-									SKY.NET offers messaging services that let you send interplanetary messages freely.
-									Letting you keep up with others in realtime no matter how are they are.
-								</p>
+					<div className='row featurette d-flex justify-content-between'>
+						<div
+							className={`${styles.featureDescFlip} col-md-7 order-md-2 mb-3 text-center d-flex justify-content-center align-items-center`}>
+							<div>
+								<h2 className={`${styles.featureHeader} text-center`}>
+									Need to talk to someone planets or even light years away?
+								</h2>
+								<div className=''>
+									<p className='lead text-center'>
+										SKY.NET offers messaging services that let you send interplanetary messages
+										freely. Letting you keep up with others in realtime no matter how are they are.
+									</p>
+								</div>
 							</div>
 						</div>
 						<div className='col-md-5 d-flex justify-content-center align-items-center'>
 							<img
 								className={`${styles.featureImg} bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto`}
-								width={500}
-								height={500}
 								src={homeURL}
 								alt='Home gif'
 							/>
