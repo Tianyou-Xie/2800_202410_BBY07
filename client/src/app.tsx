@@ -1,16 +1,30 @@
-import { ToastContainer } from 'react-toastify';
-import { Switch, Route, useLocation } from 'wouter';
-import { useEffect, useState } from 'react';
-import { Auth, UserAuthContext } from './lib/auth';
-import { Else, If, Then } from 'react-if';
-
+/* Import for the main stylesheet */
 import './index.css';
+
+/* Imports from React */
+import { useEffect, useState } from 'react';
+import { Else, If, Then } from 'react-if';
+import { ToastContainer } from 'react-toastify';
+
+/* Import from wouter */
+import { Switch, Route, useLocation } from 'wouter';
+
+/* Utility imports for client side authentication */
+import { Auth, UserAuthContext } from './lib/auth';
+
+/* Import for client hostname */
+import { getClientHost } from './environment';
+
+/* Imports for all pages of the website */
+import LandingPage from './pages/landing-page/landing-page';
+import { PlanetMap } from './pages/planet-map/planet-map';
+import Home from './pages/home/home';
+import Login from './pages/login/login-component';
+import Signup from './pages/signup/signup-component';
 import About from './pages/about/about-page';
 import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
 import GeneralFeed from './pages/general-feed/general-feed';
-import Login from './pages/login/login-component';
-import Signup from './pages/signup/signup-component';
 import UserSettings from './pages/user-settings/user-settings-page';
 import Resetpassword from './pages/resetpassword/resetpassword';
 import ManageAccount from './pages/user-settings/options/manage-account-page';
@@ -22,22 +36,25 @@ import LikedPage from './pages/user-settings/options/liked';
 import SavedPage from './pages/user-settings/options/saved';
 import FollowingPage from './pages/following/following';
 import FollowerPage from './pages/follower/follower';
-import Cursors from './components/cursor/cursor';
-import LandingPage from './pages/landing-page/landing-page';
-import { Loader } from './components/loader/loader';
 import PostPage from './pages/post-page/post-page';
 import UserPage from './pages/user-page/user-page';
 import ProfilePage from './pages/profile-page/profile-page';
-import { PlanetMap } from './pages/planet-map/planet-map';
-import Home from './pages/home/home';
 import PostDetailPage from './pages/post/post';
 import Planets from './pages/planets/planets-component';
 import PlanetFeed from './pages/planet-feed/planet-feed';
 import MessagesAll from './pages/messages-all/messages';
-import SEO from './components/seo/seo';
-import { getClientHost } from './environment';
 import SearchPage from './pages/search-page/search-page';
 
+/* Imports for custom componets made */
+import SEO from './components/seo/seo';
+import { Loader } from './components/loader/loader';
+import Cursors from './components/cursor/cursor';
+
+/**
+ * Contructs, manages, and returns the entire client side.
+ * 
+ * @returns the client side application as a JSX.Element.
+ */
 export const App = () => {
 	const [loading, setLoading] = useState(true);
 	const [authenticatedUser, setAuthenticatedUser] = useState<any>();
@@ -53,6 +70,9 @@ export const App = () => {
 		});
 	}, [loc]);
 
+	/**
+	 * The common routes throughout this website.
+	 */
 	const commonRoutes = (
 		<>
 			<Route path='/signup' component={Signup} />
