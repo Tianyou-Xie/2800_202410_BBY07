@@ -1,7 +1,14 @@
-import styles from '../about.module.css';
+/* Stylesheet imports */
+import styles from '../about-page.module.css';
 
+/* Imports from other components created */
 import Page from '../../../components/Page/Page';
 
+/**
+ * Constructs and returns the terms of use page.
+ * 
+ * @returns the terms of use page as a JSX.Element.
+ */
 const Terms = () => {
 	return (
 		<>
@@ -124,4 +131,7 @@ const Terms = () => {
 	);
 };
 
+/**
+ * Exports the terms of conditions page for external use.
+ */
 export default Terms;

@@ -1,7 +1,14 @@
-import styles from '../about.module.css';
+/* Stylesheet imports */
+import styles from '../about-page.module.css';
 
+/* Imports from other components created */
 import Page from '../../../components/Page/Page';
 
+/**
+ * Constructs and returns the policy page.
+ * 
+ * @returns the polic page as a JSX.Element.
+ */
 const Policy = () => {
 	return (
 		<>
@@ -157,4 +164,7 @@ const Policy = () => {
 	);
 };
 
+/**
+ * Exports the policy page for external use.
+ */
 export default Policy;

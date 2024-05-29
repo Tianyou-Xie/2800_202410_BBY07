@@ -1,8 +1,15 @@
-import styles from '../user-settings.module.css';
+/* Stylesheet imports */
+import styles from '../user-settings-page.module.css';
 
+/* Imports from other components created */
 import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+
+/* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
 
+/**
+ * The properties and types for the ChangeNameModal.
+ */
 interface Props {
 	usernameBody1: {
 		showNameBody1: boolean;
@@ -17,7 +24,16 @@ interface Props {
 	};
 }
 
+/**
+ * Contructs, manages, and returns the ChangeNameModal component.
+ * 
+ * @param props the props for this ChangeNameModal, as seen outlined in the interface
+ * @returns The ChangeNameModal component as a JSX.Element
+ */
 const ChangeNameModal = (props: Props) => {
+	/**
+	 * Clears the current input feilds.
+	 */
 	const clearFields = () => {
 		props.usernameBody2.setNameInput('');
 	};
@@ -92,4 +108,7 @@ const ChangeNameModal = (props: Props) => {
 	);
 };
 
+/**
+ * Exports the ChangeNameModal for external use.
+ */
 export default ChangeNameModal;

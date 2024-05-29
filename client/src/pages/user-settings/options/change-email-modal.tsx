@@ -1,8 +1,15 @@
-import styles from '../user-settings.module.css';
+/* Stylesheet imports */
+import styles from '../user-settings-page.module.css';
 
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+/* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
 
+/* Imports from other components created */
+import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+
+/**
+ * The properties and types for the ChangeEmailModal.
+ */
 interface Props {
 	emailBody1: {
 		showEmailBody1: boolean;
@@ -21,7 +28,16 @@ interface Props {
 	};
 }
 
+/**
+ * Contructs, manages, and returns the ChangeEmailModal component.
+ * 
+ * @param props the props for this ChangeEmailModal, as seen outlined in the interface
+ * @returns The ChangeEmailModal component as a JSX.Element
+ */
 const ChangeEmailModal = (props: Props) => {
+	/**
+	 * Clears the current input feilds.
+	 */
 	const clearFields = () => {
         props.emailBody2.setCurrEmail('');
 		props.emailBody2.setEmailInput('');
@@ -116,4 +132,7 @@ const ChangeEmailModal = (props: Props) => {
 	);
 };
 
+/**
+ * Exports the ChangeEmailModal for external use.
+ */
 export default ChangeEmailModal;

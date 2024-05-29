@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
 /**
- * The props types for the Header.
+ * The properties and types for the Header.
  */
 interface Props {
 	pageName?: string;

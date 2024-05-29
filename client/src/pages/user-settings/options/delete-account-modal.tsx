@@ -1,8 +1,15 @@
-import styles from '../user-settings.module.css';
+/* Stylesheet imports */
+import styles from '../user-settings-page.module.css';
 
+/* Imports from other components created */
 import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+
+/* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
 
+/**
+ * The properties and types for the DeleteAccountModal.
+ */
 interface Props {
 	deleteBody1: {
 		showDeleteBody1: boolean;
@@ -17,7 +24,16 @@ interface Props {
 	};
 }
 
+/**
+ * Contructs, manages, and returns the DeleteAccountModal component.
+ * 
+ * @param props the props for this DeleteAccountModal, as seen outlined in the interface
+ * @returns The DeleteAccountModal component as a JSX.Element
+ */
 const DeleteAccountModal = (props: Props) => {
+	/**
+	 * Clears the current input feilds.
+	 */
 	const clearFields = () => {
 		props.deleteBody2.setConfInput('');
 	};
@@ -104,4 +120,7 @@ const DeleteAccountModal = (props: Props) => {
 	);
 };
 
+/**
+ * Exports the DeleteAccountModal for external use.
+ */
 export default DeleteAccountModal;

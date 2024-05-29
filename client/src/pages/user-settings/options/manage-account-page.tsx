@@ -1,16 +1,25 @@
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { api } from '../../../lib/axios';
+/* Stylesheet imports */
+import styles from '../user-settings-page.module.css';
+
+/* Import from wouter */
 import { useLocation } from 'wouter';
+
+/* Imports for frontend api call and authentication verification */
+import { api } from '../../../lib/axios';
 import { Auth } from '../../../lib/auth';
 
-import styles from '../user-settings.module.css';
+/* Imports from React */
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
+/* Imports from react-bootstrap */
 import ListGroup from 'react-bootstrap/ListGroup';
-import ChangePasswordModal from '../options/change-password-modal';
-import DeleteAccountModal from '../options/delete-account-modal';
-import ChangeNameModal from './change-username';
-import ChangeEmailModal from './change-email';
+
+/* Imports from other components created */
+import ChangePasswordModal from './change-password-modal';
+import DeleteAccountModal from './delete-account-modal';
+import ChangeNameModal from './change-username-modal';
+import ChangeEmailModal from './change-email-modal';
 import Page from '../../../components/Page/Page';
 
 const ManageAccount = () => {
@@ -48,6 +57,11 @@ const ManageAccount = () => {
 	const [emailInput, setEmailInput] = useState('');
 	const [confEmailInput, setConfEmailInput] = useState('');
 
+	/**
+	 * Handles the patch request to change the user's password with the help of axios.
+	 *
+	 * @param event the form event from onSubmit.
+	 */
 	const changePassword = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		try {
@@ -63,6 +77,11 @@ const ManageAccount = () => {
 		}
 	};
 
+	/**
+	 * Handles the delete request to delete the user's account with the help of axios.
+	 *
+	 * @param event the form event from onSubmit.
+	 */
 	const deleteAccount = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		try {
@@ -77,6 +96,11 @@ const ManageAccount = () => {
 		}
 	};
 
+	/**
+	 * Handles the patch request to change the user's username with the help of axios.
+	 *
+	 * @param event the form event from onSubmit.
+	 */
 	const changeUsername = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		try {
@@ -90,6 +114,11 @@ const ManageAccount = () => {
 		}
 	};
 
+	/**
+	 * Handles the patch request to change the user's email with the help of axios.
+	 *
+	 * @param event the form event from onSubmit.
+	 */
 	const changeEmail = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		try {
@@ -105,6 +134,9 @@ const ManageAccount = () => {
 		}
 	};
 
+	/**
+	 * Reseta all inputs and visibility statuses of the modals.
+	 */
 	const wrapUpModal = () => {
 		setPassword('');
 		setNewPassword('');
@@ -120,6 +152,9 @@ const ManageAccount = () => {
 		setEmailBody2(false);
 	};
 
+	/**
+	 * Logs the user out.
+	 */
 	const logout = () => [Auth.loseToken(), setLocation('/login')];
 
 	// defining values for the Change Password Modal
@@ -226,4 +261,7 @@ const ManageAccount = () => {
 	);
 };
 
+/**
+ * Exports the user manage account page for external use.
+ */
 export default ManageAccount;

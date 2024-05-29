@@ -1,11 +1,15 @@
-import { useState } from 'react';
-
-import styles from '../user-settings.module.css';
-
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+/* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
+
+/* Imports from other components created */
+import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+
+/* Imports from this website's assets */
 import logoUrl from '../../../assets/images/SkynetLogo.png';
 
+/**
+ * The properties and types for the ChangePasswordModal.
+ */
 interface Props {
 	passBody1: {
 		showPassBody1: boolean;
@@ -24,7 +28,16 @@ interface Props {
 	};
 }
 
+/**
+ * Contructs, manages, and returns the ChangePasswordModal component.
+ * 
+ * @param props the props for this ChangePasswordModal, as seen outlined in the interface
+ * @returns The ChangePasswordModal component as a JSX.Element
+ */
 const ChangePasswordModal = (props: Props) => {
+	/**
+	 * Clears the current input feilds.
+	 */
 	const clearFields = () => {
 		props.passBody2.setPassword('');
 		props.passBody2.setNewPassword('');
@@ -142,4 +155,7 @@ const ChangePasswordModal = (props: Props) => {
 	);
 };
 
+/**
+ * Exports the ChangePasswordModal for external use.
+ */
 export default ChangePasswordModal;

@@ -1,10 +1,19 @@
+/* Imports from React */
 import { useContext } from 'react';
-
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
-import Button from 'react-bootstrap/Button';
-import { UserAuthContext } from '../../../lib/auth';
 import { Else, If, Then } from 'react-if';
 
+/* Imports from react-bootstrap */
+import Button from 'react-bootstrap/Button';
+
+/* Import for the authorized user context */
+import { UserAuthContext } from '../../../lib/auth';
+
+/* Imports from other components created */
+import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+
+/**
+ * The properties and types for the YourInfoModal.
+ */
 interface Props {
 	infoBody: {
 		showInfoBody: boolean;
@@ -12,6 +21,12 @@ interface Props {
 	};
 }
 
+/**
+ * Contructs, manages, and returns the YourInfoModal component.
+ * 
+ * @param props the props for this YourInfoModal, as seen outlined in the interface
+ * @returns The YourInfoModal component as a JSX.Element
+ */
 const YourInfoModal = (props: Props) => {
 	const user = useContext(UserAuthContext);
 
@@ -51,4 +66,7 @@ const YourInfoModal = (props: Props) => {
 	);
 };
 
+/**
+ * Exports the YourInfoModal for external use.
+ */
 export default YourInfoModal;

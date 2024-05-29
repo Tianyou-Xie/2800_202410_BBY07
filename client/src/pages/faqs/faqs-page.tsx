@@ -1,16 +1,29 @@
+/* Stylesheet imports */
 import styles from './faqs.module.css';
 
-import Page from '../../components/Page/Page';
-import QuestionAccordion from '../../components/ques-accordion/ques-accordion';
-import Accordion from 'react-bootstrap/Accordion';
+/* Imports from React */
 import { useEffect, useRef, useState } from 'react';
-import { api } from '../../lib/axios';
 import { toast } from 'react-toastify';
+
+/* Imports from react-bootstrap */
+import Accordion from 'react-bootstrap/Accordion';
+
+/* Imports from other components created */
+import QuestionAccordion from '../../components/ques-accordion/ques-accordion';
+import Page from '../../components/Page/Page';
+
+/* Import for Axios */
+import { api } from '../../lib/axios';
 
 const emptyMessage =
 	"Your search didn't match to any result. Try rewording your search." +
 	" It may also be possible that we don't have what you are looking for yet";
 
+/**
+ * Constructs, manages, and returns the FAQs page.
+ *
+ * @returns the FAQs page as a JSX.Element.
+ */
 const FAQs = () => {
 	const [searchQuery, setSearch] = useState('');
 	const [quesToDisplay, setQuestions] = useState(Array<JSX.Element>());
@@ -18,10 +31,14 @@ const FAQs = () => {
 
 	const clearBtn = useRef<HTMLButtonElement>(null);
 
+	/* Calls displayInitialQues() when the page loads */
 	useEffect(() => {
 		displayInitialQues();
 	}, []);
 
+	/**
+	 * Displays the FAQs from the database.
+	 */
 	const displayInitialQues = async () => {
 		const response = await api.get('/faqs');
 		const ques = response.data.value;
@@ -29,6 +46,11 @@ const FAQs = () => {
 		setQuestions(questions);
 	};
 
+	/**
+	 * Sends a post request to recieve all FAQs that match the query body provided.
+	 *
+	 * @param event the form event from onSubmit.
+	 */
 	const findQuestions = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		if (searchQuery) clearBtn.current!.toggleAttribute('hidden');
@@ -44,6 +66,11 @@ const FAQs = () => {
 		}
 	};
 
+	/**
+	 * Check to see if the given result is empty.
+	 *
+	 * @param result the result to check.
+	 */
 	const checkEmptyResult = (result: any) => {
 		if (result.length == 0) {
 			setEmptyMsg(true);
@@ -52,6 +79,12 @@ const FAQs = () => {
 		}
 	};
 
+	/**
+	 * Renders the given questions as QuestionAccordions into an array and returns the array.
+	 *
+	 * @param ques The questions to render.
+	 * @returns an array of the QuestionAccordions as a Array<JSX.Element>.
+	 */
 	const renderQuestions = (ques: any): Array<JSX.Element> => {
 		setQuestions([]);
 		let num = 0;
@@ -70,6 +103,9 @@ const FAQs = () => {
 		return newQues;
 	};
 
+	/**
+	 * Resets the FAQ page by clearing the search bar, removing the clear button, and dispalying the intital questions again.
+	 */
 	const resetPage = () => {
 		setSearch('');
 		clearBtn.current!.toggleAttribute('hidden');
@@ -126,4 +162,7 @@ const FAQs = () => {
 	);
 };
 
+/**
+ * Exports the FAQs page for external use.
+ */
 export default FAQs;

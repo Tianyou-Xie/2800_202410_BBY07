@@ -1,15 +1,31 @@
-import { useState } from 'react';
+/* Stylesheet imports */
+import styles from './user-settings-page.module.css';
+
+/* Import from wouter */
 import { useLocation } from 'wouter';
 
-import styles from './user-settings.module.css';
-
-import ListGroup from 'react-bootstrap/ListGroup';
-import Nav from 'react-bootstrap/Nav';
-import { MdOutlineArrowForwardIos } from 'react-icons/md';
-import Page from '../../components/Page/Page';
-import YourInfoModal from './options/your-info';
+/* Import for JWT token authorization */
 import { Auth } from '../../lib/auth';
 
+/* Imports from React */
+import { useState } from 'react';
+
+/* Imports from react-bootstrap */
+import ListGroup from 'react-bootstrap/ListGroup';
+import Nav from 'react-bootstrap/Nav';
+
+/* Icon imports from react-icons */
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
+
+/* Imports from other components created */
+import Page from '../../components/Page/Page';
+import YourInfoModal from './options/your-info-modal';
+
+/**
+ * Constructs, manages, and returns the user settings page.
+ * 
+ * @returns the user settings page as a JSX.Element
+ */
 const UserSettings = () => {
 	const [_, setLocation] = useLocation();
 
@@ -134,4 +150,7 @@ const UserSettings = () => {
 	);
 };
 
+/**
+ * Exports the user settings page for external use.
+ */
 export default UserSettings;

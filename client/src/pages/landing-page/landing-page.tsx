@@ -1,34 +1,67 @@
+/* Stylesheet imports */
 import styles from './landing-page.module.css';
 
+/* Import from wouter */
+import { useLocation } from 'wouter';
+
+/* Imports from React */
+import { useRef } from 'react';
+
+/* Imports from react-bootstrap */
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import { PlanetMap } from '../planet-map/planet-map';
-import { Scrambler } from '../../components/scrambler/scrambler';
+
+/* Icon imports from react-icons */
 import { IoMdArrowDown } from 'react-icons/io';
 import { IoArrowUpSharp } from 'react-icons/io5';
-import { useLocation } from 'wouter';
+
+/* Imports from other components created */
+import { PlanetMap } from '../planet-map/planet-map';
+import { Scrambler } from '../../components/scrambler/scrambler';
+
+/* Imports from this website's assets */
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import homeURL from '../../assets/videos/home.gif';
 import postURL from '../../assets/videos/post.gif';
 import messageURL from '../../assets/videos/message.gif';
-import { useRef } from 'react';
 
+/**
+ * Constructs, manages, and returns the Landing page.
+ *
+ * @returns returns the landing page as a JSX.Element.
+ */
 const LandingPage = () => {
 	const [_, setLocation] = useLocation();
 	const upArrow = useRef<HTMLDivElement>(null);
 
-	const moveDisplay = (id: string) => {
-		document.getElementById(id)?.scrollIntoView();
-	};
-
-	const redirect = (path: string) => {
-		setLocation(path);
-	};
-
+	/* An event listener for the scroll event of the window */
 	document.addEventListener('scroll', () => {
 		updateArrow(window.scrollY);
 	});
 
+	/**
+	 * Adjusts the current scroll view to the given element id.
+	 *
+	 * @param id the id of the element to scroll into view.
+	 */
+	const moveDisplay = (id: string) => {
+		document.getElementById(id)?.scrollIntoView();
+	};
+
+	/**
+	 * Redirects to the given page.
+	 *
+	 * @param path  the path to redirect to.
+	 */
+	const redirect = (path: string) => {
+		setLocation(path);
+	};
+
+	/**
+	 * Updates the visibility of the arrow up element of this landing page based upon the scroll-y position of the window.
+	 *
+	 * @param position the current position of the page view in the y-direction.
+	 */
 	const updateArrow = (position: number) => {
 		if (position > 0) {
 			upArrow.current?.toggleAttribute('hidden', false);
@@ -185,4 +218,7 @@ const LandingPage = () => {
 	);
 };
 
+/**
+ * Exports the Landing page for external use.
+ */
 export default LandingPage;
