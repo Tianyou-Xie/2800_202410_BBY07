@@ -1,6 +1,7 @@
 .general {
 	font-family: TTOctosquares;
-	width: 100%;
+	width: 75%;
+	max-width: 1400px;
 }
 
 .username {
@@ -47,6 +48,7 @@
 
 .submit-div {
 	margin-right: 2px;
+	padding: 2px 7px;
 }
 
 .submit {
@@ -54,4 +56,10 @@
 	width: 100%;
 	padding: 0px;
 	background-color: transparent;
+}
+
+@media only screen and (max-width: 767px) {
+	.general {
+		width: 100%;
+	}
 }
