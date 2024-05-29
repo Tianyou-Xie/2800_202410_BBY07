@@ -14,9 +14,10 @@ interface Props {
 	planet: unknown;
 	planetId: string;
 	home: boolean;
+	interactable: boolean;
 }
 
-export const PlanetVisual = ({ planet, home, planetId }: Props) => {
+export const PlanetVisual = ({ planet, home, planetId, interactable }: Props) => {
 	if (!planet || typeof planet !== 'object' || !('visual' in planet)) return;
 	const name = 'name' in planet && typeof planet.name === 'string' ? planet.name : 'Unknown Planet';
 
@@ -37,7 +38,7 @@ export const PlanetVisual = ({ planet, home, planetId }: Props) => {
 
 	const [planetImg, planetImgStatus] = useImage(imageUrl);
 
-	const [active, setActive] = useState(isMobile);
+	const [active, setActive] = useState(interactable ? isMobile : false);
 	const [cardType, setCardType] = useState<'preview' | 'expanded'>(isMobile ? 'preview' : 'expanded');
 
 	const [x, setX] = useState(orbitRadius);
@@ -143,6 +144,7 @@ export const PlanetVisual = ({ planet, home, planetId }: Props) => {
 							setCardType('expanded');
 						} else setActive(!active);
 					}}
+					listening={interactable}
 					onClick={goToFeed}
 					onMouseEnter={() => setActive(true)}
 					onMouseLeave={() => setActive(false)}

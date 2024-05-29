@@ -118,8 +118,8 @@ export const App = () => {
 						<Else>
 							<UserAuthContext.Provider value={authenticatedUser}>
 								<Switch>
-									<Route path='/'>{() => <PlanetMap />}</Route>
-									<Route path='/home'>{() => <PlanetMap />}</Route>
+									<Route path='/'>{() => <PlanetMap interactable />}</Route>
+									<Route path='/home'>{() => <PlanetMap interactable />}</Route>
 									<Route path='/home-list' component={Home} />
 									<Route path='/changepassword' component={Changepassword} />
 									<Route path='/feed' component={GeneralFeed} />

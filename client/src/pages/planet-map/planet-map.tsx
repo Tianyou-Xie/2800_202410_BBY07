@@ -17,11 +17,10 @@ import { If, Then } from 'react-if';
 import Header from '../../components/Header/Header';
 
 interface Props {
-	interactable?: boolean;
+	interactable: boolean;
 }
 
 export const PlanetMap = (props: Props) => {
-	const stageInteractable = props.interactable ?? true;
 	const stageRef = useRef<Konva.Stage>(null);
 
 	const [_, navigate] = useLocation();
@@ -195,7 +194,7 @@ export const PlanetMap = (props: Props) => {
 	return (
 		<>
 			<Header enableLogoHeader={true} />
-			<If condition={stageInteractable}>
+			<If condition={props.interactable}>
 				<Then>
 					<div className='position-absolute end-0 bottom-0 z-3 p-3 d-flex'>
 						<div className='mt-auto ms-auto d-flex gap-3'>
@@ -230,17 +229,25 @@ export const PlanetMap = (props: Props) => {
 					position: 'absolute',
 					background: 'transparent',
 					zIndex: 1,
-					pointerEvents: stageInteractable ? 'unset' : 'none',
+					pointerEvents: props.interactable ? 'all' : 'none',
 				}}
-				draggable={stageInteractable}
-				listening={stageInteractable}>
+				draggable={props.interactable}
+				listening={props.interactable}>
 				<Layer>
 					<CenterVisual />
 				</Layer>
 
 				<Layer>
 					{planetData.map((v) => {
-						return <PlanetVisual key={v._id} planet={v} home={homePlanetId === v._id} planetId={v._id} />;
+						return (
+							<PlanetVisual
+								key={v._id}
+								planet={v}
+								home={homePlanetId === v._id}
+								planetId={v._id}
+								interactable={props.interactable}
+							/>
+						);
 					})}
 				</Layer>
 
