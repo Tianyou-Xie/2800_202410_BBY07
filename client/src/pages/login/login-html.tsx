@@ -1,7 +1,9 @@
-import { Link, useLocation } from 'wouter';
+import { Link } from 'wouter';
 import styles from './login.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import { GoogleAuthButton } from '../../components/google-auth-btn/google-auth-btn';
+import { If, Then, Else } from 'react-if';
+import { SmallLoader } from '../../components/loader/small-loader';
 
 const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading }: any) => {
 	return (
@@ -33,7 +35,12 @@ const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading
 						/>
 
 						<button disabled={loading} className={`${styles.button} mb-3 w-100`}>
-							Login
+							<If condition={loading}>
+								<Then>
+									<SmallLoader />
+								</Then>
+								<Else>LOGIN</Else>
+							</If>
 						</button>
 					</form>
 

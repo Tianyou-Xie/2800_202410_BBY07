@@ -59,12 +59,6 @@ export const post: Handler = async (req, res) => {
 		const planet = await PlanetModel.findById(body.location.planetId).lean().exec();
 		if (!planet) return Resolve(res).badRequest('The given location does not exist.');
 
-		const image = await openai.images.generate({
-			model: 'dall-e-3',
-			prompt: prompt,
-			size: '512x512',
-		});
-
 		const user = new UserModel({
 			email: body.email,
 			userName: body.userName,
@@ -72,10 +66,18 @@ export const post: Handler = async (req, res) => {
 			location: body.location,
 		});
 
-		imageUpload(image.data[0].url).then(async (res) => {
-			if (!res) return;
-			await user.updateOne({ avatarUrl: res.secure_url });
-		});
+		openai.images
+			.generate({
+				model: 'dall-e-3',
+				prompt: prompt,
+				size: '1024x1024',
+			})
+			.then((image) => {
+				imageUpload(image.data[0].url).then(async (res) => {
+					if (!res) return;
+					await user.updateOne({ avatarUrl: res.secure_url });
+				});
+			});
 
 		await user.save();
 		Resolve(res).okWith(JWT.signAs(user));

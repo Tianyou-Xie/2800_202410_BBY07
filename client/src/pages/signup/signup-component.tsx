@@ -34,6 +34,7 @@ const Signup = () => {
 	}, []);
 
 	const submitForm = async (e: any) => {
+		setLoading(true);
 		e.preventDefault();
 
 		const geoLoc = await new Promise<GeolocationPosition | undefined>((res) => {
@@ -70,10 +71,9 @@ const Signup = () => {
 				progress: undefined,
 				theme: 'colored',
 			});
+		} finally {
+			setLoading(false);
 		}
-
-		// if (!res.success) throw res.error;
-		// else alert('new user created');
 	};
 
 	return (
@@ -89,6 +89,7 @@ const Signup = () => {
 			setPassword={setPassword}
 			setLocation={setLocation}
 			submitForm={submitForm}
+			loading={loading}
 		/>
 	);
 };

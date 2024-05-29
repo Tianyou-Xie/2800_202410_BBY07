@@ -1,7 +1,9 @@
-import { Link, useLocation } from 'wouter';
+import { Link } from 'wouter';
 import styles from './signup.module.css';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import { GoogleAuthButton } from '../../components/google-auth-btn/google-auth-btn';
+import { Else, If, Then } from 'react-if';
+import { SmallLoader } from '../../components/loader/small-loader';
 
 const SignupHtml = ({
 	planets,
@@ -68,7 +70,12 @@ const SignupHtml = ({
 						</select>
 						<div className='mb-3'>
 							<button disabled={loading} className={`${styles.button} w-100`}>
-								SIGN UP
+								<If condition={loading}>
+									<Then>
+										<SmallLoader />
+									</Then>
+									<Else>SIGN UP</Else>
+								</If>
 							</button>
 						</div>
 					</form>
