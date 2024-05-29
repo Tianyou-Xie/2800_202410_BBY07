@@ -1,21 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { If, Then } from 'react-if';
 import { Link } from 'wouter';
 import { api } from '../../../lib/axios';
 import style from './post-header.module.css';
+import { UserAuthContext } from '../../../lib/auth';
+import UIBox from '../../UIBox/UIBox';
 
 interface Props {
-	/** The username of the post author. */
 	userName: string;
-	/** Whether the time of posting should be displayed. */
 	displayTime?: boolean;
-	/** The ID of the post author, used for profile link. */
 	authorId: string;
-	/** The avatar of the post author, optional. */
 	avatarUrl?: string;
-	/** The date of creation of the post, optional. */
 	createdAt?: Date;
-	/** The location of creation of the post, optional. */
 	location?: {
 		planetId: string;
 		latitude: number;
@@ -24,13 +20,10 @@ interface Props {
 	};
 }
 
-/**
- * Component representing the informational header of a post.
- *
- * Includes the userName, and can include the avatar, location and time of the
- * post.
- */
 export const PostHeader = (props: Props) => {
+	const user = useContext(UserAuthContext);
+	const currentUserId = user?._id; // Assuming user object has _id property
+
 	const timeOptions: Intl.DateTimeFormatOptions =
 		props.displayTime === true ? { hour: 'numeric', minute: 'numeric' } : {};
 	const dateFormatter = Intl.DateTimeFormat(navigator.language, {
@@ -51,8 +44,13 @@ export const PostHeader = (props: Props) => {
 		api.get(`/planet/${props.location.planetId}`).then(({ data }) => setLocationName(data.value.name));
 	}, [props.location?._id]);
 
+	const handleDelete = () => {
+		// Implement delete logic here
+		console.log('Delete post');
+	};
+
 	return (
-		<div className='w-100 d-flex gap-2 align-items-center pb-1'>
+		<div className={`w-100 d-flex gap-2 align-items-center pb-1 ${style.postHeaderContainer}`}>
 			<If condition={props.avatarUrl}>
 				<Then>
 					<Link href={'/user/' + props.authorId ?? '/'}>
@@ -87,6 +85,24 @@ export const PostHeader = (props: Props) => {
 					</If>
 				</div>
 			</div>
+
+			<If condition={props.authorId === currentUserId}>
+				<Then>
+					<button className={style.deleteButton} onClick={handleDelete}>
+						<UIBox
+							className={`${style.buttons} p-1 h-100 d-flex align-items-center`}
+							content={
+								<div className='d-flex gap-1 align-items-center'>
+									<span>X</span>
+								</div>
+							}
+							curved
+							clickable
+							dark
+						/>
+					</button>
+				</Then>
+			</If>
 		</div>
 	);
 };

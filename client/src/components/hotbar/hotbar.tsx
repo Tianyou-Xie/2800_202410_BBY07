@@ -1,5 +1,5 @@
 /* Stylesheet imports */
-import styles from './Hotbar.module.css';
+import styles from './hotbar.module.css';
 import './hotbar-animation.css';
 
 /* Imports from react */
