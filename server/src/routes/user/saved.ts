@@ -8,37 +8,41 @@ import { Resolve } from '../../utils/express';
  * GET @ /user/saved
  * Fetches the saved posts by a user.
  */
-async function getPostDetailsById(id: string) {
-    const post = await PostModel.findById(id).lean();
-    if (!post) return null;
-
-    const user = await UserModel.findById(post.authorId).select('userName').lean();
-    if (!user) return null;
-
-    return {
-        ...post,
-        userName: user.userName,
-    };
-}
-
 export const get: Handler[] = [
     authProtected,
     async (req, res) => {
-        const user = req.user!;
+        const user = req.user!._id;
+
+        const rawPage = parseInt(typeof req.query.page === 'string' ? req.query.page : '');
+        const page = Math.max(1, typeof rawPage !== 'number' || isNaN(rawPage) ? 1 : rawPage);
+        const limit = 20;
+        const skip = (page - 1) * limit;
 
         try {
-            const savedPostsIds = await UserModel.findById(user._id).select('savedPosts').lean();
-            const savedPostsIdsArray = savedPostsIds?.savedPosts || [];
+            const userDoc = await UserModel.findById(user).select('savedPosts').lean();
+            if (!userDoc) return Resolve(res).notFound('User not found.');
 
-            const savedPostsDetails = await Promise.all(
-                savedPostsIdsArray.map(async (postId) => {
-                    return getPostDetailsById(postId as any);
-                })
-            );
+            const savedPostsIds = userDoc.savedPosts || [];
 
-            const filteredSavedPosts = savedPostsDetails.filter(post => post !== null);
+            const savedPostsDetails = await PostModel.aggregate([
+                { $match: { _id: { $in: savedPostsIds }, deleted: false } },
+                { $sort: { createdAt: -1 } },
+                { $skip: skip },
+                { $limit: limit },
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'authorId',
+                        foreignField: '_id',
+                        as: 'author',
+                    },
+                },
+                { $unwind: { path: '$author' } },
+                { $addFields: { userName: '$author.userName', avatarUrl: '$author.avatarUrl' } },
+                { $project: { author: 0 } },
+            ]);
 
-            return Resolve(res).okWith({ savedPosts: filteredSavedPosts });
+            return Resolve(res).okWith({ savedPosts: savedPostsDetails });
         } catch (error) {
             console.error(error);
             return Resolve(res).error('Error fetching saved posts.');
