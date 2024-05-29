@@ -1,5 +1,7 @@
+/* Stylesheet imports */
 import styles from './ques-accordion.module.css';
 
+/* Imports from react-bootstrap */
 import { Accordion } from 'react-bootstrap';
 
 /**
@@ -8,7 +10,7 @@ import { Accordion } from 'react-bootstrap';
 interface Props {
 	question: string;
 	answer: string;
-    eventKey: string;
+	eventKey: string;
 }
 
 /**
@@ -31,4 +33,7 @@ const QuestionAccordion = (props: Props) => {
 	);
 };
 
+/**
+ * Exports the accordion for external use.
+ */
 export default QuestionAccordion;

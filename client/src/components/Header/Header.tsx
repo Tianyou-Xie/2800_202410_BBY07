@@ -1,6 +1,10 @@
+/* Stylesheet imports */
 import styles from './Header.module.css';
+
+/* Icon imports from react-icons */
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
 
+/* Imports from react-bootstrap */
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -42,6 +46,9 @@ const Header = (props: Props) => {
 	);
 };
 
+/**
+ * Exports the header for external use.
+ */
 export default Header;
 
 /**

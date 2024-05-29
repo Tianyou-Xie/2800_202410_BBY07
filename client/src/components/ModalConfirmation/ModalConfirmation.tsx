@@ -1,5 +1,7 @@
+/* Stylesheet imports */
 import styles from './ModalConfirmation.module.css';
 
+/* Imports from react-bootstrap */
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
@@ -67,4 +69,7 @@ const ModalConfirmation = (props: Props) => {
 	);
 };
 
+/**
+ * Exports the modal for external use.
+ */
 export default ModalConfirmation;

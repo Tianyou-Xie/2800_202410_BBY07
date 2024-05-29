@@ -1,8 +1,11 @@
-import { useState } from 'react';
-
+/* Stylesheet imports */
 import styles from './Hotbar.module.css';
 import './hotbar-animation.css';
 
+/* Imports from react */
+import { useState } from 'react';
+
+/* Icon imports from react-icons */
 import { GoHomeFill } from 'react-icons/go';
 import { IoMdPerson } from 'react-icons/io';
 import { IoMenuSharp } from 'react-icons/io5';
@@ -10,12 +13,19 @@ import { IoCloseCircleOutline } from 'react-icons/io5';
 import { IoIosAddCircle } from 'react-icons/io';
 import { MdSearch } from 'react-icons/md';
 import { AiFillMessage } from 'react-icons/ai';
-import { PiGearFill } from 'react-icons/pi';
 import { MdPeople } from 'react-icons/md';
 
+/**
+ * Contructs the hotbar for the website.
+ *
+ * @returns The Hotbar for this website as a JSX.Element
+ */
 const Hotbar = () => {
 	const [isChecked, setCheck] = useState(false);
 
+	/**
+	 * Responsible for toggling between the hamburger menu icon and the close icon.
+	 */
 	function toggleMenu() {
 		let menuIcon = document.getElementById('menu-icon');
 		let closeIcon = document.getElementById('close-icon');
@@ -93,4 +103,7 @@ const Hotbar = () => {
 	);
 };
 
+/**
+ * Exports the hotbar for external use.
+ */
 export default Hotbar;
