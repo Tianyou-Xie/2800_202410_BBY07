@@ -9,6 +9,7 @@ import { useLocation } from 'wouter';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import homeURL from '../../assets/videos/home.gif';
 import postURL from '../../assets/videos/post.gif';
+import messageURL from '../../assets/videos/message.gif';
 
 const LandingPage = () => {
 	const [_, setLocation] = useLocation();
@@ -109,8 +110,10 @@ const LandingPage = () => {
 						<div className='col-md-5 d-flex justify-content-center align-items-center'>
 							<img
 								className={`${styles.featureImg} bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto`}
-								src={homeURL}
-								alt='Home gif'
+								width={400}
+								height={600}
+								src={messageURL}
+								alt='Message gif'
 							/>
 						</div>
 					</div>
