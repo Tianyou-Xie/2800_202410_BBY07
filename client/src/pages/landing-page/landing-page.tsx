@@ -8,6 +8,7 @@ import { IoMdArrowDown } from 'react-icons/io';
 import { useLocation } from 'wouter';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import homeURL from '../../assets/videos/home.gif';
+import postURL from '../../assets/videos/post.gif';
 
 const LandingPage = () => {
 	const [_, setLocation] = useLocation();
@@ -81,7 +82,7 @@ const LandingPage = () => {
 						</div>
 						<div className='col-md-5 d-flex justify-content-center align-items-center'>
 							<img
-								className='bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto'
+								className={`${styles.featureImg} bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto`}
 								width={500}
 								height={500}
 								src={homeURL}
@@ -100,60 +101,42 @@ const LandingPage = () => {
 							<div className=''>
 								<p className='lead text-center'>
 									SKY.NET offers messaging services that let you send interplanetary messages freely.
-									Letting you keep up with others in realtime.
+									Letting you keep up with others in realtime no matter how are they are.
 								</p>
 							</div>
 						</div>
-						<div className='col-md-5 order-md-1'>
-							{/* <svg
-								className='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto'
-								width='500'
-								height='500'
-								xmlns='http://www.w3.org/2000/svg'
-								role='img'
-								aria-label='Placeholder: 500x500'
-								preserveAspectRatio='xMidYMid slice'
-								focusable='false'>
-								<title>Placeholder</title>
-								<rect width='100%' height='100%' fill='var(--bs-secondary-bg)' />
-								<text x='50%' y='50%' fill='var(--bs-secondary-color)' dy='.3em'>
-									500x500
-								</text>
-							</svg> */}
+						<div className='col-md-5 d-flex justify-content-center align-items-center'>
+							<img
+								className={`${styles.featureImg} bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto`}
+								width={500}
+								height={500}
+								src={homeURL}
+								alt='Home gif'
+							/>
 						</div>
 					</div>
 
 					<hr className='featurette-divider' />
 
-					<div className='row featurette'>
-						<div className={`${styles.featureDesc} col-md-7`}>
-							<h2 className={`${styles.featureHeader} text-center`}>
-								sky.net makes time feel irrelevant
-							</h2>
-							<div className=''>
+					<div className='row featurette d-flex justify-content-between'>
+						<div
+							className={`${styles.featureDesc} col-md-7 mb-3 text-center d-flex justify-content-center align-items-center`}>
+							<div>
+								<h2 className={`${styles.featureHeader} text-center`}>sky.net Connects All</h2>
 								<p className='lead text-center'>
-									SKY.NET aims to provide instantaneous connection between individials no matter how
-									far they are or what time it is. With SKY.NET feeds you can see what is going on in
-									your planet, other planets, and even the whole galaxy.
+									With SKY.NET feeds you can see what is going on in your planet, other planets, and
+									even the whole galaxy.
 								</p>
 							</div>
 						</div>
-						<div className='col-md-5'>
-							{/* <svg
-								className='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto'
-								width='500'
-								height='500'
-								xmlns='http://www.w3.org/2000/svg'
-								role='img'
-								aria-label='Placeholder: 500x500'
-								preserveAspectRatio='xMidYMid slice'
-								focusable='false'>
-								<title>Placeholder</title>
-								<rect width='100%' height='100%' fill='var(--bs-secondary-bg)' />
-								<text x='50%' y='50%' fill='var(--bs-secondary-color)' dy='.3em'>
-									500x500
-								</text>
-							</svg> */}
+						<div className='col-md-5 d-flex justify-content-center align-items-center'>
+							<img
+								className={`${styles.featureImg} bd-placeholder-img bd-placeholder-img-lg mx-auto`}
+								width={400}
+								height={600}
+								src={postURL}
+								alt='Post gif'
+							/>
 						</div>
 					</div>
 
