@@ -22,7 +22,6 @@ import Home from './pages/home/home';
 import Login from './pages/login/login-component';
 import Signup from './pages/signup/signup-component';
 import About from './pages/about/about-page';
-import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
 import GeneralFeed from './pages/general-feed/general-feed';
 import UserSettings from './pages/user-settings/user-settings-page';
@@ -123,7 +122,6 @@ export const App = () => {
 									<Route path='/'>{() => <PlanetMap interactable />}</Route>
 									<Route path='/home'>{() => <PlanetMap interactable />}</Route>
 									<Route path='/home-list' component={Home} />
-									<Route path='/changepassword' component={Changepassword} />
 									<Route path='/feed' component={GeneralFeed} />
 									<Route path='/post' component={PostPage} />
 									<Route path='/search' component={SearchPage} />
