@@ -54,7 +54,7 @@ const LandingPage = () => {
 						<PlanetMap interactable={false} />
 						<div className={`${styles.landingHeader} w-100 text-center`}>
 							<h1>
-								<Scrambler text='Communication Revisioned' scrambleSpeed={50} scrambleDelay={6000} />
+								<Scrambler text='Communication Re-envisioned' scrambleSpeed={50} scrambleDelay={6000} />
 							</h1>
 							<h3>Welcome to sky.net</h3>
 							<p>No matter the distance. No matter the time. We all can stay connected.</p>
