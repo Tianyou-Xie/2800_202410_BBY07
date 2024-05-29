@@ -28,6 +28,7 @@ interface PostProp {
 	displayTime?: boolean;
 	isRoot?: boolean;
 	avatarUrl?: string;
+	deleted?: boolean;
 	location?: {
 		planetId: string;
 		latitude: number;
@@ -176,7 +177,7 @@ const Post = (props: PostProp): JSX.Element => {
 									onClick={() => navigate(`/post/${parentPost?._id}`)}>
 									<GoCrossReference />
 									<div className='d-flex text-wrap text-break'>
-										{parentPost?.content === '' ? (
+										{parentPost?.deleted ? (
 											<span className='text-danger'>Reply of a deleted post</span>
 										) : (
 											<>
@@ -195,7 +196,7 @@ const Post = (props: PostProp): JSX.Element => {
 
 						<button onClick={viewDetails} className='p-2'>
 							<p className='text-start text-break'>
-								{props.content === '' ? (
+								{props.deleted ? (
 									<span className='text-danger'>Post was deleted by author.</span>
 								) : (
 									props.content

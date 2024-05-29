@@ -6,7 +6,7 @@ import style from './post-header.module.css';
 import { UserAuthContext } from '../../../lib/auth';
 import UIBox from '../../UIBox/UIBox';
 import ModalConfirmation from '../../ModalConfirmation/ModalConfirmation';
-import { FaTrash, FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt } from 'react-icons/fa';
 
 interface Props {
 	userName: string;
@@ -14,6 +14,7 @@ interface Props {
 	authorId: string;
 	avatarUrl?: string;
 	createdAt?: Date;
+	deleted?: boolean;
 	location?: {
 		planetId: string;
 		latitude: number;
@@ -105,7 +106,7 @@ export const PostHeader = (props: Props) => {
 					</div>
 				</div>
 
-				<If condition={props.authorId === currentUserId}>
+				<If condition={(props.authorId === currentUserId || user.admin) && !props.deleted}>
 					<Then>
 						<button className={style.deleteButton} onClick={handleDeleteClick}>
 							<UIBox
