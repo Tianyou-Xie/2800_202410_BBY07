@@ -12,6 +12,9 @@ interface QueryBody {
 const minSearchLen = 1;
 const maxSearchLen = 30;
 
+/**
+ * 
+ */
 export const get: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -20,6 +23,16 @@ export const get: Handler[] = [
 	},
 ];
 
+
+/**
+ * POST @ /faqs
+ *
+ * This recieves a query in the body of the request.
+ * The query must adhere to the schema witten.
+ * This query is then used to find and filter relevent faqs from the database.
+ * An array of relevent questions that were found are sent with the resolve.
+ * An empty array will be sent if none were found.
+ */
 export const post: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -47,7 +60,7 @@ export const post: Handler[] = [
 			});
 		}
 
-		if (quesToSend.length === 0) return Resolve(res).okWith(quesToSend);
+		if (quesToSend.length === 0) return Resolve(res).okWith(quesToSend, 'Questions were not found.');
 
 		return Resolve(res).okWith(quesToSend, 'Questions were found.');
 	},
