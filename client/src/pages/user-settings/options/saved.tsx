@@ -25,6 +25,7 @@ interface PostType {
     deleted: boolean;
     isRoot: boolean;
     userName: string;
+    avatar: string;
 }
 
 const SavedPage = () => {
@@ -59,30 +60,10 @@ const SavedPage = () => {
             pageName='Saved Posts'
             content={
                 <>
-                    <div className='w-100 px-3 d-flex flex-column align-items-center justify-content-center'>
-                        {loading ? (
-                            <div>Loading...</div>
-                        ) : savedPosts.length === 0 ? (
-                            <div>No Saved posts found.</div>
-                        ) : (
-                            <div className='w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
-                                {savedPosts.map((post) => (
-                                    <Post
-                                        key={post._id}
-                                        _id={post._id}
-                                        authorId={post.authorId}
-                                        content={post.content}
-                                        likeCount={post.likeCount}
-                                        commentCount={post.commentCount}
-                                        location={post.location}
-                                        createdAt={post.createdAt}
-                                        isRoot={post.isRoot}
-                                        userName={post.userName}
-                                    />
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                    <PaginatedPostFeed
+                        feedKey={user._id}
+                        fetchPage={(page) => api.get(`/user/saved?page=${page}`).then((res) => res.data.value.savedPosts)}
+                    />
                 </>
             }
         />

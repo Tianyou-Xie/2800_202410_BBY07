@@ -24,6 +24,7 @@ interface PostType {
     deleted: boolean;
     isRoot: boolean;
     userName: string;
+    avatar: string;
 }
 
 const LikedPage = () => {
@@ -57,7 +58,11 @@ const LikedPage = () => {
             pageName='Liked Posts'
             content={
                 <>
-                    <div className='w-100 px-3 d-flex flex-column align-items-center justify-content-center'>
+                    <PaginatedPostFeed
+                        feedKey={user._id}
+                        fetchPage={(page) => api.get(`/user/liked?page=${page}`).then((res) => res.data.value.likedPosts)}
+                    />
+                    {/* <div className='w-100 px-3 d-flex flex-column align-items-center justify-content-center'>
                         {loading ? (
                             <div>Loading...</div>
                         ) : likedPosts.length === 0 ? (
@@ -81,11 +86,7 @@ const LikedPage = () => {
                             </div>
                         )}
 
-                        {/* <PaginatedPostFeed
-                            feedKey='liked'
-                            fetchPage={(page) => api.get(`/user/liked?page=${page}`).then((res) => res.data.value)}
-                        /> */}
-                    </div>
+                    </div> */}
                 </>
             }
         />

@@ -104,8 +104,8 @@ const UserSettings = () => {
 									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link className={styles.groupItemBody} href=''>
-										<p>Commented Posts</p>
+									<Nav.Link className={styles.groupItemBody} href='/commented'>
+										<p>Commented</p>
 										<MdOutlineArrowForwardIos />
 									</Nav.Link>
 								</ListGroup.Item>
