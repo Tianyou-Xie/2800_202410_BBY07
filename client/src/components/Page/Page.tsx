@@ -1,7 +1,7 @@
 import styles from './Page.module.css';
 
 import Header from '../Header/Header';
-import Hotbar from '../hotbar/hotbar';
+import Hotbar from '../Hotbar/Hotbar';
 
 interface PageProp {
 	content: JSX.Element | JSX.Element[];
