@@ -1,3 +1,7 @@
+.profile-container {
+	max-width: 800px;
+}
+
 .profile-box {
 	width: 100%;
 }
@@ -33,7 +37,7 @@ button {
 .bottomButtons {
 	display: flex;
 	width: 100%;
-    gap: 20px;
+	gap: 20px;
 }
 
 .buttons {
