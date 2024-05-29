@@ -1,5 +1,6 @@
 .about-body {
     width: 100%;
+    max-width: 750px;
     font-family: BabaPro;
     background-color: var(--signup-background);
     border: 2px solid black;
