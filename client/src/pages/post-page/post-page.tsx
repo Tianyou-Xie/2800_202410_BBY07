@@ -101,7 +101,7 @@ const PostPage = function (props: PostProps) {
 								dark
 							/>
 							<UIBox
-								className={styles.post}
+								className={`${styles.post} mb-2`}
 								content={
 									<textarea
 										id='post'
