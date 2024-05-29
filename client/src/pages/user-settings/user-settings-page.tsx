@@ -23,7 +23,7 @@ import YourInfoModal from './options/your-info-modal';
 
 /**
  * Constructs, manages, and returns the user settings page.
- * 
+ *
  * @returns the user settings page as a JSX.Element
  */
 const UserSettings = () => {
@@ -127,7 +127,7 @@ const UserSettings = () => {
 									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link className={styles.groupItemBody} href=''>
+									<Nav.Link className={styles.groupItemBody} href='/support'>
 										<p>Support</p>
 										<MdOutlineArrowForwardIos />
 									</Nav.Link>

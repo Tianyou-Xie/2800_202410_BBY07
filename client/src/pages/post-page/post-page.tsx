@@ -113,9 +113,18 @@ const PostPage = function (props: PostProps) {
 										);
 									})}
 								</select>
-								<button className={styles.submit} onClick={submitPost}>
-									<UIBox content='Post' curved dark clickable />
-								</button>
+
+								<UIBox
+									className={styles.submitDiv}
+									content={
+										<button className={styles.submit} onClick={submitPost}>
+											Post
+										</button>
+									}
+									curved
+									dark
+									clickable
+								/>
 							</div>
 						</div>
 					</>

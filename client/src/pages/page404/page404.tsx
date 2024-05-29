@@ -26,7 +26,6 @@ const Page404 = () => {
 				</div>
 			</div>
 			{/* <Image src='/among-us.jpg' className={styles.image} /> */}
-			<div className={styles.rest}>@Sky.net trademark 2024. BCIT - Project 2800</div>
 		</div>
 	);
 };
