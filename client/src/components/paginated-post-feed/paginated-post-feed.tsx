@@ -22,65 +22,53 @@ interface Props {
  * user is scrolling.
  */
 export const PaginatedPostFeed = (props: Props) => {
-	const [page, setPage] = useState(0);
+	const [page, setPage] = useState(1);
 	const [endReached, setEndReached] = useState(false);
 
 	const postsListRef = useRef<HTMLDivElement>(null);
 	const [loading, setLoading] = useState(false);
 	const [posts, setPosts] = useState<any[]>([]);
 
-	const fetchIncrement = async (increment: number) => {
-		if (loading || endReached) return;
-
-		const nextPage = (page ?? 0) + increment;
-		if (nextPage < 1) return;
-
-		try {
-			const newPosts = await props.fetchPage(nextPage);
-			if (newPosts.length === 0) return setEndReached(true);
-
-			setPage(nextPage);
-			setPosts(increment < 0 ? [...newPosts, ...posts] : [...posts, ...newPosts]);
-		} catch (err) {
-			return setEndReached(true);
-		}
-	};
-
 	const checkScroll = () => {
-		if (loading || endReached) return;
-
 		const postsList = postsListRef.current;
 		if (!postsList) return;
 
-		const scrollBottom = window.scrollY + window.innerHeight;
-
-		let increment;
-		if (scrollBottom > postsList.scrollHeight - window.innerHeight) increment = 1;
-
-		if (!increment) return;
-
-		setLoading(true);
-		fetchIncrement(increment).then(() => setLoading(false));
+		const rect = postsList.getBoundingClientRect();
+		const distFromBottom = Math.max(0, rect.bottom - innerHeight);
+		if (distFromBottom <= rect.height / 4) setPage((page) => page + 1);
 	};
 
-	useEffect(checkScroll, []);
 	useEffect(() => {
+		if (endReached || loading) return;
+
 		const interval = setInterval(checkScroll, 1000);
 		return () => clearInterval(interval);
-	});
+	}, [endReached, loading]);
+
+	useEffect(() => {
+		setLoading(true);
+		props
+			.fetchPage(page)
+			.then((newPosts) => {
+				setEndReached(() => newPosts.length === 0);
+				setPosts([...posts, ...newPosts]);
+			})
+			.catch(() => setEndReached(true))
+			.finally(() => setLoading(false));
+	}, [page]);
 
 	return (
 		<div className='w-100 my-3 d-flex justify-content-center'>
 			<div ref={postsListRef} className='w-100 py-2 d-flex flex-column align-items-center gap-3'>
 				{posts
-					.filter((v) => !!v)
+					.filter((v) => !!v?._id)
 					.map((v, i) => {
 						return <Post key={i} {...v} />;
 					})}
 
 				<If condition={endReached}>
 					<Then>
-						<p>There is nothing else to see, so do not look.</p>
+						<p className='text-center'>There is nothing else to see, so do not look.</p>
 					</Then>
 					<Else>
 						<SmallLoader />

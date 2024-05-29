@@ -124,8 +124,7 @@ export const post: Handler[] = [
 			const responseComment = {
 				...newComment,
 				userName: user.userName,
-				like: newComment.likeCount,
-				comment: newComment.commentCount,
+				avatarUrl: user.avatarUrl,
 			};
 
 			Resolve(res).created(responseComment, 'Comment created successfully.');
