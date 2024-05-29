@@ -8,6 +8,8 @@ interface PageProp {
 	logoHeader?: boolean;
 	pageName?: string;
 	noHeader?: boolean;
+	noNavbar?: boolean;
+	noBootstrap?: boolean;
 }
 
 /**
@@ -16,6 +18,8 @@ interface PageProp {
  * @param props.pageName string - (Optional) Name of the page
  * @param props.content JSX.Element | JSX.Element[] - Content that will be added in the middle
  * @param props.noHeader boolean - (Optional) Takes off the header
+ * @param props.noNavbar boolean - (Optional) Takes off the navbar
+ * @param props.noBootstrap boolean - (Optional) Takes off the bootstrap content container format
  * @param props.logoHeader boolean - (Optional) Gives a header with only website name if true. If false give regular header
  * @returns JSX.Element
  */
@@ -33,11 +37,17 @@ const Page = (props: PageProp) => {
 				</div>
 			)}
 			<div className={styles.content}>
-				<div className='d-flex flex-column gap-4 p-3 align-items-center'>{props.content}</div>
+				<div className={props.noBootstrap ? '' : 'd-flex flex-column gap-4 p-3 align-items-center'}>
+					{props.content}
+				</div>
 			</div>
-			<div className={styles.navbar}>
-				<Hotbar />
-			</div>
+			{props.noNavbar ? (
+				<></>
+			) : (
+				<div className={styles.navbar}>
+					<Hotbar />
+				</div>
+			)}
 		</div>
 	);
 };
