@@ -36,6 +36,7 @@ import MessagesAll from './pages/messages-all/messages';
 import SEO from './components/seo/seo';
 import { getClientHost } from './environment';
 import SearchPage from './pages/search-page/search-page';
+import Page404 from './pages/page404/page404';
 
 export const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -116,7 +117,7 @@ export const App = () => {
 
 									{commonRoutes}
 
-									<Route>404 Not Found</Route>
+									<Route component={Page404}>404 Not Found</Route>
 								</Switch>
 							</UserAuthContext.Provider>
 						</Else>
