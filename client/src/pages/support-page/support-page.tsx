@@ -1,13 +1,6 @@
 /* Stylesheet imports */
 import styles from './support-page.module.css';
 
-/* Icon imports from react-icons */
-import { MdOutlineArrowForwardIos } from 'react-icons/md';
-
-/* Imports from react-bootstrap */
-import ListGroup from 'react-bootstrap/ListGroup';
-import Nav from 'react-bootstrap/Nav';
-
 /* Imports from other components created */
 import Page from '../../components/Page/Page';
 import { Container } from 'react-bootstrap';
