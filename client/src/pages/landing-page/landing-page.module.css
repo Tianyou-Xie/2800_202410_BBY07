@@ -92,7 +92,7 @@ body:has(.landing-display) {
     position: relative;
 }
 
-.map-container p, .feature-desc p, .feature-desc-flip p {
+.map-container p, .feature-desc p, .feature-desc-flip p, .join-msg h5 {
     font-family: TTOctosquares;
     margin: 0;
     padding: 0;
@@ -138,6 +138,16 @@ body:has(.landing-display) {
 
 .feature-img {
     border: 1px solid aliceblue;
+}
+
+.join-msg {
+    background-color: var(--signup-background);
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
+
+.join-msg h5 {
+    font-size: 10pt;
 }
 
 @keyframes down {

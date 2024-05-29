@@ -67,7 +67,7 @@ const LandingPage = () => {
 				</div>
 
 				<div id='section2'>
-					<hr className='featurette-divider' />
+					<hr />
 
 					<div className='row featurette'>
 						<div
@@ -90,7 +90,7 @@ const LandingPage = () => {
 						</div>
 					</div>
 
-					<hr className='featurette-divider' />
+					<hr />
 
 					<div className='row featurette d-flex justify-content-between'>
 						<div
@@ -118,7 +118,7 @@ const LandingPage = () => {
 						</div>
 					</div>
 
-					<hr className='featurette-divider' />
+					<hr />
 
 					<div className='row featurette d-flex justify-content-between'>
 						<div
@@ -133,7 +133,7 @@ const LandingPage = () => {
 						</div>
 						<div className='col-md-5 d-flex justify-content-center align-items-center'>
 							<img
-								className={`${styles.featureImg} bd-placeholder-img bd-placeholder-img-lg mx-auto`}
+								className={`${styles.featureImg} bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto`}
 								width={400}
 								height={600}
 								src={postURL}
@@ -142,7 +142,20 @@ const LandingPage = () => {
 						</div>
 					</div>
 
-					<hr className='featurette-divider' />
+					<hr />
+
+					<div className={`${styles.joinMsg} w-50 text-center p-5 mx-auto mb-5`}>
+						<h4>Join sky.net now</h4>
+						<h5>The future of connection is here.</h5>
+						<button
+							className={`${styles.landingBtn} ${styles.signupBtn} btn mt-2`}
+							type='button'
+							onClick={() => redirect('/signup')}>
+							Signup
+						</button>
+					</div>
+
+					<hr />
 				</div>
 			</div>
 		</>
