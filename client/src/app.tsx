@@ -51,10 +51,11 @@ import Page404 from './pages/page404/page404';
 import SEO from './components/seo/seo';
 import { Loader } from './components/loader/loader';
 import Cursors from './components/cursor/cursor';
+import SupportPage from './pages/support-page/support-page';
 
 /**
  * Contructs, manages, and returns the entire client side.
- * 
+ *
  * @returns the client side application as a JSX.Element.
  */
 export const App = () => {
@@ -83,6 +84,7 @@ export const App = () => {
 			<Route path='/about/policy' component={Policy} />
 			<Route path='/about/terms' component={Terms} />
 			<Route path='/faqs' component={FAQs} />
+			<Route path='/support' component={SupportPage} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/planets' component={Planets} />
