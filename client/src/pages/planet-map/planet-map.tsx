@@ -14,6 +14,7 @@ import { SpaceTraveller } from './space-traveller';
 import { StarBackground } from './star-background';
 import { useLocation } from 'wouter';
 import { If, Then } from 'react-if';
+import Header from '../../components/Header/Header';
 
 interface Props {
 	interactable?: boolean;
@@ -193,6 +194,7 @@ export const PlanetMap = (props: Props) => {
 
 	return (
 		<>
+			<Header enableLogoHeader={true} />
 			<If condition={stageInteractable}>
 				<Then>
 					<div className='position-absolute end-0 bottom-0 z-3 p-3 d-flex'>

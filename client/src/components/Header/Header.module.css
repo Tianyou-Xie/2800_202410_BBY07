@@ -18,9 +18,14 @@
 
 .logo-header {
     width: 100%;
+    z-index: 10;
+    background-color: #242C38;
+    color: aliceblue;
+    position: absolute;
     font-family: Bitsumishi;
     padding-top: 10px;
     padding-left: 10px;
+    padding-bottom: 5px;
 }
 
 @media screen and (max-width: 420px) {
