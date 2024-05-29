@@ -6,6 +6,7 @@ import style from './post-header.module.css';
 import { UserAuthContext } from '../../../lib/auth';
 import UIBox from '../../UIBox/UIBox';
 import ModalConfirmation from '../../ModalConfirmation/ModalConfirmation';
+import { FaTrash, FaTrashAlt } from 'react-icons/fa';
 
 interface Props {
 	userName: string;
@@ -111,7 +112,7 @@ export const PostHeader = (props: Props) => {
 								className={`${style.buttons} p-1 h-100 d-flex align-items-center`}
 								content={
 									<div className='d-flex gap-1 align-items-center'>
-										<span>X</span>
+										<FaTrashAlt />
 									</div>
 								}
 								curved
@@ -126,7 +127,7 @@ export const PostHeader = (props: Props) => {
 			<ModalConfirmation
 				show={showModal}
 				onHide={handleCloseModal}
-				title="Delete Post"
+				title='Delete Post'
 				body={<p>Are you sure you want to delete this post?</p>}
 				disableFooter={false}
 				onContinue={handleConfirmDelete}
