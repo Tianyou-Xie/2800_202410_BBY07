@@ -1,3 +1,39 @@
 .info-list *:not(:last-child)::after {
 	content: ',';
 }
+
+.postHeaderContainer {
+	position: relative;
+}
+
+.deleteButton {
+	position: absolute;
+	top: 8px;
+	/* Adjusted spacing for better alignment */
+	right: 8px;
+	/* Adjusted spacing for better alignment */
+	background: none;
+	border: none;
+	color: rgb(0, 0, 0);
+	font-size: 1.0rem;
+	/* Reduced font size */
+	cursor: pointer;
+	padding: 4px;
+	/* Added padding for better click area */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buttons {
+	background-color: #242c38;
+	border: 2px solid #2196f3;
+	box-shadow: 4px 5px 0px #355a79;
+	padding: 4px;
+	/* Adjusted padding to make the button smaller */
+	font-size: 0.8rem;
+	/* Reduced font size inside the button */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
