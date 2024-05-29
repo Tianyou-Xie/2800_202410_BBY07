@@ -122,8 +122,8 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 
 					<div className='w-100 px-3 d-flex flex-column align-items-center justify-content-center'>
 						<div className='w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
-							{postedComments.map((v) => {
-								return <Post {...v} isRoot={true} />;
+							{postedComments.map((v, i) => {
+								return <Post key={i} {...v} isRoot={true} />;
 							})}
 						</div>
 
