@@ -125,7 +125,8 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		<>
 			<div className={`container`}>
 				<div className='row d-flex justify-content-center'>
-					<div className='col-md-7'>
+					{/* <div className='col-md-7'> */}
+					<div className={styles.profileContainer}>
 						<div className='card text-center'>
 							<UIBox
 								content={
