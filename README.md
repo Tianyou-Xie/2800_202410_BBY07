@@ -106,7 +106,7 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
     > https://github.com/component/escape-regexp/blob/master/index.js
 -   Helmet SEO Component Structure: [(`./client/components/seo/seo.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/seo/seo.tsx#L23-L37)
     > https://www.freecodecamp.org/news/react-helmet-examples
--   Hotbar Structure and Animation Inspiration: [(`./client/components/hotbar/hotbar.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/hotbar/hotbar.tsx)
+-   Hotbar Structure and Animation Inspiration: [(`./client/components/Hotbar/Hotbar.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/components/Hotbar/Hotbar.tsx)
     > https://youtu.be/sgV111KxbwI?si=HnOS5OnfLswXk_8E
 
 ## Environment Variables
