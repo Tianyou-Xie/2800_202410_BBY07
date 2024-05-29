@@ -37,7 +37,6 @@ const UserSettings = () => {
 
 	// calls loseToken() and logs the user out
 	function logout() {
-		console.log('here');
 		Auth.loseToken();
 		setLocation('/login');
 	}
