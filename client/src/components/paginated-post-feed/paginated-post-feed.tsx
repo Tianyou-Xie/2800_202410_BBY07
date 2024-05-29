@@ -22,7 +22,7 @@ interface Props {
  * user is scrolling.
  */
 export const PaginatedPostFeed = (props: Props) => {
-	const [page, setPage] = useState(0);
+	const [page, setPage] = useState(1);
 	const [endReached, setEndReached] = useState(false);
 
 	const postsListRef = useRef<HTMLDivElement>(null);
@@ -71,14 +71,7 @@ export const PaginatedPostFeed = (props: Props) => {
 						<p className='text-center'>There is nothing else to see, so do not look.</p>
 					</Then>
 					<Else>
-						<If condition={loading}>
-							<Then>
-								<SmallLoader />
-							</Then>
-							<Else>
-								<p className='text-center'>We will load the rest soon!</p>
-							</Else>
-						</If>
+						<SmallLoader />
 					</Else>
 				</If>
 			</div>
