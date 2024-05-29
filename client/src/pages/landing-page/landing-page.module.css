@@ -108,7 +108,7 @@ body:has(.landing-display) {
     z-index: 0;
 }
 
-.arrow-icon {
+.arrow-icon1 {
     position: absolute;
     z-index: 5;
     color: aliceblue;
@@ -118,6 +118,24 @@ body:has(.landing-display) {
     margin-top: 500px;
 
     animation: down alternate 2s infinite;
+}
+
+.arrow-icon2 {
+    background-color: var(--signup-background);
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+
+    display: flex;
+    animation: fade-in 300ms forwards;
+
+    position: fixed;
+    z-index: 5;
+    font-size: 4em;
+    bottom: 5%;
+    right: 5%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
 }
 
 .feature-header {
@@ -157,6 +175,16 @@ body:has(.landing-display) {
 
     100% {
         margin-top: 515px;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
     }
 }
 

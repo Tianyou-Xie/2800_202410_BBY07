@@ -5,14 +5,17 @@ import Navbar from 'react-bootstrap/Navbar';
 import { PlanetMap } from '../planet-map/planet-map';
 import { Scrambler } from '../../components/scrambler/scrambler';
 import { IoMdArrowDown } from 'react-icons/io';
+import { IoArrowUpSharp } from 'react-icons/io5';
 import { useLocation } from 'wouter';
 import logoUrl from '../../assets/images/SkynetLogo.png';
 import homeURL from '../../assets/videos/home.gif';
 import postURL from '../../assets/videos/post.gif';
 import messageURL from '../../assets/videos/message.gif';
+import { useRef } from 'react';
 
 const LandingPage = () => {
 	const [_, setLocation] = useLocation();
+	const upArrow = useRef<HTMLDivElement>(null);
 
 	const moveDisplay = (id: string) => {
 		document.getElementById(id)?.scrollIntoView();
@@ -20,6 +23,18 @@ const LandingPage = () => {
 
 	const redirect = (path: string) => {
 		setLocation(path);
+	};
+
+	document.addEventListener('scroll', () => {
+		updateArrow(window.scrollY);
+	});
+
+	const updateArrow = (position: number) => {
+		if (position > 0) {
+			upArrow.current?.toggleAttribute('hidden', false);
+		} else {
+			upArrow.current?.toggleAttribute('hidden', true);
+		}
 	};
 
 	return (
@@ -60,7 +75,7 @@ const LandingPage = () => {
 							<h3>Welcome to sky.net</h3>
 							<p>No matter the distance. No matter the time. We all can stay connected.</p>
 						</div>
-						<div className={styles.arrowIcon} onClick={() => moveDisplay('section2')}>
+						<div className={styles.arrowIcon1} onClick={() => moveDisplay('section2')}>
 							<IoMdArrowDown />
 						</div>
 					</div>
@@ -156,6 +171,14 @@ const LandingPage = () => {
 					</div>
 
 					<hr />
+
+					<div
+						className={`${styles.arrowIcon2} justify-content-center align-items-center`}
+						onClick={() => moveDisplay('section1')}
+						ref={upArrow}
+						hidden>
+						<IoArrowUpSharp />
+					</div>
 				</div>
 			</div>
 		</>
