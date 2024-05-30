@@ -1,6 +1,4 @@
-import styles from './user-page.module.css';
 import Page from '../../components/Page/Page';
-import Post from '../../components/Post/Post';
 import Profile from '../../components/Profile/Profile';
 import { useLocation, useParams } from 'wouter';
 import { useEffect, useState } from 'react';
@@ -17,8 +15,7 @@ const UserPage = () => {
 	useEffect(() => {
 		const getUserData = async function () {
 			if (id !== undefined && (await isUser(id))) {
-				navigate('/profile');
-				return;
+				return navigate('/profile', { replace: true });
 			} else {
 				try {
 					if (id == '') return;
@@ -44,18 +41,7 @@ const UserPage = () => {
 						og={{ image: userData.avatarUrl, imageAlt: `${userData.userName} Avatar`, type: 'website' }}
 					/>
 
-					<Profile
-						userId={userData._id}
-						username={userData.userName}
-						description={userData.bio}
-						follower={userData.followerCount}
-						following={userData.followingCount}
-						postCount={userData.postCount}
-						avatar={userData.avatarUrl}
-						planetId={userData.location?.planetId}
-						createdAt={userData.createdAt}
-						outsideUser
-					/>
+					<Profile {...userData} />
 
 					<PaginatedPostFeed
 						feedKey={id}

@@ -78,7 +78,7 @@ export const PostHeader = (props: Props) => {
 								src={props.avatarUrl}
 								alt={props.userName + ' Avatar'}
 								className='img-thumbnail rounded-circle'
-								style={{ maxWidth: '64px', maxHeight: '64px' }}
+								style={{ maxWidth: '64px', maxHeight: '64px', aspectRatio: '1' }}
 							/>
 						</Link>
 					</Then>

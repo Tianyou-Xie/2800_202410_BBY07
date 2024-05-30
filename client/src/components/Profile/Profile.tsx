@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { FaCog, FaEdit } from 'react-icons/fa';
 import { FaLocationDot, FaRegMessage } from 'react-icons/fa6';
 import { SlUserFollow, SlUserUnfollow } from 'react-icons/sl';
@@ -10,41 +10,46 @@ import UIBox from '../UIBox/UIBox';
 import styles from './Profile.module.css';
 import { toast } from 'react-toastify';
 import { SmallLoader } from '../loader/small-loader';
+import { UserAuthContext } from '../../lib/auth';
 
 interface ProfileProp {
-	userId: string;
-	username: string;
-	description?: string;
-	follower: number;
-	following: number;
+	_id: string;
+	userName: string;
+	bio?: string;
+	followerCount: number;
+	followingCount: number;
 	postCount: number;
-	planetId?: string;
+	location?: { planetId: string; latitude: number; longitude: number };
 	createdAt?: Date;
-	outsideUser?: boolean;
+	avatarUrl?: string;
 	className?: string;
-	avatar?: string;
 }
 
 const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
 
 const Profile = (props: ProfileProp): JSX.Element => {
+	const user = useContext(UserAuthContext);
+
+	const [isOutsideUser, setIsOutsideUser] = useState(false);
+	useEffect(() => setIsOutsideUser(props._id !== user._id), [user]);
+
 	const [isActionActive, setIsActionActive] = useState(false);
 	const [followed, setFollowed] = useState(false);
-	const [followerCount, setFollowerCount] = useState<number>(props.follower);
-	const [avatarUrl, setAvatarUrl] = useState(props.avatar);
+	const [followerCount, setFollowerCount] = useState(props.followerCount);
+	const [avatarUrl, setAvatarUrl] = useState(props.avatarUrl);
 	const [locationName, setLocationName] = useState('');
 
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
-			if (!props.userId) {
+			if (!props._id) {
 				return;
 			}
 
 			try {
-				const response = await api.get(`/user/${props.userId}/follow`);
+				const response = await api.get(`/user/${props._id}/follow`);
 				if (response.data.success) {
+					setFollowerCount(props.followerCount);
 					setFollowed(response.data.value);
-					setFollowerCount(props.follower);
 				}
 			} catch (error) {
 				console.error('Error fetching follow status:', error);
@@ -52,20 +57,20 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		};
 
 		fetchSaveStatus();
-	}, [props.userId]);
+	}, [props._id]);
 
 	useEffect(() => {
-		setAvatarUrl(props.avatar);
-	}, [props.avatar]);
+		setAvatarUrl(props.avatarUrl);
+	}, [props.avatarUrl]);
 
 	useEffect(() => {
-		const id = props.planetId;
+		const id = props.location?.planetId;
 		if (!id) return setLocationName('');
 
 		api.get(`/planet/${id}`)
 			.then(({ data: res }) => setLocationName(res.value.name))
 			.catch();
-	}, [props.planetId]);
+	}, [props.location]);
 
 	const onFollow = async () => {
 		if (isActionActive) return;
@@ -73,11 +78,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 
 		try {
 			if (followed) {
-				await api.delete(`/user/${props.userId}/follow`);
+				await api.delete(`/user/${props._id}/follow`);
 				setFollowed(false);
 				setFollowerCount((prevCount) => Math.max(0, prevCount - 1));
 			} else {
-				const response = await api.post(`/user/${props.userId}/follow`);
+				const response = await api.post(`/user/${props._id}/follow`);
 				if (response.data.success) {
 					setFollowed(true);
 					setFollowerCount((prevCount) => prevCount + 1);
@@ -132,7 +137,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	};
 
 	const avatarImgElement = (
-		<img src={avatarUrl} width='210' className='rounded-circle img-fluid border border-dark-subtle shadow' />
+		<img
+			src={avatarUrl}
+			style={{ maxWidth: '210px', maxHeight: '210px', aspectRatio: '1' }}
+			className='rounded-circle img-fluid border border-dark-subtle shadow figure'
+		/>
 	);
 
 	return (
@@ -146,7 +155,7 @@ const Profile = (props: ProfileProp): JSX.Element => {
 								content={
 									<>
 										<div className='py-3'>
-											<If condition={!props.outsideUser}>
+											<If condition={!isOutsideUser}>
 												<Then>
 													<input
 														ref={changeAvatarInput}
@@ -185,11 +194,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 											</If>
 											<div className='stats'></div>
 											<div className='mt-2'>
-												<h4 className={styles.username}>@{props.username}</h4>
+												<h4 className={styles.username}>@{props.userName}</h4>
 											</div>
 											<div className='mt-2 d-flex flex-column align-items-center'>
-												<If condition={props.description}>
-													<Then> {props.description}</Then>
+												<If condition={props.bio}>
+													<Then> {props.bio}</Then>
 												</If>
 
 												<hr className='w-100 m-2' />
@@ -201,7 +210,7 @@ const Profile = (props: ProfileProp): JSX.Element => {
 													<Then>
 														<div className='d-flex flex-column flex-sm-row gap-2 align-items-center'>
 															<span className='d-flex gap-2'>
-																Joined
+																Joined from
 																<span className='d-flex align-items-center gap-1'>
 																	<FaLocationDot />
 																	{locationName}
@@ -221,11 +230,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 											</div>
 										</div>
 										<div className='pb-3 d-flex gap-2 align-items-center justify-content-evenly'>
-											<span className='d-block head'>{props.following} Following</span>
-											<div className='vr'></div>
-											<span className=''>
+											<span>
 												{followerCount} Follower{followerCount !== 1 ? 's' : ''}
 											</span>
+											<div className='vr'></div>
+											<span className='d-block head'>{props.followingCount} Following</span>
 											<div className='vr'></div>
 											<span className='d-block head'>
 												{props.postCount} Post{props.postCount !== 1 ? 's' : ''}
@@ -239,7 +248,7 @@ const Profile = (props: ProfileProp): JSX.Element => {
 						</div>
 
 						<div className={`${styles.bottomButtons} justify-content-center justify-content-lg-end`}>
-							{props.outsideUser ? (
+							{isOutsideUser ? (
 								<button disabled={isActionActive} onClick={onFollow}>
 									<UIBox
 										className={`${styles.buttons} p-1 h-100 d-flex align-items-center`}
@@ -284,12 +293,12 @@ const Profile = (props: ProfileProp): JSX.Element => {
 								</button>
 							)}
 							<button>
-								<Link href={props.outsideUser ? '/messages/' + props.userId : '/settings'}>
+								<Link href={isOutsideUser ? '/messages/' + props._id : '/settings'}>
 									<UIBox
 										className={`${styles.buttons} p-1 h-100 d-flex align-items-center`}
 										content={
 											<div className='d-flex gap-1 align-items-center'>
-												<If condition={props.outsideUser}>
+												<If condition={isOutsideUser}>
 													<Then>
 														<FaRegMessage />
 														<span>Message</span>
