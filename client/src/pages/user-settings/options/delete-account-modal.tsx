@@ -6,6 +6,7 @@ import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfir
 
 /* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
+import UIBox from '../../../components/UIBox/UIBox';
 
 /**
  * The properties and types for the DeleteAccountModal.
@@ -26,7 +27,7 @@ interface Props {
 
 /**
  * Contructs, manages, and returns the DeleteAccountModal component.
- * 
+ *
  * @param props the props for this DeleteAccountModal, as seen outlined in the interface
  * @returns The DeleteAccountModal component as a JSX.Element
  */
@@ -88,15 +89,21 @@ const DeleteAccountModal = (props: Props) => {
 							</i>
 						</p>
 						<form onSubmit={props.deleteBody2.deleteAccount}>
-							<input
-								className={`${styles.confInput} mb-5 w-75`}
-								name='confirminput'
-								placeholder='"I-WANT-TO-DELETE-THIS-ACCOUNT"'
-								type='text'
-								value={props.deleteBody2.confInput}
-								onChange={(event) => props.deleteBody2.setConfInput(event.target.value)}
-								required
+							<UIBox
+								className='mb-4 w-75 mx-auto'
+								content={
+									<input
+										className={styles.confInput}
+										name='confirminput'
+										placeholder='"I-WANT-TO-DELETE-THIS-ACCOUNT"'
+										type='text'
+										value={props.deleteBody2.confInput}
+										onChange={(event) => props.deleteBody2.setConfInput(event.target.value)}
+										required
+									/>
+								}
 							/>
+
 							<div className='d-flex justify-content-evenly align-items-center'>
 								<button className='btn btn-danger' type='submit'>
 									DELETE ACCOUNT

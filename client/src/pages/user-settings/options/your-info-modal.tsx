@@ -41,7 +41,7 @@ const YourInfoModal = (props: Props) => {
 						<Then>
 							<p>Username: {user.userName}</p>
 							<p>Email: {user.email ?? 'Authenticated with Provider'}</p>
-							<p>Bio: {user.bio ?? 'No Bio Provided'}</p>
+							<p>Bio: {user.bio ? user.bio : 'No Bio Provided'}</p>
 						</Then>
 						<Else>
 							<p className='text-danger'>An error occured.</p>

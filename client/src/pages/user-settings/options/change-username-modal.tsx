@@ -3,6 +3,7 @@ import styles from '../user-settings-page.module.css';
 
 /* Imports from other components created */
 import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+import UIBox from '../../../components/UIBox/UIBox';
 
 /* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
@@ -26,7 +27,7 @@ interface Props {
 
 /**
  * Contructs, manages, and returns the ChangeNameModal component.
- * 
+ *
  * @param props the props for this ChangeNameModal, as seen outlined in the interface
  * @returns The ChangeNameModal component as a JSX.Element
  */
@@ -76,14 +77,19 @@ const ChangeNameModal = (props: Props) => {
 					<>
 						<p>What would you like your new username to be?</p>
 						<form onSubmit={props.usernameBody2.changeUsername}>
-							<input
-								className={`${styles.confInput} mb-5 w-75`}
-								name='newUsername'
-								placeholder='Username'
-								type='text'
-								value={props.usernameBody2.nameInput}
-								onChange={(event) => props.usernameBody2.setNameInput(event.target.value)}
-								required
+							<UIBox
+								className='mb-4 w-75 mx-auto'
+								content={
+									<input
+										className={styles.confInput}
+										name='newUsername'
+										placeholder='Username'
+										type='text'
+										value={props.usernameBody2.nameInput}
+										onChange={(event) => props.usernameBody2.setNameInput(event.target.value)}
+										required
+									/>
+								}
 							/>
 							<div className='d-flex justify-content-evenly align-items-center'>
 								<button className='btn btn-danger' type='submit'>
