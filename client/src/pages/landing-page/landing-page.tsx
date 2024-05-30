@@ -85,13 +85,13 @@ const LandingPage = () => {
 									className={`${styles.landingBtn} ${styles.loginBtn} btn me-2`}
 									type='button'
 									onClick={() => redirect('/login')}>
-									Login
+									Log in
 								</button>
 								<button
 									className={`${styles.landingBtn} ${styles.signupBtn} btn ms-2`}
 									type='button'
 									onClick={() => redirect('/signup')}>
-									Signup
+									Sign up
 								</button>
 							</div>
 						</Container>

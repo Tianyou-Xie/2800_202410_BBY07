@@ -61,7 +61,7 @@ const Resetpassword: React.FC<Props> = ({ token }) => {
 								<br />
 								<input
 									name='confirmpassword'
-									placeholder='Confirm Password'
+									placeholder='Confirm New Password'
 									type='password'
 									className={styles.input}
 									value={confirmpassword}

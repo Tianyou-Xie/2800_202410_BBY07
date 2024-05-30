@@ -39,7 +39,7 @@ const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading
 								<Then>
 									<SmallLoader />
 								</Then>
-								<Else>LOGIN</Else>
+								<Else>LOG IN</Else>
 							</If>
 						</button>
 					</form>
