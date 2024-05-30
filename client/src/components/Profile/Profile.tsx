@@ -1,6 +1,6 @@
 import { HTMLInputTypeAttribute, useEffect, useRef, useState } from 'react';
 import { FaCog, FaEdit } from 'react-icons/fa';
-import { FaRegMessage } from 'react-icons/fa6';
+import { FaLocationDot, FaRegMessage } from 'react-icons/fa6';
 import { SlUserFollow, SlUserUnfollow } from 'react-icons/sl';
 import { Else, If, Then } from 'react-if';
 import { Link } from 'wouter';
@@ -18,16 +18,21 @@ interface ProfileProp {
 	follower: number;
 	following: number;
 	postCount: number;
+	planetId?: string;
+	createdAt?: Date;
 	outsideUser?: boolean;
 	className?: string;
 	avatar?: string;
 }
+
+const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
 
 const Profile = (props: ProfileProp): JSX.Element => {
 	const [isActionActive, setIsActionActive] = useState(false);
 	const [followed, setFollowed] = useState(false);
 	const [followerCount, setFollowerCount] = useState<number>(props.follower);
 	const [avatarUrl, setAvatarUrl] = useState(props.avatar);
+	const [locationName, setLocationName] = useState('');
 
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
@@ -52,6 +57,15 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	useEffect(() => {
 		setAvatarUrl(props.avatar);
 	}, [props.avatar]);
+
+	useEffect(() => {
+		const id = props.planetId;
+		if (!id) return setLocationName('');
+
+		api.get(`/planet/${id}`)
+			.then(({ data: res }) => setLocationName(res.value.name))
+			.catch();
+	}, [props.planetId]);
 
 	const onFollow = async () => {
 		if (isActionActive) return;
@@ -131,72 +145,91 @@ const Profile = (props: ProfileProp): JSX.Element => {
 							<UIBox
 								content={
 									<>
-										<div className={`col-md-7 ${styles.borderRight} no-gutters`}>
-											<div className='py-3'>
-												<If condition={!props.outsideUser}>
-													<Then>
-														<input
-															ref={changeAvatarInput}
-															type='file'
-															accept={avatarFileTypes.join(',')}
-															onChange={(e) => {
-																const files = e.target.files;
-																const img = files && files[0];
-																if (!img) return;
-																changeAvatar(img);
-															}}
-															hidden
-														/>
-														<button
-															onClick={initiateAvatarChange}
-															disabled={isUploadingFile}>
-															<div className='d-flex flex-column align-items-center gap-2'>
-																{avatarImgElement}
-																<UIBox
-																	clickable
-																	curved
-																	dark
-																	className={`${styles.buttons} px-2`}
-																	content={
-																		<If condition={isUploadingFile}>
-																			<Then>
-																				<SmallLoader
-																					style={{ color: 'white' }}
-																				/>
-																			</Then>
+										<div className='py-3'>
+											<If condition={!props.outsideUser}>
+												<Then>
+													<input
+														ref={changeAvatarInput}
+														type='file'
+														accept={avatarFileTypes.join(',')}
+														onChange={(e) => {
+															const files = e.target.files;
+															const img = files && files[0];
+															if (!img) return;
+															changeAvatar(img);
+														}}
+														hidden
+													/>
+													<button onClick={initiateAvatarChange} disabled={isUploadingFile}>
+														<div className='d-flex flex-column align-items-center gap-2'>
+															{avatarImgElement}
+															<UIBox
+																clickable
+																curved
+																dark
+																className={`${styles.buttons} px-2`}
+																content={
+																	<If condition={isUploadingFile}>
+																		<Then>
+																			<SmallLoader style={{ color: 'white' }} />
+																		</Then>
 
-																			<Else>Change Avatar</Else>
-																		</If>
-																	}
-																/>
-															</div>
-														</button>
-													</Then>
-													<Else>{avatarImgElement}</Else>
+																		<Else>Change Avatar</Else>
+																	</If>
+																}
+															/>
+														</div>
+													</button>
+												</Then>
+												<Else>{avatarImgElement}</Else>
+											</If>
+											<div className='stats'></div>
+											<div className='mt-2'>
+												<h4 className={styles.username}>@{props.username}</h4>
+											</div>
+											<div className='mt-2 d-flex flex-column align-items-center'>
+												<If condition={props.description}>
+													<Then> {props.description}</Then>
 												</If>
-												<div className='stats'></div>
-												<div className='mt-2'>
-													<h4 className={styles.username}>@{props.username}</h4>
-												</div>
-												<div className='mt-4'>
-													<If condition={props.description}>
-														<Then>{props.description}</Then>
-													</If>
-												</div>
+
+												<hr className='w-100 m-2' />
+
+												<If
+													condition={
+														locationName !== undefined && props.createdAt !== undefined
+													}>
+													<Then>
+														<div className='d-flex flex-column flex-sm-row gap-2 align-items-center'>
+															<span className='d-flex gap-2'>
+																Joined
+																<span className='d-flex align-items-center gap-1'>
+																	<FaLocationDot />
+																	{locationName}
+																</span>
+															</span>
+															<span className='flex-wrap'>
+																on{' '}
+																{props.createdAt
+																	? joinedDateFmt.format(new Date(props.createdAt))
+																	: ''}
+															</span>
+														</div>
+													</Then>
+												</If>
+
+												<hr className='w-100 m-2' />
 											</div>
 										</div>
-										<div className='col-md-5'>
-											<div className='py-3'>
-												<div className='mt-4'>
-													<span className='d-block head'>{followerCount} followers</span>
-												</div>
-												<div className='mt-4'>
-													<span className='d-block head'>{props.following} following</span>
-												</div>
-												<div className='mt-4'>
-													<span className='d-block head'>{props.postCount} posts</span>
-												</div>
-											</div>
+										<div className='pb-3 d-flex gap-2 align-items-center justify-content-evenly'>
+											<span className='d-block head'>{props.following} Following</span>
+											<div className='vr'></div>
+											<span className=''>
+												{followerCount} Follower{followerCount !== 1 ? 's' : ''}
+											</span>
+											<div className='vr'></div>
+											<span className='d-block head'>
+												{props.postCount} Post{props.postCount !== 1 ? 's' : ''}
+											</span>
 										</div>
 									</>
 								}
