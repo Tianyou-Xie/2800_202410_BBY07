@@ -29,7 +29,7 @@ export const get: Handler[] = [
 		else {
 			userSearch = { userName: { $regex: escapeRegex(search), $options: 'si' } };
 			const searchedUsers = await UserModel.aggregate([
-				{ $match: { ...userSearch } },
+				{ $match: { ...userSearch, deleted: { $not: { $eq: true } } } },
 				{ $sort: { createdAt: -1 } },
 				{ $skip: skip },
 				{ $limit: limit },
@@ -48,3 +48,4 @@ export const get: Handler[] = [
 		}
 	},
 ];
+``
