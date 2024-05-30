@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { FaCog, FaEdit } from 'react-icons/fa';
 import { FaLocationDot, FaRegMessage } from 'react-icons/fa6';
 import { SlUserFollow, SlUserUnfollow } from 'react-icons/sl';
@@ -136,13 +136,16 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		reader.readAsDataURL(imageFile);
 	};
 
-	const avatarImgElement = (
-		<img
-			src={avatarUrl}
-			style={{ maxWidth: '210px', maxHeight: '210px', aspectRatio: '1' }}
-			className='rounded-circle img-fluid border border-dark-subtle shadow figure'
-		/>
-	);
+	const avatarImgElement = useMemo(() => {
+		if (!avatarUrl) return <></>;
+		return (
+			<img
+				src={avatarUrl}
+				style={{ maxWidth: '210px', maxHeight: '210px', aspectRatio: '1' }}
+				className='rounded-circle img-fluid border border-dark-subtle shadow figure'
+			/>
+		);
+	}, [avatarUrl]);
 
 	return (
 		<>
