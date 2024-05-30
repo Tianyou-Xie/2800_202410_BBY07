@@ -1,6 +1,7 @@
 .general {
 	font-family: TTOctosquares;
-	width: 100%;
+	width: 75%;
+	max-width: 1400px;
 }
 
 .username {
@@ -33,20 +34,32 @@
 	padding: 6px;
 	padding-right: 0px;
 	justify-content: right;
+	gap: 20px;
 }
 
 .select {
 	color: #fff;
 	background-color: #000;
 	border-radius: 10px;
-	margin-right: 10px;
 	border: #000;
 	box-shadow: 4px 5px 0px var(--soft-shadow);
 	text-align: center;
 }
 
+.submit-div {
+	margin-right: 2px;
+	padding: 2px 7px;
+}
+
 .submit {
-	border: none;
-	background-color: transparent;
+	color: white;
+	width: 100%;
 	padding: 0px;
+	background-color: transparent;
+}
+
+@media only screen and (max-width: 767px) {
+	.general {
+		width: 100%;
+	}
 }

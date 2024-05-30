@@ -22,7 +22,6 @@ import Home from './pages/home/home';
 import Login from './pages/login/login-component';
 import Signup from './pages/signup/signup-component';
 import About from './pages/about/about-page';
-import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
 import GeneralFeed from './pages/general-feed/general-feed';
 import UserSettings from './pages/user-settings/user-settings-page';
@@ -52,10 +51,12 @@ import EditProfilePage from './pages/edit-profile-page/edit-profile-page';
 import SEO from './components/seo/seo';
 import { Loader } from './components/loader/loader';
 import Cursors from './components/cursor/cursor';
+import SupportPage from './pages/support-page/support-page';
+import AboutSkynetPage from './pages/about/options/about-skynet-page';
 
 /**
  * Contructs, manages, and returns the entire client side.
- * 
+ *
  * @returns the client side application as a JSX.Element.
  */
 export const App = () => {
@@ -83,7 +84,9 @@ export const App = () => {
 			<Route path='/about' component={About} />
 			<Route path='/about/policy' component={Policy} />
 			<Route path='/about/terms' component={Terms} />
+			<Route path='/about/about-skynet' component={AboutSkynetPage} />
 			<Route path='/faqs' component={FAQs} />
+			<Route path='/support' component={SupportPage} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/planets' component={Planets} />
@@ -122,7 +125,6 @@ export const App = () => {
 									<Route path='/'>{() => <PlanetMap interactable />}</Route>
 									<Route path='/home'>{() => <PlanetMap interactable />}</Route>
 									<Route path='/home-list' component={Home} />
-									<Route path='/changepassword' component={Changepassword} />
 									<Route path='/feed' component={GeneralFeed} />
 									<Route path='/post' component={PostPage} />
 									<Route path='/search' component={SearchPage} />

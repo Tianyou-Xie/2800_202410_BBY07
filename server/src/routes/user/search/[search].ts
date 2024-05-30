@@ -3,6 +3,7 @@ import { Resolve } from '../../../utils/express';
 import { IUser, UserModel } from '../../../models/user';
 import { authProtected } from '../../../middlewares/auth-protected';
 import mongoose from 'mongoose';
+import { escapeRegex } from '../../../utils/regex';
 
 /**
  * GET @ /user/search/:search?page
@@ -13,7 +14,7 @@ import mongoose from 'mongoose';
 export const get: Handler[] = [
 	authProtected,
 	async (req, res) => {
-		const search = req.params.search;
+		const search = req.params.search.trim();
 
 		const rawPage = parseInt(typeof req.query.page === 'string' ? req.query.page : '');
 		const page = Math.max(1, typeof rawPage !== 'number' || isNaN(rawPage) ? 1 : rawPage);
@@ -26,7 +27,7 @@ export const get: Handler[] = [
 
 		if (!users) return Resolve(res).notFound('No user or posts found with this search key.');
 		else {
-			userSearch = { userName: { $regex: search, $options: 'si' } };
+			userSearch = { userName: { $regex: escapeRegex(search), $options: 'si' } };
 			const searchedUsers = await UserModel.aggregate([
 				{ $match: { ...userSearch } },
 				{ $sort: { createdAt: -1 } },

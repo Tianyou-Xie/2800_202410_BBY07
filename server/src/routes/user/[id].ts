@@ -19,9 +19,3 @@ export const get: Handler = async (req, res) => {
 	if (!user) Resolve(res).notFound('No user found by the given ID.');
 	else Resolve(res).okWith(user);
 };
-
-interface PatchBody {
-	userName?: string;
-	email?: string;
-	bio?: string;
-}

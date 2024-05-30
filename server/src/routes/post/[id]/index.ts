@@ -52,7 +52,8 @@ export const del: Handler[] = [
 		if (!post) return Resolve(res).notFound('Invalid post ID provided.');
 
 		const currentUser = req.user!;
-		if (!post.authorId.equals(currentUser._id)) return Resolve(res).forbidden('You cannot delete this post.');
+		if (!post.authorId.equals(currentUser._id) && !currentUser.admin)
+			return Resolve(res).forbidden('You cannot delete this post.');
 
 		if (post.deleted) return Resolve(res).gone('Post is already deleted.');
 

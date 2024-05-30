@@ -13,7 +13,7 @@ import Page from '../../components/Page/Page';
 
 /**
  * Constructs and returns the About us page for this website.
- * 
+ *
  * @returns the About us page as a JSX.Element.
  */
 const About = () => {
@@ -34,6 +34,12 @@ const About = () => {
 							<ListGroup.Item className={`${styles.groupItem}`}>
 								<Nav.Link className={styles.groupItemBody} href='/about/terms'>
 									<h2>Terms of Use</h2>
+									<MdOutlineArrowForwardIos />
+								</Nav.Link>
+							</ListGroup.Item>
+							<ListGroup.Item className={`${styles.groupItem}`}>
+								<Nav.Link className={styles.groupItemBody} href='/about/about-skynet'>
+									<h2>About Skynet</h2>
 									<MdOutlineArrowForwardIos />
 								</Nav.Link>
 							</ListGroup.Item>

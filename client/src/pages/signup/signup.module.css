@@ -32,15 +32,22 @@
 }
 
 .signup-button-login:active {
-    box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+	box-shadow: 4px 4px var(--signup-button-active) 5 !important;
 	transform: translateY(5px) !important;
 }
 
-input,
-.button,
-.select {
+.signup-form input {
+	font-size: 20px;
+	font-family: Fjalla One;
+	padding-left: 5px;
+	border: 2px solid black;
+	outline: none;
+}
+
+.signup-form .button,
+.signup-form .select {
 	font-size: 14pt;
-	font-family: 'BabaPro';
+	font-family: BabaPro;
 	background: var(--signup-background);
 	border: 2px solid black;
 	outline: none;
@@ -86,9 +93,9 @@ input,
 }
 
 .h5 {
-	font-family: BabaPro;
+	font-family: TTOctosquares;
 }
 
 .span {
-    font-family: TTOctosquares;
+	font-family: TTOctosquares;
 }
