@@ -15,6 +15,11 @@
     font-family: BabaPro;
 }
 
+.modal button:active {
+    box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+	transform: translateY(5px) !important;
+}
+
 .header-font {
     font-family: Bitsumishi;
     font-size: 2em;
