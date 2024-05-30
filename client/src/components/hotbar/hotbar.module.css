@@ -120,6 +120,10 @@
     opacity: 1;
 }
 
+.nav-container input:not(:checked) ~ ul.submenu > li {
+    pointer-events: none;
+}
+
 .nav-container ul.submenu > li {
     --item: 1;
     position: absolute;

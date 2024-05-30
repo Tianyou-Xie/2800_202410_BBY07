@@ -231,7 +231,7 @@ const EditProfilePage = () => {
 								}
 							/>
 						</div>
-						<div className='w-50 d-flex justify-content-evenly align-items-center'>
+						<div className='w-50 d-flex justify-content-evenly align-items-center mb-3'>
 							<button
 								className={`${styles.submitBtn} btn btn-primary`}
 								onClick={submitChanges}
