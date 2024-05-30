@@ -1,6 +1,6 @@
 import { FaVideo } from 'react-icons/fa';
 import { IoCall } from 'react-icons/io5';
-import { IoArrowBackCircle } from "react-icons/io5";
+import { IoArrowBackCircle } from 'react-icons/io5';
 import { IoSend } from 'react-icons/io5';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { RxAvatar } from 'react-icons/rx';
@@ -18,10 +18,12 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 				<header className='border-bottom lh-1 py-3'>
 					<div className='row flex-nowrap justify-content-between align-items-center'>
 						<div className='col-4 pt-1'>
-							<IoArrowBackCircle style={{color: "#2196F3"}} size={40} onClick={handlePageReturn} />
+							<IoArrowBackCircle style={{ color: '#2196F3' }} size={40} onClick={handlePageReturn} />
 						</div>
 						<div className='col-4 text-center'>
-							<a className='blog-header-logo text-body-emphasis text-decoration-none' href='#'>
+							<a
+								className='blog-header-logo text-body-emphasis text-decoration-none'
+								href={`/user/${id}`}>
 								<img src={avatar} width='80' className='rounded-circle' />
 								<h3 className={styles.h3}>{username}</h3>
 							</a>
@@ -51,7 +53,9 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 													<p className={`${styles.p} d-inline mx-2`} key={index}>
 														{message.content}
 													</p>
-                                                    <p className={`${styles.time} ms-4`}>{new Date(message.createdAt).toLocaleTimeString('en-US')}</p>
+													<p className={`${styles.time} ms-4`}>
+														{new Date(message.createdAt).toLocaleTimeString('en-US')}
+													</p>
 												</div>
 											</Then>
 											<Else>
@@ -65,7 +69,9 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 													<p className={`${styles.p} d-inline mx-2`} key={index}>
 														{message.content}
 													</p>
-													<p className={`${styles.time} me-3`}>{new Date(message.createdAt).toLocaleTimeString('en-US')}</p>
+													<p className={`${styles.time} me-3`}>
+														{new Date(message.createdAt).toLocaleTimeString('en-US')}
+													</p>
 												</div>
 											</Else>
 										</If>
@@ -83,7 +89,7 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 				<div className={`container fixed-bottom mb-2`}>
 					<div className='row align-items-center'>
 						<div className={`col-1 themed-grid-col ${styles.customCol}`}>
-							<MdOutlineEmojiEmotions style={{color: "#2196F3"}} size={40} />
+							<MdOutlineEmojiEmotions style={{ color: '#2196F3' }} size={40} />
 						</div>
 						<div className={`col-10 themed-grid-col ${styles.customCol10}`}>
 							<form onSubmit={submitForm}>
@@ -99,7 +105,7 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 							</form>
 						</div>
 						<div className={`col-1 themed-grid-col ${styles.customCol}`}>
-							<IoSend style={{color: "#2196F3"}} size={40} onClick={submitForm} />
+							<IoSend style={{ color: '#2196F3' }} size={40} onClick={submitForm} />
 						</div>
 					</div>
 				</div>
