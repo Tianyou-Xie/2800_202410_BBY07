@@ -123,7 +123,7 @@ const LandingPage = () => {
 							<div className='p-4'>
 								<h2 className={`${styles.featureHeader}`}>Interactable Planets and Galaxies</h2>
 								<p className='lead'>
-									Dive into SKY.NET and see social media redesigned for ou modern space age. With a
+									Dive into SKY.NET and see social media redesigned for our modern space age. With a
 									homepage structured around your galaxy, you can feel even closer to your friends and
 									family amongst the stars.
 								</p>
