@@ -10,7 +10,7 @@ const ProfilePage = () => {
 
 	return (
 		<Page
-			pageName='Profile'
+			pageName={user.userName.length < 12 ? user.userName : 'My Profile'}
 			content={
 				<>
 					<Profile {...user} />

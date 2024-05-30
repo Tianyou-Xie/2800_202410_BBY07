@@ -8,7 +8,7 @@ import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginate
 import SEO from '../../components/seo/seo';
 
 const UserPage = () => {
-	const [userData, setUserData] = useState<any>({});
+	const [userData, setUserData] = useState<any>({ userName: '' });
 	const [_, navigate] = useLocation();
 	let { id = '' } = useParams();
 
@@ -32,7 +32,7 @@ const UserPage = () => {
 
 	return (
 		<Page
-			pageName={userData.userName}
+			pageName={userData.userName.length < 12 ? userData.userName : 'Profile'}
 			content={
 				<>
 					<SEO
