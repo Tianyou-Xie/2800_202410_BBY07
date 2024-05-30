@@ -1,6 +1,6 @@
 import { HTMLInputTypeAttribute, useEffect, useRef, useState } from 'react';
 import { FaCog, FaEdit } from 'react-icons/fa';
-import { FaRegMessage } from 'react-icons/fa6';
+import { FaLocationDot, FaRegMessage } from 'react-icons/fa6';
 import { SlUserFollow, SlUserUnfollow } from 'react-icons/sl';
 import { Else, If, Then } from 'react-if';
 import { Link } from 'wouter';
@@ -18,16 +18,21 @@ interface ProfileProp {
 	follower: number;
 	following: number;
 	postCount: number;
+	planetId?: string;
+	createdAt?: Date;
 	outsideUser?: boolean;
 	className?: string;
 	avatar?: string;
 }
+
+const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
 
 const Profile = (props: ProfileProp): JSX.Element => {
 	const [isActionActive, setIsActionActive] = useState(false);
 	const [followed, setFollowed] = useState(false);
 	const [followerCount, setFollowerCount] = useState<number>(props.follower);
 	const [avatarUrl, setAvatarUrl] = useState(props.avatar);
+	const [locationName, setLocationName] = useState('');
 
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
@@ -52,6 +57,15 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	useEffect(() => {
 		setAvatarUrl(props.avatar);
 	}, [props.avatar]);
+
+	useEffect(() => {
+		const id = props.planetId;
+		if (!id) return setLocationName('');
+
+		api.get(`/planet/${id}`)
+			.then(({ data: res }) => setLocationName(res.value.name))
+			.catch();
+	}, [props.planetId]);
 
 	const onFollow = async () => {
 		if (isActionActive) return;
@@ -178,9 +192,27 @@ const Profile = (props: ProfileProp): JSX.Element => {
 												<div className='mt-2'>
 													<h4 className={styles.username}>@{props.username}</h4>
 												</div>
-												<div className='mt-4'>
+												<div className='mt-2 d-flex flex-column align-items-center'>
 													<If condition={props.description}>
-														<Then>{props.description}</Then>
+														<Then> {props.description}</Then>
+													</If>
+
+													<hr className='w-100 m-2' />
+
+													<If
+														condition={
+															locationName !== undefined && props.createdAt !== undefined
+														}>
+														<Then>
+															<div className='d-flex gap-2 align-items-center'>
+																Joined
+																<FaLocationDot />
+																{locationName} on{' '}
+																{props.createdAt
+																	? joinedDateFmt.format(new Date(props.createdAt))
+																	: ''}
+															</div>
+														</Then>
 													</If>
 												</div>
 											</div>
