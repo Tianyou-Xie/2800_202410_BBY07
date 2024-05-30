@@ -17,7 +17,7 @@ const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading
 					<form onSubmit={submitForm}>
 						<input
 							name='email'
-							placeholder='EMAIL'
+							placeholder='Email'
 							type='email'
 							className={styles.input}
 							required
@@ -26,7 +26,7 @@ const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading
 						/>
 						<input
 							name='password'
-							placeholder='********'
+							placeholder='Password'
 							type='password'
 							className={styles.input}
 							required

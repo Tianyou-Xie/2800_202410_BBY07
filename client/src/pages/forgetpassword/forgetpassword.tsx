@@ -34,6 +34,8 @@ const Forgetpassword = () => {
 	return (
 		<Page
 			pageName={'Forgot Password'}
+			noHeader
+			noNavbar
 			content={
 				<div className={styles.forgetpasswordContainer}>
 					<div className={`px-4 pb-2 text-center`}>

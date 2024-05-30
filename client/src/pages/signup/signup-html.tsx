@@ -28,7 +28,7 @@ const SignupHtml = ({
 					<form onSubmit={submitForm}>
 						<input
 							name='username'
-							placeholder='USERNAME'
+							placeholder='Username'
 							type='text'
 							value={username}
 							className={styles.input}
@@ -37,7 +37,7 @@ const SignupHtml = ({
 						/>
 						<input
 							name='email'
-							placeholder='EMAIL'
+							placeholder='Email'
 							type='email'
 							value={email}
 							className={styles.input}
@@ -46,7 +46,7 @@ const SignupHtml = ({
 						/>
 						<input
 							name='password'
-							placeholder='********'
+							placeholder='Password'
 							type='password'
 							value={password}
 							className={styles.input}
