@@ -212,14 +212,14 @@ const EditProfilePage = () => {
 								curved
 								content={
 									<div>
-										<label className={styles.feildLabel} htmlFor='name-input'>
+										<label className={styles.feildLabel} htmlFor='bio-input'>
 											Bio
 										</label>
 										<UIBox
 											dark
 											content={
 												<textarea
-													id='name-input'
+													id='bio-input'
 													placeholder='Nothing yet...'
 													className={styles.textFeild}
 													value={userBio}
