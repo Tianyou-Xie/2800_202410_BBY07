@@ -9,11 +9,21 @@ An interplanetary town square that maintains connections between cultures and id
 
 ## Authors
 
--   Kamal Dolikay ([@kamalkdolikay](https://github.com/kamalkdolikay))
--   Ole Lammers ([@zyrakia](https://www.github.com/Zyrakia))
--   Tianyou Xie ([@Tianyou-Xie](https://github.com/Tianyou-Xie))
--   Samarjit Bhogal ([@SamarjitBhogal](https://github.com/SamarjitBhogal))
--   Marcus Lages ([@MarcusLages](https://github.com/MarcusLages))
+-   Kamal Dolikay
+    -   GitHub: [@kamalkdolikay](https://github.com/kamalkdolikay)
+    -   Email: [kamaldolikay@gmail.com](mailto:kamaldolikay@gmail.com)
+-   Ole Lammers
+    -   GitHub: [@zyrakia](https://www.github.com/Zyrakia)
+    -   Email: [ole.lammers@pm.me](mailto:ole.lammers@pm.me)
+-   Tianyou Xie
+    -   GitHub: ([@Tianyou-Xie](https://github.com/Tianyou-Xie))
+    -   Email: [tianyouxie001@gmail.com](mailto:tianyouxie001@gmail.com)
+-   Samarjit Bhogal
+    -   GitHub: ([@SamarjitBhogal](https://github.com/SamarjitBhogal))
+    -   Email: [samarjit.v.bhogal@gmail.com](mailto:samarjit.v.bhogal@gmail.com)
+-   Marcus Lages
+    -   GitHub: ([@MarcusLages](https://github.com/MarcusLages))
+    -   Email: [marcusvlages@gmail.com](mailto:marcusvlages@gmail.com)
 
 ## Features
 
@@ -199,11 +209,11 @@ There are a few instances where AI was used in this project:
 �   README.md
 �   Skynet Logo.png
 �   tree.txt
-�   
+�
 +---.vscode
 �       extensions.json
 �       settings.json
-�       
+�
 +---client
 �   �   .env
 �   �   index.html
@@ -211,27 +221,27 @@ There are a few instances where AI was used in this project:
 �   �   package.json
 �   �   tsconfig.json
 �   �   vite.config.ts
-�   �   
+�   �
 �   +---public
 �   �       among-us.jpg
 �   �       among-us2.jpg
 �   �       favicon.ico
 �   �       logo.webp
-�   �       
+�   �
 �   +---src
 �       �   app.tsx
 �       �   environment.ts
 �       �   index.css
 �       �   index.tsx
 �       �   vite-env.d.ts
-�       �   
+�       �
 �       +---assets
 �       �   +---fonts
 �       �   �       BabaPro-Bold.ttf
 �       �   �       BITSUMIS.TTF
 �       �   �       FjallaOne-Regular.ttf
 �       �   �       TT-Octosquares-Trial-Regular.ttf
-�       �   �       
+�       �   �
 �       �   +---images
 �       �   �   �   amongus-black.webp
 �       �   �   �   amongus-blue.webp
@@ -244,7 +254,7 @@ There are a few instances where AI was used in this project:
 �       �   �   �   Infinity_Gauntlet_Cursor.png
 �       �   �   �   Infinity_Gauntlet_Pointer.png
 �       �   �   �   SkynetLogo.png
-�       �   �   �   
+�       �   �   �
 �       �   �   +---icons
 �       �   �           android-chrome-192x192.png
 �       �   �           android-chrome-512x512.png
@@ -253,80 +263,80 @@ There are a few instances where AI was used in this project:
 �       �   �           favicon-32x32.png
 �       �   �           favicon.ico
 �       �   �           site.webmanifest
-�       �   �           
+�       �   �
 �       �   +---videos
 �       �           home.gif
 �       �           message.gif
 �       �           post.gif
-�       �           
+�       �
 �       +---components
 �       �   +---cursor
 �       �   �       cursor.module.css
 �       �   �       cursor.tsx
-�       �   �       
+�       �   �
 �       �   +---google-auth-btn
 �       �   �       google-auth-btn.tsx
-�       �   �       
+�       �   �
 �       �   +---Header
 �       �   �       Header.module.css
 �       �   �       Header.tsx
-�       �   �       
+�       �   �
 �       �   +---hotbar
 �       �   �       hotbar-animation.css
 �       �   �       hotbar.module.css
 �       �   �       hotbar.tsx
-�       �   �       
+�       �   �
 �       �   +---loader
 �       �   �       loader.module.css
 �       �   �       loader.tsx
 �       �   �       small-loader.module.css
 �       �   �       small-loader.tsx
-�       �   �       
+�       �   �
 �       �   +---ModalConfirmation
 �       �   �       ModalConfirmation.module.css
 �       �   �       ModalConfirmation.tsx
-�       �   �       
+�       �   �
 �       �   +---Page
 �       �   �       Page.module.css
 �       �   �       Page.tsx
-�       �   �       
+�       �   �
 �       �   +---paginated-post-feed
 �       �   �       paginated-post-feed.tsx
-�       �   �       
+�       �   �
 �       �   +---paginated-user-list
 �       �   �       paginated-user-list.module.css
 �       �   �       paginated-user-list.tsx
-�       �   �       
+�       �   �
 �       �   +---Post
 �       �   �   �   Post.module.css
 �       �   �   �   Post.tsx
-�       �   �   �   
+�       �   �   �
 �       �   �   +---post-header
 �       �   �           post-header.module.css
 �       �   �           post-header.tsx
-�       �   �           
+�       �   �
 �       �   +---Profile
 �       �   �       Profile.module.css
 �       �   �       Profile.tsx
-�       �   �       
+�       �   �
 �       �   +---ques-accordion
 �       �   �       ques-accordion.module.css
 �       �   �       ques-accordion.tsx
-�       �   �       
+�       �   �
 �       �   +---scrambler
 �       �   �       scrambler.tsx
-�       �   �       
+�       �   �
 �       �   +---seo
 �       �   �       seo.tsx
-�       �   �       
+�       �   �
 �       �   +---UIBox
 �       �   �       UIBox.module.css
 �       �   �       UIBox.tsx
-�       �   �       
+�       �   �
 �       �   +---UserInfo
 �       �           UserInfo.module.css
 �       �           UserInfo.tsx
-�       �           
+�       �
 �       +---lib
 �       �       auth.ts
 �       �       axios.ts
@@ -334,71 +344,71 @@ There are a few instances where AI was used in this project:
 �       �       create-slug.ts
 �       �       isUser.ts
 �       �       with-ref.ts
-�       �       
+�       �
 �       +---pages
 �           +---about
 �           �   �   about-page.module.css
 �           �   �   about-page.tsx
-�           �   �   
+�           �   �
 �           �   +---options
 �           �           about-skynet-page.tsx
 �           �           policy-page.tsx
 �           �           terms-page.tsx
-�           �           
+�           �
 �           +---edit-profile-page
 �           �       edit-profile-page.module.css
 �           �       edit-profile-page.tsx
-�           �       
+�           �
 �           +---faqs
 �           �       faqs-page.tsx
 �           �       faqs.module.css
-�           �       
+�           �
 �           +---follower
 �           �       follower.module.css
 �           �       follower.tsx
-�           �       
+�           �
 �           +---following
 �           �       following.module.css
 �           �       following.tsx
-�           �       
+�           �
 �           +---forgetpassword
 �           �       forgetpassword.module.css
 �           �       forgetpassword.tsx
-�           �       
+�           �
 �           +---general-feed
 �           �       general-feed.module.css
 �           �       general-feed.tsx
-�           �       
+�           �
 �           +---home
 �           �       home.module.css
 �           �       home.tsx
-�           �       
+�           �
 �           +---landing-page
 �           �       landing-page.module.css
 �           �       landing-page.tsx
-�           �       
+�           �
 �           +---login
 �           �       login-component.tsx
 �           �       login-html.tsx
 �           �       login.module.css
-�           �       
+�           �
 �           +---messages
 �           �       messages-component.tsx
 �           �       messages-html.tsx
 �           �       messages.module.css
-�           �       
+�           �
 �           +---messages-all
 �           �       messages.module.css
 �           �       messages.tsx
-�           �       
+�           �
 �           +---page404
 �           �       page404.module.css
 �           �       page404.tsx
-�           �       
+�           �
 �           +---planet-feed
 �           �       planet-feed.module.css
 �           �       planet-feed.tsx
-�           �       
+�           �
 �           +---planet-home
 �           +---planet-map
 �           �       center-visual.tsx
@@ -408,49 +418,49 @@ There are a few instances where AI was used in this project:
 �           �       planet-visual.tsx
 �           �       space-traveller.tsx
 �           �       star-background.tsx
-�           �       
+�           �
 �           +---planets
 �           �       planets-component.tsx
 �           �       planets-html.tsx
 �           �       planets.module.css
-�           �       
+�           �
 �           +---post
 �           �       post.module.css
 �           �       post.tsx
-�           �       
+�           �
 �           +---post-page
 �           �       post-page.module.css
 �           �       post-page.tsx
-�           �       
+�           �
 �           +---profile-page
 �           �       profile-page.module.css
 �           �       profile-page.tsx
-�           �       
+�           �
 �           +---resetpassword
 �           �       resetpassword.module.css
 �           �       resetpassword.tsx
-�           �       
+�           �
 �           +---search-page
 �           �       search-page.module.css
 �           �       search-page.tsx
-�           �       
+�           �
 �           +---signup
 �           �       signup-component.tsx
 �           �       signup-html.tsx
 �           �       signup.module.css
-�           �       
+�           �
 �           +---support-page
 �           �       support-page.module.css
 �           �       support-page.tsx
-�           �       
+�           �
 �           +---user-page
 �           �       user-page.module.css
 �           �       user-page.tsx
-�           �       
+�           �
 �           +---user-settings
 �               �   user-settings-page.module.css
 �               �   user-settings-page.tsx
-�               �   
+�               �
 �               +---options
 �                       change-email-modal.tsx
 �                       change-password-modal.tsx
@@ -461,34 +471,34 @@ There are a few instances where AI was used in this project:
 �                       manage-account-page.tsx
 �                       saved.tsx
 �                       your-info-modal.tsx
-�                       
+�
 +---server
     �   .env
     �   index.ts
     �   package-lock.json
     �   package.json
     �   tsconfig.json
-    �   
+    �
     +---src
         �   environment.ts
-        �   
+        �
         +---@types
         �       express.d.ts
         �       model.d.ts
-        �       
+        �
         +---lib
         �   +---auth
         �       �   auth-adapter.ts
         �       �   auth-worker.ts
-        �       �   
+        �       �
         �       +---adapters
         �               basic-jwt.ts
         �               google-oauth.ts
-        �               
+        �
         +---middlewares
         �       auth-protected.ts
         �       log.ts
-        �       
+        �
         +---models
         �       comment-relationship.ts
         �       conversation.ts
@@ -503,34 +513,34 @@ There are a few instances where AI was used in this project:
         �       question.ts
         �       token.ts
         �       user.ts
-        �       
+        �
         +---routes
         �   �   index.ts
-        �   �   
+        �   �
         �   +---faqs
         �   �       index.ts
-        �   �       
+        �   �
         �   +---feed
         �   �       index.ts
         �   �       [planetOrUserId].ts
-        �   �       
+        �   �
         �   +---planet
         �   �       index.ts
         �   �       [nameOrId].ts
-        �   �       
+        �   �
         �   +---post
         �   �   �   index.ts
-        �   �   �   
+        �   �   �
         �   �   +---search
         �   �   �       [search].ts
-        �   �   �       
+        �   �   �
         �   �   +---[id]
         �   �           comment.ts
         �   �           index.ts
         �   �           like.ts
         �   �           parent.ts
         �   �           save.ts
-        �   �           
+        �   �
         �   +---user
         �       �   changeavatar.ts
         �       �   changeBio.ts
@@ -550,22 +560,22 @@ There are a few instances where AI was used in this project:
         �       �   saved.ts
         �       �   signup.ts
         �       �   [id].ts
-        �       �   
+        �       �
         �       +---deleteaccount
         �       �       delete.ts
-        �       �       
+        �       �
         �       +---oauth
         �       �       google.ts
-        �       �       
+        �       �
         �       +---resetpassword
         �       �       [token].ts
-        �       �       
+        �       �
         �       +---search
         �       �       [search].ts
-        �       �       
+        �       �
         �       +---[id]
         �               follow.ts
-        �               
+        �
         +---utils
                 bcrypt.ts
                 email.ts
@@ -573,5 +583,5 @@ There are a few instances where AI was used in this project:
                 image.ts
                 jwt.ts
                 regex.ts
-                
+
 ```
