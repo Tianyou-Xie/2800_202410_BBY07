@@ -193,6 +193,7 @@ There are a few instances where AI was used in this project:
 -   Policy Page - an inital draft was created with the help of ChatGPT
 -   Terms of Use Page - an inital draft was created with the help of ChatGPT
 -   FAQs Page - ChatGPT was use to get an idea of common questions that people have about social media platforms
+-   Planet Images - the images on the homepage for the different planets were generated with AI and then edited manually to enhance the look and feel
 
 ## Project Links
 
