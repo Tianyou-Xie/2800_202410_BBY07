@@ -1,202 +1,207 @@
 .nav-container p {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .nav-container li a {
-    margin-right: 100px;
-    min-width: 90px;
-    padding: 1px;
-    text-decoration: none;
-    text-align: center;
-    flex-basis: 100%;
-    color: #2196F3;
-    font-family: Fjalla One;
-    font-weight: bold;
-    letter-spacing: 1px;
+	margin-right: 100px;
+	min-width: 90px;
+	padding: 1px;
+	text-decoration: none;
+	text-align: center;
+	flex-basis: 100%;
+	color: #2196f3;
+	font-family: Fjalla One;
+	font-weight: bold;
+	letter-spacing: 1px;
 }
 
 .nav-container {
-    position: fixed;
-    bottom: 0%;
-    left: 0%;
-    width: 100vw;
-    margin-bottom: 105px;
-    z-index: 10;
+	position: fixed;
+	bottom: 0%;
+	left: 0%;
+	width: 100vw;
+	margin-bottom: 105px;
+	z-index: 10;
 }
 
 .nav {
-    position: relative;
-    width: 100vw;
+	position: relative;
+	width: 100vw;
 }
 
 .circle {
-    position: absolute;
-    border: none;
-    background-color: #242C38;
-    padding: 60px;
-    border-radius: 50%;
-    z-index: 1;
+	position: absolute;
+	border: none;
+	background-color: #242c38;
+	padding: 60px;
+	border-radius: 50%;
+	z-index: 1;
 }
 
 .circle-right {
-    right: 0%;
-    transform: translate(50%, 10%);
+	right: 0%;
+	transform: translate(50%, 10%);
 }
 
 .circle-left {
-    left: 0%;
-    transform: translate(-50%, 10%);
+	left: 0%;
+	transform: translate(-50%, 10%);
 }
 
 .bar {
-    border: none;
-    position: absolute;
-    background-color: #242C38;
-    padding: 60px;
-    width: 100vw;
-    top: 50px;
+	border: none;
+	position: absolute;
+	background-color: #242c38;
+	padding: 60px;
+	width: 100vw;
+	top: 50px;
 }
 
 .nav-icon {
-    position: absolute;
-    z-index: 2;
-    font-size: 2em;
-    color: #2196F3;
+	position: absolute;
+	z-index: 2;
+	font-size: 2em;
+	color: #2196f3;
 }
 
 .icon-right {
-    right: 0%;
+	right: 0%;
 }
 
 .icon-left {
-    left: 0%;
+	left: 0%;
 }
 
 .menu-container {
-    position: absolute;
-    background-color: #2196F3;
-    z-index: 5;
-    padding: 10px;
-    border-radius: 50%;
-    right: 50%;
-    transform: translate(50%);
+	position: absolute;
+	background-color: #2196f3;
+	z-index: 5;
+	padding: 10px;
+	border-radius: 50%;
+	right: 50%;
+	transform: translate(50%);
+
+    border: 2px solid black;
+	box-shadow: 0px -1px 0px #000;
 }
 
 .menu-backdrop {
-    position: absolute;
-    background-color: transparent;
-    z-index: 3;
-    width: 110px;
-    border-radius: 50%;
-    padding: 50px;
-    right: 50%;
-    top: 0;
-    transform: translate(50%);
+	position: absolute;
+	background-color: transparent;
+	z-index: 3;
+	width: 110px;
+	border-radius: 50%;
+	padding: 50px;
+	right: 50%;
+	top: 0;
+	transform: translate(50%);
 }
 
 .nav-container li a p {
-    font-size: 11pt;
+	font-size: 11pt;
 }
 
 .menu-sub-icons {
-    font-size: 3em;
-    -webkit-filter: drop-shadow( 3px 3px 2px var(--metal-grey));
-    filter: drop-shadow( 3px 3px 2px var(--metal-grey));
+	font-size: 3em;
+	-webkit-filter: drop-shadow(3px 3px 2px var(--metal-grey));
+	filter: drop-shadow(3px 3px 2px var(--metal-grey));
 }
 
-.menu-icon, .close-icon{
-    font-size: 4em;
+.menu-icon,
+.close-icon {
+	font-size: 4em;
 }
 
 .nav-container ul.submenu {
-    position: absolute;
-    right: 50%;
-    top: 0%;
-    width: 150px;
-    transform: translateX(-50%);
+	position: absolute;
+	right: 50%;
+	top: 0%;
+	width: 150px;
+	transform: translateX(-50%);
 }
 
 .nav-container input:checked ~ ul.submenu > li {
-    transform: rotate(calc((180deg / 5) * var(--item))) translateX(0px);
-    opacity: 1;
+	transform: rotate(calc((180deg / 5) * var(--item))) translateX(0px);
+	opacity: 1;
 }
 
 .nav-container input:not(:checked) ~ ul.submenu > li {
-    pointer-events: none;
+	pointer-events: none;
 }
 
 .nav-container ul.submenu > li {
-    --item: 1;
-    position: absolute;
-    opacity: 0;
-    transform: rotate(calc((180deg / 5) * var(--item))) translateX(120px);
-    transform-origin: right center;
-    display: flex;
-    align-self: center;
-    transition: transform .7s, opacity .2s;
+	--item: 1;
+	position: absolute;
+	opacity: 0;
+	transform: rotate(calc((180deg / 5) * var(--item))) translateX(120px);
+	transform-origin: right center;
+	display: flex;
+	align-self: center;
+	transition: transform 0.7s, opacity 0.2s;
 }
 
 .nav-container ul.submenu > li p {
-    text-shadow: -1px -1px 0 var(--metal-grey), 1px -1px 0 var(--metal-grey), -1px 1px 0 var(--metal-grey), 1px 1px 0 var(--metal-grey);
+	text-shadow: -1px -1px 0 var(--metal-grey), 1px -1px 0 var(--metal-grey), -1px 1px 0 var(--metal-grey),
+		1px 1px 0 var(--metal-grey);
 }
 
 .nav-container ul.submenu li:nth-child(1) {
-    --item: 1;
+	--item: 1;
 }
 
 .nav-container ul.submenu li:nth-child(2) {
-    --item: 2;
+	--item: 2;
 }
 
 .nav-container ul.submenu li:nth-child(3) {
-    --item: 3;
+	--item: 3;
 }
 
 .nav-container ul.submenu li:nth-child(4) {
-    --item: 4;
+	--item: 4;
 }
 
 .nav-container ul.submenu li:nth-child(1) a {
-    transform: rotate(-36deg);
+	transform: rotate(-36deg);
 }
 
 .nav-container ul.submenu li:nth-child(2) a {
-    transform: rotate(-72deg);
+	transform: rotate(-72deg);
 }
 
 .nav-container ul.submenu li:nth-child(3) a {
-    transform: rotate(-108deg);
+	transform: rotate(-108deg);
 }
 
 .nav-container ul.submenu li:nth-child(4) a {
-    transform: rotate(-144deg);
+	transform: rotate(-144deg);
 }
 
 .back-drop-div {
-    pointer-events: none;
-    
-    position: absolute;
-    right: 50%;
-    bottom: 0%;
-    width: 100vw;
-    height: 100vh;
-    transform: translateY(50%) translateX(50%);
-    background-color: rgba(255, 255, 255, 0.4);
-    
-    backdrop-filter: blur(10px);
-    mask: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 80%);
+	pointer-events: none;
 
-    opacity: 0;
-    transition: transform .7s, opacity .3s;
+	position: absolute;
+	right: 50%;
+	bottom: 0%;
+	width: 100vw;
+	height: 100vh;
+	transform: translateY(50%) translateX(50%);
+	background-color: rgba(255, 255, 255, 0.4);
+
+	backdrop-filter: blur(10px);
+	mask: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 80%);
+
+	opacity: 0;
+	transition: transform 0.7s, opacity 0.3s;
 }
 
 .nav-container input:checked ~ .back-drop-div {
-    opacity: 1;    
+	opacity: 1;
 }
 
 .menu-label {
-    position: absolute;
-    right: 50%;
-    transform: translateX(50%);
+	position: absolute;
+	right: 50%;
+	transform: translateX(50%);
 }
