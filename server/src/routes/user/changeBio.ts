@@ -17,13 +17,8 @@ export const patch: Handler[] = [
 	authProtected,
 	async (req, res) => {
 		const user = req.user!;
-		let currBio;
 
-		if (user.bio) {
-			currBio = user.bio;
-		} else {
-			currBio = '';
-		}
+		const currBio = user.bio ? user.bio : '';
 
 		const emailSchema = Joi.object<bioBody>({
 			newBio: Joi.string().allow('').trim().required().invalid(currBio).messages({
