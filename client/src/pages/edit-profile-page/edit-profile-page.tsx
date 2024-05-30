@@ -20,14 +20,14 @@ const EditProfilePage = () => {
 	const [isUploadingFile, setUploadingFile] = useState(false);
 	const avatarInput = useRef<HTMLInputElement>(null);
 	const undoBtn = useRef<HTMLButtonElement>(null);
+	const submitBtn = useRef<HTMLButtonElement>(null);
 
 	const [userAvatarUrl, setAvatarUrl] = useState(initAvatarURl);
 	const [userName, setUserName] = useState(initUsername);
 	const [userBio, setBio] = useState(initBio);
 
 	useEffect(() => {
-		console.log(userBio);
-		handleUndoBtn();
+		handleBtns();
 	}, [userName, userBio, userAvatarUrl]);
 
 	/**
@@ -59,7 +59,6 @@ const EditProfilePage = () => {
 		reader.readAsDataURL(file);
 		reader.addEventListener('load', async () => {
 			const dataUrl = reader.result;
-			console.log(dataUrl);
 			if (!dataUrl || typeof dataUrl !== 'string') return;
 			try {
 				const { data: res } = await api.patch('/user/changeavatar', { avatarDataUrl: dataUrl });
@@ -75,26 +74,41 @@ const EditProfilePage = () => {
 		});
 	};
 
-	const handleUndoBtn = () => {
-		const btn = undoBtn.current;
-		if (btn?.hasAttribute('hidden')) btn?.toggleAttribute('hidden', false);
-		if (userName == initUsername && userBio == initBio && userAvatarUrl == initAvatarURl)
-			btn?.toggleAttribute('hidden', true);
+	const handleBtns = () => {
+		const undo = undoBtn.current;
+		const submit = submitBtn.current;
+		if (submit?.hasAttribute('disabled')) {
+			submit?.removeAttribute('disabled');
+		}
+		if (userName == initUsername && userBio == initBio && userAvatarUrl == initAvatarURl) {
+			undo?.toggleAttribute('hidden', true);
+			submit?.setAttribute('disabled', 'true');
+		}
 	};
 
 	const submitChanges = async () => {
-		try {
-			if (!userName) return;
-			const nameRes = await api.patch('/user/changeUsername', {
-				newUsername: userName,
-			});
-			const bioRes = await api.patch('/user/changeBio', {
-				newBio: userBio,
-			});
-			toast.success('Your info has been updated!');
-		} catch (error: any) {
-			toast.error(error.response.data.error);
+		if (userName !== initUsername) {
+			try {
+				const nameRes = await api.patch('/user/changeUsername', {
+					newUsername: userName,
+				});
+			} catch (error: any) {
+				toast.error(error.response.data.error);
+			}
 		}
+		if (userBio !== initBio) {
+			try {
+				const bioRes = await api.patch('/user/changeBio', {
+					newBio: userBio,
+				});
+			} catch (error: any) {
+				toast.error(error.response.data.error);
+			}
+		}
+		toast.success('Your info has been updated!');
+
+        const undo = undoBtn.current;
+        undo?.toggleAttribute('hidden', false);
 	};
 
 	const undoChanges = async () => {
@@ -131,7 +145,7 @@ const EditProfilePage = () => {
 		setAvatarUrl(initAvatarURl);
 		setBio(initBio);
 		setUserName(initUsername);
-		undoBtn.current?.toggleAttribute('hidden');
+		undoBtn.current?.toggleAttribute('hidden', true);
 
 		toast.success('Changes were undone.');
 	};
@@ -146,7 +160,7 @@ const EditProfilePage = () => {
 				pageName='Edit Profile'
 				content={
 					<>
-						<div className={`${styles.pageContainer} w-100`}>
+						<div className={`w-100`}>
 							<input
 								ref={avatarInput}
 								onChange={(event) => {
@@ -164,7 +178,7 @@ const EditProfilePage = () => {
 								<button className={`${styles.avatarBtn} rounded-4`} onClick={triggerAvatarInput}>
 									<If condition={isUploadingFile}>
 										<Then>
-											<SmallLoader style={{ color: 'black' }} />
+											<SmallLoader style={{ color: 'white' }} />
 										</Then>
 										<Else>Change Avatar</Else>
 									</If>
@@ -218,14 +232,17 @@ const EditProfilePage = () => {
 							/>
 						</div>
 						<div className='w-50 d-flex justify-content-evenly align-items-center'>
-							<button className={`${styles.submitBtn} btn btn-primary`} onClick={submitChanges}>
-								Submit
+							<button
+								className={`${styles.submitBtn} btn btn-primary`}
+								onClick={submitChanges}
+								ref={submitBtn}>
+								Save
 							</button>
 							<button
 								className={`${styles.undoBtn} btn btn-danger`}
 								ref={undoBtn}
 								onClick={undoChanges}
-								hidden>
+								>
 								Undo
 							</button>
 						</div>
