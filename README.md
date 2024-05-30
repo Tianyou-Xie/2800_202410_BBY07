@@ -16,13 +16,13 @@ An interplanetary town square that maintains connections between cultures and id
     -   GitHub: [@zyrakia](https://www.github.com/Zyrakia)
     -   Email: [ole.lammers@pm.me](mailto:ole.lammers@pm.me)
 -   Tianyou Xie
-    -   GitHub: ([@Tianyou-Xie](https://github.com/Tianyou-Xie))
+    -   GitHub: [@Tianyou-Xie](https://github.com/Tianyou-Xie)
     -   Email: [tianyouxie001@gmail.com](mailto:tianyouxie001@gmail.com)
 -   Samarjit Bhogal
-    -   GitHub: ([@SamarjitBhogal](https://github.com/SamarjitBhogal))
+    -   GitHub: [@SamarjitBhogal](https://github.com/SamarjitBhogal)
     -   Email: [samarjit.v.bhogal@gmail.com](mailto:samarjit.v.bhogal@gmail.com)
 -   Marcus Lages
-    -   GitHub: ([@MarcusLages](https://github.com/MarcusLages))
+    -   GitHub: [@MarcusLages](https://github.com/MarcusLages)
     -   Email: [marcusvlages@gmail.com](mailto:marcusvlages@gmail.com)
 
 ## Features
