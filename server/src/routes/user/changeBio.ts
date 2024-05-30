@@ -17,11 +17,16 @@ export const patch: Handler[] = [
 	authProtected,
 	async (req, res) => {
 		const user = req.user!;
+		let currBio;
 
-		const currBio = user.bio;
+		if (user.bio) {
+			currBio = user.bio;
+		} else {
+			currBio = '';
+		}
 
 		const emailSchema = Joi.object<bioBody>({
-			newBio: Joi.string().trim().required().invalid(currBio).messages({
+			newBio: Joi.string().allow('').trim().required().invalid(currBio).messages({
 				'string.base': 'New bio must be a string.',
 				'any.required': 'A bio is required in order to change your bio.',
 				'any.invalid': 'Bio entered is already your current bio.',

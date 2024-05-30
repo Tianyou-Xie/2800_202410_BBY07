@@ -13,17 +13,22 @@ import { SmallLoader } from '../../components/loader/small-loader';
 
 const EditProfilePage = () => {
 	const user = useContext(UserAuthContext);
-    const initBio = user.bio;
-    const initUsername = user.userName;
-    const initAvatarURl = user.avatarUrl;
+	const initBio = user.bio ? user.bio : '';
+	const initUsername = user.userName;
+	const initAvatarURl = user.avatarUrl;
 
 	const [isUploadingFile, setUploadingFile] = useState(false);
 	const avatarInput = useRef<HTMLInputElement>(null);
-    const undoBtn = useRef<HTMLButtonElement>(null);
+	const undoBtn = useRef<HTMLButtonElement>(null);
 
-	const [currAvatarUrl, setAvatarUrl] = useState(initAvatarURl);
-	const [userNameInput, setUserName] = useState(initUsername);
+	const [userAvatarUrl, setAvatarUrl] = useState(initAvatarURl);
+	const [userName, setUserName] = useState(initUsername);
 	const [userBio, setBio] = useState(initBio);
+
+	useEffect(() => {
+		console.log(userBio);
+		handleUndoBtn();
+	}, [userName, userBio, userAvatarUrl]);
 
 	/**
 	 * Manages the functionality of the hidden file input element externally
@@ -32,8 +37,8 @@ const EditProfilePage = () => {
 		if (!avatarInput.current) return;
 		avatarInput.current.click();
 	};
-    
-    const avatarFileTypes = ['image/png', 'image/jpeg', 'image/webp'];
+
+	const avatarFileTypes = ['image/png', 'image/jpeg', 'image/webp'];
 
 	/**
 	 * Handles the patch request to upload the new avatar image URL. Throws an error if unsuccesful or invalid file id provided.
@@ -63,7 +68,6 @@ const EditProfilePage = () => {
 
 				toast.success('Updated avatar! Changes may take a few minutes.');
 			} catch (error: any) {
-				console.log(error);
 				toast.error('Failed to update avatar! Try again later.');
 			} finally {
 				setUploadingFile(false);
@@ -71,36 +75,69 @@ const EditProfilePage = () => {
 		});
 	};
 
-    const onFeildChange = (data: string, callback: (d: string) => void) => {
-        callback(data);
-        displayUndoBtn();
-    }
+	const handleUndoBtn = () => {
+		const btn = undoBtn.current;
+		if (btn?.hasAttribute('hidden')) btn?.toggleAttribute('hidden', false);
+		if (userName == initUsername && userBio == initBio && userAvatarUrl == initAvatarURl)
+			btn?.toggleAttribute('hidden', true);
+	};
 
-    const displayUndoBtn = () => {
-    }
-
-    const submitChanges = async () => {
-        try {
+	const submitChanges = async () => {
+		try {
+			if (!userName) return;
 			const nameRes = await api.patch('/user/changeUsername', {
-				newUsername: userNameInput,
+				newUsername: userName,
 			});
-            const bioRes = await api.patch('/user/changeUsername', {
-				newUsername: userNameInput,
+			const bioRes = await api.patch('/user/changeBio', {
+				newBio: userBio,
 			});
-			toast.success("Your info has been updated!");
+			toast.success('Your info has been updated!');
 		} catch (error: any) {
 			toast.error(error.response.data.error);
 		}
-    }
- 
-    const undoChanges = () => {
-        if (userBio !== initBio) {
+	};
 
-        }
-    }
+	const undoChanges = async () => {
+		if (userBio !== initBio) {
+			try {
+				const bioRes = await api.patch('/user/changeBio', {
+					newBio: initBio,
+				});
+			} catch (error: any) {
+				toast.error(error.response.data.error);
+			}
+		}
+
+		if (userName !== initUsername) {
+			try {
+				const nameRes = await api.patch('/user/changeUsername', {
+					newUsername: initUsername,
+				});
+			} catch (error: any) {
+				toast.error(error.response.data.error);
+			}
+		}
+
+		if (userAvatarUrl !== initAvatarURl) {
+			try {
+				const { data: res } = await api.patch('/user/changeavatar', { avatarDataUrl: initAvatarURl });
+				if (res.success === false) throw 'Error';
+				setAvatarUrl(res.value);
+			} catch (error: any) {
+				toast.error('Failed to undo avatar! Try again later.');
+			}
+		}
+
+		setAvatarUrl(initAvatarURl);
+		setBio(initBio);
+		setUserName(initUsername);
+		undoBtn.current?.toggleAttribute('hidden');
+
+		toast.success('Changes were undone.');
+	};
 
 	const avatarImgElement = (
-		<img src={currAvatarUrl} width='210' className='rounded-circle img-fluid border border-dark-subtle shadow' />
+		<img src={userAvatarUrl} width='210' className='rounded-circle img-fluid border border-dark-subtle shadow' />
 	);
 
 	return (
@@ -148,7 +185,7 @@ const EditProfilePage = () => {
 													id='name-input'
 													className={styles.textFeild}
 													type='text'
-													value={userNameInput}
+													value={userName}
 													onChange={(event) => setUserName(event.target.value)}
 												/>
 											}
@@ -172,7 +209,7 @@ const EditProfilePage = () => {
 													placeholder='Nothing yet...'
 													className={styles.textFeild}
 													value={userBio}
-													onChange={(event) => onFeildChange(event.target.value, setBio)}
+													onChange={(event) => setBio(event.target.value)}
 												/>
 											}
 										/>
@@ -181,8 +218,16 @@ const EditProfilePage = () => {
 							/>
 						</div>
 						<div className='w-50 d-flex justify-content-evenly align-items-center'>
-							<button className={`${styles.submitBtn} btn btn-primary`} onClick={submitChanges}>Submit</button>
-							<button className={`${styles.undoBtn} btn btn-danger`} ref={undoBtn} onClick={undoChanges}>Undo</button>
+							<button className={`${styles.submitBtn} btn btn-primary`} onClick={submitChanges}>
+								Submit
+							</button>
+							<button
+								className={`${styles.undoBtn} btn btn-danger`}
+								ref={undoBtn}
+								onClick={undoChanges}
+								hidden>
+								Undo
+							</button>
 						</div>
 					</>
 				}
