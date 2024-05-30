@@ -123,7 +123,7 @@ const LandingPage = () => {
 							<div className='p-4'>
 								<h2 className={`${styles.featureHeader}`}>Interactable Planets and Galaxies</h2>
 								<p className='lead'>
-									Dive into SKY.NET and see social media redesigned for ou modern space age. With a
+									Dive into SKY.NET and see social media redesigned for our modern space age. With a
 									homepage structured around your galaxy, you can feel even closer to your friends and
 									family amongst the stars.
 								</p>
@@ -150,7 +150,7 @@ const LandingPage = () => {
 								<div className=''>
 									<p className='lead text-center'>
 										SKY.NET offers messaging services that let you send interplanetary messages
-										freely. Letting you keep up with others in realtime no matter how are they are.
+										freely. Letting you keep up with others in real-time no matter how far they are.
 									</p>
 								</div>
 							</div>
@@ -175,7 +175,7 @@ const LandingPage = () => {
 								<h2 className={`${styles.featureHeader} text-center`}>sky.net Connects All</h2>
 								<p className='lead text-center'>
 									With SKY.NET feeds you can see what is going on in your planet, other planets, and
-									even the whole galaxy.
+									even the whole galaxy. Always stay up to date with popular opinions and discussions.
 								</p>
 							</div>
 						</div>

@@ -3,9 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 /* Imports from other components created */
 import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
-
-/* Imports from this website's assets */
-import logoUrl from '../../../assets/images/SkynetLogo.png';
+import UIBox from '../../../components/UIBox/UIBox';
 
 /**
  * The properties and types for the ChangePasswordModal.
@@ -30,7 +28,7 @@ interface Props {
 
 /**
  * Contructs, manages, and returns the ChangePasswordModal component.
- * 
+ *
  * @param props the props for this ChangePasswordModal, as seen outlined in the interface
  * @returns The ChangePasswordModal component as a JSX.Element
  */
@@ -90,7 +88,6 @@ const ChangePasswordModal = (props: Props) => {
 				disableFooter={true}
 				header={
 					<div className='mt-3'>
-						<img className={`img-fluid w-25`} src={logoUrl} alt='Skynet Logo' />
 						<p>Change Password</p>
 					</div>
 				}
@@ -98,36 +95,47 @@ const ChangePasswordModal = (props: Props) => {
 					<>
 						<div className='text-center'>
 							<form onSubmit={props.passBody2.changePassword}>
-								<input
-									className='mb-2'
-									name='password'
-									placeholder='Current Password'
-									type='password'
-									value={props.passBody2.password}
-									onChange={(event) => props.passBody2.setPassword(event.target.value)}
-									required
+								<UIBox
+									className='mb-3 w-75 mx-auto'
+									content={
+										<input
+											name='password'
+											placeholder='Current Password'
+											type='password'
+											value={props.passBody2.password}
+											onChange={(event) => props.passBody2.setPassword(event.target.value)}
+											required
+										/>
+									}
 								/>
-								<br />
-								<input
-									className='mb-2'
-									name='newpassword'
-									placeholder='New Password'
-									type='password'
-									value={props.passBody2.newPassword}
-									onChange={(event) => props.passBody2.setNewPassword(event.target.value)}
-									required
+
+								<UIBox
+									className='mb-3 w-75 mx-auto'
+									content={
+										<input
+											name='newpassword'
+											placeholder='New Password'
+											type='password'
+											value={props.passBody2.newPassword}
+											onChange={(event) => props.passBody2.setNewPassword(event.target.value)}
+											required
+										/>
+									}
 								/>
-								<br />
-								<input
-									className='mb-2'
-									name='confirmpassword'
-									placeholder='Confirm New Password'
-									type='password'
-									value={props.passBody2.confPassword}
-									onChange={(event) => props.passBody2.setConfPassword(event.target.value)}
-									required
+								<UIBox
+									className='mb-5 w-75 mx-auto'
+									content={
+										<input
+											name='confirmpassword'
+											placeholder='Confirm New Password'
+											type='password'
+											value={props.passBody2.confPassword}
+											onChange={(event) => props.passBody2.setConfPassword(event.target.value)}
+											required
+										/>
+									}
 								/>
-								<br />
+
 								<div className='d-flex justify-content-evenly align-items-center my-3'>
 									<div className='text-center'>
 										<button className='btn btn-danger' type='submit'>

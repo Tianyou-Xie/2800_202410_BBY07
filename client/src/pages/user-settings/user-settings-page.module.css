@@ -70,8 +70,16 @@
     color: red;
 }
 
+.logout-btn:active {
+    box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+	transform: translateY(5px) !important;
+}
+
 .conf-input {
     font-family: Fjalla One;
+    /* border-radius: 0;
+    border: 2px solid black;
+	box-shadow: 3px 4px 0px #000; */
 }
 
 @media screen and (min-width: 800px) {
