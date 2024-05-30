@@ -53,6 +53,7 @@ export const post: Handler[] = [
 			bio: null,
 			birthDate: null,
 			avatarUrl: null,
+			deleted: true
 		});
 
 		const deletedUser = new DeletedUserModel({
