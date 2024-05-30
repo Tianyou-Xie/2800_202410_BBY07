@@ -145,90 +145,91 @@ const Profile = (props: ProfileProp): JSX.Element => {
 							<UIBox
 								content={
 									<>
-										<div className={`col-md-7 ${styles.borderRight} no-gutters`}>
-											<div className='py-3'>
-												<If condition={!props.outsideUser}>
-													<Then>
-														<input
-															ref={changeAvatarInput}
-															type='file'
-															accept={avatarFileTypes.join(',')}
-															onChange={(e) => {
-																const files = e.target.files;
-																const img = files && files[0];
-																if (!img) return;
-																changeAvatar(img);
-															}}
-															hidden
-														/>
-														<button
-															onClick={initiateAvatarChange}
-															disabled={isUploadingFile}>
-															<div className='d-flex flex-column align-items-center gap-2'>
-																{avatarImgElement}
-																<UIBox
-																	clickable
-																	curved
-																	dark
-																	className={`${styles.buttons} px-2`}
-																	content={
-																		<If condition={isUploadingFile}>
-																			<Then>
-																				<SmallLoader
-																					style={{ color: 'white' }}
-																				/>
-																			</Then>
+										<div className='py-3'>
+											<If condition={!props.outsideUser}>
+												<Then>
+													<input
+														ref={changeAvatarInput}
+														type='file'
+														accept={avatarFileTypes.join(',')}
+														onChange={(e) => {
+															const files = e.target.files;
+															const img = files && files[0];
+															if (!img) return;
+															changeAvatar(img);
+														}}
+														hidden
+													/>
+													<button onClick={initiateAvatarChange} disabled={isUploadingFile}>
+														<div className='d-flex flex-column align-items-center gap-2'>
+															{avatarImgElement}
+															<UIBox
+																clickable
+																curved
+																dark
+																className={`${styles.buttons} px-2`}
+																content={
+																	<If condition={isUploadingFile}>
+																		<Then>
+																			<SmallLoader style={{ color: 'white' }} />
+																		</Then>
 
-																			<Else>Change Avatar</Else>
-																		</If>
-																	}
-																/>
-															</div>
-														</button>
-													</Then>
-													<Else>{avatarImgElement}</Else>
+																		<Else>Change Avatar</Else>
+																	</If>
+																}
+															/>
+														</div>
+													</button>
+												</Then>
+												<Else>{avatarImgElement}</Else>
+											</If>
+											<div className='stats'></div>
+											<div className='mt-2'>
+												<h4 className={styles.username}>@{props.username}</h4>
+											</div>
+											<div className='mt-2 d-flex flex-column align-items-center'>
+												<If condition={props.description}>
+													<Then> {props.description}</Then>
 												</If>
-												<div className='stats'></div>
-												<div className='mt-2'>
-													<h4 className={styles.username}>@{props.username}</h4>
-												</div>
-												<div className='mt-2 d-flex flex-column align-items-center'>
-													<If condition={props.description}>
-														<Then> {props.description}</Then>
-													</If>
 
-													<hr className='w-100 m-2' />
+												<hr className='w-100 m-2' />
 
-													<If
-														condition={
-															locationName !== undefined && props.createdAt !== undefined
-														}>
-														<Then>
-															<div className='d-flex gap-2 align-items-center'>
+												<If
+													condition={
+														locationName !== undefined && props.createdAt !== undefined
+													}>
+													<Then>
+														<div className='d-flex flex-column flex-sm-row gap-2 align-items-center'>
+															<span className='d-flex gap-2'>
 																Joined
-																<FaLocationDot />
-																{locationName} on{' '}
+																<span className='d-flex align-items-center gap-1'>
+																	<FaLocationDot />
+																	{locationName}
+																</span>
+															</span>
+															<span className='flex-wrap'>
+																on{' '}
 																{props.createdAt
 																	? joinedDateFmt.format(new Date(props.createdAt))
 																	: ''}
-															</div>
-														</Then>
-													</If>
-												</div>
+															</span>
+														</div>
+													</Then>
+												</If>
+
+												<hr className='w-100 m-2' />
 											</div>
 										</div>
-										<div className='col-md-5'>
-											<div className='py-3'>
-												<div className='mt-4'>
-													<span className='d-block head'>{followerCount} followers</span>
-												</div>
-												<div className='mt-4'>
-													<span className='d-block head'>{props.following} following</span>
-												</div>
-												<div className='mt-4'>
-													<span className='d-block head'>{props.postCount} posts</span>
-												</div>
-											</div>
+										<div className='pb-3 d-flex gap-2 align-items-center justify-content-evenly'>
+											<span className='d-block head'>{props.following} Following</span>
+											<div className='vr'></div>
+											<span className=''>
+												{followerCount} Follower{followerCount !== 1 ? 's' : ''}
+											</span>
+											<div className='vr'></div>
+											<span className='d-block head'>
+												{props.postCount} Post{props.postCount !== 1 ? 's' : ''}
+											</span>
 										</div>
 									</>
 								}
