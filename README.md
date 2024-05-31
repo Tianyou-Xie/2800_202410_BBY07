@@ -203,7 +203,7 @@ There are a few instances where AI was used in this project:
 -   [Trello](https://trello.com/b/ENhDCODq/2800202410bby07)
 -   [FigJam](https://www.figma.com/file/lM0sT0hbMY3v0cW2zLn5hC/2800-202410-BBY07?type=whiteboard&node-id=0-1&t=fR12pb3gUrK1EDNj-0)
 
-## Files and Folders (as of commit [eabfc90](https://github.com/Tianyou-Xie/2800_202410_BBY07/commit/eabfc9041802f74c79210bd2aa3442d6f82a347e))
+## Files and Folders (as of commit [2df6f0a](https://github.com/Tianyou-Xie/2800_202410_BBY07/commit/2df6f0a8cf27b0f37aa137d971e6ba9b0b1ebaf1))
 
 ```
 .
@@ -432,7 +432,6 @@ There are a few instances where AI was used in this project:
     │   │   ├── auth-protected.ts
     │   │   └── log.ts
     │   ├── models
-    │   │   ├── comment-relationship.ts
     │   │   ├── conversation.ts
     │   │   ├── deletedUser.ts
     │   │   ├── follow-relationship.ts
@@ -460,7 +459,6 @@ There are a few instances where AI was used in this project:
     │   │   │   │   ├── comment.ts
     │   │   │   │   ├── index.ts
     │   │   │   │   ├── like.ts
-    │   │   │   │   ├── parent.ts
     │   │   │   │   └── save.ts
     │   │   │   ├── index.ts
     │   │   │   └── search
