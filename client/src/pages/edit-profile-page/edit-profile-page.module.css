@@ -1,49 +1,49 @@
 .text-feild {
-    font-family: TTOctosquares;
-    background-color: var(--signup-background);
-    border: 2px solid black;
+	font-family: TTOctosquares;
+	background-color: var(--signup-background);
+	border: 2px solid black;
 }
 
 .feild-label {
-    font-family: Bitsumishi;
-    font-size: 15pt;
+	font-family: Bitsumishi;
+	font-size: 15pt;
 }
 
 .undo-btn {
-    font-family: BabaPro;
-    border: 2px solid black;
-    box-shadow: 4px 5px 0px #000;
-    border-radius: 0;
-    color: aliceblue;
+	font-family: BabaPro;
+	border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+	border-radius: 0;
+	color: aliceblue;
 }
 
 .submit-btn {
-    font-family: BabaPro;
-    border: 2px solid black;
-    box-shadow: 4px 5px 0px #000;
-    border-radius: 0;
-    background-color: #2196F3;
-    color: aliceblue;
+	font-family: BabaPro;
+	border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+	border-radius: 0;
+	background-color: #2196f3;
+	color: aliceblue;
 }
 
 .submit-btn:disabled {
-    background-color: #274157;
-    box-shadow: 0px 0px 0px #000;
+	background-color: #274157;
+	box-shadow: 0px 0px 0px #000;
 }
 
 .avatar-btn {
-    color: aliceblue;
-    background-color: #242c38;
-    border: 2px solid #2196f3;
-    box-shadow: 4px 5px 0px #355a79;
-    min-width: 130px;
+	color: aliceblue;
+	background-color: #242c38;
+	border: 2px solid #2196f3;
+	box-shadow: 4px 5px 0px #355a79;
+	min-width: 130px;
 }
 
 .undo-btn:active,
 .submit-btn:active,
 .avatar-btn:active {
-    box-shadow: 4px 4px var(--signup-button-active) 5 !important;
-    transform: translateY(5px) !important;
+	box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+	transform: translateY(5px) !important;
 }
 
 @media screen and (min-width: 500px) {
