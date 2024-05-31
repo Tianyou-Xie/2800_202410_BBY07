@@ -185,7 +185,7 @@ const EditProfilePage = () => {
 								</button>
 							</div>
 							<UIBox
-								className='mt-3 p-3 w-75 mx-auto'
+								className={`${styles.uiBox} mt-3 p-3 w-100 mx-auto`}
 								curved
 								content={
 									<div>
@@ -208,7 +208,7 @@ const EditProfilePage = () => {
 								}
 							/>
 							<UIBox
-								className='mt-3 p-3 w-75 mx-auto'
+								className={`${styles.uiBox} mt-3 p-3 w-100 mx-auto`}
 								curved
 								content={
 									<div>

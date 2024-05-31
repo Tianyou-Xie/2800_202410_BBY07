@@ -45,3 +45,15 @@
     box-shadow: 4px 4px var(--signup-button-active) 5 !important;
     transform: translateY(5px) !important;
 }
+
+@media screen and (min-width: 500px) {
+	.ui-box {
+		width: 75% !important;
+	}
+}
+
+@media screen and (min-width: 800px) {
+	.ui-box {
+		width: 50% !important;
+	}
+}
