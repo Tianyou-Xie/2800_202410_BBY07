@@ -14,7 +14,7 @@ import { SpaceTraveller } from './space-traveller';
 import { StarBackground } from './star-background';
 import { useLocation } from 'wouter';
 import { If, Then } from 'react-if';
-import Header from '../../components/Header/Header';
+import Header from '../../components/header/header';
 
 interface Props {
 	interactable: boolean;

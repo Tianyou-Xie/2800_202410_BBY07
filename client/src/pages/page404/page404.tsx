@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import Header from '../../components/Header/Header';
+import Header from '../../components/header/header';
 import UIBox from '../../components/UIBox/UIBox';
 import styles from './page404.module.css';
 import { Container, Image } from 'react-bootstrap';
