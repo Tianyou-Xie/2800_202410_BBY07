@@ -96,7 +96,7 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 			try {
 				const response = await api.get<PostResponse>(`/post/${id}`);
 				if (response.data.success) setPostDetails(response.data.value);
-			} catch { }
+			} catch {}
 		};
 
 		fetchPost();
@@ -152,8 +152,8 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 
 					<Post
 						{...postDetails}
+						format='expanded'
 						commentCount={postDetails.commentCount + postedComments.length}
-						displayTime={true}
 					/>
 
 					<hr className='w-100 m-0' />

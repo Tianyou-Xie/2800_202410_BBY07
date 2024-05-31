@@ -4,8 +4,8 @@ import { Link } from 'wouter';
 import { api } from '../../../lib/axios';
 import style from './post-header.module.css';
 import { UserAuthContext } from '../../../lib/auth';
-import UIBox from '../../UIBox/UIBox';
 import ModalConfirmation from '../../ModalConfirmation/ModalConfirmation';
+import UIBox from '../../UIBox/UIBox';
 import { FaTrashAlt } from 'react-icons/fa';
 
 /**
@@ -15,7 +15,7 @@ import { FaTrashAlt } from 'react-icons/fa';
  */
 interface Props {
 	userName: string;
-	displayTime?: boolean;
+	format: 'short' | 'expanded';
 	authorId: string;
 	avatarUrl?: string;
 	createdAt?: Date;
@@ -36,7 +36,7 @@ interface Props {
  * @param props.authorId string - Id of the author of the post.
  * @param props.userName string - UserName of author of the post.
  * @param props.createdAt Date - (optional) Date in which the post was created.
- * @param props.displayTime boolean - If true, displays the time in which the post was displayed
+ * @param props.format short | long - If true, displays extra information and actions about the post
  * @param props.avatarUrl string - Url for displaying the avatar picture
  * @param props.deleted boolean - If true, displays the post as a deleted post.
  * @param props.Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
@@ -45,8 +45,10 @@ interface Props {
 export const PostHeader = (props: Props) => {
 	const user = useContext(UserAuthContext);
 	const currentUserId = user?._id; // Assuming user object has _id property
+
 	const timeOptions: Intl.DateTimeFormatOptions =
-		props.displayTime === true ? { hour: 'numeric', minute: 'numeric' } : {};
+		props.format === 'expanded' ? { hour: 'numeric', minute: 'numeric' } : {};
+
 	const dateFormatter = Intl.DateTimeFormat(navigator.language, {
 		month: 'long',
 		day: 'numeric',
@@ -109,14 +111,14 @@ export const PostHeader = (props: Props) => {
 					</Then>
 				</If>
 
-				<div className='d-flex flex-column align-items-start gap-1'>
+				<div className='d-flex flex-column align-items-start gap-1 w-100 position-relative'>
 					<Link
 						href={'/user/' + props.authorId ?? '/'}
 						className='text-decoration-none text-white bg-black rounded-4 px-2 py-1'>
 						<span>@{props.userName}</span>
 					</Link>
 
-					<div className={`d-flex gap-2 ps-1 ${style.infoList}`}>
+					<div className={`d-flex gap-2 ps-1 ${style.infoList} align-items-center flex-wrap me-5`}>
 						<If condition={!!date}>
 							<Then>
 								<small className='text-muted'>{dateFormatter.format(date)}</small>
@@ -129,25 +131,30 @@ export const PostHeader = (props: Props) => {
 							</Then>
 						</If>
 					</div>
-				</div>
 
-				<If condition={(props.authorId === currentUserId || user.admin) && !props.deleted}>
-					<Then>
-						<button className={style.deleteButton} onClick={() => setShowModal(true)}>
-							<UIBox
-								className={`${style.buttons} p-1 h-100 d-flex align-items-center`}
-								content={
-									<div className='d-flex gap-1 align-items-center'>
-										<FaTrashAlt />
-									</div>
-								}
-								curved
-								clickable
-								dark
-							/>
-						</button>
-					</Then>
-				</If>
+					<If
+						condition={
+							props.format === 'expanded' &&
+							(props.authorId === currentUserId || user.admin) &&
+							!props.deleted
+						}>
+						<Then>
+							<button className='position-absolute end-0 bottom-0' onClick={() => setShowModal(true)}>
+								<UIBox
+									className={`${style.buttons} p-1 h-100 d-flex align-items-center`}
+									content={
+										<div className='d-flex gap-1 align-items-center'>
+											<FaTrashAlt />
+										</div>
+									}
+									curved
+									clickable
+									dark
+								/>
+							</button>
+						</Then>
+					</If>
+				</div>
 			</div>
 
 			<ModalConfirmation

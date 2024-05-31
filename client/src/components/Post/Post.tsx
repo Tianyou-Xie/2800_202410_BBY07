@@ -30,7 +30,7 @@ interface PostProp {
 	likeCount?: number;
 	commentCount?: number;
 	createdAt?: Date;
-	displayTime?: boolean;
+	format?: 'short' | 'expanded';
 	parentPost?: string;
 	avatarUrl?: string;
 	deleted?: boolean;
@@ -53,7 +53,7 @@ interface PostProp {
  * @param props.likeCount number - Number of likes of the post.
  * @param props.commentCount number - Number of comments of the post.
  * @param props.createdAt Date - (optional) Date in which the post was created.
- * @param props.displayTime boolean - If true, displays the time in which the post was displayed
+ * @param props.format short | long - If true, displays extra information and actions about the post
  * @param props.isRoot boolean - If true, displays the post as a root post instead of as a comment post.
  * @param props.avatarUrl string - Url for displaying the avatar picture of the author of the post
  * @param props.deleted boolean - If true, displays the post as a deleted post.
@@ -73,6 +73,9 @@ const Post = (props: PostProp): JSX.Element => {
 	const likedCacheKey = getCacheKey('liked');
 
 	const detailsUrl = `/post/${props._id}`;
+
+	const [format, setFormat] = useState<'short' | 'expanded'>(props.format ?? 'short');
+	useEffect(() => setFormat(props.format ?? 'short'), [props.format]);
 
 	/**
 	 * Use effect used to fetch the save status of that post (if a post
@@ -208,7 +211,7 @@ const Post = (props: PostProp): JSX.Element => {
 
 	return (
 		<div className={styles.postContainer}>
-			<PostHeader {...props} />
+			<PostHeader {...props} format={format} />
 
 			<UIBox
 				className='p-2'
