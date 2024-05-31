@@ -34,6 +34,8 @@ interface ProfileProp {
 const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
 
 /**
+ * Builds a Profile component that contains all the user information according
+ * to the inputs.
  *
  * @param props._id string - Id of the user
  * @param props.userName string - Username of the user
@@ -59,6 +61,9 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	const [avatarUrl, setAvatarUrl] = useState(props.avatarUrl);
 	const [locationName, setLocationName] = useState('');
 
+	/**
+	 *
+	 */
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
 			if (!props._id) {
@@ -79,10 +84,16 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		fetchSaveStatus();
 	}, [props._id]);
 
+	/**
+	 *
+	 */
 	useEffect(() => {
 		setAvatarUrl(props.avatarUrl);
 	}, [props.avatarUrl]);
 
+	/**
+	 *
+	 */
 	useEffect(() => {
 		const id = props.location?.planetId;
 		if (!id) return setLocationName('');
@@ -92,6 +103,9 @@ const Profile = (props: ProfileProp): JSX.Element => {
 			.catch();
 	}, [props.location]);
 
+	/**
+	 *
+	 */
 	const onFollow = async () => {
 		if (isActionActive) return;
 		setIsActionActive(true);
@@ -118,6 +132,9 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	const avatarFileTypes = ['image/png', 'image/jpeg', 'image/webp'];
 	const changeAvatarInput = useRef<HTMLInputElement>(null);
 
+	/**
+	 *
+	 */
 	const initiateAvatarChange = () => {
 		const input = changeAvatarInput.current;
 		if (!input) return;
@@ -126,6 +143,10 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	};
 
 	const [isUploadingFile, setUploadingFile] = useState(false);
+
+	/**
+	 *
+	 */
 	const changeAvatar = (imageFile: File) => {
 		if (!avatarFileTypes.includes(imageFile.type) || imageFile.size > 3e6) {
 			toast.error('Invalid file selected!');
@@ -156,6 +177,9 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		reader.readAsDataURL(imageFile);
 	};
 
+	/**
+	 *
+	 */
 	const avatarImgElement = useMemo(() => {
 		if (!avatarUrl) return <></>;
 		return (

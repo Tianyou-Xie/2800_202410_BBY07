@@ -5,6 +5,13 @@ import { useContext } from 'react';
 import { UserAuthContext } from '../../lib/auth';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 
+/**
+ * ProfilePage component representing the own user's profile page, containing profile
+ * information and personal feed (all posts made by the user) and being different by
+ * being and editable profile page.
+ *
+ * @return JSX.Element -Profile Page as a JSX.Element
+ */
 const ProfilePage = () => {
 	const user = useContext(UserAuthContext);
 
@@ -24,4 +31,7 @@ const ProfilePage = () => {
 	);
 };
 
+/**
+ * Exports the ProfilePage component for external use.
+ */
 export default ProfilePage;
