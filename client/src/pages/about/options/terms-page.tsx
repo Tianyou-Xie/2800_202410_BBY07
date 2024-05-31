@@ -5,9 +5,9 @@ import styles from '../about-page.module.css';
 import Page from '../../../components/Page/Page';
 
 /**
- * Constructs and returns the terms of use page.
+ * Constructs and returns the Terms of Use page.
  *
- * @returns the terms of use page as a JSX.Element.
+ * @returns the Terms of Use page as a JSX.Element.
  */
 const Terms = () => {
 	return (
@@ -132,6 +132,6 @@ const Terms = () => {
 };
 
 /**
- * Exports the terms of conditions page for external use.
+ * Exports the Terms of Use page for external use.
  */
 export default Terms;

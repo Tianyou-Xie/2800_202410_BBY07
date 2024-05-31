@@ -29,6 +29,10 @@ export const PaginatedPostFeed = (props: Props) => {
 	const [loading, setLoading] = useState(false);
 	const [posts, setPosts] = useState<any[]>([]);
 
+	/**
+	 *
+	 * @returns
+	 */
 	const checkScroll = () => {
 		const postsList = postsListRef.current;
 		if (!postsList) return;
@@ -38,6 +42,9 @@ export const PaginatedPostFeed = (props: Props) => {
 		if (distFromBottom <= rect.height / 4) setPage((page) => page + 1);
 	};
 
+	/**
+	 *
+	 */
 	useEffect(() => {
 		if (endReached || loading) return;
 
@@ -45,6 +52,9 @@ export const PaginatedPostFeed = (props: Props) => {
 		return () => clearInterval(interval);
 	}, [endReached, loading]);
 
+	/**
+	 *
+	 */
 	useEffect(() => {
 		setLoading(true);
 		props
