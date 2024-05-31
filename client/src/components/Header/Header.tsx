@@ -59,7 +59,9 @@ const Header = (props: Props) => {
 						<Navbar.Text onClick={handlePageReturn}>
 							<IoArrowBackCircleOutline className={styles.returnIcon} />
 						</Navbar.Text>
-						<Navbar.Text className={styles.pageTitle}>{props.pageName}</Navbar.Text>
+						<Navbar.Text style={{ fontSize: "2remf" }} className={styles.pageTitle}>
+							{props.pageName}
+						</Navbar.Text>
 					</Container>
 				</Navbar>
 			)}

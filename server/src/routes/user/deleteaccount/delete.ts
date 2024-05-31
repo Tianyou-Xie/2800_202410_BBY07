@@ -47,12 +47,13 @@ export const post: Handler[] = [
 		await userRef.updateOne({
 			email: null,
 			sso: null,
-			userName: 'deletedUser',
+			userName: 'Deleted User',
 			password: null,
 			location: null,
 			bio: null,
 			birthDate: null,
 			avatarUrl: null,
+			deleted: true
 		});
 
 		const deletedUser = new DeletedUserModel({
@@ -70,8 +71,9 @@ export const post: Handler[] = [
 			postCount: userCopy.postCount,
 			savedPosts: userCopy.savedPosts,
 			admin: userCopy.admin,
-			createdAt: Date.now(),
+			deleted: true,
 		});
+		
 		await deletedUser.save();
 
 		Resolve(res).okWith(userCopy, 'Account deleted successfully.');

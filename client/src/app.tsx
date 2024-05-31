@@ -22,7 +22,6 @@ import Home from './pages/home/home';
 import Login from './pages/login/login-component';
 import Signup from './pages/signup/signup-component';
 import About from './pages/about/about-page';
-import Changepassword from './pages/changepassword/changepassword';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
 import GeneralFeed from './pages/general-feed/general-feed';
 import UserSettings from './pages/user-settings/user-settings-page';
@@ -34,6 +33,7 @@ import Terms from './pages/about/options/terms-page';
 import FAQs from './pages/faqs/faqs-page';
 import LikedPage from './pages/user-settings/options/liked';
 import SavedPage from './pages/user-settings/options/saved';
+import CommentedPostPage from './pages/user-settings/options/commented';
 import FollowingPage from './pages/following/following';
 import FollowerPage from './pages/follower/follower';
 import PostPage from './pages/post-page/post-page';
@@ -45,15 +45,17 @@ import PlanetFeed from './pages/planet-feed/planet-feed';
 import MessagesAll from './pages/messages-all/messages';
 import SearchPage from './pages/search-page/search-page';
 import Page404 from './pages/page404/page404';
+import EditProfilePage from './pages/edit-profile-page/edit-profile-page';
 
 /* Imports for custom componets made */
 import SEO from './components/seo/seo';
 import { Loader } from './components/loader/loader';
-import Cursors from './components/cursor/cursor';
+import SupportPage from './pages/support-page/support-page';
+import AboutSkynetPage from './pages/about/options/about-skynet-page';
 
 /**
  * Contructs, manages, and returns the entire client side.
- * 
+ *
  * @returns the client side application as a JSX.Element.
  */
 export const App = () => {
@@ -81,7 +83,9 @@ export const App = () => {
 			<Route path='/about' component={About} />
 			<Route path='/about/policy' component={Policy} />
 			<Route path='/about/terms' component={Terms} />
+			<Route path='/about/about-skynet' component={AboutSkynetPage} />
 			<Route path='/faqs' component={FAQs} />
+			<Route path='/support' component={SupportPage} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
 			<Route path='/planets' component={Planets} />
@@ -98,7 +102,6 @@ export const App = () => {
 			/>
 
 			<ToastContainer />
-			<Cursors />
 
 			<If condition={loading}>
 				<Then>
@@ -117,21 +120,22 @@ export const App = () => {
 						<Else>
 							<UserAuthContext.Provider value={authenticatedUser}>
 								<Switch>
-									<Route path='/'>{() => <PlanetMap />}</Route>
-									<Route path='/home'>{() => <PlanetMap />}</Route>
+									<Route path='/'>{() => <PlanetMap interactable />}</Route>
+									<Route path='/home'>{() => <PlanetMap interactable />}</Route>
 									<Route path='/home-list' component={Home} />
-									<Route path='/changepassword' component={Changepassword} />
 									<Route path='/feed' component={GeneralFeed} />
 									<Route path='/post' component={PostPage} />
 									<Route path='/search' component={SearchPage} />
 									<Route path='/user/:id' component={UserPage} />
 									<Route path='/feed/:planetName/:id' component={PlanetFeed} />
 									<Route path='/profile' component={ProfilePage} />
+									<Route path='/profile/edit' component={EditProfilePage} />
 									<Route path='/settings' component={UserSettings} />
 									<Route path='/settings/manageAccount' component={ManageAccount} />
 									<Route path='/messages/:id' component={Messages} />
 									<Route path='/liked' component={LikedPage} />
 									<Route path='/saved' component={SavedPage} />
+									<Route path='/commented' component={CommentedPostPage} />
 									<Route path='/following' component={FollowingPage} />
 									<Route path='/followers' component={FollowerPage} />
 									<Route path='/messages' component={MessagesAll} />

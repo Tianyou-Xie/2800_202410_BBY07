@@ -6,6 +6,10 @@ import { api } from '../../lib/axios';
 import { toast } from 'react-toastify';
 import { useLocation } from 'wouter';
 import { UserAuthContext } from '../../lib/auth';
+import { FaEdit } from 'react-icons/fa';
+import { AxiosError } from 'axios';
+import { Else, If, Then } from 'react-if';
+import { SmallLoader } from '../../components/loader/small-loader';
 
 interface PostProps {}
 
@@ -18,7 +22,10 @@ const PostPage = function (props: PostProps) {
 	}
 
 	const [planets, setPlanets] = useState<Array<Planet>>([]);
-	const [_, setLocation] = useLocation();
+	const [_, navigate] = useLocation();
+
+	const [selectedPlanet, setSelectedPlanet] = useState(user?.location.planetId);
+	const [postContent, setPostContent] = useState('');
 
 	useEffect(() => {
 		(async function fetchPlanets() {
@@ -32,7 +39,12 @@ const PostPage = function (props: PostProps) {
 		})();
 	}, []);
 
+	const [loading, setLoading] = useState(false);
+
 	async function submitPost() {
+		if (loading) return;
+		setLoading(true);
+
 		const geoLoc = await new Promise<GeolocationPosition | undefined>((res) => {
 			navigator.geolocation.getCurrentPosition(
 				(p) => res(p),
@@ -40,28 +52,23 @@ const PostPage = function (props: PostProps) {
 			);
 		});
 
-		const postContent = document.getElementsByTagName('textarea');
-		const content = postContent[0].value;
-		const planet = document.getElementsByTagName('select');
-		const planetID = planet[0].value;
-
 		const postRequest = {
-			content: content,
+			content: postContent,
 			location: {
 				latitude: geoLoc ? geoLoc.coords.latitude : 0,
 				longitude: geoLoc ? geoLoc.coords.longitude : 0,
-				planetId: planetID,
+				planetId: selectedPlanet,
 			},
 		};
 
-		console.log(postRequest);
-
 		try {
 			const res = await api.post('/post', postRequest);
-			setLocation('/profile');
-			toast.success(res.data.message);
+			const postId = res.data.value._id;
+			if (!postId) throw 'Post was not able to be created.';
+			toast.success('Post was created!');
+			navigate(`/post/${postId}`);
 		} catch (err: any) {
-			toast.error(`${err.response.data.error}`, {
+			toast.error(err instanceof AxiosError ? `${err.response?.data.error}` : err, {
 				position: 'top-right',
 				hideProgressBar: false,
 				closeOnClick: true,
@@ -70,6 +77,8 @@ const PostPage = function (props: PostProps) {
 				progress: undefined,
 				theme: 'colored',
 			});
+		} finally {
+			setLoading(false);
 		}
 	}
 
@@ -79,45 +88,75 @@ const PostPage = function (props: PostProps) {
 				pageName='Post'
 				content={
 					<>
-						<div className={styles.general}>
+						<form
+							className={`${styles.general} container`}
+							onSubmit={(e) => {
+								e.preventDefault();
+								submitPost();
+							}}>
 							<UIBox
 								className={styles.username}
-								content={user ? `@${user.userName}` : 'Unknown'}
+								content={user ? `Posting as @${user.userName}` : 'Error retrieving username'}
 								curved
 								dark
 							/>
 							<UIBox
-								className={styles.post}
+								className={`${styles.post} mb-2`}
 								content={
 									<textarea
 										id='post'
 										name='post'
 										className={styles.textBox}
+										minLength={1}
 										maxLength={324}
-										placeholder='Share your ideas...'></textarea>
+										value={postContent}
+										onChange={(e) => setPostContent(e.target.value)}
+										placeholder='Share your ideas...'
+										required
+									/>
 								}
 								curved
 							/>
-							<div className={styles.sideButtons}>
+							<div
+								className={`${styles.sideButtons} w-100 d-flex justify-content-center justify-content-md-end`}>
 								<select
+									value={selectedPlanet}
 									name='planets'
 									id='planets'
-									defaultValue={planets[0]?._id}
-									className={styles.select}
+									className={`${styles.select} px-2 py-1`}
+									onChange={(v) => setSelectedPlanet(v.target.value.trim())}
 									required>
 									{planets.map((planet: any, index: number) => {
 										return (
 											<option key={index} value={planet._id}>
-												{planet.name}
+												{planet._id === user.location.planetId ? '🏠' : ``} {planet.name}
 											</option>
 										);
 									})}
 								</select>
-								<button className={styles.submit} onClick={submitPost}>
-									<UIBox content='Post' curved dark clickable />
-								</button>
+
+								<UIBox
+									className={`${styles.submitDiv} px-3 py-1`}
+									content={
+										<button
+											disabled={loading}
+											className={`${styles.submit} d-flex align-items-center justify-content-center gap-2`}>
+											<If condition={loading}>
+												<Then>
+													<SmallLoader style={{ color: 'white' }} />
+												</Then>
+												<Else>
+													<FaEdit /> Create Post
+												</Else>
+											</If>
+										</button>
+									}
+									curved
+									dark
+									clickable
+								/>
 							</div>
-						</div>
+						</form>
 					</>
 				}
 			/>

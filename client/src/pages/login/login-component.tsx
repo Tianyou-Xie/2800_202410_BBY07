@@ -45,10 +45,9 @@ const Login = () => {
 			toast.success('Logged in successfully.');
 		} catch (error: any) {
 			let err = error.response.data.success;
-			console.log(err);
-			toast.error('🦄 Wrong Credentials', {
+			toast.error('No account exists with that email and password.', {
 				position: 'top-right',
-				autoClose: 55000,
+				autoClose: 5500,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: true,

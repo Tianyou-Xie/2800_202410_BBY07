@@ -1,12 +1,13 @@
 .about-body {
     width: 100%;
+    max-width: 750px;
     font-family: BabaPro;
-     background-color: var(--signup-background);
-     border: 2px solid black;
-	box-shadow: 4px 5px 0px #000;
+    background-color: var(--signup-background);
+    border: 2px solid black;
+    box-shadow: 4px 5px 0px #000;
 }
 
-.about-body * {   
+.about-body * {
     background-color: var(--signup-background);
 }
 
@@ -18,13 +19,36 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;    
+    align-items: center;
 }
 
-.group-item {    
+.group-item {
     border-color: gray;
 }
 
 .offical-pages-body {
     font-family: Fjalla One;
+    width: 80%;
+}
+
+.heading-style {
+    color: white;
+    background-color: #242C38;
+    padding: 6px;
+}
+
+.second-heading {
+    display: block;
+    border-bottom: 5px solid #242C38;
+}
+
+.final-phrase {
+    display: block;
+    border-bottom: 5px solid #242C38;
+}
+
+@media only screen and (max-width: 767px) {
+    .offical-pages-body {
+        width: 100%;
+    }
 }

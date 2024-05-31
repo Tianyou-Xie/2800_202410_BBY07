@@ -163,6 +163,7 @@ body:has(.landing-display) {
 }
 
 .join-msg {
+    font-family: Bitsumishi;
     background-color: var(--signup-background);
     border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;

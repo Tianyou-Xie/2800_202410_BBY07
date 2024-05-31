@@ -23,12 +23,13 @@ interface Props {
 
 /**
  * Contructs, manages, and returns the YourInfoModal component.
- * 
+ *
  * @param props the props for this YourInfoModal, as seen outlined in the interface
  * @returns The YourInfoModal component as a JSX.Element
  */
 const YourInfoModal = (props: Props) => {
 	const user = useContext(UserAuthContext);
+	const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
 
 	return (
 		<>
@@ -41,7 +42,11 @@ const YourInfoModal = (props: Props) => {
 						<Then>
 							<p>Username: {user.userName}</p>
 							<p>Email: {user.email ?? 'Authenticated with Provider'}</p>
-							<p>Bio: {user.bio ?? 'No Bio Provided'}</p>
+							<p>Bio: {user.bio ? user.bio : 'No Bio Provided'}</p>
+							<p>Followers: {user.followerCount}</p>
+							<p>Following: {user.followingCount}</p>
+							<p>User Type: {!user.admin ? 'Basic user' : 'Administrator'}</p>
+							<p>Account Created: {joinedDateFmt.format(new Date(user.createdAt))}</p>
 						</Then>
 						<Else>
 							<p className='text-danger'>An error occured.</p>
@@ -52,7 +57,6 @@ const YourInfoModal = (props: Props) => {
 				footer={
 					<div className='w-100 d-flex justify-content-center'>
 						<Button
-							className='me-3'
 							variant='secondary'
 							onClick={() => {
 								props.infoBody.setInfoBody(false);

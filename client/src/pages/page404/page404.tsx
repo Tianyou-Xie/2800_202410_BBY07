@@ -20,13 +20,11 @@ const Page404 = () => {
 							<UIBox className={styles.buttons} content='Main Page' curved clickable />
 						</Link>
 						<Link className={styles.linkText} href='/faqs'>
-							<UIBox className={styles.buttons} content='Contact Us' curved dark clickable />
+							<UIBox className={styles.buttons} content='FAQs' curved dark clickable />
 						</Link>
 					</Container>
 				</div>
 			</div>
-			{/* <Image src='/among-us.jpg' className={styles.image} /> */}
-			<div className={styles.rest}>@Sky.net trademark 2024. BCIT - Project 2800</div>
 		</div>
 	);
 };

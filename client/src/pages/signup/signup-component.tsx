@@ -60,17 +60,9 @@ const Signup = () => {
 			const token = res.value;
 			Auth.saveToken(token);
 			navigate('/');
-			toast.success('User created successfully');
+			toast.success('Account created successfully.');
 		} catch (err: any) {
-			toast.error(`🦄 ${err.response.data.error}`, {
-				position: 'top-right',
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: 'colored',
-			});
+			toast.error(err.response.data.error);
 		} finally {
 			setLoading(false);
 		}

@@ -31,14 +31,21 @@
 }
 
 .login-button-login:active {
-    box-shadow: 4px 4px var(--login-button-active) 5 !important;
+	box-shadow: 4px 4px var(--login-button-active) 5 !important;
 	transform: translateY(5px) !important;
+}
+
+.input {
+	font-family: Fjalla One;
+}
+
+.button {
+	font-family: BabaPro;
 }
 
 .input,
 .button {
 	font-size: 14pt;
-	font-family: 'BabaPro';
 	background: var(--login-background);
 	border: 2px solid black;
 	outline: none;
@@ -49,8 +56,8 @@
 	display: block;
 	width: 100%;
 	line-height: 28pt;
-	margin-bottom: 20pt;
 	box-shadow: 4px 5px;
+	padding: 0 5px;
 }
 
 .button {
@@ -81,5 +88,5 @@
 }
 
 .span {
-    font-family: TTOctosquares;
+	font-family: TTOctosquares;
 }

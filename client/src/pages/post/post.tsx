@@ -122,8 +122,8 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 
 					<div className='w-100 px-3 d-flex flex-column align-items-center justify-content-center'>
 						<div className='w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
-							{postedComments.map((v) => {
-								return <Post {...v} isRoot={true} />;
+							{postedComments.map((v, i) => {
+								return <Post key={i} {...v} parentPost={undefined} />;
 							})}
 						</div>
 
@@ -132,7 +132,7 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 							fetchPage={(page) =>
 								api
 									.get(`/post/${postDetails!._id}/comment?page=${page}`)
-									.then((v) => v.data.value.map((v: any) => ({ ...v, isRoot: true })))
+									.then((v) => v.data.value.map((v: any) => ({ ...v, parentPost: undefined })))
 							}
 						/>
 					</div>

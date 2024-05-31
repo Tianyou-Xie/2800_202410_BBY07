@@ -1,6 +1,4 @@
-import styles from './user-page.module.css';
 import Page from '../../components/Page/Page';
-import Post from '../../components/Post/Post';
 import Profile from '../../components/Profile/Profile';
 import { useLocation, useParams } from 'wouter';
 import { useEffect, useState } from 'react';
@@ -9,52 +7,20 @@ import { isUser } from '../../lib/isUser';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 import SEO from '../../components/seo/seo';
 
-interface Post {
-	authorId: string;
-	commentCount: number;
-	content: string;
-	createdAt: Date;
-	deleted: false;
-	likeCount: number;
-	avatar: string;
-	location: {
-		planetId: string;
-		latitude: number;
-		longitude: number;
-		_id: string;
-	};
-	media: [];
-	__v: number;
-	_id: string;
-}
-
 const UserPage = () => {
-	const [username, setUsername] = useState('');
-	const [follower, setFollower] = useState(0);
-	const [following, setFollowing] = useState(0);
-	const [postCount, setPostCount] = useState(0);
-	const [userID, setUserID] = useState('');
-	const [avatar, setAvatar] = useState('');
+	const [userData, setUserData] = useState<any>({ userName: '' });
 	const [_, navigate] = useLocation();
 	let { id = '' } = useParams();
 
 	useEffect(() => {
 		const getUserData = async function () {
 			if (id !== undefined && (await isUser(id))) {
-				navigate('/profile');
-				return;
+				return navigate('/profile', { replace: true });
 			} else {
 				try {
 					if (id == '') return;
 					const res = await api.get('/user/' + id);
-					const data = res.data.value;
-					setUserID(data._id);
-					setUsername(data.userName);
-					setFollower(data.followerCount);
-					setFollowing(data.followingCount);
-					setPostCount(data.postCount);
-					setAvatar(data.avatarUrl);
-					// setDisplayedPosts(await getPosts());
+					setUserData(res.data.value);
 				} catch (err) {
 					console.log(err);
 				}
@@ -66,25 +32,16 @@ const UserPage = () => {
 
 	return (
 		<Page
-			pageName={username}
+			pageName={userData.userName.length < 12 ? userData.userName : 'Profile'}
 			content={
 				<>
 					<SEO
-						title={`${username} on Skynet`}
-						description={`${username} is on Skynet, join them now!`}
-						og={{ image: avatar, imageAlt: `${username} Avatar`, type: 'website' }}
+						title={`${userData.userName} on Skynet`}
+						description={`${userData.userName} is on Skynet, join them now!`}
+						og={{ image: userData.avatarUrl, imageAlt: `${userData.userName} Avatar`, type: 'website' }}
 					/>
 
-					<Profile
-						userId={userID}
-						username={username}
-						// description={'I like eating lettuce and broccoli'}
-						follower={follower}
-						following={following}
-						postCount={postCount}
-						avatar={avatar}
-						outsideUser
-					/>
+					<Profile {...userData} />
 
 					<PaginatedPostFeed
 						feedKey={id}

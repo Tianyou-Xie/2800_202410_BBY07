@@ -11,6 +11,7 @@ import Accordion from 'react-bootstrap/Accordion';
 /* Imports from other components created */
 import QuestionAccordion from '../../components/ques-accordion/ques-accordion';
 import Page from '../../components/Page/Page';
+import UIBox from '../../components/UIBox/UIBox';
 
 /* Import for Axios */
 import { api } from '../../lib/axios';
@@ -120,16 +121,22 @@ const FAQs = () => {
 				pageName='FAQs'
 				content={
 					<div className='w-75'>
-						<h3 className='w-100'>What can we help you with?</h3>
+						<h3 className={`${styles.faqHeader} w-100`}>What can we help you with?</h3>
 						<form className='w-100' onSubmit={findQuestions}>
-							<input
-								className='mb-2 w-100'
-								name='password'
-								placeholder='Search...'
-								value={searchQuery}
-								onChange={(event) => setSearch(event.target.value)}
-								type='text'
+							<UIBox
+								className='mb-3 w-100 mx-auto'
+								dark
+								content={
+									<input
+										name='password'
+										placeholder='Search...'
+										value={searchQuery}
+										onChange={(event) => setSearch(event.target.value)}
+										type='text'
+									/>
+								}
 							/>
+
 							<div className='d-flex justify-content-evenly align-items-center'>
 								<button className={`${styles.searchBtn} btn btn-primary`} type='submit'>
 									Search

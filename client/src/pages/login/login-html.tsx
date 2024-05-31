@@ -4,8 +4,12 @@ import logoUrl from '../../assets/images/SkynetLogo.png';
 import { GoogleAuthButton } from '../../components/google-auth-btn/google-auth-btn';
 import { If, Then, Else } from 'react-if';
 import { SmallLoader } from '../../components/loader/small-loader';
+import { useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading }: any) => {
+	const [showPassword, setShowPassword] = useState(false);
+
 	return (
 		<div className={styles.loginContainer}>
 			<div className='px-3 text-center'>
@@ -14,32 +18,42 @@ const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading
 				<h5 className={styles.h5}>Stay Connected Across The Galaxy</h5>
 				<div className={`${styles.loginUpperdiv} mb-1`}></div>
 				<div className={`${styles.loginForm} p-3`}>
-					<form onSubmit={submitForm}>
+					<form onSubmit={submitForm} className='d-flex flex-column gap-4'>
 						<input
 							name='email'
-							placeholder='EMAIL'
+							placeholder='Email'
 							type='email'
 							className={styles.input}
 							required
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 						/>
-						<input
-							name='password'
-							placeholder='********'
-							type='password'
-							className={styles.input}
-							required
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
 
-						<button disabled={loading} className={`${styles.button} mb-3 w-100`}>
+						<div className='d-flex align-align-items-center justify-content-center gap-2'>
+							<input
+								name='password'
+								placeholder='Password'
+								type={showPassword ? 'text' : 'password'}
+								className={styles.input}
+								required
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+
+							<button
+								type='button'
+								className={`${styles.button} w-auto p-2 d-flex align-items-center justify-content-center`}
+								onClick={() => setShowPassword(!showPassword)}>
+								{showPassword ? <FaEyeSlash /> : <FaEye />}
+							</button>
+						</div>
+
+						<button type='submit' disabled={loading} className={`${styles.button} mb-3 w-100`}>
 							<If condition={loading}>
 								<Then>
 									<SmallLoader />
 								</Then>
-								<Else>LOGIN</Else>
+								<Else>LOG IN</Else>
 							</If>
 						</button>
 					</form>

@@ -21,7 +21,7 @@ export const get: Handler[] = [
 		const skip = (page - 1) * limit;
 
 		const latestPosts = await PostModel.aggregate([
-			{ $match: { isRoot: { $not: { $eq: false } }, deleted: false } },
+			{ $match: { parentPost: { $exists: false }, deleted: false } },
 			{ $sort: { likeCount: -1, commentCount: -1, createdAt: -1 } },
 			{ $skip: skip },
 			{ $limit: limit },

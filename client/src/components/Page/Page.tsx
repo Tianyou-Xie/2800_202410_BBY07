@@ -1,12 +1,17 @@
 import styles from './Page.module.css';
 
 import Header from '../Header/Header';
-import Hotbar from '../Hotbar/Hotbar';
+import Hotbar from '../hotbar/hotbar';
 
+/**
+ * Interface that represents the arguments passed down to the Page component.
+ *
+ * @params Covered on the component documentation.
+ */
 interface PageProp {
+	pageName?: string;
 	content: JSX.Element | JSX.Element[];
 	logoHeader?: boolean;
-	pageName?: string;
 	noHeader?: boolean;
 	noNavbar?: boolean;
 	noBootstrap?: boolean;
@@ -17,11 +22,11 @@ interface PageProp {
  *
  * @param props.pageName string - (Optional) Name of the page
  * @param props.content JSX.Element | JSX.Element[] - Content that will be added in the middle
+ * @param props.logoHeader boolean - (Optional) Gives a header with only website name if true. If false give regular header
  * @param props.noHeader boolean - (Optional) Takes off the header
  * @param props.noNavbar boolean - (Optional) Takes off the navbar
  * @param props.noBootstrap boolean - (Optional) Takes off the bootstrap content container format
- * @param props.logoHeader boolean - (Optional) Gives a header with only website name if true. If false give regular header
- * @returns JSX.Element
+ * @returns JSX.Element - Page component as a JSX.Element
  */
 const Page = (props: PageProp) => {
 	const noHeader = props.noHeader ? styles.noHeader : '';
@@ -52,4 +57,7 @@ const Page = (props: PageProp) => {
 	);
 };
 
+/**
+ * Exports the Page component for external use.
+ */
 export default Page;

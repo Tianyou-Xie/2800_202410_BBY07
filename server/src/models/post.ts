@@ -11,7 +11,7 @@ export interface IPost {
 	location: ILocation;
 	media: Array<IMedia>;
 	deleted: boolean;
-	isRoot: boolean;
+	parentPost?: Types.ObjectId;
 }
 
 const schema = new Schema<IPost>(
@@ -22,7 +22,7 @@ const schema = new Schema<IPost>(
 		commentCount: { type: 'number', required: true, default: 0 },
 		location: { type: LocationSchema, required: true },
 		deleted: { type: 'boolean', required: true, default: false },
-		isRoot: { type: 'boolean', required: true, default: true },
+		parentPost: { type: 'ObjectID', ref: 'Post', index: true },
 		media: {
 			required: true,
 			default: [],

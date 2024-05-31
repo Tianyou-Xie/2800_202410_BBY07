@@ -23,7 +23,7 @@ import YourInfoModal from './options/your-info-modal';
 
 /**
  * Constructs, manages, and returns the user settings page.
- * 
+ *
  * @returns the user settings page as a JSX.Element
  */
 const UserSettings = () => {
@@ -37,7 +37,6 @@ const UserSettings = () => {
 
 	// calls loseToken() and logs the user out
 	function logout() {
-		console.log('here');
 		Auth.loseToken();
 		setLocation('/login');
 	}
@@ -104,8 +103,8 @@ const UserSettings = () => {
 									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link className={styles.groupItemBody} href=''>
-										<p>Commented Posts</p>
+									<Nav.Link className={styles.groupItemBody} href='/commented'>
+										<p>Commented</p>
 										<MdOutlineArrowForwardIos />
 									</Nav.Link>
 								</ListGroup.Item>
@@ -127,7 +126,7 @@ const UserSettings = () => {
 									</Nav.Link>
 								</ListGroup.Item>
 								<ListGroup.Item className={`${styles.groupItem} ms-5`}>
-									<Nav.Link className={styles.groupItemBody} href=''>
+									<Nav.Link className={styles.groupItemBody} href='/support'>
 										<p>Support</p>
 										<MdOutlineArrowForwardIos />
 									</Nav.Link>

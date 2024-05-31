@@ -15,6 +15,9 @@ import { toast } from 'react-toastify';
 /* Imports from react-bootstrap */
 import ListGroup from 'react-bootstrap/ListGroup';
 
+/* Icon imports from react-icons */
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
+
 /* Imports from other components created */
 import ChangePasswordModal from './change-password-modal';
 import DeleteAccountModal from './delete-account-modal';
@@ -223,29 +226,42 @@ const ManageAccount = () => {
 				logoHeader={false}
 				pageName='Manage Account'
 				content={
-					<ListGroup variant='flush' className={`${styles.settingBody} mt-3`}>
+					<ListGroup variant='flush' className={`${styles.settingBody} my-3`}>
 						<ListGroup.Item className={`${styles.dangerZone}`}>
 							<h1 className={`${styles.settingTitle} ms-3`}>Danger Zone</h1>
 							<ListGroup variant='flush'>
 								<ListGroup.Item
 									className={`${styles.clickable} ms-5`}
 									onClick={() => setNameBody1(true)}>
-									Change Username
+									<div className={styles.groupItemBody}>
+										<p>Change Username</p>
+										<MdOutlineArrowForwardIos />
+									</div>
+								</ListGroup.Item>
+
+								<ListGroup.Item
+									className={`${styles.clickable} ms-5`}
+									onClick={() => setEmailBody1(true)}>
+									<div className={styles.groupItemBody}>
+										<p>Change Email</p>
+										<MdOutlineArrowForwardIos />
+									</div>
 								</ListGroup.Item>
 								<ListGroup.Item
 									className={`${styles.clickable} ms-5`}
 									onClick={() => setShowPass1(true)}>
-									Change Password
-								</ListGroup.Item>
-								<ListGroup.Item
-									className={`${styles.clickable} ms-5`}
-									onClick={() => setEmailBody1(true)}>
-									Change Email
+									<div className={styles.groupItemBody}>
+										<p>Change Password</p>
+										<MdOutlineArrowForwardIos />
+									</div>
 								</ListGroup.Item>
 								<ListGroup.Item
 									className={`${styles.clickable} ms-5`}
 									onClick={() => setShowDelete1(true)}>
-									DELETE ACCOUNT
+									<div className={styles.groupItemBody}>
+										<p>DELETE ACCOUNT</p>
+										<MdOutlineArrowForwardIos />
+									</div>
 								</ListGroup.Item>
 							</ListGroup>
 						</ListGroup.Item>

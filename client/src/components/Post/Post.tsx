@@ -26,8 +26,9 @@ interface PostProp {
 	commentCount?: number;
 	createdAt?: Date;
 	displayTime?: boolean;
-	isRoot?: boolean;
+	parentPost?: string;
 	avatarUrl?: string;
+	deleted?: boolean;
 	location?: {
 		planetId: string;
 		latitude: number;
@@ -78,18 +79,18 @@ const Post = (props: PostProp): JSX.Element => {
 	}, []);
 
 	useEffect(() => {
-		if (props.isRoot !== false) return;
+		if (props.parentPost === undefined) return setParentPost(undefined);
 
 		const getParentPost = async () => {
 			try {
-				const res = await api.get(`/post/${props._id}/parent`).then((res) => res.data);
+				const res = await api.get(`/post/${props.parentPost}`).then((res) => res.data);
 				if (!res.value) return;
 				setParentPost(res.value);
 			} catch {}
 		};
 
 		getParentPost();
-	}, [props.isRoot]);
+	}, [props.parentPost]);
 
 	const onBookmark = async () => {
 		if (isActionActive) return;
@@ -176,11 +177,17 @@ const Post = (props: PostProp): JSX.Element => {
 									onClick={() => navigate(`/post/${parentPost?._id}`)}>
 									<GoCrossReference />
 									<div className='d-flex text-wrap text-break'>
-										<span>Reply of "</span>
-										<span className='text-truncate' style={{ maxWidth: '2.5rem' }}>
-											{parentPost?.content}
-										</span>
-										<span>" by {parentPost?.userName}</span>
+										{parentPost?.deleted ? (
+											<span className='text-danger'>Reply of a deleted post</span>
+										) : (
+											<>
+												<span>Reply of "</span>
+												<span className='text-truncate' style={{ maxWidth: '2.5rem' }}>
+													{parentPost?.content}
+												</span>
+												<span>" by {parentPost?.userName}</span>
+											</>
+										)}
 									</div>
 								</button>
 								<hr className='m-0' />
@@ -188,7 +195,13 @@ const Post = (props: PostProp): JSX.Element => {
 						</If>
 
 						<button onClick={viewDetails} className='p-2'>
-							<p className='text-start text-break'>{props.content}</p>
+							<p className='text-start text-break'>
+								{props.deleted ? (
+									<span className='text-danger'>Post was deleted by author.</span>
+								) : (
+									props.content
+								)}
+							</p>
 						</button>
 
 						<div className='d-flex flex-column'>

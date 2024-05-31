@@ -15,13 +15,7 @@ export const get: Handler = async (req, res) => {
 
 	const user = await UserModel.findById(id)
 		.lean()
-		.select('userName bio location avatarUrl followerCount followingCount postCount createdAt');
+		.select('userName bio location avatarUrl followerCount followingCount postCount createdAt deleted');
 	if (!user) Resolve(res).notFound('No user found by the given ID.');
 	else Resolve(res).okWith(user);
 };
-
-interface PatchBody {
-	userName?: string;
-	email?: string;
-	bio?: string;
-}

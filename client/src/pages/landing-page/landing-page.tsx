@@ -85,13 +85,13 @@ const LandingPage = () => {
 									className={`${styles.landingBtn} ${styles.loginBtn} btn me-2`}
 									type='button'
 									onClick={() => redirect('/login')}>
-									Login
+									Log in
 								</button>
 								<button
 									className={`${styles.landingBtn} ${styles.signupBtn} btn ms-2`}
 									type='button'
 									onClick={() => redirect('/signup')}>
-									Signup
+									Sign up
 								</button>
 							</div>
 						</Container>
@@ -120,10 +120,10 @@ const LandingPage = () => {
 					<div className='row featurette'>
 						<div
 							className={`${styles.featureDesc} col-md-7 mb-3 text-center d-flex justify-content-center align-items-center`}>
-							<div>
+							<div className='p-4'>
 								<h2 className={`${styles.featureHeader}`}>Interactable Planets and Galaxies</h2>
 								<p className='lead'>
-									Dive into SKY.NET and see social media redesigned for ou modern space age. With a
+									Dive into SKY.NET and see social media redesigned for our modern space age. With a
 									homepage structured around your galaxy, you can feel even closer to your friends and
 									family amongst the stars.
 								</p>
@@ -143,14 +143,14 @@ const LandingPage = () => {
 					<div className='row featurette d-flex justify-content-between'>
 						<div
 							className={`${styles.featureDescFlip} col-md-7 order-md-2 mb-3 text-center d-flex justify-content-center align-items-center`}>
-							<div>
+							<div className='p-4'>
 								<h2 className={`${styles.featureHeader} text-center`}>
 									Need to talk to someone planets or even light years away?
 								</h2>
 								<div className=''>
 									<p className='lead text-center'>
 										SKY.NET offers messaging services that let you send interplanetary messages
-										freely. Letting you keep up with others in realtime no matter how are they are.
+										freely. Letting you keep up with others in real-time no matter how far they are.
 									</p>
 								</div>
 							</div>
@@ -171,11 +171,11 @@ const LandingPage = () => {
 					<div className='row featurette d-flex justify-content-between'>
 						<div
 							className={`${styles.featureDesc} col-md-7 mb-3 text-center d-flex justify-content-center align-items-center`}>
-							<div>
+							<div className='p-4'>
 								<h2 className={`${styles.featureHeader} text-center`}>sky.net Connects All</h2>
 								<p className='lead text-center'>
 									With SKY.NET feeds you can see what is going on in your planet, other planets, and
-									even the whole galaxy.
+									even the whole galaxy. Always stay up to date with popular opinions and discussions.
 								</p>
 							</div>
 						</div>
@@ -192,7 +192,7 @@ const LandingPage = () => {
 
 					<hr />
 
-					<div className={`${styles.joinMsg} w-50 text-center p-5 mx-auto mb-5`}>
+					<div className={`${styles.joinMsg} w-75 text-center p-5 mx-auto mb-5`}>
 						<h4>Join sky.net now</h4>
 						<h5>The future of connection is here.</h5>
 						<button
