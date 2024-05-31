@@ -1,35 +1,50 @@
 /* Stylesheet import */
 import styles from './edit-profile-page.module.css';
 
+/* Imports from React */
+import { useContext, useEffect, useRef, useState } from 'react';
+import { Else, If, Then } from 'react-if';
+import { toast } from 'react-toastify';
+
 /* Import custom components that were made */
 import Page from '../../components/Page/Page';
-import { useContext, useEffect, useRef, useState } from 'react';
-import { UserAuthContext } from '../../lib/auth';
 import UIBox from '../../components/UIBox/UIBox';
-import { toast } from 'react-toastify';
-import { api } from '../../lib/axios';
-import { Else, If, Then } from 'react-if';
 import { SmallLoader } from '../../components/loader/small-loader';
 
+/* Frontend utility imports */
+import { UserAuthContext } from '../../lib/auth';
+import { api } from '../../lib/axios';
+
 const EditProfilePage = () => {
+	// fetches the info of the user logged in
 	const user = useContext(UserAuthContext);
 
+	// Indicates if the image is uploading to the database
+	// Responsible for showing the small loader
 	const [isUploadingFile, setUploadingFile] = useState(false);
+
+	// Reference to DOM elements
 	const avatarInput = useRef<HTMLInputElement>(null);
 	const undoBtn = useRef<HTMLButtonElement>(null);
 	const submitBtn = useRef<HTMLButtonElement>(null);
 
+	// stores initial info from database
 	const [initBio, setInitBio] = useState(user.bio ? user.bio : '');
 	const [initUsername, setInitUsername] = useState(user.userName);
 	const [initAvatarURl, setInitAvatarURl] = useState(user.avatarUrl);
 
+	// stores current changes
 	const [userAvatarUrl, setAvatarUrl] = useState(initAvatarURl);
 	const [userName, setUserName] = useState(initUsername);
 	const [userBio, setBio] = useState(initBio);
 
-	const [currBio, setCurrBio] = useState(initBio);
-	const [currUsername, setCurrUsername] = useState(initUsername);
+	// Stores the previous changes
+	const [prevBio, setPrevBio] = useState(initBio);
+	const [prevUsername, setPrevUsername] = useState(initUsername);
 
+	/**
+	 * Listens to changes in the userName, userBio, and userAvatarUrl and calls handleBtns.
+	 */
 	useEffect(() => {
 		handleBtns();
 	}, [userName, userBio, userAvatarUrl]);
@@ -38,9 +53,7 @@ const EditProfilePage = () => {
 	 * Manages the functionality of the hidden file input element externally
 	 */
 	const triggerAvatarInput = () => {
-		console.log("here1");
 		if (!avatarInput.current) return;
-		console.log("here2");
 		avatarInput.current.click();
 	};
 
@@ -56,7 +69,7 @@ const EditProfilePage = () => {
 	 * @author Zyrakia & SamarjitBhogal
 	 */
 	const uploadAvatar = async (file: File) => {
-		console.log("here");
+		console.log('here');
 		if (!avatarFileTypes.includes(file.type) || file.size > 3e6) {
 			toast.error('Invalid file selected!');
 			return;
@@ -83,6 +96,9 @@ const EditProfilePage = () => {
 		});
 	};
 
+	/**
+	 * Handles the toggle of the display of save and undo buttons of the page.
+	 */
 	const handleBtns = () => {
 		const undo = undoBtn.current;
 		const submit = submitBtn.current;
@@ -95,18 +111,23 @@ const EditProfilePage = () => {
 		}
 	};
 
+	/**
+	 * Handles the user changes to save when the save button is clicked.
+	 *
+	 * @returns a react toast based on an error or success prompt.
+	 */
 	const submitChanges = async () => {
 		try {
-			if (userBio !== currBio) {
-				const bioRes = await api.patch('/user/changeBio', {
+			if (userBio !== prevBio) {
+				await api.patch('/user/changeBio', {
 					newBio: userBio,
 				});
-				setCurrBio(userBio);
-			} else if (userName !== currUsername) {
-				const nameRes = await api.patch('/user/changeUsername', {
+				setPrevBio(userBio);
+			} else if (userName !== prevUsername) {
+				await api.patch('/user/changeUsername', {
 					newUsername: userName,
 				});
-				setCurrUsername(userName);
+				setPrevUsername(userName);
 			} else {
 				return toast.error('The information entered has already been saved.');
 			}
@@ -120,36 +141,31 @@ const EditProfilePage = () => {
 		undo?.toggleAttribute('hidden', false);
 	};
 
+	/**
+	 * Handles undoing the recent changes when the undo button is clicked.
+	 */
 	const undoChanges = async () => {
-		if (userBio !== initBio) {
-			try {
-				const bioRes = await api.patch('/user/changeBio', {
+		try {
+			if (userBio !== initBio) {
+				await api.patch('/user/changeBio', {
 					newBio: initBio,
 				});
-				setCurrBio(initBio);
-			} catch (error: any) {
-				toast.error(error.response.data.error);
-			}
-		}
-
-		if (userName !== initUsername) {
-			try {
-				const nameRes = await api.patch('/user/changeUsername', {
+				setPrevBio(initBio);
+			} else if (userName !== initUsername) {
+				await api.patch('/user/changeUsername', {
 					newUsername: initUsername,
 				});
-				setCurrUsername(initUsername);
-			} catch (error: any) {
-				toast.error(error.response.data.error);
+				setPrevUsername(initUsername);
+			} else if (userAvatarUrl !== initAvatarURl) {
+				try {
+					const { data: res } = await api.patch('/user/changeavatar', { avatarDataUrl: initAvatarURl });
+					if (res.success === false) throw 'Error';
+				} catch (error: any) {
+					toast.error('Failed to undo avatar! Try again later.');
+				}
 			}
-		}
-
-		if (userAvatarUrl !== initAvatarURl) {
-			try {
-				const { data: res } = await api.patch('/user/changeavatar', { avatarDataUrl: initAvatarURl });
-				if (res.success === false) throw 'Error';
-			} catch (error: any) {
-				toast.error('Failed to undo avatar! Try again later.');
-			}
+		} catch (error: any) {
+			toast.error(error.response.data.error);
 		}
 
 		setAvatarUrl(initAvatarURl);
@@ -160,6 +176,9 @@ const EditProfilePage = () => {
 		toast.success('Changes were undone.');
 	};
 
+	/**
+	 * The avatar img as a JSX.Element.
+	 */
 	const avatarImgElement = (
 		<img src={userAvatarUrl} width='210' className='rounded-circle img-fluid border border-dark-subtle shadow' />
 	);
@@ -175,9 +194,7 @@ const EditProfilePage = () => {
 								ref={avatarInput}
 								onChange={(event) => {
 									const files = event.target.files;
-									console.log("before return")
 									if (!files) return;
-									console.log('after return')
 									uploadAvatar(files[0]);
 								}}
 								type='file'
@@ -261,4 +278,7 @@ const EditProfilePage = () => {
 	);
 };
 
+/**
+ * Export for this edit profile page.
+ */
 export default EditProfilePage;
