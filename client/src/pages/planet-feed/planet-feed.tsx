@@ -1,6 +1,6 @@
 import { api } from '../../lib/axios';
 
-import Page from '../../components/kebab1/kebab';
+import Page from '../../components/page/page';
 import { useParams } from 'wouter';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 

@@ -18,7 +18,7 @@ import Nav from 'react-bootstrap/Nav';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
 /* Imports from other components created */
-import Page from '../../components/kebab1/kebab';
+import Page from '../../components/page/page';
 import YourInfoModal from './options/your-info-modal';
 
 /**

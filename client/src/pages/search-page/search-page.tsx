@@ -1,7 +1,7 @@
 import styles from './search-page.module.css';
 import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
-import Page from '../../components/kebab1/kebab';
+import Page from '../../components/page/page';
 import UIBox from '../../components/UIBox/UIBox';
 import { Container } from 'react-bootstrap';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';

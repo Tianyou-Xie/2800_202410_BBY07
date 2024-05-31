@@ -11,7 +11,7 @@ import { Link } from 'wouter';
 import { api } from '../../lib/axios';
 
 /* Imports from other components created */
-import Page from '../../components/kebab1/kebab';
+import Page from '../../components/page/page';
 
 /* Define the PostResponse interface */
 interface PostResponse {
