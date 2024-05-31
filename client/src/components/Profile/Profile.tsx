@@ -23,6 +23,7 @@ interface ProfileProp {
 	createdAt?: Date;
 	avatarUrl?: string;
 	className?: string;
+	deleted?: boolean;
 }
 
 const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
@@ -197,7 +198,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 											</If>
 											<div className='stats'></div>
 											<div className='mt-2'>
-												<h4 className={styles.username}>@{props.userName}</h4>
+												{props.deleted ? (
+													<h4 className='text-danger'>Deleted User</h4>
+												) : (
+													<h4 className={styles.username}>@{props.userName}</h4>
+												)}
 											</div>
 											<div className='mt-2 d-flex flex-column align-items-center'>
 												<If condition={props.bio}>

@@ -29,9 +29,7 @@ interface Props {
  */
 const YourInfoModal = (props: Props) => {
 	const user = useContext(UserAuthContext);
-
-	const date = new Date(user.createdAt);
-	const stringDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+	const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
 
 	return (
 		<>
@@ -48,7 +46,7 @@ const YourInfoModal = (props: Props) => {
 							<p>Followers: {user.followerCount}</p>
 							<p>Following: {user.followingCount}</p>
 							<p>User Type: {!user.admin ? 'Basic user' : 'Administrator'}</p>
-							<p>Account Created: {stringDate}</p>
+							<p>Account Created: {joinedDateFmt.format(new Date(user.createdAt))}</p>
 						</Then>
 						<Else>
 							<p className='text-danger'>An error occured.</p>

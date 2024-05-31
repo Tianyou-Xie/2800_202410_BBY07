@@ -4,25 +4,24 @@ import { SmallLoader } from '../loader/small-loader';
 import { Else, If, Then } from 'react-if';
 import UIBox from '../UIBox/UIBox';
 import { Link } from 'wouter';
-import { Container } from 'react-bootstrap';
 
+/**
+ * Interface that represents the arguments passed down to the PaginatedPostFeed component.
+ *
+ * @params Covered on the component documentation
+ */
 interface Props {
-	/**
-	 * A key that aligns to the uniqueness of this feed,
-	 * to handle scroll restoration.
-	 */
 	feedKey: string;
-
-	/**
-	 * The function used to fetch new users.
-	 * If this returns an empty array, it means that the end has been reached.
-	 */
 	fetchPage: (page: number) => Promise<any[]>;
 }
 
 /**
- * A feed of users that automatically fetches the next page while a
- * user is scrolling.
+ * A feed of user list that automatically fetches the next page while a
+ * user is scrolling down.
+ *
+ * @param props.feedKey A key that aligns to the uniqueness of this feed, to handle scroll restoration.
+ * @param props.fetchPage The function used to fetch new posts. If this returns an empty array, it means that the end has been reached.
+ * @returns JSX.Element - PaginatedPostFeed component as a JSX.Element
  */
 export const PaginatedUserList = (props: Props) => {
 	const [page, setPage] = useState(0);

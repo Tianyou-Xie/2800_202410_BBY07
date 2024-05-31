@@ -7,8 +7,6 @@ import { RawDocument } from '../../../@types/model';
 import { ILocation, RawLocationSchema } from '../../../models/location';
 import { IMedia, RawMediaSchema } from '../../../models/media';
 import Joi from 'joi';
-import { CommentRelationship } from '../../../models/comment-relationship';
-import { UserModel } from '../../../models/user';
 
 interface PostBody {
 	content: string;
@@ -32,28 +30,23 @@ export const get: Handler = async (req, res) => {
 
 	if (!mongoose.isValidObjectId(parentPostId)) return Resolve(res).badRequest('Invalid post ID provided.');
 
-	const relationships = await CommentRelationship.find({ parentPost: parentPostId })
-		.sort({ createdAt: 'descending' })
-		.skip(skip)
-		.limit(limit);
-
-	const comments = await Promise.all(
-		relationships.map(async (v) => {
-			const comment = await PostModel.findById(v.childPost).lean();
-			if (comment) {
-				const user = await UserModel.findById(comment.authorId).lean();
-				const post = await PostModel.findById(comment._id).lean();
-				if (user && post) {
-					return {
-						...comment,
-						userName: user.userName,
-						avatarUrl: user.avatarUrl,
-					};
-				}
-			}
-			return comment;
-		}),
-	);
+	const comments = await PostModel.aggregate([
+		{ $match: { parentPost: new mongoose.Types.ObjectId(parentPostId), deleted: false } },
+		{ $sort: { createdAt: -1 } },
+		{ $skip: skip },
+		{ $limit: limit },
+		{
+			$lookup: {
+				from: 'users',
+				localField: 'authorId',
+				foreignField: '_id',
+				as: 'author',
+			},
+		},
+		{ $unwind: { path: '$author' } },
+		{ $addFields: { userName: '$author.userName', avatarUrl: '$author.avatarUrl' } },
+		{ $project: { author: 0 } },
+	]);
 
 	Resolve(res).okWith(comments);
 };
@@ -90,22 +83,16 @@ export const post: Handler[] = [
 		const session = await mongoose.startSession();
 
 		try {
-			const commentRelationship = await session.withTransaction(async () => {
+			const createdComment = await session.withTransaction(async () => {
 				const comment = new PostModel({
 					authorId: currentUser._id,
 					content: body.content,
 					media: body.media,
 					location: body.location ?? currentUser.location,
-					isRoot: false,
-				});
-
-				const relationship = new CommentRelationship({
 					parentPost: parentPost._id,
-					childPost: comment._id,
 				});
 
 				await comment.save({ session });
-				await relationship.save({ session });
 
 				currentUser.postCount++;
 				await currentUser.save({ session });
@@ -113,18 +100,13 @@ export const post: Handler[] = [
 				parentPost.commentCount++;
 				await parentPost.save({ session });
 
-				return relationship;
+				return comment;
 			});
 
-			// Fetch the newly created comment with user information
-			const newComment = await PostModel.findById(commentRelationship.childPost).lean();
-			if (!newComment) throw new Error('Failed to fetch the newly created comment.');
-			const user = await UserModel.findById(newComment.authorId).lean();
-			if (!user) throw new Error('Failed to fetch the user information of the comment author.');
 			const responseComment = {
-				...newComment,
-				userName: user.userName,
-				avatarUrl: user.avatarUrl,
+				...createdComment.toObject(),
+				userName: currentUser.userName,
+				avatarUrl: currentUser.avatarUrl,
 			};
 
 			Resolve(res).created(responseComment, 'Comment created successfully.');
