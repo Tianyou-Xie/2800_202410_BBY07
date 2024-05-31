@@ -54,8 +54,8 @@ export const post: Handler[] = [
 			});
 
 			const data = await message.save();
-			io.emit('receiveMessage', data);
-			return Resolve(res).ok('Message saved successfully.');
+			// io.to(data.conversationId).emit('receiveMessage', data);
+			return Resolve(res).okWith(data,'Message saved successfully.');
 		}
 
 		const message = new MessageModel({
@@ -66,7 +66,24 @@ export const post: Handler[] = [
 
 		const data = await message.save();
 
-		io.emit('receiveMessage', data);
+        const message1 = await MessageModel.aggregate([
+            {
+                $match: { conversationId: converationID._id }
+            },
+            {
+              $group: {
+                _id: {
+                  $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+                },
+                messages: { $push: "$$ROOT" }
+              }
+            },
+            {
+              $sort: { "_id": 1 }
+            }
+          ]);
+
+		io.emit('receiveMessage', message1);
 		return Resolve(res).okWith(data, 'Message saved successfully.');
 	},
 ];

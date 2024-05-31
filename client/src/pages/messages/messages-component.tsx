@@ -54,7 +54,9 @@ const Messages = () => {
 				arr = data;
 			});
 			socket.on('displayMessage', () => {
-				setMessages((prevMessages) => [...prevMessages, arr]);
+                console.log("arr", arr)
+				// setMessages((prevMessages) => [...prevMessages, arr]);
+                setMessages(arr);
 			});
 		}
 	}, [socket]);
@@ -84,7 +86,6 @@ const Messages = () => {
 			isChat={isChat}
 			username={username}
             avatar={avatar}
-            userImage={user.avatarUrl}
 		/>
 	);
 };
