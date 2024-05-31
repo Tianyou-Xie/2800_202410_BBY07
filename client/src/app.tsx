@@ -46,12 +46,12 @@ import MessagesAll from './pages/messages-all/messages';
 import SearchPage from './pages/search-page/search-page';
 import Page404 from './pages/page404/page404';
 import EditProfilePage from './pages/edit-profile-page/edit-profile-page';
+import SupportPage from './pages/support-page/support-page';
+import AboutSkynetPage from './pages/about/options/about-skynet-page';
 
 /* Imports for custom componets made */
 import SEO from './components/seo/seo';
 import { Loader } from './components/loader/loader';
-import SupportPage from './pages/support-page/support-page';
-import AboutSkynetPage from './pages/about/options/about-skynet-page';
 
 /**
  * Contructs, manages, and returns the entire client side.
