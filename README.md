@@ -197,392 +197,310 @@ There are a few instances where AI was used in this project:
 
 ## Project Links
 
+-   [Hosted Site](https://skynetwork.app)
+-   [Hosted Development Site](https://dev.skynetwork.app)
 -   [GitHub](https://github.com/1800-BBY8/1800_202410_BBY8)
 -   [Trello](https://trello.com/b/ENhDCODq/2800202410bby07)
 -   [FigJam](https://www.figma.com/file/lM0sT0hbMY3v0cW2zLn5hC/2800-202410-BBY07?type=whiteboard&node-id=0-1&t=fR12pb3gUrK1EDNj-0)
 
-## Files and Folders (as of commit [5967d16](https://github.com/Tianyou-Xie/2800_202410_BBY07/commit/5967d16031c8085646fdacf3b991fa1af5de4a15))
+## Files and Folders (as of commit [eabfc90](https://github.com/Tianyou-Xie/2800_202410_BBY07/commit/eabfc9041802f74c79210bd2aa3442d6f82a347e))
 
 ```
 .
-�   .gitignore
-�   .prettierrc
-�   README.md
-�   Skynet Logo.png
-�   tree.txt
-�
-+---.vscode
-�       extensions.json
-�       settings.json
-�
-+---client
-�   �   .env
-�   �   index.html
-�   �   package-lock.json
-�   �   package.json
-�   �   tsconfig.json
-�   �   vite.config.ts
-�   �
-�   +---public
-�   �       among-us.jpg
-�   �       among-us2.jpg
-�   �       favicon.ico
-�   �       logo.webp
-�   �
-�   +---src
-�       �   app.tsx
-�       �   environment.ts
-�       �   index.css
-�       �   index.tsx
-�       �   vite-env.d.ts
-�       �
-�       +---assets
-�       �   +---fonts
-�       �   �       BabaPro-Bold.ttf
-�       �   �       BITSUMIS.TTF
-�       �   �       FjallaOne-Regular.ttf
-�       �   �       TT-Octosquares-Trial-Regular.ttf
-�       �   �
-�       �   +---images
-�       �   �   �   amongus-black.webp
-�       �   �   �   amongus-blue.webp
-�       �   �   �   amongus-green.webp
-�       �   �   �   amongus-pink.webp
-�       �   �   �   amongus-red.webp
-�       �   �   �   amongus-white.webp
-�       �   �   �   amongus-yellow.webp
-�       �   �   �   icons8-cursor-38.png
-�       �   �   �   Infinity_Gauntlet_Cursor.png
-�       �   �   �   Infinity_Gauntlet_Pointer.png
-�       �   �   �   SkynetLogo.png
-�       �   �   �
-�       �   �   +---icons
-�       �   �           android-chrome-192x192.png
-�       �   �           android-chrome-512x512.png
-�       �   �           apple-touch-icon.png
-�       �   �           favicon-16x16.png
-�       �   �           favicon-32x32.png
-�       �   �           favicon.ico
-�       �   �           site.webmanifest
-�       �   �
-�       �   +---videos
-�       �           home.gif
-�       �           message.gif
-�       �           post.gif
-�       �
-�       +---components
-�       �   +---cursor
-�       �   �       cursor.module.css
-�       �   �       cursor.tsx
-�       �   �
-�       �   +---google-auth-btn
-�       �   �       google-auth-btn.tsx
-�       �   �
-�       �   +---Header
-�       �   �       Header.module.css
-�       �   �       Header.tsx
-�       �   �
-�       �   +---hotbar
-�       �   �       hotbar-animation.css
-�       �   �       hotbar.module.css
-�       �   �       hotbar.tsx
-�       �   �
-�       �   +---loader
-�       �   �       loader.module.css
-�       �   �       loader.tsx
-�       �   �       small-loader.module.css
-�       �   �       small-loader.tsx
-�       �   �
-�       �   +---ModalConfirmation
-�       �   �       ModalConfirmation.module.css
-�       �   �       ModalConfirmation.tsx
-�       �   �
-�       �   +---Page
-�       �   �       Page.module.css
-�       �   �       Page.tsx
-�       �   �
-�       �   +---paginated-post-feed
-�       �   �       paginated-post-feed.tsx
-�       �   �
-�       �   +---paginated-user-list
-�       �   �       paginated-user-list.module.css
-�       �   �       paginated-user-list.tsx
-�       �   �
-�       �   +---Post
-�       �   �   �   Post.module.css
-�       �   �   �   Post.tsx
-�       �   �   �
-�       �   �   +---post-header
-�       �   �           post-header.module.css
-�       �   �           post-header.tsx
-�       �   �
-�       �   +---Profile
-�       �   �       Profile.module.css
-�       �   �       Profile.tsx
-�       �   �
-�       �   +---ques-accordion
-�       �   �       ques-accordion.module.css
-�       �   �       ques-accordion.tsx
-�       �   �
-�       �   +---scrambler
-�       �   �       scrambler.tsx
-�       �   �
-�       �   +---seo
-�       �   �       seo.tsx
-�       �   �
-�       �   +---UIBox
-�       �   �       UIBox.module.css
-�       �   �       UIBox.tsx
-�       �   �
-�       �   +---UserInfo
-�       �           UserInfo.module.css
-�       �           UserInfo.tsx
-�       �
-�       +---lib
-�       �       auth.ts
-�       �       axios.ts
-�       �       callPosts.ts
-�       �       create-slug.ts
-�       �       isUser.ts
-�       �       with-ref.ts
-�       �
-�       +---pages
-�           +---about
-�           �   �   about-page.module.css
-�           �   �   about-page.tsx
-�           �   �
-�           �   +---options
-�           �           about-skynet-page.tsx
-�           �           policy-page.tsx
-�           �           terms-page.tsx
-�           �
-�           +---edit-profile-page
-�           �       edit-profile-page.module.css
-�           �       edit-profile-page.tsx
-�           �
-�           +---faqs
-�           �       faqs-page.tsx
-�           �       faqs.module.css
-�           �
-�           +---follower
-�           �       follower.module.css
-�           �       follower.tsx
-�           �
-�           +---following
-�           �       following.module.css
-�           �       following.tsx
-�           �
-�           +---forgetpassword
-�           �       forgetpassword.module.css
-�           �       forgetpassword.tsx
-�           �
-�           +---general-feed
-�           �       general-feed.module.css
-�           �       general-feed.tsx
-�           �
-�           +---home
-�           �       home.module.css
-�           �       home.tsx
-�           �
-�           +---landing-page
-�           �       landing-page.module.css
-�           �       landing-page.tsx
-�           �
-�           +---login
-�           �       login-component.tsx
-�           �       login-html.tsx
-�           �       login.module.css
-�           �
-�           +---messages
-�           �       messages-component.tsx
-�           �       messages-html.tsx
-�           �       messages.module.css
-�           �
-�           +---messages-all
-�           �       messages.module.css
-�           �       messages.tsx
-�           �
-�           +---page404
-�           �       page404.module.css
-�           �       page404.tsx
-�           �
-�           +---planet-feed
-�           �       planet-feed.module.css
-�           �       planet-feed.tsx
-�           �
-�           +---planet-home
-�           +---planet-map
-�           �       center-visual.tsx
-�           �       decorative-star.tsx
-�           �       planet-info-card.tsx
-�           �       planet-map.tsx
-�           �       planet-visual.tsx
-�           �       space-traveller.tsx
-�           �       star-background.tsx
-�           �
-�           +---planets
-�           �       planets-component.tsx
-�           �       planets-html.tsx
-�           �       planets.module.css
-�           �
-�           +---post
-�           �       post.module.css
-�           �       post.tsx
-�           �
-�           +---post-page
-�           �       post-page.module.css
-�           �       post-page.tsx
-�           �
-�           +---profile-page
-�           �       profile-page.module.css
-�           �       profile-page.tsx
-�           �
-�           +---resetpassword
-�           �       resetpassword.module.css
-�           �       resetpassword.tsx
-�           �
-�           +---search-page
-�           �       search-page.module.css
-�           �       search-page.tsx
-�           �
-�           +---signup
-�           �       signup-component.tsx
-�           �       signup-html.tsx
-�           �       signup.module.css
-�           �
-�           +---support-page
-�           �       support-page.module.css
-�           �       support-page.tsx
-�           �
-�           +---user-page
-�           �       user-page.module.css
-�           �       user-page.tsx
-�           �
-�           +---user-settings
-�               �   user-settings-page.module.css
-�               �   user-settings-page.tsx
-�               �
-�               +---options
-�                       change-email-modal.tsx
-�                       change-password-modal.tsx
-�                       change-username-modal.tsx
-�                       commented.tsx
-�                       delete-account-modal.tsx
-�                       liked.tsx
-�                       manage-account-page.tsx
-�                       saved.tsx
-�                       your-info-modal.tsx
-�
-+---server
-    �   .env
-    �   index.ts
-    �   package-lock.json
-    �   package.json
-    �   tsconfig.json
-    �
-    +---src
-        �   environment.ts
-        �
-        +---@types
-        �       express.d.ts
-        �       model.d.ts
-        �
-        +---lib
-        �   +---auth
-        �       �   auth-adapter.ts
-        �       �   auth-worker.ts
-        �       �
-        �       +---adapters
-        �               basic-jwt.ts
-        �               google-oauth.ts
-        �
-        +---middlewares
-        �       auth-protected.ts
-        �       log.ts
-        �
-        +---models
-        �       comment-relationship.ts
-        �       conversation.ts
-        �       deletedUser.ts
-        �       follow-relationship.ts
-        �       like-interaction.ts
-        �       location.ts
-        �       media.ts
-        �       message.ts
-        �       planet.ts
-        �       post.ts
-        �       question.ts
-        �       token.ts
-        �       user.ts
-        �
-        +---routes
-        �   �   index.ts
-        �   �
-        �   +---faqs
-        �   �       index.ts
-        �   �
-        �   +---feed
-        �   �       index.ts
-        �   �       [planetOrUserId].ts
-        �   �
-        �   +---planet
-        �   �       index.ts
-        �   �       [nameOrId].ts
-        �   �
-        �   +---post
-        �   �   �   index.ts
-        �   �   �
-        �   �   +---search
-        �   �   �       [search].ts
-        �   �   �
-        �   �   +---[id]
-        �   �           comment.ts
-        �   �           index.ts
-        �   �           like.ts
-        �   �           parent.ts
-        �   �           save.ts
-        �   �
-        �   +---user
-        �       �   changeavatar.ts
-        �       �   changeBio.ts
-        �       �   changeEmail.ts
-        �       �   changepassword.ts
-        �       �   changeUsername.ts
-        �       �   chat.ts
-        �       �   commented.ts
-        �       �   conversations.ts
-        �       �   follower.ts
-        �       �   following.ts
-        �       �   forgetpassword.ts
-        �       �   getchats.ts
-        �       �   index.ts
-        �       �   liked.ts
-        �       �   login.ts
-        �       �   saved.ts
-        �       �   signup.ts
-        �       �   [id].ts
-        �       �
-        �       +---deleteaccount
-        �       �       delete.ts
-        �       �
-        �       +---oauth
-        �       �       google.ts
-        �       �
-        �       +---resetpassword
-        �       �       [token].ts
-        �       �
-        �       +---search
-        �       �       [search].ts
-        �       �
-        �       +---[id]
-        �               follow.ts
-        �
-        +---utils
-                bcrypt.ts
-                email.ts
-                express.ts
-                image.ts
-                jwt.ts
-                regex.ts
+├── .gitignore
+├── .prettierrc
+├── .vscode
+│   ├── extensions.json
+│   └── settings.json
+├── README.md
+├── Skynet Logo.png
+├── client
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   ├── among-us.jpg
+│   │   ├── among-us2.jpg
+│   │   ├── favicon.ico
+│   │   └── logo.webp
+│   ├── src
+│   │   ├── app.tsx
+│   │   ├── assets
+│   │   │   ├── fonts
+│   │   │   │   ├── BITSUMIS.TTF
+│   │   │   │   ├── BabaPro-Bold.ttf
+│   │   │   │   ├── FjallaOne-Regular.ttf
+│   │   │   │   └── TT-Octosquares-Trial-Regular.ttf
+│   │   │   ├── images
+│   │   │   │   ├── SkynetLogo.png
+│   │   │   │   ├── amongus-black.webp
+│   │   │   │   ├── amongus-blue.webp
+│   │   │   │   ├── amongus-green.webp
+│   │   │   │   ├── amongus-pink.webp
+│   │   │   │   ├── amongus-red.webp
+│   │   │   │   ├── amongus-white.webp
+│   │   │   │   ├── amongus-yellow.webp
+│   │   │   │   └── icons
+│   │   │   │       ├── android-chrome-192x192.png
+│   │   │   │       ├── android-chrome-512x512.png
+│   │   │   │       ├── apple-touch-icon.png
+│   │   │   │       ├── favicon-16x16.png
+│   │   │   │       ├── favicon-32x32.png
+│   │   │   │       ├── favicon.ico
+│   │   │   │       └── site.webmanifest
+│   │   │   └── videos
+│   │   │       ├── home.gif
+│   │   │       ├── message.gif
+│   │   │       └── post.gif
+│   │   ├── components
+│   │   │   ├── Header
+│   │   │   │   ├── Header.module.css
+│   │   │   │   └── Header.tsx
+│   │   │   ├── ModalConfirmation
+│   │   │   │   ├── ModalConfirmation.module.css
+│   │   │   │   └── ModalConfirmation.tsx
+│   │   │   ├── Page
+│   │   │   │   ├── Page.module.css
+│   │   │   │   └── Page.tsx
+│   │   │   ├── Post
+│   │   │   │   ├── Post.module.css
+│   │   │   │   ├── Post.tsx
+│   │   │   │   └── post-header
+│   │   │   │       ├── post-header.module.css
+│   │   │   │       └── post-header.tsx
+│   │   │   ├── Profile
+│   │   │   │   ├── Profile.module.css
+│   │   │   │   └── Profile.tsx
+│   │   │   ├── UIBox
+│   │   │   │   ├── UIBox.module.css
+│   │   │   │   └── UIBox.tsx
+│   │   │   ├── UserInfo
+│   │   │   │   ├── UserInfo.module.css
+│   │   │   │   └── UserInfo.tsx
+│   │   │   ├── google-auth-btn
+│   │   │   │   └── google-auth-btn.tsx
+│   │   │   ├── hotbar
+│   │   │   │   ├── hotbar-animation.css
+│   │   │   │   ├── hotbar.module.css
+│   │   │   │   └── hotbar.tsx
+│   │   │   ├── loader
+│   │   │   │   ├── loader.module.css
+│   │   │   │   ├── loader.tsx
+│   │   │   │   ├── small-loader.module.css
+│   │   │   │   └── small-loader.tsx
+│   │   │   ├── paginated-post-feed
+│   │   │   │   └── paginated-post-feed.tsx
+│   │   │   ├── paginated-user-list
+│   │   │   │   ├── paginated-user-list.module.css
+│   │   │   │   └── paginated-user-list.tsx
+│   │   │   ├── ques-accordion
+│   │   │   │   ├── ques-accordion.module.css
+│   │   │   │   └── ques-accordion.tsx
+│   │   │   ├── scrambler
+│   │   │   │   └── scrambler.tsx
+│   │   │   └── seo
+│   │   │       └── seo.tsx
+│   │   ├── environment.ts
+│   │   ├── index.css
+│   │   ├── index.tsx
+│   │   ├── lib
+│   │   │   ├── auth.ts
+│   │   │   ├── axios.ts
+│   │   │   ├── callPosts.ts
+│   │   │   ├── create-slug.ts
+│   │   │   ├── isUser.ts
+│   │   │   └── with-ref.ts
+│   │   ├── pages
+│   │   │   ├── about
+│   │   │   │   ├── about-page.module.css
+│   │   │   │   ├── about-page.tsx
+│   │   │   │   └── options
+│   │   │   │       ├── about-skynet-page.tsx
+│   │   │   │       ├── policy-page.tsx
+│   │   │   │       └── terms-page.tsx
+│   │   │   ├── edit-profile-page
+│   │   │   │   ├── edit-profile-page.module.css
+│   │   │   │   └── edit-profile-page.tsx
+│   │   │   ├── faqs
+│   │   │   │   ├── faqs-page.tsx
+│   │   │   │   └── faqs.module.css
+│   │   │   ├── follower
+│   │   │   │   ├── follower.module.css
+│   │   │   │   └── follower.tsx
+│   │   │   ├── following
+│   │   │   │   ├── following.module.css
+│   │   │   │   └── following.tsx
+│   │   │   ├── forgetpassword
+│   │   │   │   ├── forgetpassword.module.css
+│   │   │   │   └── forgetpassword.tsx
+│   │   │   ├── general-feed
+│   │   │   │   ├── general-feed.module.css
+│   │   │   │   └── general-feed.tsx
+│   │   │   ├── home
+│   │   │   │   ├── home.module.css
+│   │   │   │   └── home.tsx
+│   │   │   ├── landing-page
+│   │   │   │   ├── landing-page.module.css
+│   │   │   │   └── landing-page.tsx
+│   │   │   ├── login
+│   │   │   │   ├── login-component.tsx
+│   │   │   │   ├── login-html.tsx
+│   │   │   │   └── login.module.css
+│   │   │   ├── messages-all
+│   │   │   │   ├── messages.module.css
+│   │   │   │   └── messages.tsx
+│   │   │   ├── messages
+│   │   │   │   ├── messages-component.tsx
+│   │   │   │   ├── messages-html.tsx
+│   │   │   │   └── messages.module.css
+│   │   │   ├── page404
+│   │   │   │   ├── page404.module.css
+│   │   │   │   └── page404.tsx
+│   │   │   ├── planet-feed
+│   │   │   │   ├── planet-feed.module.css
+│   │   │   │   └── planet-feed.tsx
+│   │   │   ├── planet-map
+│   │   │   │   ├── center-visual.tsx
+│   │   │   │   ├── decorative-star.tsx
+│   │   │   │   ├── planet-info-card.tsx
+│   │   │   │   ├── planet-map.tsx
+│   │   │   │   ├── planet-visual.tsx
+│   │   │   │   ├── space-traveller.tsx
+│   │   │   │   └── star-background.tsx
+│   │   │   ├── planets
+│   │   │   │   ├── planets-component.tsx
+│   │   │   │   ├── planets-html.tsx
+│   │   │   │   └── planets.module.css
+│   │   │   ├── post-page
+│   │   │   │   ├── post-page.module.css
+│   │   │   │   └── post-page.tsx
+│   │   │   ├── post
+│   │   │   │   ├── post.module.css
+│   │   │   │   └── post.tsx
+│   │   │   ├── profile-page
+│   │   │   │   ├── profile-page.module.css
+│   │   │   │   └── profile-page.tsx
+│   │   │   ├── resetpassword
+│   │   │   │   ├── resetpassword.module.css
+│   │   │   │   └── resetpassword.tsx
+│   │   │   ├── search-page
+│   │   │   │   ├── search-page.module.css
+│   │   │   │   └── search-page.tsx
+│   │   │   ├── signup
+│   │   │   │   ├── signup-component.tsx
+│   │   │   │   ├── signup-html.tsx
+│   │   │   │   └── signup.module.css
+│   │   │   ├── support-page
+│   │   │   │   ├── support-page.module.css
+│   │   │   │   └── support-page.tsx
+│   │   │   ├── user-page
+│   │   │   │   ├── user-page.module.css
+│   │   │   │   └── user-page.tsx
+│   │   │   └── user-settings
+│   │   │       ├── options
+│   │   │       │   ├── change-email-modal.tsx
+│   │   │       │   ├── change-password-modal.tsx
+│   │   │       │   ├── change-username-modal.tsx
+│   │   │       │   ├── commented.tsx
+│   │   │       │   ├── delete-account-modal.tsx
+│   │   │       │   ├── liked.tsx
+│   │   │       │   ├── manage-account-page.tsx
+│   │   │       │   ├── saved.tsx
+│   │   │       │   └── your-info-modal.tsx
+│   │   │       ├── user-settings-page.module.css
+│   │   │       └── user-settings-page.tsx
+│   │   └── vite-env.d.ts
+│   ├── tsconfig.json
+│   └── vite.config.ts
+└── server
+    ├── index.ts
+    ├── package-lock.json
+    ├── package.json
+    ├── src
+    │   ├── @types
+    │   │   ├── express.d.ts
+    │   │   └── model.d.ts
+    │   ├── environment.ts
+    │   ├── lib
+    │   │   └── auth
+    │   │       ├── adapters
+    │   │       │   ├── basic-jwt.ts
+    │   │       │   └── google-oauth.ts
+    │   │       ├── auth-adapter.ts
+    │   │       └── auth-worker.ts
+    │   ├── middlewares
+    │   │   ├── auth-protected.ts
+    │   │   └── log.ts
+    │   ├── models
+    │   │   ├── comment-relationship.ts
+    │   │   ├── conversation.ts
+    │   │   ├── deletedUser.ts
+    │   │   ├── follow-relationship.ts
+    │   │   ├── like-interaction.ts
+    │   │   ├── location.ts
+    │   │   ├── media.ts
+    │   │   ├── message.ts
+    │   │   ├── planet.ts
+    │   │   ├── post.ts
+    │   │   ├── question.ts
+    │   │   ├── token.ts
+    │   │   └── user.ts
+    │   ├── routes
+    │   │   ├── faqs
+    │   │   │   └── index.ts
+    │   │   ├── feed
+    │   │   │   ├── [planetOrUserId].ts
+    │   │   │   └── index.ts
+    │   │   ├── index.ts
+    │   │   ├── planet
+    │   │   │   ├── [nameOrId].ts
+    │   │   │   └── index.ts
+    │   │   ├── post
+    │   │   │   ├── [id]
+    │   │   │   │   ├── comment.ts
+    │   │   │   │   ├── index.ts
+    │   │   │   │   ├── like.ts
+    │   │   │   │   ├── parent.ts
+    │   │   │   │   └── save.ts
+    │   │   │   ├── index.ts
+    │   │   │   └── search
+    │   │   │       └── [search].ts
+    │   │   └── user
+    │   │       ├── [id].ts
+    │   │       ├── [id]
+    │   │       │   └── follow.ts
+    │   │       ├── changeBio.ts
+    │   │       ├── changeEmail.ts
+    │   │       ├── changeUsername.ts
+    │   │       ├── changeavatar.ts
+    │   │       ├── changepassword.ts
+    │   │       ├── chat.ts
+    │   │       ├── commented.ts
+    │   │       ├── conversations.ts
+    │   │       ├── deleteaccount
+    │   │       │   └── delete.ts
+    │   │       ├── follower.ts
+    │   │       ├── following.ts
+    │   │       ├── forgetpassword.ts
+    │   │       ├── getchats.ts
+    │   │       ├── index.ts
+    │   │       ├── liked.ts
+    │   │       ├── login.ts
+    │   │       ├── oauth
+    │   │       │   └── google.ts
+    │   │       ├── resetpassword
+    │   │       │   └── [token].ts
+    │   │       ├── saved.ts
+    │   │       ├── search
+    │   │       │   └── [search].ts
+    │   │       └── signup.ts
+    │   └── utils
+    │       ├── bcrypt.ts
+    │       ├── email.ts
+    │       ├── express.ts
+    │       ├── image.ts
+    │       ├── jwt.ts
+    │       └── regex.ts
+    └── tsconfig.json
 
 ```
