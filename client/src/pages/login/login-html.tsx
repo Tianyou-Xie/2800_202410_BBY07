@@ -12,7 +12,7 @@ const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading
 
 	return (
 		<div className={styles.loginContainer}>
-			<div className='px-3 text-center'>
+			<div className='px-3 text-center mb-3'>
 				<img className={`${styles.img} img-fluid`} src={logoUrl} alt='Skynet Logo' />
 				<h1 className={styles.h1}>SKY.NET</h1>
 				<h5 className={styles.h5}>Stay Connected Across The Galaxy</h5>
