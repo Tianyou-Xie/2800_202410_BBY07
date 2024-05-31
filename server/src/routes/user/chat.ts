@@ -40,11 +40,11 @@ export const post: Handler[] = [
 		});
 
 		if (converationID == null) {
+
 			const conversation = new ConversationModel({
 				senderId: user._id,
 				receiverId: value.receiverId,
 			});
-
 			const convo = await conversation.save();
 
 			const message = new MessageModel({
@@ -52,9 +52,26 @@ export const post: Handler[] = [
 				senderId: user._id,
 				content: value.content,
 			});
-
 			const data = await message.save();
-			// io.to(data.conversationId).emit('receiveMessage', data);
+
+            const messages = await MessageModel.aggregate([
+                {
+                    $match: { conversationId: data.conversationId }
+                },
+                {
+                  $group: {
+                    _id: {
+                      $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+                    },
+                    messages: { $push: "$$ROOT" }
+                  }
+                },
+                {
+                  $sort: { "_id": 1 }
+                }
+              ]);
+
+            io.to(data.conversationId.toHexString()).emit('displayMessage', messages);
 			return Resolve(res).okWith(data,'Message saved successfully.');
 		}
 
@@ -63,10 +80,9 @@ export const post: Handler[] = [
 			senderId: user._id,
 			content: value.content,
 		});
-
 		const data = await message.save();
 
-        const message1 = await MessageModel.aggregate([
+        const messages = await MessageModel.aggregate([
             {
                 $match: { conversationId: converationID._id }
             },
@@ -83,7 +99,8 @@ export const post: Handler[] = [
             }
           ]);
 
-		io.emit('receiveMessage', message1);
+		// io.emit('receiveMessage', messages);
+        io.to(data.conversationId.toHexString()).emit('displayMessage', messages);
 		return Resolve(res).okWith(data, 'Message saved successfully.');
 	},
 ];

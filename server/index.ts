@@ -6,7 +6,6 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
-// import multipart from 'connect-multiparty'
 
 import { requestLogger } from './src/middlewares/log.js';
 import { getServerHost, SERVER_PORT } from './src/environment';
@@ -26,12 +25,13 @@ const PROJECT_ROOT = path.join(__dirname, 'src');
 		});
 
 		socket.on('sendID', (convoID: string) => {
+            console.log("sendID", convoID)
 			socket.join(convoID);
 		});
 
-		socket.on('sendMessage', (convoID: string) => {
-			socket.to(convoID).emit('displayMessage');
-		});
+		/* socket.on('sendMessage', (convoID: string) => {
+		socket.to(convoID).emit('displayMessage');
+		}); */
 	});
 
 	app.set('socketio', io);
@@ -40,7 +40,6 @@ const PROJECT_ROOT = path.join(__dirname, 'src');
 	app.use(express.urlencoded({ extended: true, limit: '5mb', parameterLimit: 100 }));
 	app.use(express.json({ limit: '5mb' }));
 	app.use(requestLogger);
-	// app.use(multipart());
 
 	const mongoUrl = process.env.MONGO_URL!;
 	await mongoose.connect(mongoUrl);
