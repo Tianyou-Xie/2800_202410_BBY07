@@ -1,15 +1,33 @@
+/* Stylesheet imports */
 import styles from './resetpassword.module.css';
-import logoUrl from '../../assets/images/SkynetLogo.png';
+
+/* Import from react and toastify */
 import React, { useState } from 'react';
-import { api } from '../../lib/axios';
-import Page from '../../components/Page/Page';
 import { toast } from 'react-toastify';
+
+/* Import from wouter */
 import { useLocation } from 'wouter';
 
+/* Imports for frontend api call and authentication verification */
+import { api } from '../../lib/axios';
+
+/* Imports from other components created */
+import Page from '../../components/Page/Page';
+
+/* Import from local files */
+import logoUrl from '../../assets/images/SkynetLogo.png';
+
+/* Define the Props interface */
 interface Props {
 	token: string;
 }
 
+/**
+ * Constructs, manages, and returns the Resetpassword component.
+ *
+ * @param token The token used to reset the password
+ * @return The Resetpassword component as a JSX.Element
+ */
 const Resetpassword: React.FC<Props> = ({ token }) => {
 	const [password, setPassword] = useState('');
 	const [confirmpassword, setConfirmPassword] = useState('');
