@@ -26,7 +26,7 @@ interface PostProp {
 	commentCount?: number;
 	createdAt?: Date;
 	displayTime?: boolean;
-	isRoot?: boolean;
+	parentPost?: string;
 	avatarUrl?: string;
 	deleted?: boolean;
 	location?: {
@@ -79,18 +79,18 @@ const Post = (props: PostProp): JSX.Element => {
 	}, []);
 
 	useEffect(() => {
-		if (props.isRoot !== false) return;
+		if (props.parentPost === undefined) return setParentPost(undefined);
 
 		const getParentPost = async () => {
 			try {
-				const res = await api.get(`/post/${props._id}/parent`).then((res) => res.data);
+				const res = await api.get(`/post/${props.parentPost}`).then((res) => res.data);
 				if (!res.value) return;
 				setParentPost(res.value);
 			} catch {}
 		};
 
 		getParentPost();
-	}, [props.isRoot]);
+	}, [props.parentPost]);
 
 	const onBookmark = async () => {
 		if (isActionActive) return;

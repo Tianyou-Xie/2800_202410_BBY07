@@ -20,14 +20,12 @@ export const get: Handler[] = [
 
 		let search: mongoose.FilterQuery<IPost>;
 		const existingPlanet = await PlanetModel.exists({ _id: planetOrUserId }).lean();
-		if (existingPlanet) search = { 'location.planetId': existingPlanet._id, 'isRoot': { $not: { $eq: false } } };
+		if (existingPlanet) search = { 'location.planetId': existingPlanet._id, 'parentPost': { $exists: false } };
 		else {
 			const existingUser = await UserModel.exists({ _id: planetOrUserId }).lean();
 			if (existingUser) search = { authorId: existingUser._id };
 			else return Resolve(res).notFound('No planet or user by the given ID exists.');
 		}
-
-		const userId = req.user!._id;
 
 		const rawPage = parseInt(typeof req.query.page === 'string' ? req.query.page : '');
 		const page = Math.max(1, typeof rawPage !== 'number' || isNaN(rawPage) ? 1 : rawPage);
