@@ -96,7 +96,7 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 			try {
 				const response = await api.get<PostResponse>(`/post/${id}`);
 				if (response.data.success) setPostDetails(response.data.value);
-			} catch {}
+			} catch { }
 		};
 
 		fetchPost();

@@ -1,15 +1,26 @@
+/* Stylesheet imports */
 import styles from './post-page.module.css';
+
+
+
+/* Import from React */
+import { useContext, useEffect, useState } from 'react';
+import { Else, If, Then } from 'react-if';
+import { toast } from 'react-toastify';
+import { FaEdit } from 'react-icons/fa';
+
+/* Import from wouter */
+import { useLocation } from 'wouter';
+
+/* Imports for frontend api call and authentication verification */
+import { api } from '../../lib/axios';
+import { AxiosError } from 'axios';
+import { UserAuthContext } from '../../lib/auth';
+
+/* Import from other components created */
+import { SmallLoader } from '../../components/loader/small-loader';
 import Page from '../../components/Page/Page';
 import UIBox from '../../components/UIBox/UIBox';
-import { useContext, useEffect, useState } from 'react';
-import { api } from '../../lib/axios';
-import { toast } from 'react-toastify';
-import { useLocation } from 'wouter';
-import { UserAuthContext } from '../../lib/auth';
-import { FaEdit } from 'react-icons/fa';
-import { AxiosError } from 'axios';
-import { Else, If, Then } from 'react-if';
-import { SmallLoader } from '../../components/loader/small-loader';
 
 /**
  * PostPage component represents a page in which the user can create a post.

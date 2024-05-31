@@ -1,18 +1,25 @@
+/* Import from React */
 import { useEffect, useState, useContext } from 'react';
 import { If, Then } from 'react-if';
-import { Link } from 'wouter';
-import { api } from '../../../lib/axios';
-import style from './post-header.module.css';
-import { UserAuthContext } from '../../../lib/auth';
-import ModalConfirmation from '../../ModalConfirmation/ModalConfirmation';
-import UIBox from '../../UIBox/UIBox';
 import { FaTrashAlt } from 'react-icons/fa';
 
-/**
- * Interface that represents the arguments passed down to the PostHeader component.
- *
- * @params Covered on the component documentation.
- */
+/* Import from wouter */
+import { Link } from 'wouter';
+
+/* Imports for frontend api call and authentication verification */
+import { api } from '../../../lib/axios';
+
+/* Stylesheet imports */
+import style from './post-header.module.css';
+
+/* Import from other components created */
+import { UserAuthContext } from '../../../lib/auth';
+import ModalConfirmation from '../../ModalConfirmation/ModalConfirmation';
+
+/* Import from UI components */
+import UIBox from '../../UIBox/UIBox';
+
+/* Define the Props interface */
 interface Props {
 	userName: string;
 	format: 'short' | 'expanded';
@@ -88,8 +95,7 @@ export const PostHeader = (props: Props) => {
 		try {
 			await api.delete(`/post/${props._id}`);
 			setShowModal(false);
-			// Optionally, you can remove the post from the DOM here or refresh the feed
-			window.location.reload(); // Simple way to refresh the feed
+			window.location.reload();
 		} catch (error) {
 			console.error('Failed to delete post:', error);
 		}

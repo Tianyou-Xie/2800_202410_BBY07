@@ -1,20 +1,29 @@
-import { useEffect, useState } from 'react';
-
+/* Stylesheet imports */
 import styles from './Post.module.css';
 
+/* Import from React */
+import { useEffect, useState } from 'react';
+import { If, Then } from 'react-if';
+
+/* Import from wouter */
+import { useLocation } from 'wouter';
+
+/* Import from UI components */
 import UIBox from '../UIBox/UIBox';
 
-// Icons
-import { FaRegHeart } from 'react-icons/fa'; //<FaRegHeart />	//Empty heart
-import { FaHeart } from 'react-icons/fa'; //<FaHeart />	// Filled heart
-import { RiShareBoxLine } from 'react-icons/ri'; //<RiShareBoxLine />
-import { FaRegBookmark } from 'react-icons/fa'; //<FaRegBookmark />	//Empty bookmark
-import { FaBookmark } from 'react-icons/fa'; //<FaBookmark />	//Filled bookmark
-import { FaRocketchat } from 'react-icons/fa'; //<FaRocketchat />
-import { useLocation } from 'wouter';
-import { api } from '../../lib/axios';
-import { If, Then } from 'react-if';
+/* Import from React Icons */
+import { FaRegHeart } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
+import { RiShareBoxLine } from 'react-icons/ri';
+import { FaRegBookmark } from 'react-icons/fa';
+import { FaBookmark } from 'react-icons/fa';
+import { FaRocketchat } from 'react-icons/fa';
 import { GoCrossReference } from 'react-icons/go';
+
+/* Imports for frontend api call and authentication verification */
+import { api } from '../../lib/axios';
+
+/* Import from other components created */
 import { PostHeader } from './post-header/post-header';
 
 /**
@@ -106,7 +115,7 @@ const Post = (props: PostProp): JSX.Element => {
 				const res = await api.get(`/post/${props.parentPost}`).then((res) => res.data);
 				if (!res.value) return;
 				setParentPost(res.value);
-			} catch {}
+			} catch { }
 		};
 
 		getParentPost();
