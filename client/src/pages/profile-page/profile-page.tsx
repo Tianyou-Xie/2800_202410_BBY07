@@ -1,5 +1,5 @@
 import Page from '../../components/page/page';
-import Profile from '../../components/Profile/Profile';
+import Profile from '../../components/kebabprofile/kebabprofile';
 import { api } from '../../lib/axios';
 import { useContext } from 'react';
 import { UserAuthContext } from '../../lib/auth';

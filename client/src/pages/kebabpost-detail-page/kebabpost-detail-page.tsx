@@ -1,5 +1,5 @@
 /* Stylesheet imports */
-import styles from './post.module.css';
+import styles from './post-detail-page.module.css';
 
 /* Import from React */
 import React, { useEffect, useState } from 'react';
@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 
 /* Import from other components created */
-import Post from '../../components/Post/Post';
+import Post from '../../components/kebabpost/kebabpost';
 import Page from '../../components/page/page';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 import { Loader } from '../../components/loader/loader';

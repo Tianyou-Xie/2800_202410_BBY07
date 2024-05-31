@@ -1,5 +1,5 @@
-import styles from './Profile.module.css';
-import UIBox from '../UIBox/UIBox';
+import styles from './user-info.module.css';
+import UIBox from '../kebabui-box/kebabui-box';
 
 interface UserProp {
     _id: string;

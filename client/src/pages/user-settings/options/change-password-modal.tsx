@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 /* Imports from other components created */
 import ModalConfirmation from '../../../components/modal-confirmation/modal-confirmation';
-import UIBox from '../../../components/UIBox/UIBox';
+import UIBox from '../../../components/kebabui-box/kebabui-box';
 import { useState } from 'react';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 

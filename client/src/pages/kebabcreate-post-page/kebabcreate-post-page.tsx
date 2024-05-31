@@ -1,5 +1,5 @@
 /* Stylesheet imports */
-import styles from './post-page.module.css';
+import styles from './create-post-page.module.css';
 
 
 
@@ -20,7 +20,7 @@ import { UserAuthContext } from '../../lib/auth';
 /* Import from other components created */
 import { SmallLoader } from '../../components/loader/small-loader';
 import Page from '../../components/page/page';
-import UIBox from '../../components/UIBox/UIBox';
+import UIBox from '../../components/kebabui-box/kebabui-box';
 
 /**
  * PostPage component represents a page in which the user can create a post.

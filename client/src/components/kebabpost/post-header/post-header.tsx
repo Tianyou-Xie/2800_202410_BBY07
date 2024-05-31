@@ -17,7 +17,7 @@ import { UserAuthContext } from '../../../lib/auth';
 import ModalConfirmation from '../../modal-confirmation/modal-confirmation';
 
 /* Import from UI components */
-import UIBox from '../../UIBox/UIBox';
+import UIBox from '../../kebabui-box/kebabui-box';
 
 /* Define the Props interface */
 interface Props {

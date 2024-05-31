@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 /* Imports from other components created */
 import ModalConfirmation from '../../../components/modal-confirmation/modal-confirmation';
-import UIBox from '../../../components/UIBox/UIBox';
+import UIBox from '../../../components/kebabui-box/kebabui-box';
 
 /**
  * The properties and types for the ChangeEmailModal.

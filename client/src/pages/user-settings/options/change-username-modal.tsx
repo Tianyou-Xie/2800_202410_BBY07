@@ -3,7 +3,7 @@ import styles from '../user-settings-page.module.css';
 
 /* Imports from other components created */
 import ModalConfirmation from '../../../components/modal-confirmation/modal-confirmation';
-import UIBox from '../../../components/UIBox/UIBox';
+import UIBox from '../../../components/kebabui-box/kebabui-box';
 
 /* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';

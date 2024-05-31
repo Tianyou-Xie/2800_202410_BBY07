@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 /* Import custom components that were made */
 import Page from '../../components/page/page';
-import UIBox from '../../components/UIBox/UIBox';
+import UIBox from '../../components/kebabui-box/kebabui-box';
 import { SmallLoader } from '../../components/loader/small-loader';
 
 /* Frontend utility imports */
