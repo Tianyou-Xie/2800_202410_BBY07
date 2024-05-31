@@ -72,10 +72,10 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 
 				<div className={`container fixed-bottom pb-2 mt-5 ${styles.fixedBottom}`}>
 					<div className='row align-items-center'>
-						<div className={`col-1 themed-grid-col ${styles.customCol}`}>
+						{/* <div className={`col-1 themed-grid-col ${styles.customCol}`}>
 							<MdOutlineEmojiEmotions style={{ color: '#2196F3' }} size={40} />
-						</div>
-						<div className={`col-10 themed-grid-col ${styles.customCol10}`}>
+						</div> */}
+						<div className={`col-11 themed-grid-col ${styles.customCol11}`}>
 							<form onSubmit={submitForm}>
 								<input
 									type='text'
