@@ -4,8 +4,19 @@ import { api } from '../../lib/axios';
 import Page from '../../components/Page/Page';
 import styles from './messages.module.css';
 
+/**
+ * MessagesAll component displays all users with whom the current user has conversations.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered MessagesAll component.
+ */
 const MessagesAll = () => {
 	const [users, setUsers] = useState([]);
+
+     /**
+     * Fetches users with conversations from the backend API.
+     * @function fetchUsers
+     */
 	useEffect(() => {
 		const fetchUsers = async () => {
 			const { data: res } = await api.post('/user/conversations');
@@ -21,6 +32,8 @@ const MessagesAll = () => {
 
 		fetchUsers();
 	}, []);
+
+    // Renders the component
 	return (
 		<Page
 			pageName='Messages'

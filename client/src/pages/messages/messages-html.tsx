@@ -8,6 +8,21 @@ import { Else, If, Then } from 'react-if';
 
 import styles from './messages.module.css';
 
+/**
+ * MessagesHtml component handles the presentation layer for messages.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {string} props.message - The current message being typed.
+ * @param {Array<Object>} props.messages - The list of messages.
+ * @param {Function} props.setMessage - The function to update the message.
+ * @param {Function} props.submitForm - The function to handle form submission.
+ * @param {string} props.id - The ID of the conversation.
+ * @param {boolean} props.isChat - Flag indicating whether it's an active chat.
+ * @param {string} props.username - The username of the chat partner.
+ * @param {string} props.avatar - The avatar URL of the chat partner.
+ * @returns {JSX.Element} The rendered MessagesHtml component.
+ */
 const MessagesHtml = ({
 	message,
 	messages,
@@ -19,6 +34,12 @@ const MessagesHtml = ({
 	avatar,
 }:
 any) => {
+
+    /**
+	 * Handles the return to the previous page.
+	 *
+	 * @function handlePageReturn
+	 */
 	function handlePageReturn() {
 		history.back();
 	}
