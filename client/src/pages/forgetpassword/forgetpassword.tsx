@@ -1,7 +1,6 @@
 /* Stylesheet imports */
 import styles from './forgetpassword.module.css';
 
-
 import logoUrl from '../../assets/images/SkynetLogo.png';
 
 /* Import from React */
@@ -34,7 +33,6 @@ const Forgetpassword = () => {
 		if (loading) return;
 		setLoading(true);
 
-		// Compare this snippet from client/src/pages/forgetpassword/forgetpassword.tsx:
 		try {
 			await api.post('/user/forgetpassword', { email });
 		} catch (error: any) {
@@ -60,27 +58,30 @@ const Forgetpassword = () => {
 						<h1 className={styles.h1}>SKY.NET</h1>
 						<h5 className={styles.h5}>FORGET YOUR PASSWORD? WE ARE HERE TO HELP!</h5>
 						<div className={`${styles.forgetpasswordUpperdiv} mb-1`}></div>
-						<div className={styles.forgetpasswordForm}>
+						<div className={`${styles.forgetpasswordForm} p-3 w-100`}>
+							<p>Enter your email for a reset link:</p>
 							<form onSubmit={handleSubmit}>
 								<input
 									name='email'
 									placeholder='Enter your email'
 									type='email'
-									className={styles.input}
+									className={`${styles.input} mt-3 mx-auto`}
 									value={email}
 									onChange={(event) => setEmail(event.target.value)}
 									required
 								/>
 								<br />
-								<div className={`text-center`}>
+								<div className='text-center mb-3 w-75 mx-auto'>
 									<button disabled={loading} className={`${styles.button}`} type='submit'>
-										<If condition={loading}>
-											<Then>
-												<SmallLoader />
-											</Then>
-											<Else>Submit</Else>
-										</If>
+										Submit
 									</button>
+								</div>
+								<div>
+									<If condition={loading}>
+										<Then>
+											<SmallLoader />
+										</Then>
+									</If>
 								</div>
 							</form>
 						</div>

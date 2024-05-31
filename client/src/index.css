@@ -43,7 +43,8 @@ body {
 
 /* Styles for the react toasts */
 .Toastify__toast--success,
-.Toastify__toast--error {
+.Toastify__toast--error,
+.Toastify__toast--info {
 	border-radius: 0;
 	background-color: var(--signup-background);
 	color: var(--metal-grey);
