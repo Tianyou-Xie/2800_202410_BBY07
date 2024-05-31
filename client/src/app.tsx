@@ -39,7 +39,7 @@ import FollowerPage from './pages/follower/follower';
 import PostPage from './pages/create-post-page/create-post-page';
 import UserPage from './pages/user-page/user-page';
 import ProfilePage from './pages/profile-page/profile-page';
-import PostDetailPage from './pages/kebabpost-detail-page/post-detail-page';
+import PostDetailPage from './pages/post-detail-page/post-detail-page';
 import Planets from './pages/planets/planets-component';
 import PlanetFeed from './pages/planet-feed/planet-feed';
 import MessagesAll from './pages/messages-all/messages';
