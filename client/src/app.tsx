@@ -50,7 +50,6 @@ import EditProfilePage from './pages/edit-profile-page/edit-profile-page';
 /* Imports for custom componets made */
 import SEO from './components/seo/seo';
 import { Loader } from './components/loader/loader';
-import Cursors from './components/cursor/cursor';
 import SupportPage from './pages/support-page/support-page';
 import AboutSkynetPage from './pages/about/options/about-skynet-page';
 
@@ -103,7 +102,6 @@ export const App = () => {
 			/>
 
 			<ToastContainer />
-			<Cursors />
 
 			<If condition={loading}>
 				<Then>
@@ -131,7 +129,7 @@ export const App = () => {
 									<Route path='/user/:id' component={UserPage} />
 									<Route path='/feed/:planetName/:id' component={PlanetFeed} />
 									<Route path='/profile' component={ProfilePage} />
-									<Route path='/profile/edit' component={EditProfilePage}/>
+									<Route path='/profile/edit' component={EditProfilePage} />
 									<Route path='/settings' component={UserSettings} />
 									<Route path='/settings/manageAccount' component={ManageAccount} />
 									<Route path='/messages/:id' component={Messages} />

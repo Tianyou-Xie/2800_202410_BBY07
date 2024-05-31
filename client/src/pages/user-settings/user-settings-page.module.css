@@ -1,89 +1,88 @@
 .setting-body {
-    width: 100%;
-    font-size: x-large;
-    font-family: BabaPro;
+	width: 100%;
+	font-size: x-large;
+	font-family: BabaPro;
 }
 
 .setting-body p {
-    margin: 0;
+	margin: 0;
 }
 
 .setting-title {
-    font-size: 30pt;
-    font-family: Bitsumishi;
+	font-size: 30pt;
+	font-family: Bitsumishi;
 }
 
 .warning-color {
-    color: red !important;
+	color: red !important;
 }
 
 .danger-zone {
-    border: 2px solid black;
+	border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
 }
 
-.danger-zone, .danger-zone * {
-    background-color: #242C38;
-    color: red !important;
+.danger-zone,
+.danger-zone * {
+	background-color: #242c38;
+	color: red !important;
 }
 
 .group-item-holder {
-    margin-bottom: 30px;
-    margin-left: 5px;
-    margin-right: 5px;
-    font-size: 16pt;
-    border: 2px solid black;
+	margin-bottom: 30px;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 16pt;
+	border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
 }
 
-.group-item-holder, .group-item-holder * {
-    color: black;
-    background-color: var(--signup-background);
+.group-item-holder,
+.group-item-holder * {
+	color: black;
+	background-color: var(--signup-background);
 }
 
-.group-item {    
-    border-color: gray;
+.group-item {
+	border-color: gray;
 }
 
 .group-item-body {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.clickable {
-    cursor: var(--hand-cursor-url);
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .logout-btn {
-    border: 2px solid black;
+	border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
 }
 
 .logout-btn h1 {
-    margin: 0;
+	margin: 0;
 }
 
-.logout-btn, .logout-btn > * {
-    background-color: #242C38;
-    color: red;
+.logout-btn,
+.logout-btn > * {
+	background-color: #242c38;
+	color: red;
 }
 
 .logout-btn:active {
-    box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+	box-shadow: 4px 4px var(--signup-button-active) 5 !important;
 	transform: translateY(5px) !important;
 }
 
 .conf-input {
-    font-family: Fjalla One;
-    /* border-radius: 0;
+	font-family: Fjalla One;
+	/* border-radius: 0;
     border: 2px solid black;
 	box-shadow: 3px 4px 0px #000; */
 }
 
 @media screen and (min-width: 800px) {
-    .setting-body {
-        width: 50%;
-    }
+	.setting-body {
+		width: 50%;
+	}
 }
