@@ -110,9 +110,18 @@ const DeleteAccountModal = (props: Props) => {
 							}
 						/>
 
-						<div className='d-flex justify-content-evenly align-items-center'>
+						<div className='d-flex justify-content-evenly align-items-center flex-wrap'>
 							<button
-								className='btn btn-danger'
+								className='btn btn-secondary mb-3'
+								type='button'
+								onClick={() => {
+									props.deleteBody2.setShowDelete2(false);
+									clearFields();
+								}}>
+								Cancel
+							</button>
+							<button
+								className='btn btn-danger mb-3'
 								type='button'
 								onClick={() => {
 									if (props.deleteBody2.confInput === 'I-WANT-TO-DELETE-THIS-ACCOUNT') {
@@ -123,15 +132,6 @@ const DeleteAccountModal = (props: Props) => {
 									}
 								}}>
 								DELETE ACCOUNT
-							</button>
-							<button
-								className='btn btn-secondary'
-								type='button'
-								onClick={() => {
-									props.deleteBody2.setShowDelete2(false);
-									clearFields();
-								}}>
-								Cancel
 							</button>
 						</div>
 					</>
@@ -146,26 +146,27 @@ const DeleteAccountModal = (props: Props) => {
 				body={
 					<>
 						<p>
-							By clicking <span className={styles.red}>"DELETE ACCOUNT"</span> below you account will be <span className={styles.red}>permenatly deleted after 30 days</span>.
-							<br/>
-							<br/>
+							By clicking <span className={styles.red}>"DELETE ACCOUNT"</span> below you account will be{' '}
+							<span className={styles.red}>permenatly deleted after 30 days</span>.
+							<br />
+							<br />
 							If you wish to undo this contact: support@skynetwork.app
-							<br/>
-							<br/>
+							<br />
+							<br />
 							If you do not wish to proceed click <span className={styles.red}>"CANCEL"</span>.
 						</p>
-						<div className='d-flex justify-content-evenly align-items-center'>
-							<button className='btn btn-danger' type='button' onClick={props.deleteBody2.deleteAccount}>
-								DELETE ACCOUNT
-							</button>
+						<div className='d-flex justify-content-evenly align-items-center flex-wrap'>
 							<button
-								className='btn btn-secondary'
+								className='btn btn-secondary mb-3'
 								type='button'
 								onClick={() => {
 									props.deleteBody3.setShowDelete3(false);
 									clearFields();
 								}}>
 								Cancel
+							</button>
+							<button className='btn btn-danger mb-3' type='button' onClick={props.deleteBody2.deleteAccount}>
+								DELETE ACCOUNT
 							</button>
 						</div>
 					</>
