@@ -6,7 +6,7 @@ import { Else, If, Then } from 'react-if';
 import { Link } from 'wouter';
 
 import { api } from '../../lib/axios';
-import UIBox from '../kebabui-box/kebabui-box';
+import UIBox from '../ui-box/ui-box';
 import styles from './profile.module.css';
 import { toast } from 'react-toastify';
 import { SmallLoader } from '../loader/small-loader';

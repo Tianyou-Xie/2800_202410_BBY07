@@ -6,7 +6,7 @@ import ModalConfirmation from '../../../components/modal-confirmation/modal-conf
 
 /* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
-import UIBox from '../../../components/kebabui-box/kebabui-box';
+import UIBox from '../../../components/ui-box/ui-box';
 
 /* Import from react toastify */
 import { toast } from 'react-toastify';

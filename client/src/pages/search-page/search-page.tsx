@@ -2,7 +2,7 @@ import styles from './search-page.module.css';
 import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 import Page from '../../components/page/page';
-import UIBox from '../../components/kebabui-box/kebabui-box';
+import UIBox from '../../components/ui-box/ui-box';
 import { Container } from 'react-bootstrap';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 import { PaginatedUserList } from '../../components/paginated-user-list/paginated-user-list';

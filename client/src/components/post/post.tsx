@@ -9,7 +9,7 @@ import { If, Then } from 'react-if';
 import { useLocation } from 'wouter';
 
 /* Import from UI components */
-import UIBox from '../kebabui-box/kebabui-box';
+import UIBox from '../ui-box/ui-box';
 
 /* Import from React Icons */
 import { FaRegHeart } from 'react-icons/fa';

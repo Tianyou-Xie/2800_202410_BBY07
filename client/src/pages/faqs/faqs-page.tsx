@@ -11,7 +11,7 @@ import Accordion from 'react-bootstrap/Accordion';
 /* Imports from other components created */
 import QuestionAccordion from '../../components/ques-accordion/ques-accordion';
 import Page from '../../components/page/page';
-import UIBox from '../../components/kebabui-box/kebabui-box';
+import UIBox from '../../components/ui-box/ui-box';
 
 /* Import for Axios */
 import { api } from '../../lib/axios';

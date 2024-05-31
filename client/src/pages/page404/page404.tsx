@@ -1,6 +1,6 @@
 import { Link } from 'wouter';
 import Header from '../../components/header/header';
-import UIBox from '../../components/kebabui-box/kebabui-box';
+import UIBox from '../../components/ui-box/ui-box';
 import styles from './page404.module.css';
 import { Container, Image } from 'react-bootstrap';
 

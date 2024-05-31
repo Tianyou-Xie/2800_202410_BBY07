@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 
 /* Import from other components created */
-import Post from '../../components/kebabpost/kebabpost';
+import Post from '../../components/post/post';
 import Page from '../../components/page/page';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 import { Loader } from '../../components/loader/loader';
