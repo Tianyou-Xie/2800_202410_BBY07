@@ -1,4 +1,4 @@
-import styles from './post.module.css';
+import styles from './post-detail-page.module.css';
 
 import React, { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
@@ -8,6 +8,23 @@ import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginate
 import { Loader } from '../../components/loader/loader';
 import SEO from '../../components/seo/seo';
 
+/**
+ * Post interface used as a model schema for the Post data that is displayed.
+ *
+ * @param _id string - Id of the post in the database.
+ * @param authorId string - Id of the author of the post.
+ * @param content string - Text of the post.
+ * @param likeCount number - Number of likes of the post.
+ * @param commentCount number - Number of comments of the post.
+ * @param Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
+ * @param media any[] - (TODO) Contains media embedded into the post (image, video, audio, etc.)
+ * @param createdAt Date - (optional) Date in which the post was created.
+ * @param deleted boolean - If true, displays the post as a deleted post.
+ * @param userName string - UserName of author of the post.
+ * @param avatarUrl string - Url for displaying the avatar picture of the author of the post.
+ * @param parentPost string - If post is a comment, contains the _id of the parent post.
+ * @interface Post
+ */
 interface Post {
 	_id: string;
 	authorId: string;
@@ -25,8 +42,19 @@ interface Post {
 	deleted: boolean;
 	userName: string;
 	avatarUrl: string;
+	parentPost: string;
 }
 
+/**
+ * PostResponse interface used as a model schema for the response that comes from the
+ * database containing the Post information as it's value.
+ *
+ * @interface PostResponse
+ * @param statusCode number - Status code of the request (e.g. 404).
+ * @param statusMessage string - Status message of the request (e.g. 'Page not found')
+ * @param value Post - Post data sent through the request.
+ * @param success boolean - True if the request was received, processed and then sent successfully.
+ */
 interface PostResponse {
 	statusCode: number;
 	statusMessage: string;
@@ -34,10 +62,22 @@ interface PostResponse {
 	success: boolean;
 }
 
+/**
+ * Interface that represents the arguments passed down to the PostDetailPage component.
+ *
+ * @params Covered on the component documentation.
+ */
 interface Props {
 	id: string;
 }
 
+/**
+ * PostDetailPage component representing the page that contains all the details of a
+ * specific post.
+ *
+ * @param id string - Unique id of the post in the database.
+ * @return JSX.Element - PostDetailPage as a JSX.Element
+ */
 const PostDetailPage: React.FC<Props> = ({ id }) => {
 	const [postDetails, setPostDetails] = useState<Post>();
 	const [comment, setComment] = useState('');
@@ -142,4 +182,7 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 	);
 };
 
+/**
+ * Exports the PostDetailPage component for external use.
+ */
 export default PostDetailPage;

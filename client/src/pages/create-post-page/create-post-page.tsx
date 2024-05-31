@@ -1,4 +1,4 @@
-import styles from './post-page.module.css';
+import styles from './create-post-page.module.css';
 import Page from '../../components/Page/Page';
 import UIBox from '../../components/UIBox/UIBox';
 import { useContext, useEffect, useState } from 'react';
@@ -13,7 +13,7 @@ import { SmallLoader } from '../../components/loader/small-loader';
 
 interface PostProps {}
 
-const PostPage = function (props: PostProps) {
+const CreatePostPage = function (props: PostProps) {
 	const user = useContext(UserAuthContext);
 
 	interface Planet {
@@ -164,4 +164,4 @@ const PostPage = function (props: PostProps) {
 	);
 };
 
-export default PostPage;
+export default CreatePostPage;

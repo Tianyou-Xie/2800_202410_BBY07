@@ -22,6 +22,7 @@ import Home from './pages/home/home';
 import Login from './pages/login/login-component';
 import Signup from './pages/signup/signup-component';
 import About from './pages/about/about-page';
+import AboutSkynetPage from './pages/about/options/about-skynet-page';
 import Forgetpassword from './pages/forgetpassword/forgetpassword';
 import GeneralFeed from './pages/general-feed/general-feed';
 import UserSettings from './pages/user-settings/user-settings-page';
@@ -30,16 +31,17 @@ import ManageAccount from './pages/user-settings/options/manage-account-page';
 import Messages from './pages/messages/messages-component';
 import Policy from './pages/about/options/policy-page';
 import Terms from './pages/about/options/terms-page';
+import SupportPage from './pages/support-page/support-page';
 import FAQs from './pages/faqs/faqs-page';
 import LikedPage from './pages/user-settings/options/liked';
 import SavedPage from './pages/user-settings/options/saved';
 import CommentedPostPage from './pages/user-settings/options/commented';
 import FollowingPage from './pages/following/following';
 import FollowerPage from './pages/follower/follower';
-import PostPage from './pages/post-page/post-page';
+import CreatePostPage from './pages/create-post-page/create-post-page';
 import UserPage from './pages/user-page/user-page';
 import ProfilePage from './pages/profile-page/profile-page';
-import PostDetailPage from './pages/post/post';
+import PostDetailPage from './pages/post-detail-page/post-detail-page';
 import Planets from './pages/planets/planets-component';
 import PlanetFeed from './pages/planet-feed/planet-feed';
 import MessagesAll from './pages/messages-all/messages';
@@ -51,8 +53,6 @@ import EditProfilePage from './pages/edit-profile-page/edit-profile-page';
 import SEO from './components/seo/seo';
 import { Loader } from './components/loader/loader';
 import Cursors from './components/cursor/cursor';
-import SupportPage from './pages/support-page/support-page';
-import AboutSkynetPage from './pages/about/options/about-skynet-page';
 
 /**
  * Contructs, manages, and returns the entire client side.
@@ -126,12 +126,12 @@ export const App = () => {
 									<Route path='/home'>{() => <PlanetMap interactable />}</Route>
 									<Route path='/home-list' component={Home} />
 									<Route path='/feed' component={GeneralFeed} />
-									<Route path='/post' component={PostPage} />
+									<Route path='/post' component={CreatePostPage} />
 									<Route path='/search' component={SearchPage} />
 									<Route path='/user/:id' component={UserPage} />
 									<Route path='/feed/:planetName/:id' component={PlanetFeed} />
 									<Route path='/profile' component={ProfilePage} />
-									<Route path='/profile/edit' component={EditProfilePage}/>
+									<Route path='/profile/edit' component={EditProfilePage} />
 									<Route path='/settings' component={UserSettings} />
 									<Route path='/settings/manageAccount' component={ManageAccount} />
 									<Route path='/messages/:id' component={Messages} />

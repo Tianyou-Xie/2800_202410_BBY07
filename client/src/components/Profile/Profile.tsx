@@ -12,6 +12,11 @@ import { toast } from 'react-toastify';
 import { SmallLoader } from '../loader/small-loader';
 import { UserAuthContext } from '../../lib/auth';
 
+/**
+ * Interface that represents the arguments passed down to the Profile component.
+ *
+ * @params Covered on the component documentation.
+ */
 interface ProfileProp {
 	_id: string;
 	userName: string;
@@ -25,12 +30,33 @@ interface ProfileProp {
 	className?: string;
 }
 
+/** @type {*} */
 const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
 
+/**
+ *
+ * @param props._id string - Id of the user
+ * @param props.userName string - Username of the user
+ * @param props.bio string - (Optional) Small description given by the user.
+ * @param props.followerCount number - Number of followers of the user
+ * @param props.followingCount number - Number of accounts the user follows
+ * @param props.postCount number - Number of posts created by the user
+ * @param props.Location LocationOject - Location in which the user is from/was created at (planetId: string, latitude: number, longitude: number, _id: string)
+ * @param props.createdAt Date - (optional) Date in which the user was created.
+ * @param props.avatarUrl string - Url for displaying the avatar picture of the user
+ * @param props.className string - String for styling.
+ * @return JSX.Element - Profile component as a JSX.Element
+ */
 const Profile = (props: ProfileProp): JSX.Element => {
 	const user = useContext(UserAuthContext);
 
 	const [isOutsideUser, setIsOutsideUser] = useState(false);
+
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	useEffect(() => setIsOutsideUser(props._id !== user._id), [user]);
 
 	const [isActionActive, setIsActionActive] = useState(false);
@@ -39,6 +65,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	const [avatarUrl, setAvatarUrl] = useState(props.avatarUrl);
 	const [locationName, setLocationName] = useState('');
 
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
 			if (!props._id) {
@@ -59,10 +90,20 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		fetchSaveStatus();
 	}, [props._id]);
 
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	useEffect(() => {
 		setAvatarUrl(props.avatarUrl);
 	}, [props.avatarUrl]);
 
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	useEffect(() => {
 		const id = props.location?.planetId;
 		if (!id) return setLocationName('');
@@ -72,6 +113,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 			.catch();
 	}, [props.location]);
 
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	const onFollow = async () => {
 		if (isActionActive) return;
 		setIsActionActive(true);
@@ -98,6 +144,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	const avatarFileTypes = ['image/png', 'image/jpeg', 'image/webp'];
 	const changeAvatarInput = useRef<HTMLInputElement>(null);
 
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	const initiateAvatarChange = () => {
 		const input = changeAvatarInput.current;
 		if (!input) return;
@@ -106,6 +157,12 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	};
 
 	const [isUploadingFile, setUploadingFile] = useState(false);
+
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	const changeAvatar = (imageFile: File) => {
 		if (!avatarFileTypes.includes(imageFile.type) || imageFile.size > 3e6) {
 			toast.error('Invalid file selected!');
@@ -136,6 +193,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		reader.readAsDataURL(imageFile);
 	};
 
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	const avatarImgElement = useMemo(() => {
 		if (!avatarUrl) return <></>;
 		return (

@@ -4,8 +4,12 @@ import Page from '../../components/Page/Page';
 import { useParams } from 'wouter';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 
-// PLEASE, CHECK THE PROMISE USE
-// I HAD A PROBLEM WITH USING AWAIT/ASYNC INSIDE ARRAYS
+/**
+ * PlanetFeed component representing a specific planet feed containing posts only from that
+ * planet.
+ *
+ * @return JSX.Element - Planet Feed page as an JSX.Element
+ */
 const PlanetFeed = () => {
 	let { id = '' } = useParams();
 	let { planetName = 'unknown' } = useParams();
@@ -23,4 +27,7 @@ const PlanetFeed = () => {
 	);
 };
 
+/**
+ * Exports the PlanetFeed component for external use.
+ */
 export default PlanetFeed;

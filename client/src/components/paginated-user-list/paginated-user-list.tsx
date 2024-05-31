@@ -31,6 +31,11 @@ export const PaginatedUserList = (props: Props) => {
 	const [loading, setLoading] = useState(false);
 	const [users, setUsers] = useState<any[]>([]);
 
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	const fetchIncrement = async (increment: number) => {
 		if (loading || endReached) return;
 
@@ -48,6 +53,11 @@ export const PaginatedUserList = (props: Props) => {
 		}
 	};
 
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	const checkScroll = () => {
 		if (loading || endReached) return;
 
@@ -65,7 +75,18 @@ export const PaginatedUserList = (props: Props) => {
 		fetchIncrement(increment).then(() => setLoading(false));
 	};
 
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	useEffect(checkScroll, []);
+
+	/**
+	 *
+	 *
+	 * @return {*}
+	 */
 	useEffect(() => {
 		const interval = setInterval(checkScroll, 1000);
 		return () => clearInterval(interval);

@@ -2,8 +2,13 @@ import { Link } from 'wouter';
 import Header from '../../components/Header/Header';
 import UIBox from '../../components/UIBox/UIBox';
 import styles from './page404.module.css';
-import { Container, Image } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
+/**
+ * Page404 component representing the page a user should land if a page is not found.
+ *
+ * @return JSX.Element - Page404 as a JSX.Element
+ */
 const Page404 = () => {
 	return (
 		<div className={styles.page}>
@@ -29,4 +34,7 @@ const Page404 = () => {
 	);
 };
 
+/**
+ * Exports the Page404 component for external use.
+ */
 export default Page404;
