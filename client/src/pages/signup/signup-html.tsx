@@ -4,6 +4,8 @@ import logoUrl from '../../assets/images/SkynetLogo.png';
 import { GoogleAuthButton } from '../../components/google-auth-btn/google-auth-btn';
 import { Else, If, Then } from 'react-if';
 import { SmallLoader } from '../../components/loader/small-loader';
+import { useState } from 'react';
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
 
 const SignupHtml = ({
 	planets,
@@ -17,6 +19,8 @@ const SignupHtml = ({
 	submitForm,
 	loading,
 }: any) => {
+	const [showPassword, setShowPassword] = useState(false);
+
 	return (
 		<div className={styles.signupContainer}>
 			<div className='px-3 text-center'>
@@ -25,7 +29,7 @@ const SignupHtml = ({
 				<h5 className={styles.h5}>STAY CONNECTED ACROSS THE GALAXY</h5>
 				<div className={`${styles.signupUpperdiv} mb-1`}></div>
 				<div className={`${styles.signupForm} p-3`}>
-					<form onSubmit={submitForm}>
+					<form onSubmit={submitForm} className='d-flex flex-column gap-4'>
 						<input
 							name='username'
 							placeholder='Username'
@@ -44,15 +48,26 @@ const SignupHtml = ({
 							required
 							onChange={(e) => setEmail(e.target.value)}
 						/>
-						<input
-							name='password'
-							placeholder='Password'
-							type='password'
-							value={password}
-							className={styles.input}
-							required
-							onChange={(e) => setPassword(e.target.value)}
-						/>
+
+						<div className='d-flex align-align-items-center justify-content-center gap-2'>
+							<input
+								name='password'
+								placeholder='Password'
+								type={showPassword ? 'text' : 'password'}
+								className={styles.input}
+								required
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+
+							<button
+								type='button'
+								className={`${styles.button} w-auto p-2 d-flex align-items-center justify-content-center`}
+								onClick={() => setShowPassword(!showPassword)}>
+								{showPassword ? <FaEyeSlash /> : <FaEye />}
+							</button>
+						</div>
+
 						<select
 							name='planets'
 							id='planets'

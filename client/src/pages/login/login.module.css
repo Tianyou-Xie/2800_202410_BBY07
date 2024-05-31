@@ -56,8 +56,8 @@
 	display: block;
 	width: 100%;
 	line-height: 28pt;
-	margin-bottom: 20pt;
 	box-shadow: 4px 5px;
+	padding: 0 5px;
 }
 
 .button {
