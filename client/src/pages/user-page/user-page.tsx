@@ -1,17 +1,36 @@
+/* Imports from React */
+import { useEffect, useState } from 'react';
+
+/* Import from wouter */
+import { useLocation, useParams } from 'wouter';
+
+/* Imports from other components created */
 import Page from '../../components/Page/Page';
 import Profile from '../../components/Profile/Profile';
-import { useLocation, useParams } from 'wouter';
-import { useEffect, useState } from 'react';
-import { api } from '../../lib/axios';
-import { isUser } from '../../lib/isUser';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 import SEO from '../../components/seo/seo';
 
+/* Imports for frontend api call and authentication verification */
+import { isUser } from '../../lib/isUser';
+import { api } from '../../lib/axios';
+
+/**
+ * Constructs, manages, and returns the UserPage component, which
+ * represents the profile page of another specific user.
+ *
+ * @return The UserPage component as a JSX.Element
+ */
 const UserPage = () => {
 	const [userData, setUserData] = useState<any>({ userName: '' });
 	const [_, navigate] = useLocation();
 	let { id = '' } = useParams();
 
+	/**
+	 * Use effect used to check if it's the own user's profile page,
+	 * and if so, redirects him to editable version of the profile page.
+	 * If not, retrieves the data from a user and store it in a
+	 * React state.
+	 */
 	useEffect(() => {
 		const getUserData = async function () {
 			if (id !== undefined && (await isUser(id))) {

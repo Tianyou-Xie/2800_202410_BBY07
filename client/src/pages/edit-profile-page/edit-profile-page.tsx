@@ -13,18 +13,22 @@ import { SmallLoader } from '../../components/loader/small-loader';
 
 const EditProfilePage = () => {
 	const user = useContext(UserAuthContext);
-	const initBio = user.bio ? user.bio : '';
-	const initUsername = user.userName;
-	const initAvatarURl = user.avatarUrl;
 
 	const [isUploadingFile, setUploadingFile] = useState(false);
 	const avatarInput = useRef<HTMLInputElement>(null);
 	const undoBtn = useRef<HTMLButtonElement>(null);
 	const submitBtn = useRef<HTMLButtonElement>(null);
 
+	const [initBio, setInitBio] = useState(user.bio ? user.bio : '');
+	const [initUsername, setInitUsername] = useState(user.userName);
+	const [initAvatarURl, setInitAvatarURl] = useState(user.avatarUrl);
+
 	const [userAvatarUrl, setAvatarUrl] = useState(initAvatarURl);
 	const [userName, setUserName] = useState(initUsername);
 	const [userBio, setBio] = useState(initBio);
+
+	const [currBio, setCurrBio] = useState(initBio);
+	const [currUsername, setCurrUsername] = useState(initUsername);
 
 	useEffect(() => {
 		handleBtns();
@@ -34,7 +38,9 @@ const EditProfilePage = () => {
 	 * Manages the functionality of the hidden file input element externally
 	 */
 	const triggerAvatarInput = () => {
+		console.log("here1");
 		if (!avatarInput.current) return;
+		console.log("here2");
 		avatarInput.current.click();
 	};
 
@@ -50,6 +56,7 @@ const EditProfilePage = () => {
 	 * @author Zyrakia & SamarjitBhogal
 	 */
 	const uploadAvatar = async (file: File) => {
+		console.log("here");
 		if (!avatarFileTypes.includes(file.type) || file.size > 3e6) {
 			toast.error('Invalid file selected!');
 			return;
@@ -64,6 +71,8 @@ const EditProfilePage = () => {
 				const { data: res } = await api.patch('/user/changeavatar', { avatarDataUrl: dataUrl });
 				if (res.success === false) throw 'Error';
 				setAvatarUrl(res.value);
+				const undo = undoBtn.current;
+				undo?.toggleAttribute('hidden', false);
 
 				toast.success('Updated avatar! Changes may take a few minutes.');
 			} catch (error: any) {
@@ -87,28 +96,28 @@ const EditProfilePage = () => {
 	};
 
 	const submitChanges = async () => {
-		if (userName !== initUsername) {
-			try {
-				const nameRes = await api.patch('/user/changeUsername', {
-					newUsername: userName,
-				});
-			} catch (error: any) {
-				toast.error(error.response.data.error);
-			}
-		}
-		if (userBio !== initBio) {
-			try {
+		try {
+			if (userBio !== currBio) {
 				const bioRes = await api.patch('/user/changeBio', {
 					newBio: userBio,
 				});
-			} catch (error: any) {
-				toast.error(error.response.data.error);
+				setCurrBio(userBio);
+			} else if (userName !== currUsername) {
+				const nameRes = await api.patch('/user/changeUsername', {
+					newUsername: userName,
+				});
+				setCurrUsername(userName);
+			} else {
+				return toast.error('The information entered has already been saved.');
 			}
-		}
-		toast.success('Your info has been updated!');
 
-        const undo = undoBtn.current;
-        undo?.toggleAttribute('hidden', false);
+			toast.success('Your info has been updated!');
+		} catch (error: any) {
+			toast.error(error.response.data.error);
+		}
+
+		const undo = undoBtn.current;
+		undo?.toggleAttribute('hidden', false);
 	};
 
 	const undoChanges = async () => {
@@ -117,6 +126,7 @@ const EditProfilePage = () => {
 				const bioRes = await api.patch('/user/changeBio', {
 					newBio: initBio,
 				});
+				setCurrBio(initBio);
 			} catch (error: any) {
 				toast.error(error.response.data.error);
 			}
@@ -127,6 +137,7 @@ const EditProfilePage = () => {
 				const nameRes = await api.patch('/user/changeUsername', {
 					newUsername: initUsername,
 				});
+				setCurrUsername(initUsername);
 			} catch (error: any) {
 				toast.error(error.response.data.error);
 			}
@@ -136,7 +147,6 @@ const EditProfilePage = () => {
 			try {
 				const { data: res } = await api.patch('/user/changeavatar', { avatarDataUrl: initAvatarURl });
 				if (res.success === false) throw 'Error';
-				setAvatarUrl(res.value);
 			} catch (error: any) {
 				toast.error('Failed to undo avatar! Try again later.');
 			}
@@ -165,7 +175,9 @@ const EditProfilePage = () => {
 								ref={avatarInput}
 								onChange={(event) => {
 									const files = event.target.files;
+									console.log("before return")
 									if (!files) return;
+									console.log('after return')
 									uploadAvatar(files[0]);
 								}}
 								type='file'
@@ -185,7 +197,7 @@ const EditProfilePage = () => {
 								</button>
 							</div>
 							<UIBox
-								className='mt-3 p-3 w-75 mx-auto'
+								className={`${styles.uiBox} mt-3 p-3 w-100 mx-auto`}
 								curved
 								content={
 									<div>
@@ -208,7 +220,7 @@ const EditProfilePage = () => {
 								}
 							/>
 							<UIBox
-								className='mt-3 p-3 w-75 mx-auto'
+								className={`${styles.uiBox} mt-3 p-3 w-100 mx-auto`}
 								curved
 								content={
 									<div>
@@ -238,11 +250,7 @@ const EditProfilePage = () => {
 								ref={submitBtn}>
 								Save
 							</button>
-							<button
-								className={`${styles.undoBtn} btn btn-danger`}
-								ref={undoBtn}
-								onClick={undoChanges}
-								>
+							<button className={`${styles.undoBtn} btn btn-danger`} ref={undoBtn} onClick={undoChanges}>
 								Undo
 							</button>
 						</div>

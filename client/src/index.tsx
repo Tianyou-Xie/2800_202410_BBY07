@@ -7,4 +7,8 @@ import './index.css';
 
 import { App } from './app';
 
+/**
+ * Uses the ReactDOM render to render the React web app in the root
+ * div element in the file index.html.
+ */
 ReactDOM.createRoot(document.getElementById('root')!).render(<App />);

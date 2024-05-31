@@ -11,11 +11,21 @@ import { AxiosError } from 'axios';
 import { Else, If, Then } from 'react-if';
 import { SmallLoader } from '../../components/loader/small-loader';
 
-interface PostProps {}
-
-const PostPage = function (props: PostProps) {
+/**
+ * PostPage component represents a page in which the user can create a post.
+ *
+ * @return JSX.Element - PostPage as a JSX.Element
+ */
+const PostPage = function () {
 	const user = useContext(UserAuthContext);
 
+	/**
+	 * Interface used as model schema for the Planet data that is received from the database.
+	 *
+	 * @interface Planet
+	 * @param _id string - Id of the planet in the database
+	 * @param name string - Name of the planet in the database
+	 */
 	interface Planet {
 		_id: string;
 		name: string;
@@ -27,6 +37,10 @@ const PostPage = function (props: PostProps) {
 	const [selectedPlanet, setSelectedPlanet] = useState(user?.location.planetId);
 	const [postContent, setPostContent] = useState('');
 
+	/**
+	 * Use effect used to get all the planets from the database and store them in a
+	 * state in react once the page renders for the first time.
+	 */
 	useEffect(() => {
 		(async function fetchPlanets() {
 			try {
@@ -41,10 +55,21 @@ const PostPage = function (props: PostProps) {
 
 	const [loading, setLoading] = useState(false);
 
+	/**
+	 * Uses all the necessary data to submit and create the post by
+	 * sending the request to the backend route.
+	 *
+	 * @return void
+	 */
 	async function submitPost() {
 		if (loading) return;
 		setLoading(true);
 
+		/**
+		 * Gets the user geolocation coordinates and stores them in the geoLoc constant.
+		 *
+		 * @returns Promise<GeolocationPosition | undefined>
+		 */
 		const geoLoc = await new Promise<GeolocationPosition | undefined>((res) => {
 			navigator.geolocation.getCurrentPosition(
 				(p) => res(p),
@@ -52,6 +77,12 @@ const PostPage = function (props: PostProps) {
 			);
 		});
 
+		/**
+		 * Object that is used to build the post request to send the data to the backend.
+		 *
+		 * @param content string - Content of the post.
+		 * @param location LocationObj - Used to locate where the post was created from and contains {latitude: number, longitude: number, planetId: string}
+		 */
 		const postRequest = {
 			content: postContent,
 			location: {

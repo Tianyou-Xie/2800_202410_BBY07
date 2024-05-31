@@ -52,6 +52,6 @@ const About = () => {
 };
 
 /**
- * Exports the about page for external use.
+ * Exports the About us page for external use.
  */
 export default About;

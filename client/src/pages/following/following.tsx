@@ -1,9 +1,19 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'wouter'; // Import Link from wouter
-import { api } from '../../lib/axios';
-import Page from '../../components/Page/Page';
-import styles from './following.module.css'; // Import the CSS module
+/* Stylesheet imports */
+import styles from './following.module.css';
 
+/* Import from React */
+import { useEffect, useState } from 'react';
+
+/* Import from wouter */
+import { Link } from 'wouter';
+
+/* Imports for frontend api call and authentication verification */
+import { api } from '../../lib/axios';
+
+/* Imports from other components created */
+import Page from '../../components/Page/Page';
+
+/* Define the PostResponse interface */
 interface PostResponse {
 	statusCode: number;
 	statusMessage: string;
@@ -11,6 +21,7 @@ interface PostResponse {
 	success: boolean;
 }
 
+/* Define the UserProp interface */
 interface UserProp {
 	_id: string;
 	userName: string;
@@ -20,6 +31,11 @@ interface UserProp {
 	avatarUrl?: string;
 }
 
+/**
+ * Constructs, manages, and returns the FollowingPage component.
+ *
+ * @return The FollowingPage component as a JSX.Element
+ */
 const FollowingPage = () => {
 	const [followingUsers, setFollowingUsers] = useState<UserProp[]>([]);
 
@@ -28,7 +44,7 @@ const FollowingPage = () => {
 			try {
 				const response = await api.get<PostResponse>(`/user/following`);
 				if (response.data.success) setFollowingUsers(response.data.value);
-			} catch {}
+			} catch { }
 		};
 
 		fetchFollowing();

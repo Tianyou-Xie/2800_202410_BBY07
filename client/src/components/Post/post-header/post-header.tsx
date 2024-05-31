@@ -8,6 +8,11 @@ import UIBox from '../../UIBox/UIBox';
 import ModalConfirmation from '../../ModalConfirmation/ModalConfirmation';
 import { FaTrashAlt } from 'react-icons/fa';
 
+/**
+ * Interface that represents the arguments passed down to the PostHeader component.
+ *
+ * @params Covered on the component documentation.
+ */
 interface Props {
 	userName: string;
 	displayTime?: boolean;
@@ -24,6 +29,19 @@ interface Props {
 	_id: string; // Add postId prop to identify the post
 }
 
+/**
+ * Post header component representing the header of the Post component.
+ *
+ * @param props._id string - Id of the post in the database.
+ * @param props.authorId string - Id of the author of the post.
+ * @param props.userName string - UserName of author of the post.
+ * @param props.createdAt Date - (optional) Date in which the post was created.
+ * @param props.displayTime boolean - If true, displays the time in which the post was displayed
+ * @param props.avatarUrl string - Url for displaying the avatar picture
+ * @param props.deleted boolean - If true, displays the post as a deleted post.
+ * @param props.Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
+ * @returns JSX.Element - Post header as a JSX.Element
+ */
 export const PostHeader = (props: Props) => {
 	const user = useContext(UserAuthContext);
 	const currentUserId = user?._id; // Assuming user object has _id property
@@ -36,12 +54,22 @@ export const PostHeader = (props: Props) => {
 	});
 
 	const [date, setDate] = useState<Date>();
+
+	/**
+	 * Used to properly format the date the post was created from the database
+	 * once the createdAt attribute changes.
+	 */
 	useEffect(() => {
 		if (!props.createdAt) setDate(undefined);
 		else setDate(new Date(props.createdAt));
 	}, [props.createdAt]);
 
 	const [locationName, setLocationName] = useState<string>();
+
+	/**
+	 * Used to properly fetch and store the planet the post was created from
+	 * the database once the location attribute changes.
+	 */
 	useEffect(() => {
 		if (!props.location) return setLocationName(undefined);
 		api.get(`/planet/${props.location.planetId}`).then(({ data }) => setLocationName(data.value.name));
@@ -49,14 +77,11 @@ export const PostHeader = (props: Props) => {
 
 	const [showModal, setShowModal] = useState(false);
 
-	const handleDeleteClick = () => {
-		setShowModal(true);
-	};
-
-	const handleCloseModal = () => {
-		setShowModal(false);
-	};
-
+	/**
+	 * Handles the delete post request to the frontend.
+	 *
+	 * @return void
+	 */
 	const handleConfirmDelete = async () => {
 		try {
 			await api.delete(`/post/${props._id}`);
@@ -108,7 +133,7 @@ export const PostHeader = (props: Props) => {
 
 				<If condition={(props.authorId === currentUserId || user.admin) && !props.deleted}>
 					<Then>
-						<button className={style.deleteButton} onClick={handleDeleteClick}>
+						<button className={style.deleteButton} onClick={() => setShowModal(true)}>
 							<UIBox
 								className={`${style.buttons} p-1 h-100 d-flex align-items-center`}
 								content={
@@ -127,7 +152,7 @@ export const PostHeader = (props: Props) => {
 
 			<ModalConfirmation
 				show={showModal}
-				onHide={handleCloseModal}
+				onHide={() => setShowModal(false)}
 				title='Delete Post'
 				body={<p>Are you sure you want to delete this post?</p>}
 				disableFooter={false}

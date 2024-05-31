@@ -6,9 +6,10 @@ import Page from '../../components/Page/Page';
 import { Container } from 'react-bootstrap';
 
 /**
- * Constructs and returns the About us page for this website.
+ * Constructs and returns the Support page for this website in which users
+ * can contact someone in case of any errors while using the website.
  *
- * @returns the About us page as a JSX.Element.
+ * @returns the Support page as a JSX.Element.
  */
 const SupportPage = () => {
 	return (
@@ -51,6 +52,6 @@ const SupportPage = () => {
 };
 
 /**
- * Exports the about page for external use.
+ * Exports the Support page for external use.
  */
 export default SupportPage;

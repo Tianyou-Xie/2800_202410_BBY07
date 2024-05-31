@@ -12,6 +12,11 @@ import { toast } from 'react-toastify';
 import { SmallLoader } from '../loader/small-loader';
 import { UserAuthContext } from '../../lib/auth';
 
+/**
+ * Interface that represents the arguments passed down to the Profile component.
+ *
+ * @params Covered on the component documentation.
+ */
 interface ProfileProp {
 	_id: string;
 	userName: string;
@@ -28,6 +33,22 @@ interface ProfileProp {
 
 const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
 
+/**
+ * Builds a Profile component that contains all the user information according
+ * to the inputs.
+ *
+ * @param props._id string - Id of the user
+ * @param props.userName string - Username of the user
+ * @param props.bio string - (Optional) Small description given by the user.
+ * @param props.followerCount number - Number of followers of the user
+ * @param props.followingCount number - Number of accounts the user follows
+ * @param props.postCount number - Number of posts created by the user
+ * @param props.Location LocationOject - Location in which the user is from/was created at (planetId: string, latitude: number, longitude: number, _id: string)
+ * @param props.createdAt Date - (optional) Date in which the user was created.
+ * @param props.avatarUrl string - Url for displaying the avatar picture of the user
+ * @param props.className string - String for styling.
+ * @return JSX.Element - Profile component as a JSX.Element
+ */
 const Profile = (props: ProfileProp): JSX.Element => {
 	const user = useContext(UserAuthContext);
 
@@ -40,6 +61,10 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	const [avatarUrl, setAvatarUrl] = useState(props.avatarUrl);
 	const [locationName, setLocationName] = useState('');
 
+	/**
+	 * Use effect used to fetch the follow status of that user (if the user
+	 * was already followed or not) once the id of the user is created/changes.
+	 */
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
 			if (!props._id) {
@@ -60,10 +85,16 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		fetchSaveStatus();
 	}, [props._id]);
 
+	/**
+	 * Use effect used to fetch the avatar/profile picture of that user.
+	 */
 	useEffect(() => {
 		setAvatarUrl(props.avatarUrl);
 	}, [props.avatarUrl]);
 
+	/**
+	 * Use effect used to fetch the location in which that user created his profile.
+	 */
 	useEffect(() => {
 		const id = props.location?.planetId;
 		if (!id) return setLocationName('');
@@ -73,6 +104,12 @@ const Profile = (props: ProfileProp): JSX.Element => {
 			.catch();
 	}, [props.location]);
 
+	/**
+	 * Used to follow or unfollow a user and send that request
+	 * to the backend and database.
+	 *
+	 * @return void
+	 */
 	const onFollow = async () => {
 		if (isActionActive) return;
 		setIsActionActive(true);
@@ -99,6 +136,12 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	const avatarFileTypes = ['image/png', 'image/jpeg', 'image/webp'];
 	const changeAvatarInput = useRef<HTMLInputElement>(null);
 
+	/**
+	 * Used to start the upload process of an avatar change and upload of
+	 * the new image.
+	 *
+	 *  @return void
+	 */
 	const initiateAvatarChange = () => {
 		const input = changeAvatarInput.current;
 		if (!input) return;
@@ -107,6 +150,14 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	};
 
 	const [isUploadingFile, setUploadingFile] = useState(false);
+
+	/**
+	 * Used to change the avatar/rofile picture of an user based on an image
+	 * that the user uploads.
+	 * This function also takes care of changing the avatar on the database.
+	 *
+	 *  @return void
+	 */
 	const changeAvatar = (imageFile: File) => {
 		if (!avatarFileTypes.includes(imageFile.type) || imageFile.size > 3e6) {
 			toast.error('Invalid file selected!');
@@ -137,6 +188,12 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		reader.readAsDataURL(imageFile);
 	};
 
+	/**
+	 * Used to display the avatar image in the profile information section
+	 * of the profile page.
+	 *
+	 *  @return void
+	 */
 	const avatarImgElement = useMemo(() => {
 		if (!avatarUrl) return <></>;
 		return (

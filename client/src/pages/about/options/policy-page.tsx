@@ -5,9 +5,9 @@ import styles from '../about-page.module.css';
 import Page from '../../../components/Page/Page';
 
 /**
- * Constructs and returns the policy page.
+ * Constructs and returns the Policy page.
  *
- * @returns the polic page as a JSX.Element.
+ * @returns the Policy page as a JSX.Element.
  */
 const Policy = () => {
 	return (
@@ -165,6 +165,6 @@ const Policy = () => {
 };
 
 /**
- * Exports the policy page for external use.
+ * Exports the Policy page for external use.
  */
 export default Policy;
