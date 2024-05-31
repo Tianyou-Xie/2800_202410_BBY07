@@ -38,7 +38,7 @@ const EditProfilePage = () => {
 	const [userName, setUserName] = useState(initUsername);
 	const [userBio, setBio] = useState(initBio);
 
-	// Stores the previous changes 
+	// Stores the previous changes
 	const [prevBio, setPrevBio] = useState(initBio);
 	const [prevUsername, setPrevUsername] = useState(initUsername);
 
@@ -53,9 +53,7 @@ const EditProfilePage = () => {
 	 * Manages the functionality of the hidden file input element externally
 	 */
 	const triggerAvatarInput = () => {
-		console.log('here1');
 		if (!avatarInput.current) return;
-		console.log('here2');
 		avatarInput.current.click();
 	};
 
@@ -121,12 +119,12 @@ const EditProfilePage = () => {
 	const submitChanges = async () => {
 		try {
 			if (userBio !== prevBio) {
-				const bioRes = await api.patch('/user/changeBio', {
+				await api.patch('/user/changeBio', {
 					newBio: userBio,
 				});
 				setPrevBio(userBio);
 			} else if (userName !== prevUsername) {
-				const nameRes = await api.patch('/user/changeUsername', {
+				await api.patch('/user/changeUsername', {
 					newUsername: userName,
 				});
 				setPrevUsername(userName);
@@ -147,35 +145,27 @@ const EditProfilePage = () => {
 	 * Handles undoing the recent changes when the undo button is clicked.
 	 */
 	const undoChanges = async () => {
-		if (userBio !== initBio) {
-			try {
-				const bioRes = await api.patch('/user/changeBio', {
+		try {
+			if (userBio !== initBio) {
+				await api.patch('/user/changeBio', {
 					newBio: initBio,
 				});
 				setPrevBio(initBio);
-			} catch (error: any) {
-				toast.error(error.response.data.error);
-			}
-		}
-
-		if (userName !== initUsername) {
-			try {
-				const nameRes = await api.patch('/user/changeUsername', {
+			} else if (userName !== initUsername) {
+				await api.patch('/user/changeUsername', {
 					newUsername: initUsername,
 				});
 				setPrevUsername(initUsername);
-			} catch (error: any) {
-				toast.error(error.response.data.error);
+			} else if (userAvatarUrl !== initAvatarURl) {
+				try {
+					const { data: res } = await api.patch('/user/changeavatar', { avatarDataUrl: initAvatarURl });
+					if (res.success === false) throw 'Error';
+				} catch (error: any) {
+					toast.error('Failed to undo avatar! Try again later.');
+				}
 			}
-		}
-
-		if (userAvatarUrl !== initAvatarURl) {
-			try {
-				const { data: res } = await api.patch('/user/changeavatar', { avatarDataUrl: initAvatarURl });
-				if (res.success === false) throw 'Error';
-			} catch (error: any) {
-				toast.error('Failed to undo avatar! Try again later.');
-			}
+		} catch (error: any) {
+			toast.error(error.response.data.error);
 		}
 
 		setAvatarUrl(initAvatarURl);
@@ -204,9 +194,7 @@ const EditProfilePage = () => {
 								ref={avatarInput}
 								onChange={(event) => {
 									const files = event.target.files;
-									console.log('before return');
 									if (!files) return;
-									console.log('after return');
 									uploadAvatar(files[0]);
 								}}
 								type='file'
