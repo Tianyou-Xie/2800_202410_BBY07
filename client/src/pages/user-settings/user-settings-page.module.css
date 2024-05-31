@@ -76,9 +76,11 @@
 
 .conf-input {
 	font-family: Fjalla One;
-	/* border-radius: 0;
-    border: 2px solid black;
-	box-shadow: 3px 4px 0px #000; */
+}
+
+.red {
+	font-weight: bold;
+	color: red;
 }
 
 @media screen and (min-width: 800px) {

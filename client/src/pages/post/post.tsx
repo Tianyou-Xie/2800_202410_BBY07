@@ -14,7 +14,23 @@ import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginate
 import { Loader } from '../../components/loader/loader';
 import SEO from '../../components/seo/seo';
 
-/* Define the Post interface */
+/**
+ * Post interface used as a model schema for the Post data that is displayed.
+ *
+ * @param _id string - Id of the post in the database.
+ * @param authorId string - Id of the author of the post.
+ * @param content string - Text of the post.
+ * @param likeCount number - Number of likes of the post.
+ * @param commentCount number - Number of comments of the post.
+ * @param Location LocationOject - Location in which the post was created. (planetId: string, latitude: number, longitude: number, _id: string)
+ * @param media any[] - (TODO) Contains media embedded into the post (image, video, audio, etc.)
+ * @param createdAt Date - (optional) Date in which the post was created.
+ * @param deleted boolean - If true, displays the post as a deleted post.
+ * @param userName string - UserName of author of the post.
+ * @param avatarUrl string - Url for displaying the avatar picture of the author of the post.
+ * @param parentPost string - If post is a comment, contains the _id of the parent post.
+ * @interface Post
+ */
 interface Post {
 	_id: string;
 	authorId: string;
@@ -34,6 +50,16 @@ interface Post {
 	avatarUrl: string;
 }
 
+/**
+ * PostResponse interface used as a model schema for the response that comes from the
+ * database containing the Post information as it's value.
+ *
+ * @interface PostResponse
+ * @param statusCode number - Status code of the request (e.g. 404).
+ * @param statusMessage string - Status message of the request (e.g. 'Page not found')
+ * @param value Post - Post data sent through the request.
+ * @param success boolean - True if the request was received, processed and then sent successfully.
+ */
 interface PostResponse {
 	statusCode: number;
 	statusMessage: string;
@@ -41,6 +67,11 @@ interface PostResponse {
 	success: boolean;
 }
 
+/**
+ * Interface that represents the arguments passed down to the PostDetailPage component.
+ *
+ * @params Covered on the component documentation.
+ */
 interface Props {
 	id: string;
 }
@@ -57,6 +88,9 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 	const [isCommenting, setIsCommenting] = useState(false);
 	const [postedComments, setPostedComments] = useState<any[]>([]);
 
+	/**
+	 *
+	 */
 	useEffect(() => {
 		const fetchPost = async () => {
 			try {
@@ -70,10 +104,16 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 
 	if (!postDetails) return <Loader />;
 
+	/**
+	 *
+	 */
 	const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setComment(event.target.value);
 	};
 
+	/**
+	 *
+	 */
 	const handleCommentSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		if (!postDetails) return;
 
@@ -112,8 +152,8 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 
 					<Post
 						{...postDetails}
+						format='expanded'
 						commentCount={postDetails.commentCount + postedComments.length}
-						displayTime={true}
 					/>
 
 					<hr className='w-100 m-0' />

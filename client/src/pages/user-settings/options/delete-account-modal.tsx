@@ -8,6 +8,9 @@ import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfir
 import Button from 'react-bootstrap/Button';
 import UIBox from '../../../components/UIBox/UIBox';
 
+/* Import from react toastify */
+import { toast } from 'react-toastify';
+
 /**
  * The properties and types for the DeleteAccountModal.
  */
@@ -22,6 +25,10 @@ interface Props {
 		deleteAccount: any;
 		confInput: string;
 		setConfInput: any;
+	};
+	deleteBody3: {
+		showDeleteBody3: boolean;
+		setShowDelete3: any;
 	};
 }
 
@@ -88,37 +95,79 @@ const DeleteAccountModal = (props: Props) => {
 								<b>I-WANT-TO-DELETE-THIS-ACCOUNT</b>
 							</i>
 						</p>
-						<form onSubmit={props.deleteBody2.deleteAccount}>
-							<UIBox
-								className='mb-4 w-75 mx-auto'
-								content={
-									<input
-										className={styles.confInput}
-										name='confirminput'
-										placeholder='"I-WANT-TO-DELETE-THIS-ACCOUNT"'
-										type='text'
-										value={props.deleteBody2.confInput}
-										onChange={(event) => props.deleteBody2.setConfInput(event.target.value)}
-										required
-									/>
-								}
-							/>
+						<UIBox
+							className='mb-4 w-75 mx-auto'
+							content={
+								<input
+									className={styles.confInput}
+									name='confirminput'
+									placeholder='"I-WANT-TO-DELETE-THIS-ACCOUNT"'
+									type='text'
+									value={props.deleteBody2.confInput}
+									onChange={(event) => props.deleteBody2.setConfInput(event.target.value)}
+									required
+								/>
+							}
+						/>
 
-							<div className='d-flex justify-content-evenly align-items-center'>
-								<button className='btn btn-danger' type='submit'>
-									DELETE ACCOUNT
-								</button>
-								<button
-									className='btn btn-secondary'
-									type='button'
-									onClick={() => {
+						<div className='d-flex justify-content-evenly align-items-center'>
+							<button
+								className='btn btn-danger'
+								type='button'
+								onClick={() => {
+									if (props.deleteBody2.confInput === 'I-WANT-TO-DELETE-THIS-ACCOUNT') {
 										props.deleteBody2.setShowDelete2(false);
-										clearFields();
-									}}>
-									Cancel
-								</button>
-							</div>
-						</form>
+										props.deleteBody3.setShowDelete3(true);
+									} else {
+										toast.error('The phrase given does not match.');
+									}
+								}}>
+								DELETE ACCOUNT
+							</button>
+							<button
+								className='btn btn-secondary'
+								type='button'
+								onClick={() => {
+									props.deleteBody2.setShowDelete2(false);
+									clearFields();
+								}}>
+								Cancel
+							</button>
+						</div>
+					</>
+				}
+				disableFooter={true}
+			/>
+
+			<ModalConfirmation
+				title='LAST CHANCE'
+				show={props.deleteBody3.showDeleteBody3}
+				onHide={() => props.deleteBody3.setShowDelete3(false)}
+				body={
+					<>
+						<p>
+							By clicking <span className={styles.red}>"DELETE ACCOUNT"</span> below you account will be <span className={styles.red}>permenatly deleted after 30 days</span>.
+							<br/>
+							<br/>
+							If you wish to undo this contact: support@skynetwork.app
+							<br/>
+							<br/>
+							If you do not wish to proceed click <span className={styles.red}>"CANCEL"</span>.
+						</p>
+						<div className='d-flex justify-content-evenly align-items-center'>
+							<button className='btn btn-danger' type='button' onClick={props.deleteBody2.deleteAccount}>
+								DELETE ACCOUNT
+							</button>
+							<button
+								className='btn btn-secondary'
+								type='button'
+								onClick={() => {
+									props.deleteBody3.setShowDelete3(false);
+									clearFields();
+								}}>
+								Cancel
+							</button>
+						</div>
 					</>
 				}
 				disableFooter={true}

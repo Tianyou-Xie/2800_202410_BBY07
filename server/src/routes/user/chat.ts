@@ -40,11 +40,11 @@ export const post: Handler[] = [
 		});
 
 		if (converationID == null) {
+
 			const conversation = new ConversationModel({
 				senderId: user._id,
 				receiverId: value.receiverId,
 			});
-
 			const convo = await conversation.save();
 
 			const message = new MessageModel({
@@ -52,10 +52,27 @@ export const post: Handler[] = [
 				senderId: user._id,
 				content: value.content,
 			});
-
 			const data = await message.save();
-			io.emit('receiveMessage', data);
-			return Resolve(res).ok('Message saved successfully.');
+
+            const messages = await MessageModel.aggregate([
+                {
+                    $match: { conversationId: data.conversationId }
+                },
+                {
+                  $group: {
+                    _id: {
+                      $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+                    },
+                    messages: { $push: "$$ROOT" }
+                  }
+                },
+                {
+                  $sort: { "_id": 1 }
+                }
+              ]);
+
+            io.to(data.conversationId.toHexString()).emit('displayMessage', messages);
+			return Resolve(res).okWith(data,'Message saved successfully.');
 		}
 
 		const message = new MessageModel({
@@ -63,10 +80,27 @@ export const post: Handler[] = [
 			senderId: user._id,
 			content: value.content,
 		});
-
 		const data = await message.save();
 
-		io.emit('receiveMessage', data);
+        const messages = await MessageModel.aggregate([
+            {
+                $match: { conversationId: converationID._id }
+            },
+            {
+              $group: {
+                _id: {
+                  $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+                },
+                messages: { $push: "$$ROOT" }
+              }
+            },
+            {
+              $sort: { "_id": 1 }
+            }
+          ]);
+
+		// io.emit('receiveMessage', messages);
+        io.to(data.conversationId.toHexString()).emit('displayMessage', messages);
 		return Resolve(res).okWith(data, 'Message saved successfully.');
 	},
 ];

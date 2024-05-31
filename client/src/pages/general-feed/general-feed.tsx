@@ -3,8 +3,12 @@ import { api } from '../../lib/axios';
 import Page from '../../components/Page/Page';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 
-// PLEASE, CHECK THE PROMISE USE
-// I HAD A PROBLEM WITH USING AWAIT/ASYNC INSIDE ARRAYS
+/**
+ * GeneralFeed component representing the feed in which all the posts are aggregated
+ * from other planets and filtered/sortered.
+ *
+ * @return JSX.Element - General Feed page as an JSX.Element
+ */
 const GeneralFeed = () => {
 	return (
 		<Page
@@ -19,4 +23,7 @@ const GeneralFeed = () => {
 	);
 };
 
+/**
+ * Exports the GeneralFeed component for external use.
+ */
 export default GeneralFeed;

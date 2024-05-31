@@ -25,8 +25,8 @@ const Messages = () => {
 				if (res.success) {
 					setIsChat(true);
 					setMessages(res.message);
-					setConvoID(res.message[0].conversationId);
-					socket.emit('sendID', res.message[0].conversationId);
+					setConvoID(res.message[0].messages[0].conversationId);
+					socket.emit('sendID', res.message[0].messages[0].conversationId);
 				}
 			} catch (error) {
 				console.log(error);
@@ -50,11 +50,13 @@ const Messages = () => {
 	useEffect(() => {
 		let arr: any;
 		if (socket) {
-			socket.on('receiveMessage', (data: any) => {
-				arr = data;
-			});
-			socket.on('displayMessage', () => {
-				setMessages((prevMessages) => [...prevMessages, arr]);
+			/* socket.on('receiveMessage', (data: any) => {
+			arr = data;
+			}); */
+			socket.on('displayMessage', (data) => {
+                console.log("arr", arr)
+				// setMessages((prevMessages) => [...prevMessages, arr]);
+                setMessages(data);
 			});
 		}
 	}, [socket]);
@@ -68,7 +70,7 @@ const Messages = () => {
 
 		try {
 			const { data: res } = await api.post('/user/chat', newMessage);
-			socket.emit('sendMessage', convoID);
+			// socket.emit('sendMessage', res.value.conversationId);
 			setMessage('');
 		} catch (error) {
 			console.log(error);
@@ -84,7 +86,6 @@ const Messages = () => {
 			isChat={isChat}
 			username={username}
             avatar={avatar}
-            userImage={user.avatarUrl}
 		/>
 	);
 };

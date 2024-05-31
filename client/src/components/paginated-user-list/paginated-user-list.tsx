@@ -19,9 +19,9 @@ interface Props {
  * A feed of user list that automatically fetches the next page while a
  * user is scrolling down.
  *
- * @param props.feedKey A key that aligns to the uniqueness of this feed, to handle scroll restoration.
- * @param props.fetchPage The function used to fetch new posts. If this returns an empty array, it means that the end has been reached.
- * @returns JSX.Element - PaginatedPostFeed component as a JSX.Element
+ * @param props.feedKey A key that aligns to the uniqueness of this user list, to handle scroll restoration.
+ * @param props.fetchPage The function used to fetch new users to the user list. If this returns an empty array, it means that the end has been reached.
+ * @returns JSX.Element - PaginatedUserList component as a JSX.Element
  */
 export const PaginatedUserList = (props: Props) => {
 	const [page, setPage] = useState(0);
@@ -31,6 +31,13 @@ export const PaginatedUserList = (props: Props) => {
 	const [loading, setLoading] = useState(false);
 	const [users, setUsers] = useState<any[]>([]);
 
+	/**
+	 * Fetches a specific page of users based on the increment passed as
+	 * argument to know which page to load.
+	 *
+	 * @param increment number - Increment of page relative to the present page.
+	 * @returns void
+	 */
 	const fetchIncrement = async (increment: number) => {
 		if (loading || endReached) return;
 
@@ -48,6 +55,13 @@ export const PaginatedUserList = (props: Props) => {
 		}
 	};
 
+	/**
+	 * Function to check if user has scrolled to the bottom of the page and
+	 * needs to load the next posts from the database. If so, increases the
+	 * scrollable size of the window and calls to fetch the next posts.
+	 *
+	 * @returns void
+	 */
 	const checkScroll = () => {
 		if (loading || endReached) return;
 
@@ -65,7 +79,18 @@ export const PaginatedUserList = (props: Props) => {
 		fetchIncrement(increment).then(() => setLoading(false));
 	};
 
+	/**
+	 * Use effect used to check scroll and fetch posts once the page is
+	 * loaded for the first time.
+	 */
 	useEffect(checkScroll, []);
+
+	/**
+	 * Use effect used to start a timer to check if user has
+	 * scrolled to the end of the page every 1 second.
+	 *
+	 * @returns () => void - A function to stop the timer.
+	 */
 	useEffect(() => {
 		const interval = setInterval(checkScroll, 1000);
 		return () => clearInterval(interval);

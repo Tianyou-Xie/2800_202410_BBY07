@@ -8,13 +8,23 @@ import { Else, If, Then } from 'react-if';
 
 import styles from './messages.module.css';
 
-const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, username, avatar, userImage }: any) => {
+const MessagesHtml = ({
+	message,
+	messages,
+	setMessage,
+	submitForm,
+	id,
+	isChat,
+	username,
+	avatar,
+}:
+any) => {
 	function handlePageReturn() {
 		history.back();
 	}
 	return (
 		<>
-			<div className={`container ${styles.container}`}>
+			<div className={`container`}>
 				<header className='border-bottom lh-1 py-3'>
 					<div className='row flex-nowrap justify-content-between align-items-center'>
 						<div className='col-4 pt-1'>
@@ -35,50 +45,78 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 					</div>
 				</header>
 
-				<main className='container mt-4'>
-					<div className='row'>
+				<main className='container mt-4 mb-5'>
+					<div className='pb-5'>
 						{isChat ? (
-							messages.map((message: any, index: number) => {
-								return (
-									<div className='d-inline' key={index}>
-										<If condition={id === message.senderId}>
-											<Then>
-												<div className={`text-body-secondary `}>
-													<img
-														src={avatar}
-														width='30'
-														height='30'
-														className='rounded-circle'
-													/>
-													<p className={`${styles.p} d-inline mx-2`} key={index}>
-														{message.content}
-													</p>
-													<p className={`${styles.time} ms-4`}>
-														{new Date(message.createdAt).toLocaleTimeString('en-US')}
-													</p>
-												</div>
-											</Then>
-											<Else>
-												<div className='text-end justify-content-end'>
-													<img
-														src={userImage}
-														width='30'
-														height='30'
-														className='rounded-circle'
-													/>
-													<p className={`${styles.p} d-inline mx-2`} key={index}>
-														{message.content}
-													</p>
-													<p className={`${styles.time} me-3`}>
-														{new Date(message.createdAt).toLocaleTimeString('en-US')}
-													</p>
-												</div>
-											</Else>
-										</If>
+							<div>
+								{messages.map((messageGroup: any) => (
+									<div key={messageGroup._id}>
+										<p className='fw-bold mt-4 text-center'>
+											{Intl.DateTimeFormat('en-US', {
+												timeZone: 'America/Vancouver',
+												weekday: 'short',
+												month: 'short',
+												day: 'numeric',
+											}).format(new Date(messageGroup._id + 'T00:00:00'))}
+										</p>
+										{messageGroup.messages.map((message: any, index: any) => (
+											<div key={index}>
+												<If condition={id === message.senderId}>
+													<Then>
+														<div className={`${styles.message} ${styles.receiver}`}>
+															<div className={`${styles.content} ${styles.p}`}>
+																{message.content}
+															</div>
+															<span className={`${styles.timestamp} ms-1`}>
+																{new Date(message.createdAt).toLocaleTimeString(
+																	'en-US',
+																)}
+															</span>
+														</div>
+													</Then>
+													<Else>
+														<div className={`${styles.message} ${styles.sender}`}>
+															<div className={`${styles.content} ${styles.p}`}>
+																{message.content}
+															</div>
+															<span className={`${styles.timestamp} me-1`}>
+																{new Date(message.createdAt).toLocaleTimeString(
+																	'en-US',
+																)}
+															</span>
+														</div>
+													</Else>
+												</If>
+											</div>
+										))}
 									</div>
-								);
-							})
+								))}
+							</div>
 						) : (
+							/* messages.map((message: any, index: number) => {
+								return (
+                                    <div key={index}>
+                                        <If condition={id === message.senderId}>
+										<Then>
+											<div className={`${styles.message} ${styles.receiver}`}>
+												<div className={`${styles.content} ${styles.p}`}>{message.content}</div>
+												<span className={`${styles.timestamp} ms-1`}>
+													{new Date(message.createdAt).toLocaleTimeString('en-US')}
+												</span>
+											</div>
+										</Then>
+										<Else>
+											<div className={`${styles.message} ${styles.sender}`}>
+												<div className={`${styles.content} ${styles.p}`}>{message.content}</div>
+												<span className={`${styles.timestamp} me-1`}>
+													{new Date(message.createdAt).toLocaleTimeString('en-US')}
+												</span>
+											</div>
+										</Else>
+									</If>
+                                    </div>	
+								);
+							}) */
 							<div className='d-flex text-body-secondary'>
 								<p>No Messages to Show</p>
 							</div>
@@ -86,12 +124,12 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 					</div>
 				</main>
 
-				<div className={`container fixed-bottom mb-2`}>
+				<div className={`container fixed-bottom pb-2 mt-5 ${styles.fixedBottom}`}>
 					<div className='row align-items-center'>
-						<div className={`col-1 themed-grid-col ${styles.customCol}`}>
+						{/* <div className={`col-1 themed-grid-col ${styles.customCol}`}>
 							<MdOutlineEmojiEmotions style={{ color: '#2196F3' }} size={40} />
-						</div>
-						<div className={`col-10 themed-grid-col ${styles.customCol10}`}>
+						</div> */}
+						<div className={`col-11 themed-grid-col ${styles.customCol11}`}>
 							<form onSubmit={submitForm}>
 								<input
 									type='text'

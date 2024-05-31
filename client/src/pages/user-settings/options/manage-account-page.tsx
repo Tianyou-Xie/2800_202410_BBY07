@@ -35,6 +35,7 @@ const ManageAccount = () => {
 	// variables responsible for showing delete account modals
 	const [showDeleteBody1, setShowDelete1] = useState(false);
 	const [showDeleteBody2, setShowDelete2] = useState(false);
+	const [showDeleteBody3, setShowDelete3] = useState(false);
 
 	// variables responsible for showing change username modals
 	const [showNameBody1, setNameBody1] = useState(false);
@@ -85,8 +86,7 @@ const ManageAccount = () => {
 	 *
 	 * @param event the form event from onSubmit.
 	 */
-	const deleteAccount = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const deleteAccount = async () => {
 		try {
 			const response = await api.post('/user/deleteaccount/delete', {
 				confirmationInput: confInput,
@@ -96,6 +96,8 @@ const ManageAccount = () => {
 			logout();
 		} catch (error: any) {
 			toast.error(error.response.data.error);
+			setShowDelete3(false);
+			setShowDelete2(true);
 		}
 	};
 
@@ -189,6 +191,10 @@ const ManageAccount = () => {
 		confInput: confInput,
 		setConfInput: setConfInput,
 	};
+	const deleteBody3 = {
+		showDeleteBody3: showDeleteBody3,
+		setShowDelete3: setShowDelete3,
+	}
 
 	// defining values for the change username Modal
 	const usernameBody1 = {
@@ -270,7 +276,7 @@ const ManageAccount = () => {
 			/>
 
 			<ChangePasswordModal passBody1={passBody1} passBody2={passBody2} />
-			<DeleteAccountModal deleteBody1={deleteBody1} deleteBody2={deleteBody2} />
+			<DeleteAccountModal deleteBody1={deleteBody1} deleteBody2={deleteBody2} deleteBody3={deleteBody3}/>
 			<ChangeNameModal usernameBody1={usernameBody1} usernameBody2={usernameBody2} />
 			<ChangeEmailModal emailBody1={emailBody1} emailBody2={emailBody2} />
 		</>
