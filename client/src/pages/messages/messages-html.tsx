@@ -35,12 +35,13 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 					</div>
 				</header>
 
-				<main className='container mt-4'>
-					<div className=''>
+				<main className='container mt-4 mb-5'>
+					<div className='pb-5'>
 						{isChat ? (
 							messages.map((message: any, index: number) => {
 								return (
-									<If condition={id === message.senderId}>
+                                    <div>
+                                        <If condition={id === message.senderId}>
 										<Then>
 											<div className={`${styles.message} ${styles.receiver}`}>
 												<div className={`${styles.content} ${styles.p}`}>{message.content}</div>
@@ -58,6 +59,7 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 											</div>
 										</Else>
 									</If>
+                                    </div>	
 								);
 							})
 						) : (
@@ -68,7 +70,7 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 					</div>
 				</main>
 
-				<div className={`container fixed-bottom mb-2`}>
+				<div className={`container fixed-bottom pb-2 mt-5 ${styles.fixedBottom}`}>
 					<div className='row align-items-center'>
 						<div className={`col-1 themed-grid-col ${styles.customCol}`}>
 							<MdOutlineEmojiEmotions style={{ color: '#2196F3' }} size={40} />

@@ -7,7 +7,7 @@
 }
 
 .input {
-	font-family: TTOctosquares;
+	font-family: Fjalla One;
 }
 
 @media (min-width: 600px) {
@@ -63,4 +63,8 @@
 
 .message .timestamp {
 	text-align: right;
+}
+
+.fixed-bottom {
+    background: #f0f8ff;
 }
