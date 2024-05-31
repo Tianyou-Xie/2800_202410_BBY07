@@ -19,9 +19,9 @@ interface Props {
  * A feed of user list that automatically fetches the next page while a
  * user is scrolling down.
  *
- * @param props.feedKey A key that aligns to the uniqueness of this feed, to handle scroll restoration.
- * @param props.fetchPage The function used to fetch new posts. If this returns an empty array, it means that the end has been reached.
- * @returns JSX.Element - PaginatedPostFeed component as a JSX.Element
+ * @param props.feedKey A key that aligns to the uniqueness of this user list, to handle scroll restoration.
+ * @param props.fetchPage The function used to fetch new users to the user list. If this returns an empty array, it means that the end has been reached.
+ * @returns JSX.Element - PaginatedUserList component as a JSX.Element
  */
 export const PaginatedUserList = (props: Props) => {
 	const [page, setPage] = useState(0);
@@ -31,6 +31,10 @@ export const PaginatedUserList = (props: Props) => {
 	const [loading, setLoading] = useState(false);
 	const [users, setUsers] = useState<any[]>([]);
 
+	/**
+	 *
+	 * @returns
+	 */
 	const fetchIncrement = async (increment: number) => {
 		if (loading || endReached) return;
 
@@ -48,6 +52,10 @@ export const PaginatedUserList = (props: Props) => {
 		}
 	};
 
+	/**
+	 *
+	 * @returns
+	 */
 	const checkScroll = () => {
 		if (loading || endReached) return;
 
@@ -65,7 +73,16 @@ export const PaginatedUserList = (props: Props) => {
 		fetchIncrement(increment).then(() => setLoading(false));
 	};
 
+	/**
+	 *
+	 * @returns
+	 */
 	useEffect(checkScroll, []);
+
+	/**
+	 *
+	 * @returns
+	 */
 	useEffect(() => {
 		const interval = setInterval(checkScroll, 1000);
 		return () => clearInterval(interval);

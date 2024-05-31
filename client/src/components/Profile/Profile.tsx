@@ -12,6 +12,11 @@ import { toast } from 'react-toastify';
 import { SmallLoader } from '../loader/small-loader';
 import { UserAuthContext } from '../../lib/auth';
 
+/**
+ * Interface that represents the arguments passed down to the Profile component.
+ *
+ * @params Covered on the component documentation.
+ */
 interface ProfileProp {
 	_id: string;
 	userName: string;
@@ -28,6 +33,20 @@ interface ProfileProp {
 
 const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
 
+/**
+ *
+ * @param props._id string - Id of the user
+ * @param props.userName string - Username of the user
+ * @param props.bio string - (Optional) Small description given by the user.
+ * @param props.followerCount number - Number of followers of the user
+ * @param props.followingCount number - Number of accounts the user follows
+ * @param props.postCount number - Number of posts created by the user
+ * @param props.Location LocationOject - Location in which the user is from/was created at (planetId: string, latitude: number, longitude: number, _id: string)
+ * @param props.createdAt Date - (optional) Date in which the user was created.
+ * @param props.avatarUrl string - Url for displaying the avatar picture of the user
+ * @param props.className string - String for styling.
+ * @return JSX.Element - Profile component as a JSX.Element
+ */
 const Profile = (props: ProfileProp): JSX.Element => {
 	const user = useContext(UserAuthContext);
 

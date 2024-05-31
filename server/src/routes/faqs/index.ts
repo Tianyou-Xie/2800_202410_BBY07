@@ -13,7 +13,12 @@ const minSearchLen = 1;
 const maxSearchLen = 30;
 
 /**
+ *  GET @ /faqs
  * 
+ *  This handles the retrieval of FAQs from the database.
+ *
+ * This function processes incoming GET requests to the /faqs endpoint. It fetches a list of
+ * frequently asked questions from the database and returns them to the client.
  */
 export const get: Handler[] = [
 	authProtected,
@@ -39,7 +44,7 @@ export const post: Handler[] = [
 		const querySchema = Joi.object<QueryBody>({
 			query: Joi.string().trim().min(minSearchLen).max(maxSearchLen).messages({
 				'string.base': 'The given search must be a string.',
-                'string.empty': 'You must enter a search.',
+				'string.empty': 'You must enter a search.',
 				'string.min': 'You must enter a search.',
 				'string.max': 'Search too long.',
 				'any.required': 'A search request is required to search.',

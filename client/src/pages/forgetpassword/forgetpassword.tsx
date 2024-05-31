@@ -1,13 +1,29 @@
+/* Stylesheet imports */
 import styles from './forgetpassword.module.css';
+
+
 import logoUrl from '../../assets/images/SkynetLogo.png';
+
+/* Import from React */
 import React, { useState } from 'react';
-import { api } from '../../lib/axios';
-import Page from '../../components/Page/Page';
-import { toast } from 'react-toastify';
-import { AxiosError, HttpStatusCode } from 'axios';
 import { Else, If, Then } from 'react-if';
+import { toast } from 'react-toastify';
+
+/* Imports for frontend api call and authentication verification */
+import { api } from '../../lib/axios';
+
+/* Imports for AxiosError and HttpStatusCode */
+import { AxiosError, HttpStatusCode } from 'axios';
+
+/* Imports from other components created */
+import Page from '../../components/Page/Page';
 import { SmallLoader } from '../../components/loader/small-loader';
 
+/**
+ * Constructs, manages, and returns the Forgetpassword component.
+ *
+ * @return The Forgetpassword component as a JSX.Element
+ */
 const Forgetpassword = () => {
 	const [email, setEmail] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -18,6 +34,7 @@ const Forgetpassword = () => {
 		if (loading) return;
 		setLoading(true);
 
+		// Compare this snippet from client/src/pages/forgetpassword/forgetpassword.tsx:
 		try {
 			await api.post('/user/forgetpassword', { email });
 		} catch (error: any) {

@@ -1,6 +1,10 @@
 import styles from './UIBox.module.css';
-import { Container } from 'react-bootstrap';
 
+/**
+ * Interface that represents the arguments passed down to the UIBox component.
+ *
+ * @params Covered on the component documentation
+ */
 interface UIBoxProp {
 	content: JSX.Element | string;
 	curved?: boolean;
