@@ -1,7 +1,13 @@
+/* Stylesheet imports */
 import styles from './post.module.css';
 
+/* Import from React */
 import React, { useEffect, useState } from 'react';
+
+/* Imports for frontend api call and authentication verification */
 import { api } from '../../lib/axios';
+
+/* Import from other components created */
 import Post from '../../components/Post/Post';
 import Page from '../../components/Page/Page';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
@@ -71,11 +77,10 @@ interface Props {
 }
 
 /**
- * PostDetailPage component representing the page that contains all the details of a
- * specific post.
+ * Constructs, manages, and returns the PostDetailPage component.
  *
- * @param id string - Unique id of the post in the database.
- * @return JSX.Element - PostDetailPage as a JSX.Element
+ * @param id The id of the post
+ * @return The PostDetailPage component as a JSX.Element
  */
 const PostDetailPage: React.FC<Props> = ({ id }) => {
 	const [postDetails, setPostDetails] = useState<Post>();
@@ -91,7 +96,7 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 			try {
 				const response = await api.get<PostResponse>(`/post/${id}`);
 				if (response.data.success) setPostDetails(response.data.value);
-			} catch {}
+			} catch { }
 		};
 
 		fetchPost();
