@@ -1,13 +1,25 @@
+/* Import from React */
 import { useEffect, useState, useContext } from 'react';
 import { If, Then } from 'react-if';
-import { Link } from 'wouter';
-import { api } from '../../../lib/axios';
-import style from './post-header.module.css';
-import { UserAuthContext } from '../../../lib/auth';
-import UIBox from '../../UIBox/UIBox';
-import ModalConfirmation from '../../ModalConfirmation/ModalConfirmation';
 import { FaTrashAlt } from 'react-icons/fa';
 
+/* Import from wouter */
+import { Link } from 'wouter';
+
+/* Imports for frontend api call and authentication verification */
+import { api } from '../../../lib/axios';
+
+/* Stylesheet imports */
+import style from './post-header.module.css';
+
+/* Import from other components created */
+import { UserAuthContext } from '../../../lib/auth';
+import ModalConfirmation from '../../ModalConfirmation/ModalConfirmation';
+
+/* Import from UI components */
+import UIBox from '../../UIBox/UIBox';
+
+/* Define the Props interface */
 interface Props {
 	userName: string;
 	displayTime?: boolean;
@@ -24,6 +36,22 @@ interface Props {
 	_id: string; // Add postId prop to identify the post
 }
 
+/**
+ * PostHeader component representing the header of a post.
+ *
+ * @param {Props} props - The properties object.
+ * @param {string} props.authorId - The ID of the author of the post.
+ * @param {string} props.avatarUrl - The URL of the author's avatar image.
+ * @param {string} props.userName - The username of the author.
+ * @param {boolean} props.displayTime - Flag to indicate whether to display the time.
+ * @param {string} props.createdAt - The creation date of the post.
+ * @param {Object} props.location - The location object.
+ * @param {string} props.location.planetId - The ID of the planet where the post was created.
+ * @param {string} props._id - The ID of the post.
+ * @param {boolean} props.deleted - Flag to indicate if the post has been deleted.
+ *
+ * @return {JSX.Element} The PostHeader component.
+ */
 export const PostHeader = (props: Props) => {
 	const user = useContext(UserAuthContext);
 	const currentUserId = user?._id; // Assuming user object has _id property
@@ -61,8 +89,7 @@ export const PostHeader = (props: Props) => {
 		try {
 			await api.delete(`/post/${props._id}`);
 			setShowModal(false);
-			// Optionally, you can remove the post from the DOM here or refresh the feed
-			window.location.reload(); // Simple way to refresh the feed
+			window.location.reload();
 		} catch (error) {
 			console.error('Failed to delete post:', error);
 		}

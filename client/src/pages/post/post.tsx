@@ -14,6 +14,7 @@ import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginate
 import { Loader } from '../../components/loader/loader';
 import SEO from '../../components/seo/seo';
 
+/* Define the Post interface */
 interface Post {
 	_id: string;
 	authorId: string;
