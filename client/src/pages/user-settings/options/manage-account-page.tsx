@@ -226,7 +226,7 @@ const ManageAccount = () => {
 				logoHeader={false}
 				pageName='Manage Account'
 				content={
-					<ListGroup variant='flush' className={`${styles.settingBody} mt-3`}>
+					<ListGroup variant='flush' className={`${styles.settingBody} my-3`}>
 						<ListGroup.Item className={`${styles.dangerZone}`}>
 							<h1 className={`${styles.settingTitle} ms-3`}>Danger Zone</h1>
 							<ListGroup variant='flush'>
