@@ -30,8 +30,10 @@ export const PaginatedPostFeed = (props: Props) => {
 	const [posts, setPosts] = useState<any[]>([]);
 
 	/**
+	 * Function to check if user has scrolled to the bottom of the page and
+	 * needs to load the next posts from the database.
 	 *
-	 * @returns
+	 * @returns void
 	 */
 	const checkScroll = () => {
 		const postsList = postsListRef.current;
@@ -43,7 +45,10 @@ export const PaginatedPostFeed = (props: Props) => {
 	};
 
 	/**
+	 * Use effect used to start a timer to check if user is loading or has
+	 * scrolled to the end of the page every 1 second.
 	 *
+	 * @returns () => void - A function to stop the timer.
 	 */
 	useEffect(() => {
 		if (endReached || loading) return;
@@ -53,7 +58,8 @@ export const PaginatedPostFeed = (props: Props) => {
 	}, [endReached, loading]);
 
 	/**
-	 *
+	 * Use effect used to fetch and load new posts at the end of
+	 * the page.
 	 */
 	useEffect(() => {
 		setLoading(true);

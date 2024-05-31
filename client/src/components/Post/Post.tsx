@@ -75,7 +75,8 @@ const Post = (props: PostProp): JSX.Element => {
 	const detailsUrl = `/post/${props._id}`;
 
 	/**
-	 *
+	 * Use effect used to fetch the save status of that post (if a post
+	 * was already saved or not).
 	 */
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
@@ -91,7 +92,8 @@ const Post = (props: PostProp): JSX.Element => {
 	}, []);
 
 	/**
-	 *
+	 * Use effect used to fetch the status of that post as comment post or
+	 * parent/root post and if it is a comment, fetch the parent post.
 	 */
 	useEffect(() => {
 		if (props.parentPost === undefined) return setParentPost(undefined);
@@ -108,9 +110,10 @@ const Post = (props: PostProp): JSX.Element => {
 	}, [props.parentPost]);
 
 	/**
+	 * Used to bookmark or unbookmark a post and send that request
+	 * to the backend and database.
 	 *
-	 *
-	 * @return {*}
+	 * @return void
 	 */
 	const onBookmark = async () => {
 		if (isActionActive) return;
@@ -137,7 +140,8 @@ const Post = (props: PostProp): JSX.Element => {
 	const [likeCount, setLikeCount] = useState(props.likeCount ?? 0);
 
 	/**
-	 *
+	 * Use effect used to fetch the like status of that post (if a post
+	 * was already liked or not).
 	 */
 	useEffect(() => {
 		const fetchLikeStatus = async () => {
@@ -153,9 +157,10 @@ const Post = (props: PostProp): JSX.Element => {
 	}, []);
 
 	/**
+	 * Used to like or dislike a post and send that request
+	 * to the backend and database.
 	 *
-	 *
-	 * @return {*}
+	 * @return void
 	 */
 	const onLike = async () => {
 		if (isActionActive) return;
@@ -181,8 +186,10 @@ const Post = (props: PostProp): JSX.Element => {
 	};
 
 	/**
+	 * Used to open a window on the browser to allow the user to share or
+	 * copy the url of the post.
 	 *
-	 *
+	 * @return void
 	 */
 	function onShare() {
 		const shareUrl = location.origin + detailsUrl;
@@ -190,9 +197,9 @@ const Post = (props: PostProp): JSX.Element => {
 	}
 
 	/**
+	 * Used to redirect the user to the post detail's page of that user.
 	 *
-	 *
-	 * @return {*}
+	 * @return void
 	 */
 	const viewDetails = () => {
 		if (routerPath === detailsUrl) return;

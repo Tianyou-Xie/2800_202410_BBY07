@@ -56,9 +56,8 @@ export const PostHeader = (props: Props) => {
 	const [date, setDate] = useState<Date>();
 
 	/**
-	 *
-	 *
-	 * @return {*}
+	 * Used to properly format the date the post was created from the database
+	 * once the createdAt attribute changes.
 	 */
 	useEffect(() => {
 		if (!props.createdAt) setDate(undefined);
@@ -68,9 +67,8 @@ export const PostHeader = (props: Props) => {
 	const [locationName, setLocationName] = useState<string>();
 
 	/**
-	 *
-	 *
-	 * @return {*}
+	 * Used to properly fetch and store the planet the post was created from
+	 * the database once the location attribute changes.
 	 */
 	useEffect(() => {
 		if (!props.location) return setLocationName(undefined);
@@ -80,27 +78,9 @@ export const PostHeader = (props: Props) => {
 	const [showModal, setShowModal] = useState(false);
 
 	/**
+	 * Handles the delete post request to the frontend.
 	 *
-	 *
-	 * @return {*}
-	 */
-	const handleDeleteClick = () => {
-		setShowModal(true);
-	};
-
-	/**
-	 *
-	 *
-	 * @return {*}
-	 */
-	const handleCloseModal = () => {
-		setShowModal(false);
-	};
-
-	/**
-	 *
-	 *
-	 * @return {*}
+	 * @return void
 	 */
 	const handleConfirmDelete = async () => {
 		try {
@@ -153,7 +133,7 @@ export const PostHeader = (props: Props) => {
 
 				<If condition={(props.authorId === currentUserId || user.admin) && !props.deleted}>
 					<Then>
-						<button className={style.deleteButton} onClick={handleDeleteClick}>
+						<button className={style.deleteButton} onClick={() => setShowModal(true)}>
 							<UIBox
 								className={`${style.buttons} p-1 h-100 d-flex align-items-center`}
 								content={
@@ -172,7 +152,7 @@ export const PostHeader = (props: Props) => {
 
 			<ModalConfirmation
 				show={showModal}
-				onHide={handleCloseModal}
+				onHide={() => setShowModal(false)}
 				title='Delete Post'
 				body={<p>Are you sure you want to delete this post?</p>}
 				disableFooter={false}

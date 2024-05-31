@@ -62,7 +62,8 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	const [locationName, setLocationName] = useState('');
 
 	/**
-	 *
+	 * Use effect used to fetch the follow status of that user (if the user
+	 * was already followed or not) once the id of the user is created/changes.
 	 */
 	useEffect(() => {
 		const fetchSaveStatus = async () => {
@@ -85,14 +86,14 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	}, [props._id]);
 
 	/**
-	 *
+	 * Use effect used to fetch the avatar/profile picture of that user.
 	 */
 	useEffect(() => {
 		setAvatarUrl(props.avatarUrl);
 	}, [props.avatarUrl]);
 
 	/**
-	 *
+	 * Use effect used to fetch the location in which that user created his profile.
 	 */
 	useEffect(() => {
 		const id = props.location?.planetId;
@@ -104,7 +105,10 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	}, [props.location]);
 
 	/**
+	 * Used to follow or unfollow a user and send that request
+	 * to the backend and database.
 	 *
+	 * @return void
 	 */
 	const onFollow = async () => {
 		if (isActionActive) return;
@@ -133,7 +137,10 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	const changeAvatarInput = useRef<HTMLInputElement>(null);
 
 	/**
+	 * Used to start the upload process of an avatar change and upload of
+	 * the new image.
 	 *
+	 *  @return void
 	 */
 	const initiateAvatarChange = () => {
 		const input = changeAvatarInput.current;
@@ -145,7 +152,11 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	const [isUploadingFile, setUploadingFile] = useState(false);
 
 	/**
+	 * Used to change the avatar/rofile picture of an user based on an image
+	 * that the user uploads.
+	 * This function also takes care of changing the avatar on the database.
 	 *
+	 *  @return void
 	 */
 	const changeAvatar = (imageFile: File) => {
 		if (!avatarFileTypes.includes(imageFile.type) || imageFile.size > 3e6) {
@@ -178,7 +189,10 @@ const Profile = (props: ProfileProp): JSX.Element => {
 	};
 
 	/**
+	 * Used to display the avatar image in the profile information section
+	 * of the profile page.
 	 *
+	 *  @return void
 	 */
 	const avatarImgElement = useMemo(() => {
 		if (!avatarUrl) return <></>;

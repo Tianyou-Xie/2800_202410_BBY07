@@ -32,8 +32,11 @@ export const PaginatedUserList = (props: Props) => {
 	const [users, setUsers] = useState<any[]>([]);
 
 	/**
+	 * Fetches a specific page of users based on the increment passed as
+	 * argument to know which page to load.
 	 *
-	 * @returns
+	 * @param increment number - Increment of page relative to the present page.
+	 * @returns void
 	 */
 	const fetchIncrement = async (increment: number) => {
 		if (loading || endReached) return;
@@ -53,8 +56,11 @@ export const PaginatedUserList = (props: Props) => {
 	};
 
 	/**
+	 * Function to check if user has scrolled to the bottom of the page and
+	 * needs to load the next posts from the database. If so, increases the
+	 * scrollable size of the window and calls to fetch the next posts.
 	 *
-	 * @returns
+	 * @returns void
 	 */
 	const checkScroll = () => {
 		if (loading || endReached) return;
@@ -74,14 +80,16 @@ export const PaginatedUserList = (props: Props) => {
 	};
 
 	/**
-	 *
-	 * @returns
+	 * Use effect used to check scroll and fetch posts once the page is
+	 * loaded for the first time.
 	 */
 	useEffect(checkScroll, []);
 
 	/**
+	 * Use effect used to start a timer to check if user has
+	 * scrolled to the end of the page every 1 second.
 	 *
-	 * @returns
+	 * @returns () => void - A function to stop the timer.
 	 */
 	useEffect(() => {
 		const interval = setInterval(checkScroll, 1000);
