@@ -221,19 +221,19 @@ const Post = (props: PostProp): JSX.Element => {
 						<If condition={!!parentPost}>
 							<Then>
 								<button
-									className='d-flex align-items-center gap-2'
+									className='d-flex align-items-center gap-2 flex-wrap['
 									onClick={() => navigate(`/post/${parentPost?._id}`)}>
 									<GoCrossReference />
-									<div className='d-flex text-wrap text-break'>
+									<div className='text-start text-break flex-wrap'>
 										{parentPost?.deleted ? (
 											<span className='text-danger'>Reply of a deleted post</span>
 										) : (
 											<>
-												<span>Reply of "</span>
-												<span className='text-truncate' style={{ maxWidth: '2.5rem' }}>
-													{parentPost?.content}
-												</span>
-												<span>" by {parentPost?.userName}</span>
+												Reply of "
+												{(parentPost?.content.length ?? 0) < 5
+													? parentPost?.content
+													: parentPost?.content.slice(0, 5) + '...'}
+												" by {parentPost?.userName}
 											</>
 										)}
 									</div>
