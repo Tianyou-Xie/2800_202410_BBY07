@@ -14,7 +14,7 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 	}
 	return (
 		<>
-			<div className={`container ${styles.container}`}>
+			<div className={`container`}>
 				<header className='border-bottom lh-1 py-3'>
 					<div className='row flex-nowrap justify-content-between align-items-center'>
 						<div className='col-4 pt-1'>
@@ -36,46 +36,28 @@ const MessagesHtml = ({ message, messages, setMessage, submitForm, id, isChat, u
 				</header>
 
 				<main className='container mt-4'>
-					<div className='row'>
+					<div className=''>
 						{isChat ? (
 							messages.map((message: any, index: number) => {
 								return (
-									<div className='d-inline' key={index}>
-										<If condition={id === message.senderId}>
-											<Then>
-												<div className={`text-body-secondary `}>
-													<img
-														src={avatar}
-														width='30'
-														height='30'
-														className='rounded-circle'
-													/>
-													<p className={`${styles.p} d-inline mx-2`} key={index}>
-														{message.content}
-													</p>
-													<p className={`${styles.time} ms-4`}>
-														{new Date(message.createdAt).toLocaleTimeString('en-US')}
-													</p>
-												</div>
-											</Then>
-											<Else>
-												<div className='text-end justify-content-end'>
-													<img
-														src={userImage}
-														width='30'
-														height='30'
-														className='rounded-circle'
-													/>
-													<p className={`${styles.p} d-inline mx-2`} key={index}>
-														{message.content}
-													</p>
-													<p className={`${styles.time} me-3`}>
-														{new Date(message.createdAt).toLocaleTimeString('en-US')}
-													</p>
-												</div>
-											</Else>
-										</If>
-									</div>
+									<If condition={id === message.senderId}>
+										<Then>
+											<div className={`${styles.message} ${styles.receiver}`}>
+												<div className={`${styles.content} ${styles.p}`}>{message.content}</div>
+												<span className={`${styles.timestamp} ms-1`}>
+													{new Date(message.createdAt).toLocaleTimeString('en-US')}
+												</span>
+											</div>
+										</Then>
+										<Else>
+											<div className={`${styles.message} ${styles.sender}`}>
+												<div className={`${styles.content} ${styles.p}`}>{message.content}</div>
+												<span className={`${styles.timestamp} me-1`}>
+													{new Date(message.createdAt).toLocaleTimeString('en-US')}
+												</span>
+											</div>
+										</Else>
+									</If>
 								);
 							})
 						) : (
