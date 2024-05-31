@@ -9,7 +9,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Nav from 'react-bootstrap/Nav';
 
 /* Imports from other components created */
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab1/kebab';
 
 /**
  * Constructs and returns the About us page for this website.

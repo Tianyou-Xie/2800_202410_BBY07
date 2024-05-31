@@ -2,7 +2,7 @@
 import styles from '../about-page.module.css';
 
 /* Imports from other components created */
-import Page from '../../../components/Page/Page';
+import Page from '../../../components/kebab1/kebab';
 
 /**
  * Constructs and returns the Terms of Use page.

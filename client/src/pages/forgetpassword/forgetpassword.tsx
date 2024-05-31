@@ -15,7 +15,7 @@ import { api } from '../../lib/axios';
 import { AxiosError, HttpStatusCode } from 'axios';
 
 /* Imports from other components created */
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab1/kebab';
 import { SmallLoader } from '../../components/loader/small-loader';
 
 /**

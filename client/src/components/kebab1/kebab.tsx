@@ -1,4 +1,4 @@
-import styles from './Page.module.css';
+import styles from './page.module.css';
 
 import Header from '../header/header';
 import Hotbar from '../hotbar/hotbar';

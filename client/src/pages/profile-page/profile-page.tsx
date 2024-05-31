@@ -1,4 +1,4 @@
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab1/kebab';
 import Profile from '../../components/Profile/Profile';
 import { api } from '../../lib/axios';
 import { useContext } from 'react';

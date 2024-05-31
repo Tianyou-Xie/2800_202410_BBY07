@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 
 /* Import from other components created */
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab1/kebab';
 
 /* Define the PostResponse interface */
 interface PostResponse {

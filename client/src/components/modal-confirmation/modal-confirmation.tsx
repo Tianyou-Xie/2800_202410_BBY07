@@ -1,5 +1,5 @@
 /* Stylesheet imports */
-import styles from './ModalConfirmation.module.css';
+import styles from './modal-confirmation.module.css';
 
 /* Imports from react-bootstrap */
 import Modal from 'react-bootstrap/Modal';

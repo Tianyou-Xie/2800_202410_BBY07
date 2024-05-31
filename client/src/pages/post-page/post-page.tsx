@@ -19,7 +19,7 @@ import { UserAuthContext } from '../../lib/auth';
 
 /* Import from other components created */
 import { SmallLoader } from '../../components/loader/small-loader';
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab1/kebab';
 import UIBox from '../../components/UIBox/UIBox';
 
 /**

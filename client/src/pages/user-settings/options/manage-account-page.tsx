@@ -23,7 +23,7 @@ import ChangePasswordModal from './change-password-modal';
 import DeleteAccountModal from './delete-account-modal';
 import ChangeNameModal from './change-username-modal';
 import ChangeEmailModal from './change-email-modal';
-import Page from '../../../components/Page/Page';
+import Page from '../../../components/kebab1/kebab';
 
 const ManageAccount = () => {
 	const [_, setLocation] = useLocation();

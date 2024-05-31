@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserAuthContext } from '../../../lib/auth';
 
 /* Imports from other components created */
-import Page from '../../../components/Page/Page';
+import Page from '../../../components/kebab1/kebab';
 import { PaginatedPostFeed } from '../../../components/paginated-post-feed/paginated-post-feed';
 
 /* Imports for frontend api call and authentication verification */

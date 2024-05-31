@@ -7,7 +7,7 @@ import { Else, If, Then } from 'react-if';
 import { toast } from 'react-toastify';
 
 /* Import custom components that were made */
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab1/kebab';
 import UIBox from '../../components/UIBox/UIBox';
 import { SmallLoader } from '../../components/loader/small-loader';
 
