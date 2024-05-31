@@ -1,15 +1,27 @@
+/**
+ * Applies the Bitsumishi font family to the h3 elements.
+ */
 .h3 {
 	font-family: Bitsumishi;
 }
 
+/**
+ * Applies the TTOctosquares font family to the paragraphs.
+ */
 .p {
 	font-family: TTOctosquares;
 }
 
+/**
+ * Applies the Fjalla One font family to input elements.
+ */
 .input {
 	font-family: Fjalla One;
 }
 
+/**
+ * Sets custom column widths for specific screen sizes.
+ */
 @media (min-width: 600px) {
 	.custom-col {
 		width: 4.333333%;
@@ -20,51 +32,81 @@
 	}
 }
 
+/**
+ * Adjusts padding for custom columns on smaller screens.
+ */
 @media (max-width: 700px) {
 	.custom-col {
 		padding-left: 0;
 	}
 }
 
+/**
+ * Defines styles for message containers.
+ */
 .message {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
 }
 
+/**
+ * Styles for messages sent by the sender.
+ */
 .sender {
 	align-items: flex-end;
 }
 
+/**
+ * Styles for messages received by the receiver.
+ */
 .receiver {
 	align-items: flex-start;
 }
 
+/**
+ * Defines styles for message content.
+ */
 .message .content {
 	padding: 11px;
 	border-radius: 10px;
 }
 
+/**
+ * Styles for message content received by the receiver.
+ */
 .receiver .content {
 	background-color: #cadcfc;
 	border-bottom-left-radius: 0;
 }
 
+/**
+ * Styles for message content sent by the sender.
+ */
 .sender .content {
 	background-color: #d9f0ff;
 	border-bottom-right-radius: 0;
 }
 
+/**
+ * Defines styles for message timestamps.
+ */
 .timestamp {
 	font-size: 10px;
 	color: #999;
 	margin-top: 5px;
 }
 
+/**
+ * Aligns timestamps to the right within message containers.
+ */ 
 .message .timestamp {
 	text-align: right;
 }
 
+/**
+ * Defines styles for the fixed-bottom container.
+ */
 .fixed-bottom {
     background: #f0f8ff;
 }

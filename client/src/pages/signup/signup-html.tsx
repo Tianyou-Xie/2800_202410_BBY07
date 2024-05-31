@@ -7,6 +7,24 @@ import { SmallLoader } from '../../components/loader/small-loader';
 import { useState } from 'react';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 
+/**
+ * SignupHtml component handles the presentation layer for user signup.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {Array<Object>} props.planets - The list of planets.
+ * @param {string} props.username - The username entered by the user.
+ * @param {string} props.email - The email entered by the user.
+ * @param {string} props.password - The password entered by the user.
+ * @param {Function} props.setUsername - The function to update the username.
+ * @param {Function} props.setEmail - The function to update the email.
+ * @param {Function} props.setPassword - The function to update the password.
+ * @param {Function} props.setLocation - The function to update the location.
+ * @param {Function} props.submitForm - The function to handle form submission.
+ * @param {boolean} props.loading - The loading state to indicate form submission.
+ * @returns {JSX.Element} The rendered signup HTML component.
+ */
+
 const SignupHtml = ({
 	planets,
 	username,

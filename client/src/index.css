@@ -1,25 +1,34 @@
+/**
+ * Global CSS variables defining color schemes and shadow options.
+ */
 :root {
-	--signup-background: #f8f4e5;
-	--signup-input-focus: #ebe2c2;
-	--signup-button-active: #ebe2c2;
+	--signup-background: #f8f4e5; /* Background color for signup page */
+    --signup-input-focus: #ebe2c2; /* Background color for focused input fields in signup page */
+    --signup-button-active: #ebe2c2; /* Active color for buttons in signup page */
 
-	--login-background: #f8f4e5;
-	--login-input-focus: #ebe2c2;
-	--login-button-active: #ebe2c2;
+    --login-background: #f8f4e5; /* Background color for login page */
+    --login-input-focus: #ebe2c2; /* Background color for focused input fields in login page */
+    --login-button-active: #ebe2c2; /* Active color for buttons in login page */
 
-	--planets-background: black;
-	--planets-sun-background: yellow;
+    --planets-background: black; /* Background color for planets section */
+    --planets-sun-background: yellow; /* Background color for sun in planets section */
 
-	--soft-shadow: #b8b199;
+    --soft-shadow: #b8b199; /* Color for soft shadow effect */
 
-	--metal-grey: #242c38;
-	--bright-blue: #2196f3;
+    --metal-grey: #242c38; /* Color for metal grey elements */
+    --bright-blue: #2196f3; /* Color for bright blue elements */
 }
 
+/**
+ * Styles for scrollbar width.
+ */
 :root {
 	scrollbar-width: thin;
 }
 
+/**
+ * Reset default margin and padding for all elements.
+ */
 *,
 *::before,
 *::after {
@@ -28,11 +37,18 @@
 	box-sizing: border-box;
 }
 
+/**
+ * Set HTML dimensions to 100%.
+ */
 html {
 	width: 100%;
 	height: 100%;
 }
 
+/**
+ * Set body dimensions to 100% and hide overflow on x-axis.
+ * Apply background color.
+ */
 body {
 	width: 100%;
 	height: 100%;
@@ -57,6 +73,9 @@ body {
 	margin-right: 2px;
 }
 
+/**
+ * Define font faces for custom fonts.
+ */
 @font-face {
 	font-family: Fjalla One;
 	src: url(./assets/fonts/FjallaOne-Regular.ttf);

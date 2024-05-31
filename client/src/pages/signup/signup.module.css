@@ -1,3 +1,4 @@
+/* Styles for the container of the signup component */
 .signup-container {
 	padding-bottom: 10px;
 	display: grid;
@@ -5,12 +6,14 @@
 	justify-items: center;
 }
 
+/* Styles for the signup form */
 .signup-form {
 	background: var(--signup-background);
 	border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
 }
 
+/* Styles for the upper div of the signup form */
 .signup-upperdiv {
 	background: var(--signup-background);
 	padding: 4px 0px;
@@ -18,6 +21,7 @@
 	box-shadow: 4px 3px 0px #000;
 }
 
+/* Styles for the bottom div of the signup form */
 .signup-bottomdiv {
 	background: var(--signup-background);
 	padding: 4px 0px;
@@ -25,17 +29,20 @@
 	box-shadow: 4px 4px 0px #000;
 }
 
+/* Styles for the login button within the signup form */
 .signup-button-login {
 	box-shadow: 4px 5px gray !important;
 	background: black !important;
 	color: white !important;
 }
 
+/* Styles for the active state of the login button within the signup form */
 .signup-button-login:active {
 	box-shadow: 4px 4px var(--signup-button-active) 5 !important;
 	transform: translateY(5px) !important;
 }
 
+/* Styles for input fields within the signup form */
 .signup-form input {
 	font-size: 20px;
 	font-family: Fjalla One;
@@ -44,6 +51,7 @@
 	outline: none;
 }
 
+/* Styles for buttons and select dropdowns within the signup form */
 .signup-form .button,
 .signup-form .select {
 	font-size: 14pt;
@@ -54,6 +62,7 @@
 	padding-left: 5px;
 }
 
+/* Common styles for input elements */  
 .input {
 	display: block;
 	width: 100%;
@@ -61,17 +70,20 @@
 	box-shadow: 4px 5px;
 }
 
+/* Common styles for buttons */
 .button {
 	padding: 2px;
 	width: 50%;
 	box-shadow: 4px 5px;
 }
 
+/* Styles for the active state of buttons */
 .button:active {
 	box-shadow: 4px 4px var(--signup-button-active) 5;
 	transform: translateY(5px);
 }
 
+/* Styles for select dropdowns */
 .select {
 	width: 100%;
 	margin-bottom: 20pt;
@@ -79,14 +91,17 @@
 	padding: 6px;
 }
 
+/* Styles for images */
 .img {
 	max-width: 250px !important;
 }
 
+/* Styles for focused input fields */
 .input:focus {
 	background: var(--signup-input-focus);
 }
 
+/* Styles for heading elements */
 .h1 {
 	font-family: Bitsumishi;
 }
@@ -95,6 +110,7 @@
 	font-family: TTOctosquares;
 }
 
+/* Styles for span elements */
 .span {
 	font-family: TTOctosquares;
 }

@@ -7,6 +7,18 @@ import { SmallLoader } from '../../components/loader/small-loader';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
+/**
+ * LoginHtml component renders the HTML structure for the login page.
+ *
+ * @param {Object} props - The props passed to the component.
+ * @param {string} props.email - The email input value.
+ * @param {string} props.password - The password input value.
+ * @param {Function} props.setEmail - Function to set the email input value.
+ * @param {Function} props.setPassword - Function to set the password input value.
+ * @param {Function} props.submitForm - Function to handle form submission.
+ * @param {boolean} props.loading - Loading state for form submission.
+ * @returns {JSX.Element} The rendered LoginHtml component.
+ */
 const LoginHtml = ({ email, password, setEmail, setPassword, submitForm, loading }: any) => {
 	const [showPassword, setShowPassword] = useState(false);
 
