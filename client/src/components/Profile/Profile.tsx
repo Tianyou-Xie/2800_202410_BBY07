@@ -148,8 +148,6 @@ const Profile = (props: ProfileProp): JSX.Element => {
 		);
 	}, [avatarUrl]);
 
-	console.log(props)
-
 	return (
 		<>
 			<div className={`container`}>

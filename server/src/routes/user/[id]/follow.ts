@@ -91,16 +91,14 @@ export const del: Handler[] = [
         if (!interaction) return Resolve(res).badRequest('User is not followed.');
 
         const session = await mongoose.startSession();
+        const currentUser = req.user!
 
         try {
             await session.withTransaction(async () => {
                 await interaction.deleteOne({ session });
 
-                targetUser.followerCount--;
-                await targetUser.save({ session });
-
-                req.user!.followingCount--;
-                await req.user!.save({ session });
+                await targetUser.updateOne({ $inc: { followerCount: -1 } }, { session });
+				await currentUser.updateOne({ $inc: { followingCount: -1 } }, { session });
 
                 return interaction;
             });
