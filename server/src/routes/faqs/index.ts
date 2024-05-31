@@ -61,7 +61,7 @@ export const post: Handler[] = [
 
 		for (let i = 0; i < questions.length; i++) {
 			queryArr.forEach((q) => {
-				if (questions[i].keywords.includes(q) && !quesToSend.includes(questions[i])) quesToSend.push(questions[i]);
+				if (questions[i].keywords.includes(q.toLowerCase()) && !quesToSend.includes(questions[i])) quesToSend.push(questions[i]);
 			});
 		}
 
