@@ -78,6 +78,11 @@
 	font-family: Fjalla One;
 }
 
+.red {
+	font-weight: bold;
+	color: red;
+}
+
 @media screen and (min-width: 800px) {
 	.setting-body {
 		width: 50%;
