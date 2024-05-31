@@ -14,7 +14,7 @@ import style from './post-header.module.css';
 
 /* Import from other components created */
 import { UserAuthContext } from '../../../lib/auth';
-import ModalConfirmation from '../../ModalConfirmation/ModalConfirmation';
+import ModalConfirmation from '../../modal-confirmation/modal-confirmation';
 
 /* Import from UI components */
 import UIBox from '../../UIBox/UIBox';

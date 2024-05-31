@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { UserAuthContext } from '../../../lib/auth';
 
 /* Imports from other components created */
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+import ModalConfirmation from '../../../components/modal-confirmation/modal-confirmation';
 
 /**
  * The properties and types for the YourInfoModal.

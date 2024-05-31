@@ -5,7 +5,7 @@ import styles from '../user-settings-page.module.css';
 import Button from 'react-bootstrap/Button';
 
 /* Imports from other components created */
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+import ModalConfirmation from '../../../components/modal-confirmation/modal-confirmation';
 import UIBox from '../../../components/UIBox/UIBox';
 
 /**
