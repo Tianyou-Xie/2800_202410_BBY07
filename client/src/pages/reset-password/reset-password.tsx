@@ -12,7 +12,7 @@ import { useLocation } from 'wouter';
 import { api } from '../../lib/axios';
 
 /* Imports from other components created */
-import Page from '../../components/kebab-page/kebab-page';
+import Page from '../../components/page/page';
 
 /* Import from local files */
 import logoUrl from '../../assets/images/skynet-logo.png';

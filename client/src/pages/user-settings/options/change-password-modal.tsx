@@ -2,8 +2,8 @@
 import Button from 'react-bootstrap/Button';
 
 /* Imports from other components created */
-import ModalConfirmation from '../../../components/kebab-modal-confirmation/kebab-modal-confirmation';
-import UIBox from '../../../components/kebab-uibox/kebab-uibox';
+import ModalConfirmation from '../../../components/modal-confirmation/modal-confirmation';
+import UIBox from '../../../components/uibox/uibox';
 import { useState } from 'react';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 

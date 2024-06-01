@@ -2,11 +2,11 @@
 import styles from '../user-settings-page.module.css';
 
 /* Imports from other components created */
-import ModalConfirmation from '../../../components/kebab-modal-confirmation/kebab-modal-confirmation';
+import ModalConfirmation from '../../../components/modal-confirmation/modal-confirmation';
 
 /* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
-import UIBox from '../../../components/kebab-uibox/kebab-uibox';
+import UIBox from '../../../components/uibox/uibox';
 
 /* Import from react toastify */
 import { toast } from 'react-toastify';

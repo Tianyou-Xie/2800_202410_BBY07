@@ -14,10 +14,10 @@ import style from './post-header.module.css';
 
 /* Import from other components created */
 import { UserAuthContext } from '../../../lib/auth';
-import ModalConfirmation from '../../kebab-modal-confirmation/kebab-modal-confirmation';
+import ModalConfirmation from '../../modal-confirmation/modal-confirmation';
 
 /* Import from UI components */
-import UIBox from '../../kebab-uibox/kebab-uibox';
+import UIBox from '../../uibox/uibox';
 
 /* Define the Props interface */
 interface Props {

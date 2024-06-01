@@ -2,7 +2,7 @@
 import styles from './support-page.module.css';
 
 /* Imports from other components created */
-import Page from '../../components/kebab-page/kebab-page';
+import Page from '../../components/page/page';
 import { Container } from 'react-bootstrap';
 
 /**

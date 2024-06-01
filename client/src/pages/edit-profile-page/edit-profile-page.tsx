@@ -7,8 +7,8 @@ import { Else, If, Then } from 'react-if';
 import { toast } from 'react-toastify';
 
 /* Import custom components that were made */
-import Page from '../../components/kebab-page/kebab-page';
-import UIBox from '../../components/kebab-uibox/kebab-uibox';
+import Page from '../../components/page/page';
+import UIBox from '../../components/uibox/uibox';
 import { SmallLoader } from '../../components/loader/small-loader';
 
 /* Frontend utility imports */

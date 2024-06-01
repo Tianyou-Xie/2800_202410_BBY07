@@ -17,8 +17,8 @@ import { UserAuthContext } from '../../lib/auth';
 
 /* Import from other components created */
 import { SmallLoader } from '../../components/loader/small-loader';
-import Page from '../../components/kebab-page/kebab-page';
-import UIBox from '../../components/kebab-uibox/kebab-uibox';
+import Page from '../../components/page/page';
+import UIBox from '../../components/uibox/uibox';
 
 /**
  * PostPage component represents a page in which the user can create a post.

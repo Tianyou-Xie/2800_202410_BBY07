@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { api } from '../../lib/axios';
-import Page from '../../components/kebab-page/kebab-page';
+import Page from '../../components/page/page';
 import styles from './messages.module.css';
 
 /**

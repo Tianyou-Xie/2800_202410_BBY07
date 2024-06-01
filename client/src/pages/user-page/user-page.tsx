@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'wouter';
 
 /* Imports from other components created */
-import Page from '../../components/kebab-page/kebab-page';
-import Profile from '../../components/kebab-profile/kebab-profile';
+import Page from '../../components/page/page';
+import Profile from '../../components/profile/profile';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 import SEO from '../../components/seo/seo';
 

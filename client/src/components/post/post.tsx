@@ -1,5 +1,5 @@
 /* Stylesheet imports */
-import styles from './kebab-post.module.css';
+import styles from './post.module.css';
 
 /* Import from React */
 import { useEffect, useState } from 'react';
@@ -9,7 +9,7 @@ import { If, Then } from 'react-if';
 import { useLocation } from 'wouter';
 
 /* Import from UI components */
-import UIBox from '../kebab-uibox/kebab-uibox';
+import UIBox from '../uibox/uibox';
 
 /* Import from React Icons */
 import { FaRegHeart } from 'react-icons/fa';

@@ -6,8 +6,8 @@ import { Else, If, Then } from 'react-if';
 import { Link } from 'wouter';
 
 import { api } from '../../lib/axios';
-import UIBox from '../kebab-uibox/kebab-uibox';
-import styles from './kebab-profile.module.css';
+import UIBox from '../uibox/uibox';
+import styles from './profile.module.css';
 import { toast } from 'react-toastify';
 import { SmallLoader } from '../loader/small-loader';
 import { UserAuthContext } from '../../lib/auth';

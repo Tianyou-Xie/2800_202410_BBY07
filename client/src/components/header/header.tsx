@@ -1,5 +1,5 @@
 /* Stylesheet imports */
-import styles from './kebab-header.module.css';
+import styles from './header.module.css';
 
 /* Imports from wouter */
 import { useRoute } from 'wouter';

@@ -2,7 +2,7 @@ import styles from './paginated-user-list.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { SmallLoader } from '../loader/small-loader';
 import { Else, If, Then } from 'react-if';
-import UIBox from '../kebab-uibox/kebab-uibox';
+import UIBox from '../uibox/uibox';
 import { Link } from 'wouter';
 
 /**

@@ -1,6 +1,6 @@
 import styles from './planet-list.module.css';
 
-import Page from '../../components/kebab-page/kebab-page';
+import Page from '../../components/page/page';
 import { useContext, useEffect, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { SmallLoader } from '../../components/loader/small-loader';
