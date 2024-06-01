@@ -1,18 +1,34 @@
+/**
+ * Global CSS variables defining color schemes and shadow options.
+ */
 :root {
-	--signup-background: #f8f4e5;
-	--signup-input-focus: #ebe2c2;
-	--signup-button-active: #ebe2c2;
+	--signup-background: #f8f4e5; /* Background color for signup page */
+    --signup-input-focus: #ebe2c2; /* Background color for focused input fields in signup page */
+    --signup-button-active: #ebe2c2; /* Active color for buttons in signup page */
 
-	--login-background: #f8f4e5;
-	--login-input-focus: #ebe2c2;
-	--login-button-active: #ebe2c2;
+    --login-background: #f8f4e5; /* Background color for login page */
+    --login-input-focus: #ebe2c2; /* Background color for focused input fields in login page */
+    --login-button-active: #ebe2c2; /* Active color for buttons in login page */
 
-    --planets-background: black;
-    --planets-sun-background: yellow;
+    --planets-background: black; /* Background color for planets section */
+    --planets-sun-background: yellow; /* Background color for sun in planets section */
 
-	--soft-shadow: #b8b199;
+    --soft-shadow: #b8b199; /* Color for soft shadow effect */
+
+    --metal-grey: #242c38; /* Color for metal grey elements */
+    --bright-blue: #2196f3; /* Color for bright blue elements */
 }
 
+/**
+ * Styles for scrollbar width.
+ */
+:root {
+	scrollbar-width: thin;
+}
+
+/**
+ * Reset default margin and padding for all elements.
+ */
 *,
 *::before,
 *::after {
@@ -21,22 +37,45 @@
 	box-sizing: border-box;
 }
 
+/**
+ * Set HTML dimensions to 100%.
+ */
 html {
 	width: 100%;
 	height: 100%;
 }
 
+/**
+ * Set body dimensions to 100% and hide overflow on x-axis.
+ * Apply background color.
+ */
 body {
 	width: 100%;
 	height: 100%;
 	overflow-x: hidden;
-	/*This margin bottom is needed to make hotbar not interfere with other componenet*/
-	/*If this margin bottom is doing something else bad please talk to sam. Thank you!*/
 	margin-bottom: 20px;
 	background-color: aliceblue;
-    cursor: url("./assets/images/icons8-cursor-38.png"), auto;
 }
 
+/* Styles for the react toasts */
+.Toastify__toast--success,
+.Toastify__toast--error,
+.Toastify__toast--info {
+	border-radius: 0;
+	background-color: var(--signup-background);
+	color: var(--metal-grey);
+	box-shadow: 4px 5px 0px var(--soft-shadow);
+	font-size: 14pt;
+}
+
+.Toastify button {
+	margin-top: 9px;
+	margin-right: 2px;
+}
+
+/**
+ * Define font faces for custom fonts.
+ */
 @font-face {
 	font-family: Fjalla One;
 	src: url(./assets/fonts/FjallaOne-Regular.ttf);

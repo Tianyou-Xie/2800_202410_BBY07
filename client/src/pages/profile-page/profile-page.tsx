@@ -1,87 +1,37 @@
-import styles from './profile-page.module.css';
-import Page from '../../components/Page/Page';
-import Post from '../../components/Post/Post';
-import Profile from '../../components/Profile/Profile';
+import Page from '../../components/page/page';
+import Profile from '../../components/profile/profile';
 import { api } from '../../lib/axios';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { UserAuthContext } from '../../lib/auth';
+import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 
-interface Post {
-	authorId: string;
-	commentCount: number;
-	content: string;
-	createdAt: Date;
-	deleted: false;
-	likeCount: number;
-	location: {
-		planetId: string;
-		latitude: number;
-		longitude: number;
-		_id: string;
-	};
-	media: [];
-	repostCount: number;
-	__v: number;
-	_id: string;
-}
-
+/**
+ * ProfilePage component representing the own user's profile page, containing profile
+ * information and personal feed (all posts made by the user) and being different by
+ * being and editable profile page.
+ *
+ * @return JSX.Element -Profile Page as a JSX.Element
+ */
 const ProfilePage = () => {
 	const user = useContext(UserAuthContext);
-	const [displayedPosts, setDisplayedPosts] = useState(Array<JSX.Element>());
-
-	useEffect(() => {
-		const displayPosts = async function () {
-			setDisplayedPosts(await getPosts());
-		};
-		displayPosts();
-	}, [user]);
-
-	async function getPosts() {
-		try {
-			if (!user) return;
-			const res = await api.get('/feed/' + user._id);
-			const postArray = res.data.value;
-			let postElements = postArray.map((post: Post) => {
-				return (
-					<Post
-						username={user.userName}
-						authorId={user._id}
-						content={post.content}
-						postId={post._id}
-						likeCount={post.likeCount}
-						commentCount={post.commentCount}
-						repostCount={post.repostCount}
-						key={post._id}
-					/>
-				);
-			});
-			if (postArray.length == 0) {
-				postElements = [<>Nothing yet...</>];
-			}
-			return postElements;
-		} catch (err) {
-			console.log(err);
-		}
-	}
 
 	return (
 		<Page
-			pageName='Profile'
+			pageName={user.userName.length < 12 ? user.userName : 'My Profile'}
 			content={
 				<>
-					<Profile
-						userId={user._id}
-						username={user.userName}
-						// description='I like eating lettuce and broccoli'
-						follower={user.followerCount}
-						following={user.followingCount}
-						postCount={user.postCount}
+					<Profile {...user} />
+					<PaginatedPostFeed
+						feedKey={user._id}
+						fetchPage={(page) => api.get(`/feed/${user._id}?page=${page}`).then((res) => res.data.value)}
 					/>
-					{displayedPosts}
 				</>
 			}
 		/>
 	);
 };
 
+/**
+ * Exports the ProfilePage component for external use.
+ */
 export default ProfilePage;

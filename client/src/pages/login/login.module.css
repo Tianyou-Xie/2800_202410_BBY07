@@ -1,16 +1,24 @@
+/**
+ * Styles for the login container.
+ */
 .login-container {
 	display: grid;
 	align-items: center;
 	justify-items: center;
 }
 
+/**
+ * Styles for the login form.
+ */
 .login-form {
 	background: var(--login-background);
-	padding: 29px 59px;
 	border: 2px solid black;
 	box-shadow: 4px 5px 0px #000;
 }
 
+/**
+ * Styles for the upper div of the login container.
+ */
 .login-upperdiv {
 	background: var(--login-background);
 	padding: 4px 0px;
@@ -18,6 +26,9 @@
 	box-shadow: 4px 3px 0px #000;
 }
 
+/**
+ * Styles for the bottom div of the login container.
+ */
 .login-bottomdiv {
 	background: var(--login-background);
 	padding: 4px 0px;
@@ -31,48 +42,76 @@
 	color: white !important;
 }
 
+/**
+ * Styles for the login button.
+ */
 .login-button-login:active {
-    box-shadow: 4px 4px var(--login-button-active) 5 !important;
+	box-shadow: 4px 4px var(--login-button-active) 5 !important;
 	transform: translateY(5px) !important;
+}
+
+.input {
+	font-family: Fjalla One;
+}
+
+.button {
+	font-family: BabaPro;
 }
 
 .input,
 .button {
 	font-size: 14pt;
-	font-family: 'BabaPro';
 	background: var(--login-background);
 	border: 2px solid black;
 	outline: none;
 	padding-left: 5px;
 }
 
+/**
+ * Common styles for input elements.
+ */
 .input {
 	display: block;
 	width: 100%;
 	line-height: 28pt;
-	margin-bottom: 20pt;
 	box-shadow: 4px 5px;
+	padding: 0 5px;
 }
 
+/**
+ * Common styles for button elements.
+ */
 .button {
 	padding: 2px;
 	width: 50%;
 	box-shadow: 4px 5px;
 }
 
+/**
+ * Styles for the active state of buttons.
+ */
 .button:active {
 	box-shadow: 4px 4px var(--login-button-active) 5;
 	transform: translateY(5px);
 }
 
+/**
+ * Styles for image elements.
+ */
 .img {
 	max-width: 250px !important;
 }
 
+/**
+ * Styles for focused input elements.
+ */
 .input:focus {
 	background: var(--login-input-focus);
 }
 
+/**
+ * Styles for heading elements.
+ */
 .h1 {
 	font-family: Bitsumishi;
 }
@@ -81,6 +120,9 @@
 	font-family: BabaPro;
 }
 
+/**
+ * Styles for span elements.
+ */
 .span {
-    font-family: TTOctosquares;
+	font-family: TTOctosquares;
 }

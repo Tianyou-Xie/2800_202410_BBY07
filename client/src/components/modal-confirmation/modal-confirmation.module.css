@@ -1,0 +1,35 @@
+.modal > div {
+    border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+    background-color: var(--signup-background);
+}
+
+.modal, .modal > div {
+    border-radius: 0;
+}
+
+.modal button {
+    border-radius: 0;
+    border: 2px solid black;
+    box-shadow: 4px 5px 0px #000;
+    font-family: BabaPro;
+}
+
+.modal button:active {
+    box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+	transform: translateY(5px) !important;
+}
+
+.header-font {
+    font-family: Bitsumishi;
+    font-size: 2em;
+}
+
+.modal-body {
+    font-family: TTOctosquares;
+    font-size: 14pt;
+}
+
+.modal-footer {
+    font-family: BabaPro;
+}

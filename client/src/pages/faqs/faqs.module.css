@@ -1,0 +1,63 @@
+.accordion-item,
+.accordion-item button {
+	background-color: var(--signup-background);
+	border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+}
+
+.faq-header {
+	font-family: Bitsumishi;
+}
+
+.accordion-item button {
+	z-index: -1;
+}
+
+.accordion-item button[aria-expanded='true'] {
+	background-color: var(--signup-background);
+	color: #000;
+}
+
+.accordion-item button:focus {
+	box-shadow: none;
+}
+
+.accordion-item h2,
+.accordion-item h3,
+.accordion-item h4 {
+	font-family: BabaPro;
+}
+
+.accordion-body {
+	font-family: TTOctosquares;
+}
+
+.clear-btn {
+	font-family: BabaPro;
+	border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+	border-radius: 0;
+	color: aliceblue;
+}
+
+.search-btn {
+	font-family: BabaPro;
+	border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+	border-radius: 0;
+	background-color: #2196f3;
+	color: aliceblue;
+}
+
+.search-btn:active,
+.clear-btn:active {
+	box-shadow: 4px 4px var(--signup-button-active) 5 !important;
+	transform: translateY(5px) !important;
+}
+
+.empty-msg-card {
+	background-color: var(--signup-background);
+	border: 2px solid black;
+	box-shadow: 4px 5px 0px #000;
+	border-radius: 0;
+}

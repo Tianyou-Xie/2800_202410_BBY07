@@ -4,7 +4,7 @@ import { Image } from 'react-konva';
 import useImage from 'use-image';
 import { useLocation } from 'wouter';
 
-import logoUrl from '../../assets/images/SkynetLogo.png';
+import logoUrl from '../../assets/images/skynet-logo.png';
 import { withRef } from '../../lib/with-ref';
 
 export const CenterVisual = () => {

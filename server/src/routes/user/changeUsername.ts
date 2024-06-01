@@ -7,6 +7,12 @@ interface UsernameBody {
 	newUsername: string;
 }
 
+/**
+ * PATCH @ /user/changeUsername
+ *
+ * This changes the username for the user
+ * making the request.
+ */
 export const patch: Handler[] = [
 	authProtected,
 	async (req, res) => {

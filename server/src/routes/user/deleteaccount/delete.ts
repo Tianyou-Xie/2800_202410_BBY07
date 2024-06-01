@@ -12,6 +12,15 @@ interface deleteBody {
 
 const message = 'I-WANT-TO-DELETE-THIS-ACCOUNT';
 
+/**
+ * POST @ /user/deleteaccount
+ *
+ * This deletes the user that is making the request.
+ * This does not actually drop the document from the
+ * database because of legal reasons. It simply anonomizes
+ * the existing user and saves the previous version of the user
+ * in a private spot.
+ */
 export const post: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -38,12 +47,13 @@ export const post: Handler[] = [
 		await userRef.updateOne({
 			email: null,
 			sso: null,
-			userName: 'deletedUser',
+			userName: 'Deleted User',
 			password: null,
 			location: null,
 			bio: null,
 			birthDate: null,
 			avatarUrl: null,
+			deleted: true
 		});
 
 		const deletedUser = new DeletedUserModel({
@@ -61,8 +71,9 @@ export const post: Handler[] = [
 			postCount: userCopy.postCount,
 			savedPosts: userCopy.savedPosts,
 			admin: userCopy.admin,
-			createdAt: Date.now()
+			deleted: true,
 		});
+		
 		await deletedUser.save();
 
 		Resolve(res).okWith(userCopy, 'Account deleted successfully.');

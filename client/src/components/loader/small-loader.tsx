@@ -1,15 +1,21 @@
+import { CSSProperties } from 'react';
 import { Scrambler } from '../scrambler/scrambler';
 import styles from './small-loader.module.css';
 
-export const SmallLoader = () => {
+interface Props {
+	style?: CSSProperties;
+}
+
+export const SmallLoader = (props: Props) => {
 	const text = 'Loading';
 
 	return (
 		<span
-			className={`${styles.loader} w-100 h-100 text-black d-flex align-items-center justify-content-center position-relative`}>
+			className={`${styles.loader} w-100 h-100 d-flex align-items-center justify-content-center position-relative`}
+			style={props.style}>
 			<span className='opacity-0'>{text}</span>
 			<span className='position-absolute'>
-				<Scrambler text={text} />
+				<Scrambler style={props.style} text={text} />
 			</span>
 		</span>
 	);

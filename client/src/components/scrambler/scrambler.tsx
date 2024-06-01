@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 
 interface Props {
 	text: string;
 	scrambleSpeed?: number;
 	scrambleDelay?: number;
+	style?: CSSProperties;
 }
 
 const scrambleChars = ['@', '#', '$', '%', '-', '&', '*', '_'];
@@ -29,5 +30,5 @@ export const Scrambler = (props: Props) => {
 		return () => clearInterval(interval);
 	}, [props.scrambleSpeed, props.scrambleDelay, props.text]);
 
-	return <span>{text}</span>;
+	return <span style={props.style}>{text}</span>;
 };

@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
 import { Handler } from 'express';
+import OpenAI from 'openai';
 import { UserModel } from '../../models/user';
 import { createHash } from '../../utils/bcrypt';
 import { PlanetModel } from '../../models/planet';
@@ -8,6 +9,7 @@ import { assertRequestBody, Resolve } from '../../utils/express';
 import { ILocation, RawLocationSchema } from '../../models/location';
 import { RawDocument } from '../../@types/model';
 import { JWT } from '../../utils/jwt';
+import { imageUpload } from '../../utils/image';
 
 interface PostBody {
 	email: string;
@@ -17,7 +19,19 @@ interface PostBody {
 }
 
 const inflightEmails = new Set<string>();
+const openai = new OpenAI({
+	apiKey: process.env.OPENAI_API_KEY,
+});
+const prompt =
+	'generate a random centered avatar for a social networking app that displays post from each planets within galaxy';
 
+/**
+ * POST @ /user/signup
+ *
+ * This creates a new user with the specified parameters.
+ * This also issues a JWT token so the user will not have to
+ * log in right after signing up.
+ */
 export const post: Handler = async (req, res) => {
 	const body = assertRequestBody(
 		req,
@@ -51,6 +65,19 @@ export const post: Handler = async (req, res) => {
 			password: await createHash(body.password),
 			location: body.location,
 		});
+
+		openai.images
+			.generate({
+				model: 'dall-e-3',
+				prompt: prompt,
+				size: '1024x1024',
+			})
+			.then((image) => {
+				imageUpload(image.data[0].url).then(async (res) => {
+					if (!res) return;
+					await user.updateOne({ avatarUrl: res.secure_url });
+				});
+			});
 
 		await user.save();
 		Resolve(res).okWith(JWT.signAs(user));

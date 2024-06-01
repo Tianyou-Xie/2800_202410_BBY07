@@ -11,6 +11,12 @@ interface PostBody {
 	password: string;
 }
 
+/**
+ * GET @ /user/login
+ * 
+ * This returns whether a user is currently authorized, and
+ * if requested, can issue a new JWT token.
+ */
 export const get: Handler[] = [
 	authProtected,
 	async (req, res) => {
@@ -22,6 +28,13 @@ export const get: Handler[] = [
 	},
 ];
 
+/**
+ * POST @ /user/login
+ * 
+ * This authenticates a user based off of specified
+ * email and password, and issues a JWT token if
+ * all is okay.
+ */
 export const post: Handler = async (req, res) => {
 	const body = assertRequestBody(
 		req,

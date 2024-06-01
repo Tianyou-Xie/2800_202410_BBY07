@@ -1,0 +1,65 @@
+.general {
+	font-family: TTOctosquares;
+	width: 75%;
+	max-width: 1400px;
+}
+
+.username {
+	padding: 2px 8px;
+	margin: 2px 0px;
+	width: max-content;
+	text-align: left;
+	font-size: 1rem;
+}
+
+.post {
+	padding: 10px;
+	margin: 2px 0px;
+	text-align: left;
+	word-break: break-word;
+	font-size: 1.1rem;
+}
+
+.text-box {
+	border: none;
+	font-family: TTOctosquares;
+	width: 100%;
+	height: 250px;
+	background-color: inherit;
+	resize: none;
+}
+
+.side-buttons {
+	display: flex;
+	padding: 6px;
+	padding-right: 0px;
+	justify-content: right;
+	gap: 20px;
+}
+
+.select {
+	color: #fff;
+	background-color: #000;
+	border-radius: 10px;
+	border: #000;
+	box-shadow: 4px 5px 0px var(--soft-shadow);
+	text-align: center;
+}
+
+.submit-div {
+	margin-right: 2px;
+	padding: 2px 7px;
+}
+
+.submit {
+	color: white;
+	width: 100%;
+	padding: 0px;
+	background-color: transparent;
+}
+
+@media only screen and (max-width: 767px) {
+	.general {
+		width: 100%;
+	}
+}

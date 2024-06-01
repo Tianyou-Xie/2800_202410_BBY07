@@ -1,11 +1,15 @@
-import { useState } from 'react';
-
-import styles from '../user-settings.module.css';
-
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+/* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
-import logoUrl from '../../../assets/images/SkynetLogo.png';
 
+/* Imports from other components created */
+import ModalConfirmation from '../../../components/modal-confirmation/modal-confirmation';
+import UIBox from '../../../components/uibox/uibox';
+import { useState } from 'react';
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
+
+/**
+ * The properties and types for the ChangePasswordModal.
+ */
 interface Props {
 	passBody1: {
 		showPassBody1: boolean;
@@ -24,7 +28,19 @@ interface Props {
 	};
 }
 
+/**
+ * Contructs, manages, and returns the ChangePasswordModal component.
+ *
+ * @param props the props for this ChangePasswordModal, as seen outlined in the interface
+ * @returns The ChangePasswordModal component as a JSX.Element
+ */
 const ChangePasswordModal = (props: Props) => {
+	const [showOriginalPassword, setShowOriginalPassword] = useState(false);
+	const [showNewPassword, setShowNewPassword] = useState(false);
+
+	/**
+	 * Clears the current input feilds.
+	 */
 	const clearFields = () => {
 		props.passBody2.setPassword('');
 		props.passBody2.setNewPassword('');
@@ -77,48 +93,87 @@ const ChangePasswordModal = (props: Props) => {
 				disableFooter={true}
 				header={
 					<div className='mt-3'>
-						<img className={`img-fluid w-25`} src={logoUrl} alt='Skynet Logo' />
 						<p>Change Password</p>
 					</div>
 				}
 				body={
 					<>
-						<div className='text-center'>
-							<form onSubmit={props.passBody2.changePassword}>
-								<input
-									className='mb-2'
-									name='password'
-									placeholder='Current Password'
-									type='password'
-									value={props.passBody2.password}
-									onChange={(event) => props.passBody2.setPassword(event.target.value)}
-									required
-								/>
-								<br />
-								<input
-									className='mb-2'
-									name='newpassword'
-									placeholder='New Password'
-									type='password'
-									value={props.passBody2.newPassword}
-									onChange={(event) => props.passBody2.setNewPassword(event.target.value)}
-									required
-								/>
-								<br />
-								<input
-									className='mb-2'
-									name='confirmpassword'
-									placeholder='Confirm New Password'
-									type='password'
-									value={props.passBody2.confPassword}
-									onChange={(event) => props.passBody2.setConfPassword(event.target.value)}
-									required
-								/>
-								<br />
-								<div className='d-flex justify-content-evenly align-items-center my-3'>
+						<div className='text-center d-flex align-items-center justify-content-center mx-3'>
+							<form
+								onSubmit={props.passBody2.changePassword}
+								className='d-flex flex-column align-items-center justify-content-center gap-4'>
+								<div className='d-flex align-items-start justify-content-between gap-4'>
+									<UIBox
+										content={
+											<input
+												name='password'
+												placeholder='Current Password'
+												type={showOriginalPassword ? 'text' : 'password'}
+												value={props.passBody2.password}
+												onChange={(event) => props.passBody2.setPassword(event.target.value)}
+												required
+											/>
+										}
+									/>
+
+									<button
+										type='button'
+										className='w-auto d-flex align-items-center justify-content-center'
+										onClick={() => setShowOriginalPassword(!showOriginalPassword)}>
+										{showOriginalPassword ? <FaEyeSlash /> : <FaEye />}
+									</button>
+								</div>
+
+								<div className='d-flex align-items-start justify-content-between gap-4'>
+									<UIBox
+										content={
+											<input
+												name='newpassword'
+												placeholder='New Password'
+												type={showNewPassword ? 'text' : 'password'}
+												value={props.passBody2.newPassword}
+												onChange={(event) => props.passBody2.setNewPassword(event.target.value)}
+												required
+											/>
+										}
+									/>
+
+									<button
+										type='button'
+										className='w-auto d-flex align-items-center justify-content-center'
+										onClick={() => setShowNewPassword(!showNewPassword)}>
+										{showNewPassword ? <FaEyeSlash /> : <FaEye />}
+									</button>
+								</div>
+
+								<div className='d-flex align-items-start justify-content-between gap-4'>
+									<UIBox
+										content={
+											<input
+												name='confirmpassword'
+												placeholder='Confirm New Password'
+												type={showNewPassword ? 'text' : 'password'}
+												value={props.passBody2.confPassword}
+												onChange={(event) =>
+													props.passBody2.setConfPassword(event.target.value)
+												}
+												required
+											/>
+										}
+									/>
+
+									<button
+										type='button'
+										className='w-auto d-flex align-items-center justify-content-center'
+										onClick={() => setShowNewPassword(!showNewPassword)}>
+										{showNewPassword ? <FaEyeSlash /> : <FaEye />}
+									</button>
+								</div>
+
+								<div className='d-flex justify-content-evenly align-items-center gap-2 my-3'>
 									<div className='text-center'>
 										<button className='btn btn-danger' type='submit'>
-											Change Password
+											Confirm
 										</button>
 									</div>
 									<div className='text-center'>
@@ -142,4 +197,7 @@ const ChangePasswordModal = (props: Props) => {
 	);
 };
 
+/**
+ * Exports the ChangePasswordModal for external use.
+ */
 export default ChangePasswordModal;

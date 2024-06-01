@@ -23,6 +23,7 @@ export interface IUser {
 	followingCount: number;
 	postCount: number;
 	admin: boolean;
+	deleted: boolean;
 	savedPosts: Array<Types.ObjectId>;
 	createdAt: Date;
 }
@@ -47,8 +48,12 @@ const schema = new Schema<IUser>(
 		postCount: { type: 'number', required: true, default: 0 },
 		savedPosts: { type: ['ObjectId'], required: true, default: [] },
 		admin: { type: 'boolean', required: true, default: false },
+		deleted: { type: 'boolean', required: true, default: false },
 	},
 	{ timestamps: { createdAt: true, updatedAt: false } },
 );
 
+/**
+ * The model representing the "users" collection in MongoDB.
+ */
 export const UserModel = model('User', schema);

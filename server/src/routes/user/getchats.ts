@@ -9,6 +9,13 @@ interface PostBody {
 	content: string;
 }
 
+/**
+ * POST @ /user/getchat
+ * 
+ * This returns the messages in the conversation
+ * between the user making the request and
+ * the specified receiver.
+ */
 export const post: Handler[] = [
     authProtected,
     async (req, res) => {
@@ -26,7 +33,23 @@ export const post: Handler[] = [
             return
         }
         
-        const message = await MessageModel.find({conversationId: converationID._id});
+        await MessageModel.find({conversationId: converationID._id});
+        const message = await MessageModel.aggregate([
+            {
+                $match: { conversationId: converationID._id }
+            },
+            {
+              $group: {
+                _id: {
+                  $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+                },
+                messages: { $push: "$$ROOT" }
+              }
+            },
+            {
+              $sort: { "_id": 1 }
+            }
+          ]);
         
         res.json({success: true, message})
     }

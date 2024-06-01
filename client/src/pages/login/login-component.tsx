@@ -5,6 +5,12 @@ import { toast } from 'react-toastify';
 import { Auth } from '../../lib/auth';
 import LoginHtml from './login-html';
 
+/**
+ * Login component handles user login functionality.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Login component.
+ */
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -12,8 +18,14 @@ const Login = () => {
 	const [_, setLocation] = useLocation();
 
 	const [loading, setLoading] = useState(true);
+
+    // Retrieves search query parameters from the URL
 	const query = useSearch();
 
+    /**
+     * Effect hook to handle external authentication using OAuth code.
+     * Fetches token from the backend and saves it on successful authentication.
+     */
 	useEffect(() => {
 		const params = new URLSearchParams(query);
 		const externalAuthCode = params.get('code');
@@ -27,6 +39,12 @@ const Login = () => {
 		});
 	}, []);
 
+    /**
+     * Handles form submission for user login.
+     * Sends login request to the backend and handles the response.
+     *
+     * @param {Event} e - The form submission event.
+     */
 	const submitForm = async (e: any) => {
 		e.preventDefault();
 
@@ -42,13 +60,12 @@ const Login = () => {
 			const token = res.value;
 			Auth.saveToken(token);
 			setLocation('/home');
-			toast.success('login successfully');
+			toast.success('Logged in successfully.');
 		} catch (error: any) {
 			let err = error.response.data.success;
-			console.log(err);
-			toast.error('🦄 Wrong Credentials', {
+			toast.error('No account exists with that email and password.', {
 				position: 'top-right',
-				autoClose: 55000,
+				autoClose: 5500,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: true,
@@ -59,6 +76,7 @@ const Login = () => {
 		}
 	};
 
+    // Renders the LoginHtml component with necessary props
 	return (
 		<LoginHtml
 			email={email}

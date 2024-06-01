@@ -1,57 +1,45 @@
-import styles from './user-page.module.css';
-import Page from '../../components/Page/Page';
-import Post from '../../components/Post/Post';
-import Profile from '../../components/Profile/Profile';
-import { useLocation, useParams } from 'wouter';
+/* Imports from React */
 import { useEffect, useState } from 'react';
+
+/* Import from wouter */
+import { useLocation, useParams } from 'wouter';
+
+/* Imports from other components created */
+import Page from '../../components/page/page';
+import Profile from '../../components/profile/profile';
+import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
+import SEO from '../../components/seo/seo';
+
+/* Imports for frontend api call and authentication verification */
+import { isUser } from '../../lib/is-user';
 import { api } from '../../lib/axios';
-import { isUser } from '../../lib/isUser';
 
-interface Post {
-	authorId: string;
-	commentCount: number;
-	content: string;
-	createdAt: Date;
-	deleted: false;
-	likeCount: number;
-	location: {
-		planetId: string;
-		latitude: number;
-		longitude: number;
-		_id: string;
-	};
-	media: [];
-	repostCount: number;
-	__v: number;
-	_id: string;
-}
-
+/**
+ * Constructs, manages, and returns the UserPage component, which
+ * represents the profile page of another specific user.
+ *
+ * @return The UserPage component as a JSX.Element
+ */
 const UserPage = () => {
-	const [username, setUsername] = useState('');
-	const [follower, setFollower] = useState(0);
-	const [following, setFollowing] = useState(0);
-	const [postCount, setPostCount] = useState(0);
-	const [displayedPosts, setDisplayedPosts] = useState(Array<JSX.Element>());
-	const [userID, setUserID] = useState('');
+	const [userData, setUserData] = useState<any>({ userName: '' });
 	const [_, navigate] = useLocation();
-	let { id } = useParams() ?? '';
+	let { id = '' } = useParams();
 
+	/**
+	 * Use effect used to check if it's the own user's profile page,
+	 * and if so, redirects him to editable version of the profile page.
+	 * If not, retrieves the data from a user and store it in a
+	 * React state.
+	 */
 	useEffect(() => {
 		const getUserData = async function () {
 			if (id !== undefined && (await isUser(id))) {
-				navigate('/profile');
-				return;
+				return navigate('/profile', { replace: true });
 			} else {
 				try {
 					if (id == '') return;
 					const res = await api.get('/user/' + id);
-					const data = res.data.value;
-					setUserID(data._id);
-					setUsername(data.userName);
-					setFollower(data.followerCount);
-					setFollowing(data.followingCount);
-					setPostCount(data.postCount);
-					// setDisplayedPosts(await getPosts());
+					setUserData(res.data.value);
 				} catch (err) {
 					console.log(err);
 				}
@@ -61,57 +49,23 @@ const UserPage = () => {
 		getUserData();
 	}, []);
 
-	useEffect(() => {
-		const displayPosts = async function () {
-			setDisplayedPosts(await getPosts());
-		};
-		displayPosts();
-	}, [userID]);
-
-	async function getPosts() {
-		try {
-			if (userID == '') return;
-			const res = await api.get('/feed/' + userID);
-			const postArray = res.data.value;
-			console.log(postArray);
-			let postElements = postArray.map((post: Post) => {
-				return (
-					<Post
-						username={username}
-						authorId={userID}
-						content={post.content}
-						postId={post._id}
-						likeCount={post.likeCount}
-						commentCount={post.commentCount}
-						repostCount={post.repostCount}
-						key={post._id}
-					/>
-				);
-			});
-			if (postArray.length == 0) {
-				postElements = [<>Nothing yet...</>];
-			}
-			return postElements;
-		} catch (err) {
-			console.log(err);
-		}
-	}
-
 	return (
 		<Page
-			pageName={username}
+			pageName={userData.userName.length < 12 ? userData.userName : 'Profile'}
 			content={
 				<>
-					<Profile
-						userId={userID}
-						username={username}
-						// description={'I like eating lettuce and broccoli'}
-						follower={follower}
-						following={following}
-						postCount={postCount}
-						outsideUser
+					<SEO
+						title={`${userData.userName} on Skynet`}
+						description={`${userData.userName} is on Skynet, join them now!`}
+						og={{ image: userData.avatarUrl, imageAlt: `${userData.userName} Avatar`, type: 'website' }}
 					/>
-					{displayedPosts}
+
+					<Profile {...userData} />
+
+					<PaginatedPostFeed
+						feedKey={id}
+						fetchPage={(page) => api.get(`/feed/${id}?page=${page}`).then((res) => res.data.value)}
+					/>
 				</>
 			}
 		/>

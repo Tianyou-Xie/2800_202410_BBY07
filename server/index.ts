@@ -20,27 +20,25 @@ const PROJECT_ROOT = path.join(__dirname, 'src');
 	});
 
 	io.on('connection', (socket) => {
-		// console.log('New client connected');
-
 		socket.on('disconnect', () => {
 			// console.log('Client disconnected');
 		});
 
 		socket.on('sendID', (convoID: string) => {
+            console.log("sendID", convoID)
 			socket.join(convoID);
 		});
 
-		socket.on('sendMessage', (convoID: string) => {
-			socket.to(convoID).emit('displayMessage');
-		});
+		/* socket.on('sendMessage', (convoID: string) => {
+		socket.to(convoID).emit('displayMessage');
+		}); */
 	});
 
 	app.set('socketio', io);
-
 	app.use(cors());
 
-	app.use(express.urlencoded({ extended: true }));
-	app.use(express.json());
+	app.use(express.urlencoded({ extended: true, limit: '5mb', parameterLimit: 100 }));
+	app.use(express.json({ limit: '5mb' }));
 	app.use(requestLogger);
 
 	const mongoUrl = process.env.MONGO_URL!;

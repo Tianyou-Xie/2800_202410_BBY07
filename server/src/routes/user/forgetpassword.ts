@@ -5,11 +5,18 @@ import { TokenModel } from '../../models/token';
 import { Resolve } from '../../utils/express';
 import crypto from 'crypto';
 import { sendEmail } from '../../utils/email';
+import { getClientHost } from '../../environment';
 
 interface PostBody {
 	email: string;
 }
 
+/**
+ * POST @ /user/forgetpassword
+ *
+ * This initiates a new password reset token for
+ * the specified email address.
+ */
 export const post: Handler = async (req, res) => {
 	const bodySchema = Joi.object<PostBody>({
 		email: Joi.string().trim().email().required().messages({
@@ -24,7 +31,7 @@ export const post: Handler = async (req, res) => {
 
 	const { value: body } = bodyValidationResult;
 
-	const existingUser = await UserModel.findOne({ email: body.email });
+	const existingUser = await UserModel.findOne({ email: body.email }).lean();
 	if (!existingUser) return Resolve(res).badRequest('Sorry, no user with that email exists.');
 
 	const submittedEmail = existingUser.email;
@@ -43,8 +50,8 @@ export const post: Handler = async (req, res) => {
 
 	await token.save();
 
-	const resetURL = `${req.protocol}://localhost:8000/resetpassword/${resetToken}`;
-	const message = `We have received a request to reset the password for your account.
+	const resetURL = `${getClientHost()}/resetpassword/${resetToken}`;
+	const message = `We have received a request to reset the password for your account (${existingUser.userName}).
 					\nYou can reset your password using the following link:\n${resetURL}
 					\nThe link is only valid for 10 minutes.\nIf you did not make this request, simply ignore this email.`;
 
@@ -55,7 +62,7 @@ export const post: Handler = async (req, res) => {
 			text: message,
 		});
 
-		return Resolve(res).badRequest('Password rest link has been sent your email.');
+		return Resolve(res).ok('Password rest link has been sent your email.');
 	} catch (error) {
 		await token.deleteOne();
 		console.log(error);

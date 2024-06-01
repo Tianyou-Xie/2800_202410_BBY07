@@ -1,36 +1,63 @@
-import { ToastContainer } from 'react-toastify';
-import { Switch, Route, useLocation } from 'wouter';
-import About from './pages/about/about';
-import Changepassword from './pages/changepassword/changepassword';
-import Forgetpassword from './pages/forgetpassword/forgetpassword';
-import GeneralFeed from './pages/general-feed/general-feed';
-import Login from './pages/login/login-component';
-import MyFeed from './pages/my-feed/my-feed';
-import Signup from './pages/signup/signup-component';
-import Test from './pages/test-page/test-page';
-import UserSettings from './pages/user-settings/user-settings';
-import Resetpassword from './pages/resetpassword/resetpassword';
-import ManageAccount from './pages/user-settings/options/manage-account';
-import Messages from './pages/messages/messages-component';
-import Policy from './pages/about/options/policy';
-import Terms from './pages/about/options/terms';
-import { useEffect, useState } from 'react';
-import { Auth, UserAuthContext } from './lib/auth';
-import Cursors from './components/cursor/cursor';
+/* Import for the main stylesheet */
+import './index.css';
 
+/* Imports from React */
+import { useEffect, useState } from 'react';
 import { Else, If, Then } from 'react-if';
-import { Loader } from './components/loader/loader';
-import PostPage from './pages/post-page/post-page';
+import { ToastContainer } from 'react-toastify';
+
+/* Import from wouter */
+import { Switch, Route, useLocation } from 'wouter';
+
+/* Utility imports for client side authentication */
+import { Auth, UserAuthContext } from './lib/auth';
+
+/* Import for client hostname */
+import { getClientHost } from './environment';
+
+/* Imports for all pages of the website */
+import LandingPage from './pages/landing-page/landing-page';
+import { PlanetMap } from './pages/planet-map/planet-map';
+import Home from './pages/home/planet-list';
+import Login from './pages/login/login-component';
+import Signup from './pages/signup/signup-component';
+import About from './pages/about/about-page';
+import Forgetpassword from './pages/forgot-password/forgot-password';
+import GeneralFeed from './pages/general-feed/general-feed';
+import UserSettings from './pages/user-settings/user-settings-page';
+import Resetpassword from './pages/reset-password/reset-password';
+import ManageAccount from './pages/user-settings/options/manage-account-page';
+import Messages from './pages/messages/messages-component';
+import Policy from './pages/about/options/policy-page';
+import Terms from './pages/about/options/terms-page';
+import FAQs from './pages/faqs/faqs-page';
+import LikedPage from './pages/user-settings/options/liked';
+import SavedPage from './pages/user-settings/options/saved';
+import CommentedPostPage from './pages/user-settings/options/commented';
+import FollowingPage from './pages/following/following';
+import FollowerPage from './pages/follower/follower';
+import PostPage from './pages/create-post/create-post';
 import UserPage from './pages/user-page/user-page';
 import ProfilePage from './pages/profile-page/profile-page';
-import { PlanetMap } from './pages/planet-map/planet-map';
-
-import './index.css';
-import Home from './pages/home/home';
-import PostDetailPage from './pages/post/post';
+import PostDetailPage from './pages/post-details/post-details';
 import Planets from './pages/planets/planets-component';
 import PlanetFeed from './pages/planet-feed/planet-feed';
+import MessagesAll from './pages/messages-all/messages';
+import SearchPage from './pages/search-page/search-page';
+import Page404 from './pages/page404/page404';
+import EditProfilePage from './pages/edit-profile-page/edit-profile-page';
+import SupportPage from './pages/support-page/support-page';
+import AboutSkynetPage from './pages/about/options/about-page';
 
+/* Imports for custom componets made */
+import SEO from './components/seo/seo';
+import { Loader } from './components/loader/loader';
+
+/**
+ * Contructs, manages, and returns the entire client side.
+ *
+ * @returns the client side application as a JSX.Element.
+ */
 export const App = () => {
 	const [loading, setLoading] = useState(true);
 	const [authenticatedUser, setAuthenticatedUser] = useState<any>();
@@ -46,6 +73,9 @@ export const App = () => {
 		});
 	}, [loc]);
 
+	/**
+	 * The common routes throughout this website.
+	 */
 	const commonRoutes = (
 		<>
 			<Route path='/signup' component={Signup} />
@@ -53,19 +83,25 @@ export const App = () => {
 			<Route path='/about' component={About} />
 			<Route path='/about/policy' component={Policy} />
 			<Route path='/about/terms' component={Terms} />
+			<Route path='/about/about-skynet' component={AboutSkynetPage} />
+			<Route path='/faqs' component={FAQs} />
+			<Route path='/support' component={SupportPage} />
 			<Route path='/forgetpassword' component={Forgetpassword} />
 			<Route path='/resetpassword/:token'>{(params) => <Resetpassword token={params.token} />}</Route>
-			<Route path='/test' component={Test} />
 			<Route path='/planets' component={Planets} />
 			<Route path='/post/:id'>{(params) => <PostDetailPage id={params.id} />}</Route>
-			<Route>404 Not Found</Route>
 		</>
 	);
 
 	return (
 		<>
+			<SEO
+				title='Skynet'
+				description='The interplanetary communication platform of the future.'
+				og={{ image: getClientHost() + '/logo.webp', type: 'website', imageAlt: 'Skynet Logo' }}
+			/>
+
 			<ToastContainer />
-			<Cursors />
 
 			<If condition={loading}>
 				<Then>
@@ -76,29 +112,37 @@ export const App = () => {
 					<If condition={!authenticatedUser}>
 						<Then>
 							<Switch>
-								<Route path='/' component={Login} />
 								{commonRoutes}
+								<Route component={LandingPage} />
 							</Switch>
 						</Then>
 
 						<Else>
 							<UserAuthContext.Provider value={authenticatedUser}>
 								<Switch>
-									<Route path='/' component={PlanetMap} />
-									<Route path='/home' component={PlanetMap} />
+									<Route path='/'>{() => <PlanetMap interactable />}</Route>
+									<Route path='/home'>{() => <PlanetMap interactable />}</Route>
 									<Route path='/home-list' component={Home} />
-									<Route path='/changepassword' component={Changepassword} />
 									<Route path='/feed' component={GeneralFeed} />
-									<Route path='/myfeed' component={MyFeed} />
 									<Route path='/post' component={PostPage} />
+									<Route path='/search' component={SearchPage} />
 									<Route path='/user/:id' component={UserPage} />
 									<Route path='/feed/:planetName/:id' component={PlanetFeed} />
 									<Route path='/profile' component={ProfilePage} />
+									<Route path='/profile/edit' component={EditProfilePage} />
 									<Route path='/settings' component={UserSettings} />
 									<Route path='/settings/manageAccount' component={ManageAccount} />
 									<Route path='/messages/:id' component={Messages} />
+									<Route path='/liked' component={LikedPage} />
+									<Route path='/saved' component={SavedPage} />
+									<Route path='/commented' component={CommentedPostPage} />
+									<Route path='/following' component={FollowingPage} />
+									<Route path='/followers' component={FollowerPage} />
+									<Route path='/messages' component={MessagesAll} />
 
 									{commonRoutes}
+
+									<Route component={Page404}>404 Not Found</Route>
 								</Switch>
 							</UserAuthContext.Provider>
 						</Else>
