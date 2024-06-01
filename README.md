@@ -203,7 +203,7 @@ There are a few instances where AI was used in this project:
 -   [Trello](https://trello.com/b/ENhDCODq/2800202410bby07)
 -   [FigJam](https://www.figma.com/file/lM0sT0hbMY3v0cW2zLn5hC/2800-202410-BBY07?type=whiteboard&node-id=0-1&t=fR12pb3gUrK1EDNj-0)
 
-## Files and Folders (as of commit [2df6f0a](https://github.com/Tianyou-Xie/2800_202410_BBY07/commit/2df6f0a8cf27b0f37aa137d971e6ba9b0b1ebaf1))
+## Files and Folders (as of commit [9720d71](https://github.com/Tianyou-Xie/2800_202410_BBY07/commit/9720d7117787446e357ea41a0d10af68b33e64a5))
 
 ```
 .
@@ -232,7 +232,6 @@ There are a few instances where AI was used in this project:
 │   │   │   │   ├── FjallaOne-Regular.ttf
 │   │   │   │   └── TT-Octosquares-Trial-Regular.ttf
 │   │   │   ├── images
-│   │   │   │   ├── SkynetLogo.png
 │   │   │   │   ├── amongus-black.webp
 │   │   │   │   ├── amongus-blue.webp
 │   │   │   │   ├── amongus-green.webp
@@ -240,45 +239,25 @@ There are a few instances where AI was used in this project:
 │   │   │   │   ├── amongus-red.webp
 │   │   │   │   ├── amongus-white.webp
 │   │   │   │   ├── amongus-yellow.webp
-│   │   │   │   └── icons
-│   │   │   │       ├── android-chrome-192x192.png
-│   │   │   │       ├── android-chrome-512x512.png
-│   │   │   │       ├── apple-touch-icon.png
-│   │   │   │       ├── favicon-16x16.png
-│   │   │   │       ├── favicon-32x32.png
-│   │   │   │       ├── favicon.ico
-│   │   │   │       └── site.webmanifest
+│   │   │   │   ├── icons
+│   │   │   │   │   ├── android-chrome-192x192.png
+│   │   │   │   │   ├── android-chrome-512x512.png
+│   │   │   │   │   ├── apple-touch-icon.png
+│   │   │   │   │   ├── favicon-16x16.png
+│   │   │   │   │   ├── favicon-32x32.png
+│   │   │   │   │   ├── favicon.ico
+│   │   │   │   │   └── site.webmanifest
+│   │   │   │   └── skynet-logo.png
 │   │   │   └── videos
 │   │   │       ├── home.gif
 │   │   │       ├── message.gif
 │   │   │       └── post.gif
 │   │   ├── components
-│   │   │   ├── Header
-│   │   │   │   ├── Header.module.css
-│   │   │   │   └── Header.tsx
-│   │   │   ├── ModalConfirmation
-│   │   │   │   ├── ModalConfirmation.module.css
-│   │   │   │   └── ModalConfirmation.tsx
-│   │   │   ├── Page
-│   │   │   │   ├── Page.module.css
-│   │   │   │   └── Page.tsx
-│   │   │   ├── Post
-│   │   │   │   ├── Post.module.css
-│   │   │   │   ├── Post.tsx
-│   │   │   │   └── post-header
-│   │   │   │       ├── post-header.module.css
-│   │   │   │       └── post-header.tsx
-│   │   │   ├── Profile
-│   │   │   │   ├── Profile.module.css
-│   │   │   │   └── Profile.tsx
-│   │   │   ├── UIBox
-│   │   │   │   ├── UIBox.module.css
-│   │   │   │   └── UIBox.tsx
-│   │   │   ├── UserInfo
-│   │   │   │   ├── UserInfo.module.css
-│   │   │   │   └── UserInfo.tsx
 │   │   │   ├── google-auth-btn
 │   │   │   │   └── google-auth-btn.tsx
+│   │   │   ├── header
+│   │   │   │   ├── header.module.css
+│   │   │   │   └── header.tsx
 │   │   │   ├── hotbar
 │   │   │   │   ├── hotbar-animation.css
 │   │   │   │   ├── hotbar.module.css
@@ -288,18 +267,36 @@ There are a few instances where AI was used in this project:
 │   │   │   │   ├── loader.tsx
 │   │   │   │   ├── small-loader.module.css
 │   │   │   │   └── small-loader.tsx
+│   │   │   ├── modal-confirmation
+│   │   │   │   ├── modal-confirmation.module.css
+│   │   │   │   └── modal-confirmation.tsx
+│   │   │   ├── page
+│   │   │   │   ├── page.module.css
+│   │   │   │   └── page.tsx
 │   │   │   ├── paginated-post-feed
 │   │   │   │   └── paginated-post-feed.tsx
 │   │   │   ├── paginated-user-list
 │   │   │   │   ├── paginated-user-list.module.css
 │   │   │   │   └── paginated-user-list.tsx
+│   │   │   ├── post
+│   │   │   │   ├── post-header
+│   │   │   │   │   ├── post-header.module.css
+│   │   │   │   │   └── post-header.tsx
+│   │   │   │   ├── post.module.css
+│   │   │   │   └── post.tsx
+│   │   │   ├── profile
+│   │   │   │   ├── profile.module.css
+│   │   │   │   └── profile.tsx
 │   │   │   ├── ques-accordion
 │   │   │   │   ├── ques-accordion.module.css
 │   │   │   │   └── ques-accordion.tsx
 │   │   │   ├── scrambler
 │   │   │   │   └── scrambler.tsx
-│   │   │   └── seo
-│   │   │       └── seo.tsx
+│   │   │   ├── seo
+│   │   │   │   └── seo.tsx
+│   │   │   └── uibox
+│   │   │       ├── uibox.module.css
+│   │   │       └── uibox.tsx
 │   │   ├── environment.ts
 │   │   ├── index.css
 │   │   ├── index.tsx
@@ -308,16 +305,19 @@ There are a few instances where AI was used in this project:
 │   │   │   ├── axios.ts
 │   │   │   ├── callPosts.ts
 │   │   │   ├── create-slug.ts
-│   │   │   ├── isUser.ts
+│   │   │   ├── is-user.ts
 │   │   │   └── with-ref.ts
 │   │   ├── pages
 │   │   │   ├── about
 │   │   │   │   ├── about-page.module.css
 │   │   │   │   ├── about-page.tsx
 │   │   │   │   └── options
-│   │   │   │       ├── about-skynet-page.tsx
+│   │   │   │       ├── about-page.tsx
 │   │   │   │       ├── policy-page.tsx
 │   │   │   │       └── terms-page.tsx
+│   │   │   ├── create-post
+│   │   │   │   ├── create-post.module.css
+│   │   │   │   └── create-post.tsx
 │   │   │   ├── edit-profile-page
 │   │   │   │   ├── edit-profile-page.module.css
 │   │   │   │   └── edit-profile-page.tsx
@@ -330,15 +330,16 @@ There are a few instances where AI was used in this project:
 │   │   │   ├── following
 │   │   │   │   ├── following.module.css
 │   │   │   │   └── following.tsx
-│   │   │   ├── forgetpassword
-│   │   │   │   ├── forgetpassword.module.css
-│   │   │   │   └── forgetpassword.tsx
+│   │   │   ├── forgot-password
+│   │   │   │   ├── forgot-password.module.css
+│   │   │   │   └── forgot-password.tsx
 │   │   │   ├── general-feed
 │   │   │   │   ├── general-feed.module.css
 │   │   │   │   └── general-feed.tsx
 │   │   │   ├── home
-│   │   │   │   ├── home.module.css
-│   │   │   │   └── home.tsx
+│   │   │   │   ├── planet-list-entry.tsx
+│   │   │   │   ├── planet-list.module.css
+│   │   │   │   └── planet-list.tsx
 │   │   │   ├── landing-page
 │   │   │   │   ├── landing-page.module.css
 │   │   │   │   └── landing-page.tsx
@@ -371,18 +372,15 @@ There are a few instances where AI was used in this project:
 │   │   │   │   ├── planets-component.tsx
 │   │   │   │   ├── planets-html.tsx
 │   │   │   │   └── planets.module.css
-│   │   │   ├── post-page
-│   │   │   │   ├── post-page.module.css
-│   │   │   │   └── post-page.tsx
-│   │   │   ├── post
-│   │   │   │   ├── post.module.css
-│   │   │   │   └── post.tsx
+│   │   │   ├── post-details
+│   │   │   │   ├── post-details.module.css
+│   │   │   │   └── post-details.tsx
 │   │   │   ├── profile-page
 │   │   │   │   ├── profile-page.module.css
 │   │   │   │   └── profile-page.tsx
-│   │   │   ├── resetpassword
-│   │   │   │   ├── resetpassword.module.css
-│   │   │   │   └── resetpassword.tsx
+│   │   │   ├── reset-password
+│   │   │   │   ├── reset-password.module.css
+│   │   │   │   └── reset-password.tsx
 │   │   │   ├── search-page
 │   │   │   │   ├── search-page.module.css
 │   │   │   │   └── search-page.tsx
