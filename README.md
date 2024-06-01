@@ -123,6 +123,8 @@ The project is built using [Typescript](https://www.typescriptlang.org/), and sp
     > -   https://fkhadra.github.io/react-toastify/introduction/
 -   Planet Map Orbit Calculations [(`./client/src/pages/planet-map/planet-visual.tsx`)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/pages/planet-map/planet-visual.tsx#L70-L78)
     > https://jsfiddle.net/ColinCee/a2yu0af6/
+-   Messaging Interface Inspiration [(./client/src/pages/messages/messages-html.tsx)](https://github.com/Tianyou-Xie/2800_202410_BBY07/blob/dev/client/src/pages/messages/messages-html.tsx)
+    > https://freefrontend.com/bootstrap-chats/
 
 ## Environment Variables
 
