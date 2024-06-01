@@ -23,7 +23,7 @@ import ChangePasswordModal from './change-password-modal';
 import DeleteAccountModal from './delete-account-modal';
 import ChangeNameModal from './change-username-modal';
 import ChangeEmailModal from './change-email-modal';
-import Page from '../../../components/Page/Page';
+import Page from '../../../components/kebab-page/kebab-page';
 
 const ManageAccount = () => {
 	const [_, setLocation] = useLocation();
@@ -194,7 +194,7 @@ const ManageAccount = () => {
 	const deleteBody3 = {
 		showDeleteBody3: showDeleteBody3,
 		setShowDelete3: setShowDelete3,
-	}
+	};
 
 	// defining values for the change username Modal
 	const usernameBody1 = {
@@ -276,7 +276,7 @@ const ManageAccount = () => {
 			/>
 
 			<ChangePasswordModal passBody1={passBody1} passBody2={passBody2} />
-			<DeleteAccountModal deleteBody1={deleteBody1} deleteBody2={deleteBody2} deleteBody3={deleteBody3}/>
+			<DeleteAccountModal deleteBody1={deleteBody1} deleteBody2={deleteBody2} deleteBody3={deleteBody3} />
 			<ChangeNameModal usernameBody1={usernameBody1} usernameBody2={usernameBody2} />
 			<ChangeEmailModal emailBody1={emailBody1} emailBody2={emailBody2} />
 		</>

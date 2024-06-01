@@ -5,8 +5,8 @@ import styles from '../user-settings-page.module.css';
 import Button from 'react-bootstrap/Button';
 
 /* Imports from other components created */
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
-import UIBox from '../../../components/UIBox/UIBox';
+import ModalConfirmation from '../../../components/kebab-modal-confirmation/kebab-modal-confirmation';
+import UIBox from '../../../components/kebab-uibox/kebab-uibox';
 
 /**
  * The properties and types for the ChangeEmailModal.

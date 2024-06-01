@@ -1,6 +1,6 @@
 import { Link } from 'wouter';
 import styles from './login.module.css';
-import logoUrl from '../../assets/images/SkynetLogo.png';
+import logoUrl from '../../assets/images/skynet-logo.png';
 import { GoogleAuthButton } from '../../components/google-auth-btn/google-auth-btn';
 import { If, Then, Else } from 'react-if';
 import { SmallLoader } from '../../components/loader/small-loader';

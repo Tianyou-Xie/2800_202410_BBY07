@@ -20,7 +20,7 @@ import { PlanetMap } from '../planet-map/planet-map';
 import { Scrambler } from '../../components/scrambler/scrambler';
 
 /* Imports from this website's assets */
-import logoUrl from '../../assets/images/SkynetLogo.png';
+import logoUrl from '../../assets/images/skynet-logo.png';
 import homeURL from '../../assets/videos/home.gif';
 import postURL from '../../assets/videos/post.gif';
 import messageURL from '../../assets/videos/message.gif';

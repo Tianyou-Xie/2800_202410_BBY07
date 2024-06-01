@@ -1,5 +1,5 @@
 /* Stylesheet imports */
-import styles from './resetpassword.module.css';
+import styles from './reset-password.module.css';
 
 /* Import from react and toastify */
 import React, { useState } from 'react';
@@ -12,10 +12,10 @@ import { useLocation } from 'wouter';
 import { api } from '../../lib/axios';
 
 /* Imports from other components created */
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab-page/kebab-page';
 
 /* Import from local files */
-import logoUrl from '../../assets/images/SkynetLogo.png';
+import logoUrl from '../../assets/images/skynet-logo.png';
 
 /* Define the Props interface */
 interface Props {

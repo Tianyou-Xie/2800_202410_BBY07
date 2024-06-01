@@ -1,5 +1,5 @@
 /* Stylesheet imports */
-import styles from './Post.module.css';
+import styles from './kebab-post.module.css';
 
 /* Import from React */
 import { useEffect, useState } from 'react';
@@ -9,7 +9,7 @@ import { If, Then } from 'react-if';
 import { useLocation } from 'wouter';
 
 /* Import from UI components */
-import UIBox from '../UIBox/UIBox';
+import UIBox from '../kebab-uibox/kebab-uibox';
 
 /* Import from React Icons */
 import { FaRegHeart } from 'react-icons/fa';
@@ -115,7 +115,7 @@ const Post = (props: PostProp): JSX.Element => {
 				const res = await api.get(`/post/${props.parentPost}`).then((res) => res.data);
 				if (!res.value) return;
 				setParentPost(res.value);
-			} catch { }
+			} catch {}
 		};
 
 		getParentPost();

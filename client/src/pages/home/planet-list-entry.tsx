@@ -1,4 +1,4 @@
-import styles from './home.module.css';
+import styles from './planet-list.module.css';
 import { Link } from 'wouter';
 
 /**

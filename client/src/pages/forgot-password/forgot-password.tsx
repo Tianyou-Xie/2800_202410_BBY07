@@ -1,7 +1,7 @@
 /* Stylesheet imports */
-import styles from './forgetpassword.module.css';
+import styles from './forgot-password.module.css';
 
-import logoUrl from '../../assets/images/SkynetLogo.png';
+import logoUrl from '../../assets/images/skynet-logo.png';
 
 /* Import from React */
 import React, { useState } from 'react';
@@ -15,7 +15,7 @@ import { api } from '../../lib/axios';
 import { AxiosError, HttpStatusCode } from 'axios';
 
 /* Imports from other components created */
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab-page/kebab-page';
 import { SmallLoader } from '../../components/loader/small-loader';
 
 /**

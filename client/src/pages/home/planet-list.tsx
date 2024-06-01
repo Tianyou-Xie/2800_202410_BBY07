@@ -1,13 +1,13 @@
-import styles from './home.module.css';
+import styles from './planet-list.module.css';
 
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab-page/kebab-page';
 import { useContext, useEffect, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { SmallLoader } from '../../components/loader/small-loader';
 import { createSlug } from '../../lib/create-slug';
 import { api } from '../../lib/axios';
 import { UserAuthContext } from '../../lib/auth';
-import Planet from './planet-component';
+import Planet from './planet-list-entry';
 
 const Home = () => {
 	const user = useContext(UserAuthContext);

@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { UserAuthContext } from '../../../lib/auth';
 
 /* Imports from other components created */
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+import ModalConfirmation from '../../../components/kebab-modal-confirmation/kebab-modal-confirmation';
 
 /**
  * The properties and types for the YourInfoModal.
@@ -29,7 +29,11 @@ interface Props {
  */
 const YourInfoModal = (props: Props) => {
 	const user = useContext(UserAuthContext);
-	const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, { month: 'long', day: 'numeric', year: 'numeric' });
+	const joinedDateFmt = new Intl.DateTimeFormat(navigator.language, {
+		month: 'long',
+		day: 'numeric',
+		year: 'numeric',
+	});
 
 	return (
 		<>

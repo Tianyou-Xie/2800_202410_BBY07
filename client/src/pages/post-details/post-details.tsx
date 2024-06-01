@@ -1,5 +1,5 @@
 /* Stylesheet imports */
-import styles from './post.module.css';
+import styles from './post-details.module.css';
 
 /* Import from React */
 import React, { useEffect, useState } from 'react';
@@ -8,8 +8,8 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 
 /* Import from other components created */
-import Post from '../../components/Post/Post';
-import Page from '../../components/Page/Page';
+import Post from '../../components/kebab-post/kebab-post';
+import Page from '../../components/kebab-page/kebab-page';
 import { PaginatedPostFeed } from '../../components/paginated-post-feed/paginated-post-feed';
 import { Loader } from '../../components/loader/loader';
 import SEO from '../../components/seo/seo';
@@ -96,7 +96,7 @@ const PostDetailPage: React.FC<Props> = ({ id }) => {
 			try {
 				const response = await api.get<PostResponse>(`/post/${id}`);
 				if (response.data.success) setPostDetails(response.data.value);
-			} catch { }
+			} catch {}
 		};
 
 		fetchPost();

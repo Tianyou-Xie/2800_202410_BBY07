@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { SmallLoader } from '../loader/small-loader';
 import { Else, If, Then } from 'react-if';
-import Post from '../Post/Post';
+import Post from '../kebab-post/kebab-post';
 
 /**
  * Interface that represents the arguments passed down to the PaginatedPostFeed component.

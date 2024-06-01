@@ -10,8 +10,8 @@ import Accordion from 'react-bootstrap/Accordion';
 
 /* Imports from other components created */
 import QuestionAccordion from '../../components/ques-accordion/ques-accordion';
-import Page from '../../components/Page/Page';
-import UIBox from '../../components/UIBox/UIBox';
+import Page from '../../components/kebab-page/kebab-page';
+import UIBox from '../../components/kebab-uibox/kebab-uibox';
 
 /* Import for Axios */
 import { api } from '../../lib/axios';

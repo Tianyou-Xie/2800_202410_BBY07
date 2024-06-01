@@ -1,7 +1,5 @@
 /* Stylesheet imports */
-import styles from './post-page.module.css';
-
-
+import styles from './create-post.module.css';
 
 /* Import from React */
 import { useContext, useEffect, useState } from 'react';
@@ -19,8 +17,8 @@ import { UserAuthContext } from '../../lib/auth';
 
 /* Import from other components created */
 import { SmallLoader } from '../../components/loader/small-loader';
-import Page from '../../components/Page/Page';
-import UIBox from '../../components/UIBox/UIBox';
+import Page from '../../components/kebab-page/kebab-page';
+import UIBox from '../../components/kebab-uibox/kebab-uibox';
 
 /**
  * PostPage component represents a page in which the user can create a post.

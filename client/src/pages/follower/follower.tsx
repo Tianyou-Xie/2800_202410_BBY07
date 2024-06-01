@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../lib/axios';
 
 /* Import from other components created */
-import Page from '../../components/Page/Page';
+import Page from '../../components/kebab-page/kebab-page';
 
 /* Define the PostResponse interface */
 interface PostResponse {
@@ -44,7 +44,7 @@ const FollowerPage = () => {
 			try {
 				const response = await api.get<PostResponse>(`/user/follower`);
 				if (response.data.success) setFollowerUsers(response.data.value);
-			} catch { }
+			} catch {}
 		};
 
 		fetchFollower();

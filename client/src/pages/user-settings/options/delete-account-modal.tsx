@@ -2,11 +2,11 @@
 import styles from '../user-settings-page.module.css';
 
 /* Imports from other components created */
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
+import ModalConfirmation from '../../../components/kebab-modal-confirmation/kebab-modal-confirmation';
 
 /* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';
-import UIBox from '../../../components/UIBox/UIBox';
+import UIBox from '../../../components/kebab-uibox/kebab-uibox';
 
 /* Import from react toastify */
 import { toast } from 'react-toastify';
@@ -165,7 +165,10 @@ const DeleteAccountModal = (props: Props) => {
 								}}>
 								Cancel
 							</button>
-							<button className='btn btn-danger mb-3' type='button' onClick={props.deleteBody2.deleteAccount}>
+							<button
+								className='btn btn-danger mb-3'
+								type='button'
+								onClick={props.deleteBody2.deleteAccount}>
 								DELETE ACCOUNT
 							</button>
 						</div>

@@ -2,8 +2,8 @@
 import styles from '../user-settings-page.module.css';
 
 /* Imports from other components created */
-import ModalConfirmation from '../../../components/ModalConfirmation/ModalConfirmation';
-import UIBox from '../../../components/UIBox/UIBox';
+import ModalConfirmation from '../../../components/kebab-modal-confirmation/kebab-modal-confirmation';
+import UIBox from '../../../components/kebab-uibox/kebab-uibox';
 
 /* Imports from react-bootstrap */
 import Button from 'react-bootstrap/Button';

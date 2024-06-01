@@ -1,4 +1,4 @@
-import styles from './UIBox.module.css';
+import styles from './kebab-uibox.module.css';
 
 /**
  * Interface that represents the arguments passed down to the UIBox component.

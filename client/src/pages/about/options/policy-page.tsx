@@ -2,7 +2,7 @@
 import styles from '../about-page.module.css';
 
 /* Imports from other components created */
-import Page from '../../../components/Page/Page';
+import Page from '../../../components/kebab-page/kebab-page';
 
 /**
  * Constructs and returns the Policy page.

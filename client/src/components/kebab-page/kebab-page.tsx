@@ -1,6 +1,6 @@
-import styles from './Page.module.css';
+import styles from './kebab-page.module.css';
 
-import Header from '../Header/Header';
+import Header from '../kebab-header/kebab-header';
 import Hotbar from '../hotbar/hotbar';
 
 /**
